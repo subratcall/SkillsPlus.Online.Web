@@ -1,0 +1,53 @@
+Proacademy V1.3
+----------------------------
+-New: All ISO currencies added.
+-New: The language can be changed from the admin panel.
+-New: Now the script can run without FFmpeg too.
+-New: Paystack payment gateway added.
+-New: PayTM payment gateway added.
+-New: Separate instructor and student panels.
+-New: Users can request to be instructor and admin can disable it.
+-New: You can prevent users from downloading courses.
+-New: Course cover displays as player cover.
+-New: Students can use the support system for free courses.
+-New: Pages preloader can be disabled from the admin panel.
+-Solved: Notification indicator issue when user doesn't have the notification.
+-Solved: Charts bad view in the user panel.
+-Solved: Alignment consistency in user views.
+-Solved: Email sending problem solved, email can be defined from the admin panel.
+-Solved: Admin and staff password change error solved.
+-Solved: Filemanager error solved when uploading the first file.
+-Solved: Commission inputs value change error.
+-Solved: Identity verification error when instructors upload their documents.
+-Solved: Error in displaying videos watermark.
+-Solved: Bad view in comment reply page.
+-Solved: Error in displaying videos watermark.
+-Solved: Datepickers issues when selecting a period.
+-Solved: User attached files don't show in the admin panel.
+-Enhancement: Better error handling in forms.
+-Enhancement: New input placeholders for better cognition.
+-Enhancement: Some heading tags changed for better SEO.
+-Enhancement: Better usability in admin panel tabs.
+-Enhancement: Better view in selecting filters from admin panel
+-Enhancement: Some CSS properties changed for a better responsive experience.
+
+Proacademy V1.2
+----------------------------
+-Update: Login page updated
+-Update: Documentation updated
+-New: Local installation file for Wamp and Xampp.
+-Solved: Modal overlay in requests page.
+-Solved: Error in accounting system
+
+Proacademy V1.1
+----------------------------
+-Solved: Course box bad view in the category page
+-Solved: Error in password changing process
+-Solved: All filters display in the course upload page
+-Solved: Charts wont be displayed when switching between tabs
+-Enhancment: Invoice print view
+-Enhancment: Some CSS codes changed for better user experience
+-Enhancment: Better view in tables
+
+
+
