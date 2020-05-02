@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.real_name') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="name" value="{{{ old('name') }}}" class="form-control" id="inputDefault">
+                                    <input type="text" name="name" value="{{{ old('name') }}}" class="form-control" id="inputDefault" required>
                                 </div>
                             </div>
 
@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputReadOnly">{{{ trans('admin.password') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="password" class="form-control text-left" dir="ltr" required>
+                                    <input type="password" name="password" class="form-control text-left" dir="ltr" required>
                                 </div>
                             </div>
 
