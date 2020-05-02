@@ -100,7 +100,7 @@
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.birthday') }}}</label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-                                        <input type="text" name="birthday" id="birthday" value="{{{ $meta['birthday'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                        <input type="date" name="birthday" id="birthday" value="{{{ $meta['birthday'] or '' }}}" class="form-control text-center" id="inputDefault">
                                         <span class="input-group-append fdatebtn" id="fdatebtn"><span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span></span>
                                     </div>
                                 </div>
