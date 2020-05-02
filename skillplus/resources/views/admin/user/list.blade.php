@@ -4,7 +4,10 @@
     {{{ trans('admin.users_list') }}}
 @endsection
 @section('page')
-    <section class="card">
+
+<link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/js/dataTables/media/js/jquery.dataTables.min.js') }}"></script>
+    <!-- <section class="card">
         <header class="card-header">
             <div class="panel-actions">
                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
@@ -57,7 +60,7 @@
                 </div>
             </form>
         </div>
-    </section>
+    </section> -->
     <section class="card">
         <header class="card-header">
             <div class="panel-actions">
@@ -121,6 +124,13 @@
             </div>
         </div>
     </section>
+
+    <script src="/assets/admin//modules/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#datatable-details').DataTable();
+        });
+    </script>
 @endsection
 
 

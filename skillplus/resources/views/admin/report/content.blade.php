@@ -10,7 +10,7 @@
                     <div class="widget-summary">
                         <div class="widget-summary-col">
                             <div class="summary">
-                                <h4 class="title">{{{  trans('admin.total_courses') }}}</h4>
+                                <h4 class="title">{{{  trans('admin.total_courses') }}}123</h4>
                                 <div class="info">
                                     <strong class="amount">{{{ $contentCount or 0 }}}</strong>
                                 </div>
