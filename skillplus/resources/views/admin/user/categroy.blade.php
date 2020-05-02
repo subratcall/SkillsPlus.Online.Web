@@ -3,6 +3,8 @@
     {{{ trans('admin.usergp_pagetitle') }}}
 @endsection
 @section('page')
+<link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/js/dataTables/media/js/jquery.dataTables.min.js') }}"></script>
     <div class="card">
         <div class="card-header">{{{ trans('admin.usergp_pagetitle') }}}</div>
         <div class="card-body">
@@ -114,6 +116,12 @@
             </div>
         </div>
     </div>
+    <script src="/assets/admin//modules/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#datatable-details').DataTable();
+        });
+    </script>
 @endsection
 
 
