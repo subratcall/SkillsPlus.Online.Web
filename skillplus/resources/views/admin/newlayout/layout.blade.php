@@ -294,6 +294,8 @@
             })
         });
     @endif
+
+    //changes
 </script>
 @yield('script')
 </body>
