@@ -35,7 +35,12 @@
         gtag('js', new Date());
         gtag('config', 'UA-94034622-3');
     </script>
-    <!-- /END GA --></head>
+    <!-- /END GA -->
+
+    
+    <!-- ##### updated ##### -->
+    <link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+</head>
 
 <body>
 <div id="app">
@@ -296,6 +301,11 @@
     @endif
 
     //changes
+    $(document).ready(function(){
+        setTimeout(() => {
+            $('#datatable-details').DataTable();
+        }, 300);
+    });
 </script>
 @yield('script')
 </body>
