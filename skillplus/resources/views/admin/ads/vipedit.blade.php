@@ -84,7 +84,7 @@
     </section>
     <section class="card">
         <div class="card-body">
-            <table class="table table-bordered table-striped mb-none" id="datatable-details">
+            <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                 <thead>
                 <tr>
                     <th class="text-center" width="120">{{{ trans('admin.start_date') }}}</th>

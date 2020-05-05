@@ -4,8 +4,8 @@
     Vendor List
 @endsection
 @section('page')
-<link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<script src="{{ asset('assets/js/dataTables/media/js/jquery.dataTables.min.js') }}"></script>
+{{-- <link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/js/dataTables/media/js/jquery.dataTables.min.js') }}"></script> --}}
     <section class="card">
         <header class="card-header">
             <div class="panel-actions">
@@ -16,8 +16,8 @@
         </header>
         <div class="card-body p-0">
             <div class="table-responsive">
-                <!-- <table class="table table-bordered table-striped mb-none m-b-0" id="datatable-details"> -->
-                <table class="table table-bordered table-striped " id="datatable-details">
+                <table class="table table-bordered table-striped mb-none m-b-0 display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
+                {{-- <table class="table table-bordered table-striped " id="datatable-details"> --}}
                     <thead>
                     <tr>
                         <th class="text-center">{{{ trans('admin.username') }}}</th>
@@ -70,12 +70,7 @@
             </div>
         </div>
     </section>
-    <script src="/assets/admin//modules/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('#datatable-details').DataTable();
-        });
-    </script>
+    {{-- <script src="/assets/admin//modules/jquery.min.js"></script> --}}
 @endsection
 
 

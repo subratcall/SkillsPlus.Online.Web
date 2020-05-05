@@ -6,8 +6,8 @@
 
     <section class="card">
         <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped mb-none" style="margin-bottom: 0;" id="datatable-details">
+            <div class="">
+                <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" style="margin-bottom: 0;" id="datatable-details">
                     <thead>
                     <tr>
                         <th class="text-center">{{{ trans('admin.username') }}}</th>

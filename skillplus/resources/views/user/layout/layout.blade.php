@@ -7,3 +7,4 @@
 @yield('pages')
 @include('user.layout.modals')
 @include('view.layout.footer')
+

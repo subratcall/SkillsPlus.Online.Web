@@ -3,8 +3,8 @@
     {{{ trans('admin.usergp_pagetitle') }}}
 @endsection
 @section('page')
-<link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<script src="{{ asset('assets/js/dataTables/media/js/jquery.dataTables.min.js') }}"></script>
+{{-- <link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/js/dataTables/media/js/jquery.dataTables.min.js') }}"></script> --}}
     <div class="card">
         <div class="card-header">{{{ trans('admin.usergp_pagetitle') }}}</div>
         <div class="card-body">
@@ -18,7 +18,7 @@
             </ul>
             <div class="tab-content">
                 <div id="list" class="tab-pane active">
-                    <table class="table table-bordered table-striped mb-none" id="datatable-details">
+                    <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                         <thead>
                         <tr>
                             <th>{{{ trans('admin.user_groups_th_group_title') }}}</th>
@@ -116,12 +116,12 @@
             </div>
         </div>
     </div>
-    <script src="/assets/admin//modules/jquery.min.js"></script>
+    {{-- <script src="/assets/admin//modules/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
             $('#datatable-details').DataTable();
         });
-    </script>
+    </script> --}}
 @endsection
 
 

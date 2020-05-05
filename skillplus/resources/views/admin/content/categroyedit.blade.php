@@ -18,7 +18,7 @@
         </ul>
         <div class="tab-content">
             <div id="list" class="tab-pane ">
-            <table class="table table-bordered table-striped mb-none">
+            <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th width="36">{{{ trans('admin.th_icon') }}}</th>

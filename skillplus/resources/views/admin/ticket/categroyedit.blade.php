@@ -19,7 +19,7 @@
                 </ul>
                 <div class="tab-content">
                     <div id="list" class="tab-pane ">
-                        <table class="table table-bordered table-striped mb-none" id="datatable-details">
+                        <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                             <thead>
                             <tr>
                                 <th>{{{ trans('admin.th_title') }}}</th>

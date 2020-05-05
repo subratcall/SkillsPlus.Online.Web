@@ -67,7 +67,7 @@
                     </div>
                 @else
                     <div class="table-responsive">
-                            <table class="table ucp-table" id="chanel-table">
+                            <table class="table ucp-table display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                             <thead class="back-blue">
                             <th class="text-center">{{{ trans('main.title') }}}</th>
                             <th class="text-center">{{{ trans('main.link') }}}</th>

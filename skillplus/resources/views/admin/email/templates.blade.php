@@ -6,7 +6,7 @@
 
     <section class="card">
         <div class="card-body">
-            <table class="table table-bordered table-striped mb-none" id="datatable-basic">
+            <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-basic">
                 <thead>
                 <tr>
                     <th>{{{ trans('admin.th_title') }}}</th>
