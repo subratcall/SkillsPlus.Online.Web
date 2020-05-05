@@ -83,7 +83,7 @@
             <h4 class="card-title">{{{ trans('admin.sales_list') }}}</h4>
         </header>
         <div class="card-body">
-            <table class="table table-bordered table-striped mb-none" id="datatable-details">
+            <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                 <thead>
                 <tr>
                     <th>{{{ trans('admin.course_title') }}}</th>
