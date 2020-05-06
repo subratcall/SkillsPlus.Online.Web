@@ -202,6 +202,7 @@ return [
 'days' => 'Days',
 'th_icon' => 'Icon',
 'th_title' => 'Title',
+'th_desc' => 'Description',
 'th_commission' => 'Commission',
 'th_gift_charge' => 'Gift Charge',
 'th_controls' => 'Controls',
@@ -286,6 +287,7 @@ return [
     'item_price' => 'Item Price',
     'item_no' => 'Item No.',
     'parts' => 'Parts',
+    'lesson_plan' => 'Lesson Plan',
     'category' => 'Category',
     'type' => 'Type',
     'open' => 'Open',
@@ -295,6 +297,7 @@ return [
     'unpublish_request' => 'Unpublish Request',
     //admin/content/category.blade.php---
     'new_category' => 'New Category',
+    'new_lesson_type' => 'New Lesson Type',
     'link_title' => 'Link Title',
     'subcategories' => 'Subcategories',
     'cat_filters' => 'Filters',

@@ -11,6 +11,7 @@ use App\Models\ContentMeta;
 use App\Models\ContentPart;
 use App\Models\ContentSupport;
 use App\Models\User;
+use App\Models\LessonType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
@@ -27,8 +28,25 @@ class LessonsController extends Controller
     ## Lesson Section
     public function lesson()
     {
-        $list = ContentCategory::withCount('contents','childs','filters')->where('parent_id','0')->get();
+        $list = LessonType::all();
         return view('admin.content.lesson',array('lists'=>$list));
+    }
+
+    public function lessonStore(Request $request)
+    {
+        if($request->edit != '') {
+            $category = LessonType::find($request->edit);
+            $category->lesson = $request->lesson;
+            $category->description = $request->description;
+            $category->save();
+        }
+        else {
+            $category = new LessonType;
+            $category->lesson = $request->lesson;
+            $category->description = $request->description;
+            $category->save();
+        }
+        return back();
     }
     
 }

@@ -13,7 +13,7 @@
                 <a href="#meta" class="nav-link" data-toggle="tab">{{{ trans('admin.extra_info') }}}</a>
             </li>
             <li class="nav-item">
-                <a href="#parts" class="nav-link" data-toggle="tab">{{{ trans('admin.parts') }}}</a>
+                <a href="#parts" class="nav-link" data-toggle="tab">{{{ trans('admin.lesson_plan') }}}</a>
             </li>
             <li class="nav-item">
                 <a href="#part" class="nav-link" data-toggle="tab">{{{ $part->title or '' }}}</a>

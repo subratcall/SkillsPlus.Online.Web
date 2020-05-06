@@ -23,9 +23,9 @@
                     <img src="/assets/404/images/404.png" srcset="/assets/404/images/404-2.png 2x" class="screen mb-30" alt="">
                     <h1 class="mb-50">Page not found!</h1>
                     <p class="mb-50">If you are searching for specific content, You can search...</p>
-                    <a href="http:/academy.prodevelopers.eu" class="btn btn-default btn-lg"><span>Back to Homepage</span></a>
+                    <a href="https://skillsready.online/" class="btn btn-default btn-lg"><span>Back to Homepage</span></a>
+                    </div>
                 </div>
-            </div>
         </div>
         <div class="bg"></div>
     </section>
