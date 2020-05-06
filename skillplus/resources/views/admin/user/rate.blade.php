@@ -2,18 +2,27 @@
 @section('title')
     {{{ trans('admin.badges_pagetitle') }}}
 @endsection
+
+@section('style')
+    <style>
+      
+    </style>
+@endsection
+
 @section('page')
     <div class="card">
         <div class="card-body">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link active" href="#day" data-toggle="tab"> {{{ trans('admin.badges_tab_com_age') }}}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#videocount" data-toggle="tab"> {{{ trans('admin.badges_tab_courses_count') }}} </a></li>
-                <li class="nav-item"><a class="nav-link" href="#sellcount" data-toggle="tab"> {{{ trans('admin.badges_tab_sales') }}} </a></li>
-                <li class="nav-item"><a class="nav-link" href="#buycount" data-toggle="tab"> {{{ trans('admin.badges_tab_purchase') }}} </a></li>
-                <li class="nav-item"><a class="nav-link" href="#supportrate" data-toggle="tab"> {{{ trans('admin.badges_tab_support_feedback') }}} </a></li>
-                <li class="nav-item"><a class="nav-link" href="#productrate" data-toggle="tab"> {{{ trans('admin.badges_tab_course_rating') }}}</a></li>
-                <li class="nav-item"><a class="nav-link" href="#postrate" data-toggle="tab">{{{ trans('admin.badges_tab_postal_feedback') }}} </a></li>
-            </ul>
+            <div id="overlap">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#day" data-toggle="tab"> {{{ trans('admin.badges_tab_com_age') }}}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#videocount" data-toggle="tab"> {{{ trans('admin.badges_tab_courses_count') }}} </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sellcount" data-toggle="tab"> {{{ trans('admin.badges_tab_sales') }}} </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#buycount" data-toggle="tab"> {{{ trans('admin.badges_tab_purchase') }}} </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#supportrate" data-toggle="tab"> {{{ trans('admin.badges_tab_support_feedback') }}} </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#productrate" data-toggle="tab"> {{{ trans('admin.badges_tab_course_rating') }}}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#postrate" data-toggle="tab">{{{ trans('admin.badges_tab_postal_feedback') }}} </a></li>
+                </ul>
+            </div>
             <hr>
             <div class="tab-content">
                 <div id="day" class="tab-pane active">
@@ -90,7 +99,7 @@
                         </div>
 
                     </form>
-                    <table class="table table-bordered table-striped mb-none" id="datatable-basic">
+                    <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                         <thead>
                         <tr>
                             <th class="text-center" width="100">{{{ trans('admin.badge_icon') }}}</th>
@@ -194,7 +203,7 @@
                         </div>
 
                     </form>
-                    <table class="table table-bordered table-striped mb-none" id="datatable-basic">
+                    <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                         <thead>
                         <tr>
                             <th class="text-center" width="60">{{{ trans('admin.badge_icon') }}}</th>
@@ -296,7 +305,7 @@
                         </div>
 
                     </form>
-                    <table class="table table-bordered table-striped mb-none" id="datatable-basic">
+                    <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                         <thead>
                         <tr>
                             <th class="text-center" width="60">{{{ trans('admin.badge_icon') }}}</th>
@@ -398,7 +407,7 @@
                         </div>
 
                     </form>
-                    <table class="table table-bordered table-striped mb-none" id="datatable-basic">
+                    <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                         <thead>
                         <tr>
                             <th class="text-center" width="60">{{{ trans('admin.badge_icon') }}}</th>
@@ -500,7 +509,7 @@
                         </div>
 
                     </form>
-                    <table class="table table-bordered table-striped mb-none" id="datatable-basic">
+                    <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                         <thead>
                         <tr>
                             <th class="text-center" width="60">{{{ trans('admin.badge_icon') }}}</th>
@@ -602,7 +611,7 @@
                         </div>
 
                     </form>
-                    <table class="table table-bordered table-striped mb-none" id="datatable-basic">
+                    <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                         <thead>
                         <tr>
                             <th class="text-center" width="60">{{{ trans('admin.badge_icon') }}}</th>
@@ -704,7 +713,7 @@
                         </div>
 
                     </form>
-                    <table class="table table-bordered table-striped mb-none" id="datatable-basic">
+                    <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
                         <thead>
                         <tr>
                             <th class="text-center" width="60">{{{ trans('admin.badge_icon') }}}</th>
@@ -735,6 +744,18 @@
             </div>
         </div>
     </div>
+        
 @endsection
 
+@section('script')
 
+    <script>
+        $(document).ready(function() {
+            // $(".nav").scrollingTabs();
+        });
+
+        $(document).on("click", "a.nav-link", function() {
+           
+        });
+    </script>
+@endsection

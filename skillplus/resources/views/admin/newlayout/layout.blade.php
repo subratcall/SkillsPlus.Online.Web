@@ -41,6 +41,8 @@
     </script>
     <!-- /END GA -->
 
+    @yield('style')
+
     @include('_revise.style');
 </head>
 

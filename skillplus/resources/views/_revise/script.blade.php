@@ -1,18 +1,18 @@
+<script src="{{ asset('assets/_plugins/jquery.scrolling-tabs.min.js') }}"></script>
  <script>
     $(document).ready(function() {
         setTimeout(() => {
            let table =  $('#datatable-details');
 
-           table.DataTable({});
+           table.DataTable({
+               "responsive": true,
+               "columnDefs": [
+                    { responsivePriority: 1, targets: 0 },
+                    { responsivePriority: 2, targets: -1 }
+               ]
+           });
+
            $(".table-responsive").removeClass();
-           
-         //   table.removeClass();
-         //   table.addClass("display responsive nowrap");
-         //   table.attr('cellspacing', "0");
-         //   table.attr('width', '100%');
-           
-            // display responsive nowrap
-            // cellspacing="0" width="100%"
         }, 500);
     });
  </script>
