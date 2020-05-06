@@ -1,6 +1,7 @@
 <?php
 return [
 //Admin Sidebar
+'lessons' => 'Lessons',
 'admin_panel' => 'Admin Panel',
 'dashboard' => 'Dashboard',
 'users_report' => 'Users Report',

@@ -142,6 +142,7 @@
                                 <li><a class="nav-link" href="/admin/content/comment">{{{ trans('admin.corse_comments') }}}</a></li>
                                 <li><a class="nav-link" href="/admin/content/support">{{{ trans('admin.support_tickets') }}}</a></li>
                                 <li><a class="nav-link" href="/admin/content/category">{{{ trans('admin.categories') }}}</a></li>
+                                <li><a class="nav-link" href="/admin/content/lesson">{{{ trans('admin.lessons') }}}</a></li>
                             </ul>
                         </li>@endif
                         @if(checkAccess('request'))<li class="dropdown" id="request">

@@ -30,21 +30,21 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.real_name') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="name" value="{{{ $user->name }}}" class="form-control" id="inputDefault">
+                                    <input type="text" name="name" value="{{{ $user->name }}}" class="form-control" id="inputDefault" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputReadOnly">{{{ trans('admin.username') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" value="{{{ $user->username }}}" id="inputReadOnly" class="form-control" readonly="readonly">
+                                    <input type="text" value="{{{ $user->username }}}" id="inputReadOnly" class="form-control" readonly="readonly" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputReadOnly">{{{ trans('admin.email') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" value="{{{ $user->email }}}"  id="inputReadOnly" class="form-control text-left" dir="ltr" readonly="readonly">
+                                    <input type="text" value="{{{ $user->email }}}"  id="inputReadOnly" class="form-control text-left" dir="ltr" readonly="readonly" required>
                                 </div>
                             </div>
 
@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{{ trans('admin.th_status') }}}</label>
                                 <div class="col-md-6">
-                                    <select name="mode" class="form-control populate">
+                                    <select name="mode" class="form-control populate" required>
                                         <option value="active" {{ $user->mode=='active'?'selected="selected"':'' }}>{{{ trans('admin.active') }}}</option>
                                         <option value="deactive" {{ $user->mode=='deactive'?'selected="selected"':'' }}>{{{ trans('admin.banned') }}}</option>
                                     </select>
