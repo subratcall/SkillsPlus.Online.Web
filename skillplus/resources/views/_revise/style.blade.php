@@ -4,6 +4,14 @@
 <script src="{{ asset('assets/_plugins/datatable.js') }}"></script>
 
 <style>
+    .margin-bottom {
+        margin-bottom: 10px;
+    }
+
+    .padding-top: {
+        padding-top: 10px;
+    }
+
     @media (min-width: 0px) and (max-width: 768px) {
         .main-content {
             padding-left: 10px;
