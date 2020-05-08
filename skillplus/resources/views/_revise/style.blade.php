@@ -4,12 +4,49 @@
 <script src="{{ asset('assets/_plugins/datatable.js') }}"></script>
 
 <style>
+
+    .dataTables_filter, .dataTables_length {
+        display: none;
+    }
+
     .margin-bottom {
         margin-bottom: 10px;
     }
 
+    .margin-left {
+        margin-left: 10px;
+    }
+
+    .margin-right {
+        margin-right: 10px;
+    }
+    
+    .margin-top {
+        margin-top: 10px;
+    }
+
     .padding-top: {
         padding-top: 10px;
+    }
+
+    .padding-bottom: {
+        padding-bottom: 10px;
+    }
+
+    .padding-left: {
+        padding-left: 10px;
+    }
+
+    .padding-right: {
+        padding-right: 10px;
+    }
+
+    .float-r {
+        float: right;
+    }
+
+    .float-l {
+        float: left;
     }
 
     @media (min-width: 0px) and (max-width: 768px) {

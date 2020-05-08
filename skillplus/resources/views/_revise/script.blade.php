@@ -7,42 +7,16 @@
 
         $(".table-responsive").removeClass();
     });
+    
 
     (function($) {
-
+        
         $.fn.dtcustom = function(option) {
 
-            console.log($(this).parent("div").prepend(`
-                <form>
-                    <div class="row">
-                        <div class="form-group row col-sm-6">
-                            <div class="col-xs-12 row">
-                                <label for="staticEmail" class="col-xs-3 col-form-label">Search</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="staticEmail">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row col-xs-6">
-                            <div class="col-xs-12 row">
-                                <label for="inputPassword" class="col-xs-3 col-form-label">Limit</label>
-                                <div class="col-xs-9">
-                                    <select class="form-control">
-                                        <option>10</option>
-                                        <option>50</option>
-                                        <option>100</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            `));
-            
             var settings = $.extend({
+                bLengthChange: true,
+                bFilter: true,
                 responsive: true,
-                searching: false,
-                lengthChange: false,
                 columnDefs: [
                     { responsivePriority: 1, targets: 0 },
                     { responsivePriority: 2, targets: -1 }
@@ -50,8 +24,59 @@
             }, option);
 
             return this.DataTable({
-                lengthChange: settings.lengthChange,
-                searching: settings.searching,
+                initComplete: function () {
+
+                var vm = this;
+
+                $(this).parent('div').prepend(`
+                <div class="row margin-bottom margin-top margin-left">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="search" class="col-form-label">Search</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="search">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label class="col-form-label">Limit</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select class="form-control" id="lengthMenu">
+                                                    <option value="10">10</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`); 
+
+
+                $("#search").on("keyup", function(e) {
+                    vm.DataTable().search(e.target.value).draw();
+                });
+
+                $("#lengthMenu").on("change", function(e) {
+                    console.log(e.target.value);
+                    vm.DataTable().page.len(e.target.value).draw();
+                });
+      
+                },
+                bLengthChange : settings.bLengthChange,
+                bFilter: settings.bFilter,
                responsive: settings.responsive,
                columnDefs: settings.columnDefs
            });
