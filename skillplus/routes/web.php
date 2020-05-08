@@ -286,6 +286,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::group(['prefix'=>'lesson'],function (){
                 Route::get('','Admin\LessonsController@lesson');
                 Route::post('store','Admin\LessonsController@lessonStore');
+                Route::match(['get'],'getLessons','Admin\LessonsController@getAllLessons');
             });
 
         });

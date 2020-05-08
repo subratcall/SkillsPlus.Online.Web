@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Input;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use App\Models\LessonType;
 
 class ContentController extends Controller
 {
@@ -747,6 +748,7 @@ class ContentController extends Controller
         $contentMenu = contentMenu();
         $part = ContentPart::find($pid);
         $products = Content::where('mode','publish')->get();
+        $lessons = LessonType::find($item->lesson_type_id);
 
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         $file = 'source/content-'.$id.'/video/part-'.$pid.'.mp4';
@@ -755,8 +757,7 @@ class ContentController extends Controller
             $convert = $storagePath.$file;
         else
             $convert = false;
-
-        return view('admin.content.partedit',['item'=>$item,'meta'=>$meta,'menus'=>$contentMenu,'part'=>$part,'convert'=>$convert,'products'=>$products]);
+        return view('admin.content.partedit',['item'=>$item,'meta'=>$meta,'menus'=>$contentMenu,'part'=>$part,'convert'=>$convert,'products'=>$products,'lessons'=>$part->lesson_type_id]);
     }
     public function partStore($id,Request $request)
     {

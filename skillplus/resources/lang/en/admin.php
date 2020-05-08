@@ -141,6 +141,7 @@ return [
 'business_income_table_header' => 'Business Income',
 'th_date' => 'Date',
 'th_status' => 'Status',
+'th_lesson' => 'Lesson Type',
 'currency' => '$',
 'paid_successful_status' => 'Successfully Paid',
 'waiting_payment' => 'Waiting',
