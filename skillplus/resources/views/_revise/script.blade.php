@@ -1,4 +1,3 @@
-<script src="{{ asset('assets/_plugins/jquery.scrolling-tabs.min.js') }}"></script>
 <script>
     $(document).ready(function() {
         setTimeout(function() {
@@ -29,7 +28,7 @@
                 var vm = this;
 
                 $(this).parent('div').prepend(`
-                <div class="row margin-bottom margin-top margin-left">
+                <div class="row margin-bottom margin-top">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">

@@ -4,7 +4,7 @@
 <script src="{{ asset('assets/_plugins/datatable.js') }}"></script>
 
 <style>
-
+    
     .dataTables_filter, .dataTables_length {
         display: none;
     }
@@ -47,6 +47,11 @@
 
     .float-l {
         float: left;
+    }
+
+    .card-body {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
     }
 
     @media (min-width: 0px) and (max-width: 768px) {

@@ -5,14 +5,18 @@
 
 @section('style')
     <style>
-      
+       .nav {
+            white-space: nowrap !important;
+            overflow: auto !important;
+            flex-wrap: nowrap;
+            height: 50px;
+       }
     </style>
 @endsection
 
 @section('page')
     <div class="card">
         <div class="card-body">
-            <div id="overlap">
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a class="nav-link active" href="#day" data-toggle="tab"> {{{ trans('admin.badges_tab_com_age') }}}</a></li>
                     <li class="nav-item"><a class="nav-link" href="#videocount" data-toggle="tab"> {{{ trans('admin.badges_tab_courses_count') }}} </a></li>
@@ -22,7 +26,6 @@
                     <li class="nav-item"><a class="nav-link" href="#productrate" data-toggle="tab"> {{{ trans('admin.badges_tab_course_rating') }}}</a></li>
                     <li class="nav-item"><a class="nav-link" href="#postrate" data-toggle="tab">{{{ trans('admin.badges_tab_postal_feedback') }}} </a></li>
                 </ul>
-            </div>
             <hr>
             <div class="tab-content">
                 <div id="day" class="tab-pane active">
@@ -748,14 +751,12 @@
 @endsection
 
 @section('script')
-
     <script>
         $(document).ready(function() {
-            // $(".nav").scrollingTabs();
+            // $(".navigation");
         });
-
-        $(document).on("click", "a.nav-link", function() {
+        // $(document).on("click", "a.nav-link", function() {
            
-        });
+        // });
     </script>
 @endsection
