@@ -4,7 +4,6 @@
 <script src="{{ asset('assets/_plugins/datatable.js') }}"></script>
 
 <style>
-    
     .dataTables_filter, .dataTables_length {
         display: none;
     }

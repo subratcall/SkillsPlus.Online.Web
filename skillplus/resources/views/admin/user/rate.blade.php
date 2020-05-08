@@ -5,7 +5,7 @@
 
 @section('style')
     <style>
-       .nav {
+       .navigation {
             white-space: nowrap !important;
             overflow: auto !important;
             flex-wrap: nowrap;
@@ -17,7 +17,7 @@
 @section('page')
     <div class="card">
         <div class="card-body">
-                <ul class="nav nav-pills">
+                <ul class="navigation nav nav-pills">
                     <li class="nav-item"><a class="nav-link active" href="#day" data-toggle="tab"> {{{ trans('admin.badges_tab_com_age') }}}</a></li>
                     <li class="nav-item"><a class="nav-link" href="#videocount" data-toggle="tab"> {{{ trans('admin.badges_tab_courses_count') }}} </a></li>
                     <li class="nav-item"><a class="nav-link" href="#sellcount" data-toggle="tab"> {{{ trans('admin.badges_tab_sales') }}} </a></li>

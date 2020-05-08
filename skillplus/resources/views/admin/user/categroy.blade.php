@@ -2,13 +2,25 @@
 @section('title')
     {{{ trans('admin.usergp_pagetitle') }}}
 @endsection
+
+@section('style')
+    <style>
+       .navigation {
+            white-space: nowrap !important;
+            overflow: auto !important;
+            flex-wrap: nowrap;
+            height: 60px;
+       }
+    </style>
+@endsection
+
 @section('page')
 {{-- <link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <script src="{{ asset('assets/js/dataTables/media/js/jquery.dataTables.min.js') }}"></script> --}}
     <div class="card">
         <div class="card-header">{{{ trans('admin.usergp_pagetitle') }}}</div>
         <div class="card-body">
-            <ul class="nav nav-pills">
+            <ul class="navigation nav nav-pills">
                 <li class="nav-item">
                     <a class="nav-link active" href="#list" data-toggle="tab"> {{{ trans('admin.user_groups_tab_title') }}} </a>
                 </li>
