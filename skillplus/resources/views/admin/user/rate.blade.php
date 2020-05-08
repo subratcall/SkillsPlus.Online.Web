@@ -9,7 +9,7 @@
             white-space: nowrap !important;
             overflow: auto !important;
             flex-wrap: nowrap;
-            height: 50px;
+            height: 60px;
        }
     </style>
 @endsection
