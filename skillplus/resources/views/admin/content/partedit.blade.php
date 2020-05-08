@@ -365,6 +365,14 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{{ trans('admin.th_lesson') }}}</label>
+                                <div class="col-md-8">
+                                    <select name="lesson_type_id" onchange="selectLT()" id="lessons" class="form-control"> </select>
+                                    <input type="hidden" name="lesson_type" id="lesson_type">
+                                </div>
+                            </div>
+
 
                             <div class="form-group">
                                 <div class="row">
@@ -479,4 +487,42 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+    var LT = [];
+        $(document).ready(function() {  
+            masterfiles();  
+        });       
+
+        function masterfiles() {
+                    $.ajax({
+                        url: "{{ url('/admin/content/lesson/getLessons') }}",
+                        type: "get",
+                        dataType: 'JSON',                                                
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(data) {
+                            LT = data.data
+                            data.data.forEach(function(entry) {
+                                    $("#lessons").append("<option value='"+entry.id+"' selected>"+entry.lesson+"</option>")
+                            });
+                            $("#lessons").val("{{$lessons}}");
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            alert('Error! Contact IT Department.');
+                        }
+                    });
+        }
+        
+        function selectLT(){
+            a = LT.find(function (o) {
+                return o.id == $("#lessons").val();
+            });
+            $("#lesson_type").val(a.lesson)
+        }
+        
+    </script>
 @endsection

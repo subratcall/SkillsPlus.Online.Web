@@ -48,5 +48,19 @@ class LessonsController extends Controller
         }
         return back();
     }
+
+    function getAllLessons(){
+        $lessons = LessonType::all();
+        $data = array();
+        foreach ($lessons as $myList)
+		{
+			$row = array();
+			$row['lesson'] = $myList->lesson;
+			$row['id'] = $myList->id;
+			$data[] = $row;
+		}
+        $output = array("data" => $data);
+		echo json_encode($output);
+    }
     
 }

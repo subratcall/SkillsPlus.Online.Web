@@ -307,6 +307,8 @@
         @endif
         
     </script>
+    @section('scripts')
+    @show
 
     @include('_revise.script');
 
