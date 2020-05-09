@@ -34,8 +34,7 @@
                                     <td>{{{ $list->description }}}</td>
                                     <td class="text-center">
                                         <a href="/admin/content/lesson/edit/{{{ $list->id }}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                        <a href="/admin/content/category/filter/{{{ $list->id }}}" title="Manage Filters"><i class="fa fa-tags" aria-hidden="true"></i></a>
-                                        <a href="#" data-href="/admin/content/category/delete/{{{ $list->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                        <a href="#" data-href="/admin/content/lesson/delete/{{{ $list->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

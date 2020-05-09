@@ -288,6 +288,7 @@ Route::group(['prefix' => 'admin'],function (){
                 Route::post('store','Admin\LessonsController@lessonStore');
                 Route::match(['get'],'getLessons','Admin\LessonsController@getAllLessons');
                 Route::get('edit/{id}','Admin\LessonsController@lessonEdit');
+                Route::get('delete/{id}','Admin\LessonsController@lessonDelete');
             });
 
         });
