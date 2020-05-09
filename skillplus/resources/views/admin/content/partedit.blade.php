@@ -373,6 +373,36 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Audio</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#VideoModal" data-whatever="upload_audio">
+                                    <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                </span>
+                                        <input type="text" name="upload_audio" dir="ltr" value="{{{ $part->upload_audio or ''}}}" class="form-control">
+                                        <span class="input-group-append click-for-upload cu-p">
+                                    <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Attatchment</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#VideoModal" data-whatever="upload_file">
+                                    <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                </span>
+                                        <input type="text" name="upload_file" dir="ltr" value="{{{ $part->upload_file or ''}}}" class="form-control">
+                                        <span class="input-group-append click-for-upload cu-p">
+                                    <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                                </span>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="form-group">
                                 <div class="row">
