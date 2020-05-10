@@ -1,9 +1,14 @@
 <link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/_plugins/responsive.dataTable.css') }}" rel="stylesheet"> 
-<link href="{{ asset('assets/_plugins/jquery.scrolling-tabs.min.css') }}" rel="stylesheet"> 
+<link href="{{ asset('assets/_plugins/jquery.scrolling-tabs.min.css') }}" rel="stylesheet">
 <script src="{{ asset('assets/_plugins/datatable.js') }}"></script>
 
 <style>
+    #form .error{
+        color: red;
+        border-color: red;
+    }
+
     .dataTables_filter, .dataTables_length {
         display: none;
     }
