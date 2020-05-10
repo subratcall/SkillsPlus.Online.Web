@@ -7,7 +7,7 @@
     <style>
        .navigation {
             white-space: nowrap !important;
-            overflow-y: auto;
+            overflow: auto !important;
             flex-wrap: nowrap;
             height: 60px;
        }
