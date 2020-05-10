@@ -18,7 +18,7 @@
                         <a class="nav-link" href="#filter" data-toggle="tab">{{{ trans('admin.item_filters') }}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#parts" data-toggle="tab">{{{ trans('admin.parts') }}}</a>
+                        <a class="nav-link" href="#parts" data-toggle="tab">Lesson</a>
                     </li>
                 </ul>
                 <div class="tab-content">

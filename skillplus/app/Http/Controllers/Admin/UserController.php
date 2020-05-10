@@ -31,13 +31,20 @@ class userController extends Controller
     public function dologin(Request $request){
         $username = $request->username;
         $password = $request->password;
-        $admin = User::where('username',$username)->where('admin','1')->where('mode','active')->first();
+        //$admin = User::where('username',$username)->where('admin','1')->where('mode','active')->first();
+        $admin = User::where('username',$username)->where('mode','active')->first();
         if($admin && $de = decrypt($admin->password) == $password){
             $request->session()->put('Admin',serialize($admin->toArray()));
             $user = User::find($admin->id);
             $user->last_view = time();
             $user->save();
 
+            if($admin->admin==1){
+                Session::put('user_type','admin');
+            }else{
+                Session::put('user_type','reg_user');
+            }
+            
             return redirect('/admin/report/user');
         }else{
             $request->session()->flash('Error','notfonud');

@@ -78,6 +78,7 @@
                 </ul>
             </nav>
             <div class="main-sidebar sidebar-style-2">
+                @if(Session::get('user_type')=="admin")
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
                         <a href="/admin">Admin Panel</a>
@@ -96,13 +97,13 @@
                             </ul>
                         </li>@endif
                         <li class="menu-header">CRM</li>
-                        @if(checkAccess('manager'))<li class="dropdown" id="manager">
+                        <li class="dropdown" id="manager">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i> <span>{{{ trans('admin.employees') }}}</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="/admin/manager/lists">{{{ trans('admin.list') }}}</a></li>
                                 <li><a class="nav-link" href="/admin/manager/new">{{{ trans('admin.new_employee') }}}</a></li>
                             </ul>
-                        </li>@endif
+                        </li>
                         @if(checkAccess('user'))<li class="dropdown" id="user">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user"></i> <span>{{{ trans('admin.users') }}}</span></a>
                             <ul class="dropdown-menu">
@@ -234,6 +235,31 @@
                         </li>
                     </ul>
                 </aside>
+                @endif
+                @if(Session::get('user_type')=="reg_user")
+                <aside id="sidebar-wrapper">
+                    <div class="sidebar-brand">
+                        <a href="/admin">User Panel</a>
+                    </div>
+                    <div class="sidebar-brand sidebar-brand-sm">
+                        <a href="/admin">AP</a>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="menu-header">Financial</li>
+                        @if(checkAccess('buysell'))<li id="buysell">
+                            <a href="/admin/buysell/list" class="nav-link"><i class="fas fa-shopping-cart"></i> <span>My Profile</span></a>
+                        </li>
+                        <li id="buysell">
+                            <a href="/admin/buysell/list" class="nav-link"><i class="fas fa-cog"></i> <span>My Courses</span></a>
+                        </li>@endif                        
+                        
+       
+                        <li>
+                            <a href="/admin/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> <span>{{{ trans('admin.exit') }}}</span></a>
+                        </li>
+                    </ul>
+                </aside>
+                @endif
             </div>
             <div class="main-content">
                 <div class="section">

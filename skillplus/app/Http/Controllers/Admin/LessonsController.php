@@ -62,5 +62,18 @@ class LessonsController extends Controller
         $output = array("data" => $data);
 		echo json_encode($output);
     }
+
+    public function lessonEdit($id)
+    {
+        $list = LessonType::all();
+        $item = LessonType::find($id);
+        return view('admin.content.lessonedit',array('lists'=>$list,'item'=>$item));
+    }
+
+    public function lessonDelete($id)
+    {
+        LessonType::find($id)->delete();
+        return back();
+    }
     
 }
