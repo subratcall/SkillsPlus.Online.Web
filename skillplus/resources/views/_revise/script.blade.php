@@ -1,56 +1,6 @@
 {{-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> --}}
 <script src="/assets/_plugins/jquery.validate.min.js" ></script>
 <script>
-    function validation(form) {
-        form.validate({
-            rules: {
-                name: {
-                    required: true,
-                },
-                username: {
-                    required: true,
-                    rangelength: [4, 20]
-                },
-                password: {
-                    required: true,
-                    minlength: 6
-                },
-                confirmpassword: {
-                    required: true,
-                    minlength: 6,
-                    equalTo: "#password"
-                },
-                email: {
-                    required: true,
-                    email: true
-                }
-            },
-            messages: {
-                name: {
-                    required: "Please enter your real name",
-                },
-                username: {
-                    required: "Please enter your username",
-                    rangelength: "Enter atleast 4 - 6 characters"
-                },
-                password: {
-                    required: "Please enter your password",
-                    rangelength: "Enter atleast 4 - 6 characters"
-                },
-                confirmpassword: {
-                    required: "Please enter your confirm password",
-                    equalTo: "Your password is mismatch"
-                },
-                email: {
-                    required: "Please enter your email",
-                    email: "Please enter a valid email address"
-                }
-            },
-            submitHandler: function(form) { 
-                form.submit();
-            }
-        });
-    }
 
     $(document).ready(function() {
         setTimeout(function() {

@@ -753,7 +753,9 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            // $(".navigation");
+            $(".navigation").niceScroll({
+                emulatetouch: true
+            });
         });
         // $(document).on("click", "a.nav-link", function() {
            

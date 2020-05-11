@@ -7,7 +7,7 @@
 
     <section class="card">
         <div class="card-body">
-            <form action="/admin/ticket/store" class="form-horizontal form-bordered" method="post">
+            <form id="form" action="/admin/ticket/store" class="form-horizontal form-bordered" method="post">
                 <div class="form-group">
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-11">
@@ -53,5 +53,6 @@
         </div>
     </section>
 @endsection
+
 
 

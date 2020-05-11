@@ -1,37 +1,38 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Users','Groups','List']])
 @section('title')
-    {{{ trans('admin.usergp_pagetitle') }}}
+{{{ trans('admin.usergp_pagetitle') }}}
 @endsection
 
 @section('style')
-    <style>
-       .navigation {
-            white-space: nowrap !important;
-            overflow: auto !important;
-            flex-wrap: nowrap;
-            height: 60px;
-       }
-    </style>
+<style>
+    .navigation {
+        white-space: nowrap !important;
+        overflow: auto !important;
+        flex-wrap: nowrap;
+        height: 60px;
+    }
+</style>
 @endsection
 
 @section('page')
-{{-- <link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<script src="{{ asset('assets/js/dataTables/media/js/jquery.dataTables.min.js') }}"></script> --}}
-    <div class="card">
-        <div class="card-header">{{{ trans('admin.usergp_pagetitle') }}}</div>
-        <div class="card-body">
-            <ul class="navigation nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#list" data-toggle="tab"> {{{ trans('admin.user_groups_tab_title') }}} </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#newitem" data-toggle="tab">{{{ trans('admin.new_user_group_tab_title') }}}</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div id="list" class="tab-pane active">
-                    <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
-                        <thead>
+<div class="card">
+    <div class="card-header">{{{ trans('admin.usergp_pagetitle') }}}</div>
+    <div class="card-body">
+        <ul class="navigation nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" href="#list" data-toggle="tab"> {{{ trans('admin.user_groups_tab_title') }}}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#newitem"
+                    data-toggle="tab">{{{ trans('admin.new_user_group_tab_title') }}}</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="list" class="tab-pane active">
+                <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
+                    width="100%" id="datatable-details">
+                    <thead>
                         <tr>
                             <th>{{{ trans('admin.user_groups_th_group_title') }}}</th>
                             <th class="text-center" width="80">{{{ trans('admin.th_discount') }}}</th>
@@ -40,100 +41,105 @@
                             <th class="text-center" width="80">{{{ trans('admin.th_status') }}}</th>
                             <th class="text-center" width="80">{{{ trans('admin.th_controls') }}}</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         @foreach($lists as $list)
-                            <tr>
-                                <td>{{{ $list->title }}}</td>
-                                <td class="text-center" width="80">%{{{ $list->off or 0 }}}</td>
-                                <td class="text-center" width="80">%{{{ $list->commision or 0 }}}</td>
-                                <td class="text-center" width="80"><a href="/admin/user/incategory/{{{$list->id}}}">{{{ $list->users_count or 0 }}}</a></td>
-                                <td class="text-center">
-                                    @if($list->mode == 'publish')
-                                        <b class="c-g">{{{ trans('admin.new_user_group_status_enabled') }}}</b>
-                                    @else
-                                        <b class="c-r">{{{ trans('admin.new_user_group_status_disables') }}}</b>
-                                    @endif
-                                </td>
-                                <td class="text-center" width="80">
-                                    <a href="/admin/user/category/edit/{{{ $list->id }}}#newitem" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <a href="#" data-href="/admin/user/category/delete/{{{ $list->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>{{{ $list->title }}}</td>
+                            <td class="text-center" width="80">%{{{ $list->off or 0 }}}</td>
+                            <td class="text-center" width="80">%{{{ $list->commision or 0 }}}</td>
+                            <td class="text-center" width="80"><a
+                                    href="/admin/user/incategory/{{{$list->id}}}">{{{ $list->users_count or 0 }}}</a>
+                            </td>
+                            <td class="text-center">
+                                @if($list->mode == 'publish')
+                                <b class="c-g">{{{ trans('admin.new_user_group_status_enabled') }}}</b>
+                                @else
+                                <b class="c-r">{{{ trans('admin.new_user_group_status_disables') }}}</b>
+                                @endif
+                            </td>
+                            <td class="text-center" width="80">
+                                <a href="/admin/user/category/edit/{{{ $list->id }}}#newitem" title="Edit"><i
+                                        class="fa fa-edit" aria-hidden="true"></i></a>
+                                <a href="#" data-href="/admin/user/category/delete/{{{ $list->id }}}" title="Delete"
+                                    data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times"
+                                        aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
                         @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div id="newitem" class="tab-pane ">
-                    <form method="post" action="/admin/user/category/store" class="form-horizontal form-bordered">
+                    </tbody>
+                </table>
+            </div>
+            <div id="newitem" class="tab-pane ">
+                <form id="form" method="post" action="/admin/user/category/store" class="form-horizontal form-bordered">
 
 
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.new_user_group_title') }}}</label>
-                            <div class="col-md-6">
-                                <input type="text" name="title" value="" class="form-control">
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"
+                            for="inputDefault">{{{ trans('admin.new_user_group_title') }}}</label>
+                        <div class="col-md-6">
+                            <input type="text" name="title" value="" class="form-control">
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.new_user_group_discount') }}}</label>
-                            <div class="col-md-6">
-                                <input type="number" name="off" value="" placeholder="%" class="form-control text-center">
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"
+                            for="inputDefault">{{{ trans('admin.new_user_group_discount') }}}</label>
+                        <div class="col-md-6">
+                            <input type="number" name="off" value="" placeholder="%" class="form-control text-center">
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.new_user_group_commission') }}}</label>
-                            <div class="col-md-6">
-                                <input type="number" name="commision" value="" placeholder="%" class="form-control text-center">
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"
+                            for="inputDefault">{{{ trans('admin.new_user_group_commission') }}}</label>
+                        <div class="col-md-6">
+                            <input type="number" name="commision" value="" placeholder="%"
+                                class="form-control text-center">
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.new_user_group_icon') }}}</label>
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                    <div class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" name="image" dir="ltr" value="" class="form-control">
-                                    <div class="input-group-append click-for-upload cu-p">
-                                       <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
-                                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"
+                            for="inputDefault">{{{ trans('admin.new_user_group_icon') }}}</label>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend view-selected cu-p" data-toggle="modal"
+                                    data-target="#ImageModal" data-whatever="image">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <input type="text" name="image" dir="ltr" value="" class="form-control">
+                                <div class="input-group-append click-for-upload cu-p">
+                                    <span class="input-group-text"><i class="fa fa-upload"
+                                            aria-hidden="true"></i></span>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.new_user_group_status') }}}</label>
-                            <div class="col-md-6" >
-                                <select  name="mode" class="form-control populate" id="type">
-                                    <option value="publish">{{{ trans('admin.new_user_group_status_enabled') }}}</option>
-                                    <option value="draft">{{{ trans('admin.new_user_group_status_disables') }}}</option>
-                                </select>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"
+                            for="inputDefault">{{{ trans('admin.new_user_group_status') }}}</label>
+                        <div class="col-md-6">
+                            <select name="mode" class="form-control populate" id="type">
+                                <option value="publish">{{{ trans('admin.new_user_group_status_enabled') }}}</option>
+                                <option value="draft">{{{ trans('admin.new_user_group_status_disables') }}}</option>
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"></label>
-                            <div class="col-md-6">
-                                <button class="btn btn-primary" type="submit">{{{ trans('admin.save_changes') }}}</button>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary" type="submit">{{{ trans('admin.save_changes') }}}</button>
                         </div>
+                    </div>
 
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-    {{-- <script src="/assets/admin//modules/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('#datatable-details').DataTable();
-        });
-    </script> --}}
+</div>
 @endsection
-
-

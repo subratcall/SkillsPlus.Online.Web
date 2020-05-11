@@ -38,10 +38,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="newitem" class="tab-pane ">
-                        <form method="post" action="/admin/blog/category/store" class="form-horizontal form-bordered">
-
-
+                    <div id="newitem" class="tab-pane">
+                        <form method="post" id="form" action="/admin/blog/category/store" class="form-horizontal form-bordered">
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                                 <div class="col-md-6">
@@ -55,7 +53,6 @@
                                     <button class="btn btn-primary" type="submit">{{{ trans('admin.save_changes') }}}</button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -64,4 +61,3 @@
     </div>
 
 @endsection
-

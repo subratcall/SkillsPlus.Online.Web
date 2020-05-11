@@ -47,8 +47,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="newitem" class="tab-pane ">
-                        <form method="post" action="/admin/content/category/store" class="form-horizontal form-bordered">
+                    <div id="newitem" class="tab-pane">
+                        <form id="form" method="post" action="/admin/content/category/store" class="form-horizontal form-bordered">
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.parrent_category') }}}</label>
@@ -65,14 +65,14 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="class" value="" required class="form-control">
+                                    <input type="text" name="class" value="" class="form-control">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.link_title') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="title" required placeholder="Enter SEO friendly URL" class="form-control">
+                                    <input type="text" name="title" placeholder="Enter SEO friendly URL" class="form-control">
                                 </div>
                             </div>
 
@@ -83,7 +83,7 @@
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image" >
                                             <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                         </span>
-                                        <input type="text" name="image" required placeholder="Displays on top menu (80*80px)" dir="ltr" class="form-control">
+                                        <input type="text" name="image" placeholder="Displays on top menu (80*80px)" dir="ltr" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>
@@ -98,7 +98,7 @@
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="icon">
                                             <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                         </span>
-                                        <input type="text" name="icon" dir="ltr" required placeholder="Displays on category page header (80*80px)" class="form-control">
+                                        <input type="text" name="icon" dir="ltr" placeholder="Displays on category page header (80*80px)" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>
@@ -124,7 +124,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.color_code') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="color" value="" required placeholder="eg #e91e63" min class="form-control text-center">
+                                    <input type="text" name="color" value="" placeholder="eg #e91e63" min class="form-control text-center">
                                 </div>
                             </div>
 
@@ -165,3 +165,50 @@
     </div>
 @endsection
 
+
+@section('script')
+<script>
+    $(document).ready(function() {
+
+    
+    validation();
+
+    function validation() {
+        $("#form").validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                class: {
+                    required: true
+                },
+                color: {
+                    required: true
+                }
+            },
+            messages: {
+                title: {
+                    required: "Please fill up the field"
+                },
+                class: {
+                    required: "Please fill up the field"
+                }, 
+                color: {
+                    required: "Please fill up the field"
+                }
+            },
+            submitHandler: function(form) { 
+                form.submit();
+            }
+        });
+    }
+
+        $("#form").submit(function(e) {
+            
+            validation();
+            console.log("hello world");
+            e.preventDefault();
+        });
+    });
+</script>
+@endsection

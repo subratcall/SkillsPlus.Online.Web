@@ -6,12 +6,12 @@
     <section class="card">
         <div class="card-body">
 
-            <form action="/admin/blog/post/store" class="form-horizontal form-bordered" method="post">
+            <form id="form" action="/admin/blog/post/store" class="form-horizontal form-bordered" method="post">
 
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-10">
-                        <input type="text" name="title" class="form-control" required>
+                        <input type="text" name="title" class="form-control">
                     </div>
                 </div>
 
@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.category') }}}</label>
                     <div class="col-md-10">
-                        <select id="category_id" class="form-control">
+                        <select id="category_id" name="category_id" class="form-control">
                             <option value=""></option>
                             @foreach($category as $cat)
                                 <option value="{{{ $cat->id }}}">{{{ $cat->title }}}</option>
@@ -90,6 +90,61 @@
     </section>
 @endsection
 @section('script')
-    <script>$(".inputtags").tagsinput('items');</script>
-@endsection
+    <script>
+    $(".inputtags").tagsinput('items');
 
+    function validation() {
+            $("#form").validate({
+                rules: {
+                    title: {
+                        required: true
+                    },
+                    category_id: {
+                        required: true
+                    },
+                    pre_content: {
+                        required: true
+                    },
+                    content: {
+                        required: true
+                    },
+                    tags: {
+                        required: true
+                    }
+                },
+                message: {
+                    title: {
+                        required: "Please enter your title"
+                    },
+                    category_id: {
+                        required: "Please enter your category"
+                    },
+                    pre_content: {
+                        required: "Please enter your pre content"
+                    },
+                    content: {
+                        required: "Please enter your content"
+                    },
+                    tags: {
+                        required: "Please enter your tags"
+                    }
+                },
+                submitHandler: function(form) { 
+                    form.submit();
+                }
+            })
+        }
+
+
+    $(document).ready(function() {
+        validation();
+
+        $("#form").submit(function(e) {
+            e.preventDefault();
+
+            validation();
+        });
+    });
+    
+    </script>
+@endsection

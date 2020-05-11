@@ -35,7 +35,7 @@
                       </table>
                   </div>
                   <div id="newitem" class="tab-pane ">
-                      <form method="post" action="/admin/ticket/category/store" class="form-horizontal form-bordered">
+                      <form method="post" id="form" action="/admin/ticket/category/store" class="form-horizontal form-bordered">
 
 
                           <div class="form-group">
@@ -60,3 +60,31 @@
     </div>
 @endsection
 
+
+@section('script')
+    <script>
+        function validation() {
+            $("#form").validate({
+                rules: {
+                    title: {
+                        required: true
+                    }
+                },
+                message: {
+                    title: {
+                        required: 'Please enter title'
+                    }
+                }
+            });
+        }
+
+        validation();
+
+        $(document).ready(function() {
+           $("#form").submit(function(e) {
+               e.preventDefault();
+               validation();
+           });
+        });
+    </script>
+@endsection

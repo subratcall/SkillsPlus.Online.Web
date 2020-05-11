@@ -5,8 +5,11 @@
 
 <style>
     #form .error{
-        color: red;
         border-color: red;
+    }
+
+    #form label.error {
+        color: red;
     }
 
     .dataTables_filter, .dataTables_length {
