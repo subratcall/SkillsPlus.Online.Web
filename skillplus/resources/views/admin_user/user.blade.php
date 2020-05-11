@@ -2,6 +2,19 @@
 @section('title')
     Dashboard
 @endsection
+
+@section('style')
+    <style>
+        .card-body {
+            height: 100%;
+        }
+        
+        #todo-lists-demo-controls  {
+            height: 100%;
+        }
+    </style>
+@endsection
+
 @section('page')
     <link rel="stylesheet" href="{!! asset('assets/taskboard/css/lobilist.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/taskboard/css/jquery-ui.min.css') !!}">
@@ -99,38 +112,23 @@
     <script>
     $(document).ready(function() {     
         $('#todo-lists-demo-controls').lobiList({
-            lists: [/* {
-                    title: 'Todo',
-                    defaultStyle: 'lobilist-info',
-                    controls: ['edit', 'styleChange'],
-                    items: [{
-                        title: 'Floor cool cinders',
-                        description: 'Thunder fulfilled travellers folly, wading, lake.',
-                        dueDate: '2015-01-31'
-                    }]
-                },
+            lists: [
                 {
-                    title: 'Disabled checkboxes',
-                    defaultStyle: 'lobilist-danger',
-                    controls: ['edit', 'add', 'remove'],
-                    useLobicheck: false,
-                    items: [{
-                        title: 'Periods pride',
-                        description: 'Accepted was mollis',
-                        done: true
-                    }]
-                }, */
-                {
-                    title: 'Completed',
-                    controls: false,
-                    items: [{
-                        title: 'Composed trays',
-                        description: 'Hoary rattle exulting suspendisse elit paradises craft wistful. ' +
-                            'Bayonets allures prefer traits wrongs flushed. Tent wily matched bold polite slab coinage ' +
-                            'celerities gales beams.'
-                    }]
-                },
-            ]
+                    title: 'TODO',
+                    defaultStyle: 'lobilist-default',
+                    items: [
+                        {
+                            title: 'Floor cool cinders',
+                            description: 'Thunder fulfilled travellers folly, wading, lake.',
+                            dueDate: '2015-01-31'
+                        }
+                    ]
+                }
+            ],
+            afterListAdd: function(lobilist, list){
+                var $dueDateInput = list.$el.find('form [name=dueDate]');
+                $dueDateInput.datepicker();
+            }
         });       
     });
         

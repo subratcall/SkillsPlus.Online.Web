@@ -1,4 +1,4 @@
-@extends('admin.newlayout.layout',['breadcom'=>['Courses','Latest Courses']])
+@extends('admin.newlayout.layout',['<eadcom'=>['Courses','Latest Courses']])
 @section('title')
    {{{ trans('admin.course_list') }}}
 @endsection
@@ -116,7 +116,7 @@
                             <td class="text-center" title="{{{ $item->user->username or '' }}}"><a href="/admin/user/item/{{{ $item->user->id or '' }}}">{{{ $item->user->name or '' }}}</a></td>
                             <td class="text-center">{{{ $item->sells_count or '0' }}}</td>
                             <td class="text-center">{{{ $item->partsactive_count or '0' }}}</td>
-                            <td class="text-center">{{{ $item->transactions->sum('price') }}}<br>{{{ trans('admin.cur_dollar') }}}</td>
+                            <td class="text-center">{{{ $item->transactions->sum('price') }}}{{{ trans('admin.cur_dollar') }}}</td>
                             <td class="text-center">{{{ $item->view or '0' }}}</td>
                             <td class="text-center">{{{ $meta['price'] or 'Free' }}}</td>
                             <td class="text-center">{{{ $item->category->title or '' }}}</td>
