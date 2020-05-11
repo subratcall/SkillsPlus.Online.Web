@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\URL;
 use App\Models\UserRateRelation;
 use Maatwebsite\Excel\Facades\Excel;
 
-class userController extends Controller
+class UserController extends Controller
 {
 
     public function login(Request $request){
@@ -41,11 +41,12 @@ class userController extends Controller
 
             if($admin->admin==1){
                 Session::put('user_type','admin');
+                return redirect('/admin/report/user');
             }else{
                 Session::put('user_type','reg_user');
+                return redirect('/admin/user_dashboard/user');
             }
             
-            return redirect('/admin/report/user');
         }else{
             $request->session()->flash('Error','notfonud');
             return redirect('/admin/login');
