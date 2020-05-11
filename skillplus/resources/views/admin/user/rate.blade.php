@@ -759,5 +759,42 @@
         // $(document).on("click", "a.nav-link", function() {
            
         // });
+
+
+        // $('#todo-lists-demo-controls').lobiList({
+        //     lists: [/* {
+        //             title: 'Todo',
+        //             defaultStyle: 'lobilist-info',
+        //             controls: ['edit', 'styleChange'],
+        //             items: [{
+        //                 title: 'Floor cool cinders',
+        //                 description: 'Thunder fulfilled travellers folly, wading, lake.',
+        //                 dueDate: '2015-01-31'
+        //             }]
+        //         },
+        //         {
+        //             title: 'Disabled checkboxes',
+        //             defaultStyle: 'lobilist-danger',
+        //             controls: ['edit', 'add', 'remove'],
+        //             useLobicheck: false,
+        //             items: [{
+        //                 title: 'Periods pride',
+        //                 description: 'Accepted was mollis',
+        //                 done: true
+        //             }]
+        //         }, */
+        //         {
+        //             title: 'Completed',
+        //             controls: false,
+        //             items: [{
+        //                 title: 'Composed trays',
+        //                 description: 'Hoary rattle exulting suspendisse elit paradises craft wistful. ' +
+        //                     'Bayonets allures prefer traits wrongs flushed. Tent wily matched bold polite slab coinage ' +
+        //                     'celerities gales beams.'
+        //             }]
+        //         },
+        //     ]
+        // });       
+        // });
     </script>
 @endsection

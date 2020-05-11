@@ -99,7 +99,7 @@
     <section class="card">
         <div class="card-body">
            <!--  <canvas id="myChart" width="400" height="200"></canvas> -->
-           <div id="todo-lists-demo-controls"></div>
+           {{-- <div id="todo-lists-demo-controls"></div> --}}
         </div>
     </section>
     

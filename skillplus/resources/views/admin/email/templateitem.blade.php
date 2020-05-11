@@ -22,20 +22,20 @@
     <section class="card">
         <div class="card-body">
 
-            <form action="/admin/email/template/edit" class="form-horizontal form-bordered" method="post">
+            <form id="form" action="/admin/email/template/edit" class="form-horizontal form-bordered" method="post">
 
                 <input type="hidden" name="id" value="{{{$item->id or ''}}}">
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="inputDefault">{!! trans('admin.th_title') !!}</label>
                     <div class="col-md-11">
-                        <input type="text" name="title" class="form-control" value="{{{ $item->title or '' }}}" required>
+                        <input type="text" name="title" class="form-control" value="{{{ $item->title or '' }}}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="inputDefault">Message body</label>
                     <div class="col-md-12">
-                        <textarea class="form-control text-left summernote" dir="ltr" rows="15" name="template" required>
+                        <textarea class="form-control text-left summernote" dir="ltr" rows="15" name="template">
                             @if(isset($item->template))
                                 {!! htmlentities($item->template) !!}
                             @endif
@@ -52,4 +52,33 @@
             </form>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            function validation() {
+                $("#form").validate({
+                    rules: {
+                        title: {
+                            required: true
+                        }
+                    },
+                    message: {
+                        title: {
+                            required: "Please enter a title"
+                        }
+                    }
+                })
+            }
+
+            validation();
+
+            $("#form").submit(function(e) {
+                e.preventDefault();
+
+                validation();
+            });
+        });
+    </script>
 @endsection

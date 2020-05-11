@@ -49,7 +49,7 @@ class UserController extends Controller
             
         }else{
             $request->session()->flash('Error','notfonud');
-            return redirect('/admin/login');
+            return redirect('/admin/login')->with('status', 0);
         }
     }
     public function logout()
