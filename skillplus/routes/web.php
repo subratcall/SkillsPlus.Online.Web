@@ -17,6 +17,13 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('balance','Admin\ReportController@balance');
         });
 
+        ########################
+        ## User Dashboard     ##
+        ########################
+        Route::group(['prefix'=>'user_dashboard'],function(){
+            Route::get('user','Admin_user\UserController@dashboard');
+        });
+
         #####################
         ## Balance Section ##
         #####################
@@ -383,6 +390,23 @@ Route::group(['prefix' => 'admin'],function (){
         Route::get('video/stream/{id}','VideoController@streamAdmin');
 
     });
+
+    /* Route::group(['middleware'=>'admin'],function (){
+
+        Route::get('profile','Admin\SettingController@profile');
+        Route::post('profile/main/update','Admin\SettingController@profileMainUpdate');
+        Route::post('profile/security/update','Admin\SettingController@profileSecurityUpdate');
+
+        ########################
+        ## Report & Dashboard ##
+        ########################
+        Route::group(['prefix'=>'report'],function(){
+            Route::get('user','Admin\ReportController@user');
+            Route::get('content','Admin\ReportController@content');
+            Route::get('balance','Admin\ReportController@balance');
+        });
+
+    }); */
 
     Route::get('/',function (){return redirect('/admin/login');});
     Route::get('login','Admin\UserController@login');
