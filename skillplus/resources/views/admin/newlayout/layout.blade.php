@@ -16,12 +16,15 @@
     <link rel="stylesheet" href="/assets/admin/modules/jquery-selectric/selectric.css">
     <link rel="stylesheet" href="/assets/admin/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
 
+
+
     <!-- Template CSS -->
     <link rel="stylesheet" href="/assets/admin/css/style.css">
     <link rel="stylesheet" href="/assets/admin/css/components.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/stylesheets/admin-custom.css">
+    
     <style>
         .custom-switch-input:checked~.custom-switch-description {
             position: relative;

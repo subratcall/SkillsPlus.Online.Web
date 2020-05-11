@@ -99,7 +99,7 @@
     <script>
     $(document).ready(function() {     
         $('#todo-lists-demo-controls').lobiList({
-            lists: [{
+            lists: [/* {
                     title: 'Todo',
                     defaultStyle: 'lobilist-info',
                     controls: ['edit', 'styleChange'],
@@ -119,9 +119,9 @@
                         description: 'Accepted was mollis',
                         done: true
                     }]
-                },
+                }, */
                 {
-                    title: 'Controls disabled',
+                    title: 'Completed',
                     controls: false,
                     items: [{
                         title: 'Composed trays',
