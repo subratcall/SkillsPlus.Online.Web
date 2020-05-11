@@ -9,7 +9,6 @@
             white-space: nowrap !important;
             overflow-y: auto;
             flex-wrap: nowrap;
-            height: 60px;
        }
     </style>
 @endsection
