@@ -122,7 +122,7 @@ Dashboard
                 <button type="button" id="kb-addboard">Add</button>
             </div> -->
             <div class="col-lg-12">
-                <div id="myKanban" ></div>
+                <div id="myKanban"></div>
             </div>
         </div>
     </div>
@@ -149,7 +149,7 @@ Dashboard
             },
             success: function(data) {
                 console.log(data);
-                
+
                 for (let index = 0; index < data.courses.length; index++) {
                     c.push({"title":data.courses[index].content_title});                            
                 }
@@ -185,24 +185,12 @@ Dashboard
                     <div class='item_handle'>
                         %s <span class='float-r' id="item_delete">x</span>
                     </div>
-                    `// your entirely customized handler. Use %s to position item title
+                    `
             },
             click: function(el) {
-                var item_delete = document.getElementById('item_delete');
-                item_delete.addEventListener('click', function (e) {
-
-                    var r = confirm("Delete yes or no");
-                    if (r == true) {
-
-                        var kbitem = $(this).parent(".kanban-item").attr();
-                        
-                        console.log(kbitem);
-
-                        // KanbanTest.removeBoard("_done");
-                    } else {
-                        txt = "You pressed Cancel!";
-                    }
-                });
+                if (el.target.value) {
+                    console.log(el.target.value);
+                }
             },
             buttonClick: function(el, boardId) {
                 console.log(el);
@@ -229,9 +217,12 @@ Dashboard
                     });
 
                     formItem.parentNode.removeChild(formItem);
-
                     countc++;
                 });
+
+                document.getElementById("CancelBtn").onclick = function() {
+                    formItem.parentNode.removeChild(formItem);
+                 };
             },
             boards  :[
                     {
@@ -242,12 +233,12 @@ Dashboard
                         'item'  : c
                     },
                         {
-                    'id' : '_working',
-                    dragBoards : false,
-                    'title'  : 'Favorites',
-                    'class' : 'warning',
-                    'item'  : f
-                },
+                        'id' : '_working',
+                        dragBoards : false,
+                        'title'  : 'Favorites',
+                        'class' : 'warning',
+                        'item'  : f
+                    },
             ]
         });
         
