@@ -184,6 +184,9 @@
                 },
                 color: {
                     required: true
+                },
+                image: {
+                    required: true
                 }
             },
             messages: {
@@ -194,6 +197,9 @@
                     required: "Please fill up the field"
                 }, 
                 color: {
+                    required: "Please fill up the field"
+                },
+                image: {
                     required: "Please fill up the field"
                 }
             },

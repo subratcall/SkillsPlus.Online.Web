@@ -1,26 +1,30 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Report','Users']])
 @section('title')
-    Dashboard
+Dashboard
 @endsection
 
 @section('style')
-    <style>
-        .card-body {
-            height: 100%;
-        }
-        
-        #todo-lists-demo-controls  {
-            height: 100%;
-        }
-    </style>
-@endsection
+<link rel="stylesheet" href="/assets/_plugins/lobilist.css">
+<style>
+    .card-body {
+        height: 100%;
+    }
 
+    #todo-lists-demo-controls {
+        height: 100%;
+    }
+
+    .lobilist-footer {
+        display: none;
+    }
+    
+</style>
+@endsection
+{{-- btn-link btn-show-form --}}
 @section('page')
-    <link rel="stylesheet" href="{!! asset('assets/taskboard/css/lobilist.css') !!}">
-    <link rel="stylesheet" href="{!! asset('assets/taskboard/css/jquery-ui.min.css') !!}">
-    <div class="row">
-        <div class="col-xs-6 col-md-3 col-sm-6 text-center">
-            <!-- <section class="card bg-warning">
+<div class="row">
+    <div class="col-xs-6 col-md-3 col-sm-6 text-center">
+        <!-- <section class="card bg-warning">
                 <div class="card-body">
                     <div class="widget-summary">
                         <div class="widget-summary-col">
@@ -37,8 +41,8 @@
                     </div>
                 </div>
             </section> -->
-        </div>
-        <!-- <div class="col-xs-6 col-md-3 col-sm-6 text-center">
+    </div>
+    <!-- <div class="col-xs-6 col-md-3 col-sm-6 text-center">
             <section class="card bg-info">
                 <div class="card-body">
                     <div class="widget-summary">
@@ -77,7 +81,7 @@
             </section>
         </div>
         <div class="col-xs-6 col-md-3 col-sm-6 text-center"> -->
-        <!-- <section class="card bg-danger">
+    <!-- <section class="card bg-danger">
             <div class="card-body">
                 <div class="widget-summary">
                     <div class="widget-summary-col">
@@ -94,43 +98,39 @@
                 </div>
             </div>
         </section> -->
+</div>
+</div>
+<section class="card">
+    <div class="card-body">
+        <!--  <canvas id="myChart" width="400" height="200"></canvas> -->
+        <div id="todo-lists-demo-controls"></div>
     </div>
-    </div>
-    <section class="card">
-        <div class="card-body">
-           <!--  <canvas id="myChart" width="400" height="200"></canvas> -->
-           {{-- <div id="todo-lists-demo-controls"></div> --}}
-        </div>
-    </section>
-    
-    
+</section>
+
+
 @endsection
 
 @section('scripts')
-    <script src="{!! asset('assets/taskboard/js/lobilist.js') !!}"></script>
-    <script src="{!! asset('assets/taskboard/js/lobibox.min.js') !!}"></script>
-    <script>
-    $(document).ready(function() {     
+<script src="/assets/_plugins/lobilist.js"></script>
+<script src="/assets/_plugins/lobibox.min.js"></script>
+<script>
+    $(document).ready(function() {    
+        
         $('#todo-lists-demo-controls').lobiList({
-            lists: [
-                {
-                    title: 'TODO',
-                    defaultStyle: 'lobilist-default',
-                    items: [
-                        {
-                            title: 'Floor cool cinders',
-                            description: 'Thunder fulfilled travellers folly, wading, lake.',
-                            dueDate: '2015-01-31'
-                        }
-                    ]
-                }
-            ],
+            lists: [{
+                title: 'TODO',
+                defaultStyle: 'lobilist-default',
+                items: [{
+                        title: 'Floor cool cinders',
+                        description: 'Thunder fulfilled travellers folly, wading, lake.',
+                        dueDate: '2015-01-31'
+                    }]
+            }],
             afterListAdd: function(lobilist, list){
                 var $dueDateInput = list.$el.find('form [name=dueDate]');
                 $dueDateInput.datepicker();
             }
-        });       
+        });
     });
-        
-    </script>
+</script>
 @endsection
