@@ -4,23 +4,35 @@ Dashboard
 @endsection
 
 @section('style')
-<link rel="stylesheet" href="/assets/_plugins/lobilist.css">
+<link rel='stylesheet' href='https://www.riccardotartaglia.it/jkanban/dist/jkanban.min.css'>
 <style>
-    .card-body {
-        height: 100%;
+    #myKanban {
+        overflow-x: auto;
+        padding: 20px 0;
     }
 
-    #todo-lists-demo-controls {
-        height: 100%;
+    .success {
+        background: #00B961;
+        color: #fff
     }
 
-    .lobilist-footer {
-        display: none;
+    .info {
+        background: #2A92BF;
+        color: #fff
     }
-    
+
+    .warning {
+        background: #F4CE46;
+        color: #fff
+    }
+
+    .error {
+        background: #FB7D44;
+        color: #fff
+    }
 </style>
 @endsection
-{{-- btn-link btn-show-form --}}
+
 @section('page')
 <div class="row">
     <div class="col-xs-6 col-md-3 col-sm-6 text-center">
@@ -103,34 +115,97 @@ Dashboard
 <section class="card">
     <div class="card-body">
         <!--  <canvas id="myChart" width="400" height="200"></canvas> -->
-        <div id="todo-lists-demo-controls"></div>
+        <div class="row">
+            <div class="col-lg-6">
+                <label>Add board</label>
+                <input type="text" id="kb-btitle" placeholder="Enter list board title"/>
+                <button type="button" id="kb-addboard">Add</button>
+            </div>
+            <div class="col-lg-6">
+                <label>Add card</label>
+                <input type="text" id="kb-ctitle" placeholder="Enter list card title"/>
+                <button type="button" id="kb-addcard">Add</button>
+            </div>
+            <div class="col-lg-12">
+                <div id="myKanban"></div>
+            </div>
+        </div>
     </div>
 </section>
 
 
 @endsection
 
-@section('scripts')
-<script src="/assets/_plugins/lobilist.js"></script>
-<script src="/assets/_plugins/lobibox.min.js"></script>
+@section('script')
+<script src='https://gitcdn.xyz/repo/riktar/jkanban/master/dist/jkanban.min.js'></script>
 <script>
-    $(document).ready(function() {    
-        
-        $('#todo-lists-demo-controls').lobiList({
-            lists: [{
-                title: 'TODO',
-                defaultStyle: 'lobilist-default',
-                items: [{
-                        title: 'Floor cool cinders',
-                        description: 'Thunder fulfilled travellers folly, wading, lake.',
-                        dueDate: '2015-01-31'
-                    }]
-            }],
-            afterListAdd: function(lobilist, list){
-                var $dueDateInput = list.$el.find('form [name=dueDate]');
-                $dueDateInput.datepicker();
-            }
+
+    $(document).ready(function() {
+        var KanbanTest = new jKanban({
+            element : '#myKanban',
+            gutter  : '10px',
+                click : function(el){
+                    alert(el.innerHTML);
+                },
+        });
+
+        $("#kb-addboard").click(function() {
+            KanbanTest.addBoards(
+                [{
+                    'id' : '_default',
+                    'title'  : $('#kb-btitle').val(),
+                    'dragTo':['_todo','_working'],
+                    'class' : 'error'
+                }]
+            )
+        });
+
+        $("#kb-addcard").click(function() {
+            KanbanTest.addElement(
+            '_default',
+                {
+                    'title': $("#kb-ctitle").val(),
+                }
+            );
         });
     });
+
+    // var toDoButton = document.getElementById('addToDo');
+    // toDoButton.addEventListener('click',function(){
+    //     KanbanTest.addElement(
+    //         '_todo',
+    //         {
+    //             'title':'Test Add',
+    //         }
+    //     );
+    // });
+
+    // var addBoardDefault = document.getElementById('addDefault');
+    // addBoardDefault.addEventListener('click', function () {
+    //     KanbanTest.addBoards(
+    //         [{
+    //             'id' : '_default',
+    //             'title'  : 'Default (Can\'t drop in Done)',
+    //             'dragTo':['_todo','_working'],
+    //             'class' : 'error',
+    //             'item'  : [
+    //                 {
+    //                     'title':'Default Item',
+    //                 },
+    //                 {
+    //                     'title':'Default Item 2',
+    //                 },
+    //                 {
+    //                     'title':'Default Item 3',
+    //                 }
+    //             ]
+    //         }]
+    //     )
+    // });
+
+    // var removeBoard = document.getElementById('removeBoard');
+    // removeBoard.addEventListener('click',function(){
+    //     KanbanTest.removeBoard('_done');
+    // });
 </script>
 @endsection

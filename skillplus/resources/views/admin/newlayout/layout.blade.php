@@ -24,6 +24,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/stylesheets/admin-custom.css">
+    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     
     <style>
         .custom-switch-input:checked~.custom-switch-description {

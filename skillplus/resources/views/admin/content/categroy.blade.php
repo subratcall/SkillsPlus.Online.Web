@@ -185,9 +185,6 @@
                 color: {
                     required: true
                 },
-                image: {
-                    required: true
-                }
             },
             messages: {
                 title: {
@@ -199,9 +196,6 @@
                 color: {
                     required: "Please fill up the field"
                 },
-                image: {
-                    required: "Please fill up the field"
-                }
             },
             submitHandler: function(form) { 
                 form.submit();
