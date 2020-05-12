@@ -136,13 +136,48 @@ Dashboard
 <script>
 
     $(document).ready(function() {
+        
+        var countb = 0;
+        var countc = 0;
+        var dragarr = [];
+
         var KanbanTest = new jKanban({
             element : '#myKanban',
             gutter  : '10px',
                 click : function(el){
                     alert(el.innerHTML);
                 },
+            dragBoards       : true, 
             addItemButton: true,
+            buttonContent    : '+',
+            itemHandleOptions: {
+                enabled             : true,                                 // if board item handle is enabled or not
+                handleClass         : "item_handle",                         // css class for your custom item handle
+                customCssHandler    : "drag_handler",                        // when customHandler is undefined, jKanban will use this property to set main handler class
+                customCssIconHandler: "drag_handler_icon",                   // when customHandler is undefined, jKanban will use this property to set main icon handler class. If you want, you can use font icon libraries here
+                customHandler       : `
+                    <div class='item_handle'>
+                        %s <span class='float-r' id="item_delete">x</span>
+                    </div>
+                    `// your entirely customized handler. Use %s to position item title
+            },
+            click: function(el) {
+                var item_delete = document.getElementById('item_delete');
+                item_delete.addEventListener('click', function (e) {
+
+                    var r = confirm("Delete yes or no");
+                    if (r == true) {
+
+                        var kbitem = $(this).parent(".kanban-item").attr();
+                        
+                        console.log(kbitem);
+
+                        // KanbanTest.removeBoard("_done");
+                    } else {
+                        txt = "You pressed Cancel!";
+                    }
+                });
+            },
             buttonClick: function(el, boardId) {
                 console.log(el);
                 console.log(boardId);
@@ -161,10 +196,15 @@ Dashboard
                 formItem.addEventListener("submit", function(e) {
                     e.preventDefault();
                     var text = e.target[0].value;
+
                     KanbanTest.addElement(boardId, {
-                        title: text
+                        id: countc.toString(),
+                        title: text,
                     });
+
                     formItem.parentNode.removeChild(formItem);
+
+                    countc++;
                 });
                 document.getElementById("CancelBtn").onclick = function() {
                     formItem.parentNode.removeChild(formItem);
@@ -173,14 +213,26 @@ Dashboard
         });
 
         $("#kb-addboard").click(function() {
-            KanbanTest.addBoards(
-                [{
-                    'id' : '_default',
-                    'title'  : $('#kb-btitle').val(),
-                    'dragTo':['_todo','_working'],
-                    'class' : 'error'
-                }]
-            )
+
+            countb = countb.toString();
+
+            dragarr.push(countb);
+            
+            if ($("#kb-btitle").val()) {
+    
+                KanbanTest.addBoards(
+                    [{
+                        'id' : countb,
+                        'title'  : $('#kb-btitle').val(),
+                        'dragTo': dragarr,
+                        'class' : 'error'
+                    }]
+                )
+            }
+
+            console.log(dragarr);
+
+            countb++;
         });
     });
 
