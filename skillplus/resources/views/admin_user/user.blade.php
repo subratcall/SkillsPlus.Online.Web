@@ -4,7 +4,7 @@ Dashboard
 @endsection
 
 @section('style')
-<link rel='stylesheet' href='https://www.riccardotartaglia.it/jkanban/dist/jkanban.min.css'>
+<link rel='stylesheet' href="{{ asset('assets/_plugins/jkanban.css') }}">
 <style>
     #myKanban {
         overflow-x: auto;
@@ -121,14 +121,6 @@ Dashboard
                 <input type="text" id="kb-btitle" placeholder="Enter list board title"/>
                 <button type="button" id="kb-addboard">Add</button>
             </div>
-            <div class="col-lg-4">
-                <label>Add card</label>
-                <input type="text" id="kb-ctitle" placeholder="Enter list card title"/>
-                <button type="button" id="kb-addcard">Add</button>
-            </div>
-            <div class="col-lg-4">
-                <button type="button" id="kb-delboard">Remove</button>
-            </div>
             <div class="col-lg-12">
                 <div id="myKanban"></div>
             </div>
@@ -140,7 +132,7 @@ Dashboard
 @endsection
 
 @section('script')
-<script src='https://gitcdn.xyz/repo/riktar/jkanban/master/dist/jkanban.min.js'></script>
+<script src='{{ asset('assets/_plugins/jkanban.min.js') }}'></script>
 <script>
 
     $(document).ready(function() {
@@ -150,6 +142,34 @@ Dashboard
                 click : function(el){
                     alert(el.innerHTML);
                 },
+            addItemButton: true,
+            buttonClick: function(el, boardId) {
+                console.log(el);
+                console.log(boardId);
+                // create a form to enter element
+                var formItem = document.createElement("form");
+                formItem.setAttribute("class", "itemform");
+                formItem.innerHTML =
+                    `<div class="form-group">
+                        <textarea class="form-control" rows="2" autofocus></textarea>
+                    </div><div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-xs pull-right">Submit</button>
+                        <button type="button" id="CancelBtn" class="btn btn-default btn-xs pull-right">Cancel</button>
+                    </div>`;
+
+                KanbanTest.addForm(boardId, formItem);
+                formItem.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    var text = e.target[0].value;
+                    KanbanTest.addElement(boardId, {
+                        title: text
+                    });
+                    formItem.parentNode.removeChild(formItem);
+                });
+                document.getElementById("CancelBtn").onclick = function() {
+                    formItem.parentNode.removeChild(formItem);
+                };
+            },
         });
 
         $("#kb-addboard").click(function() {
@@ -161,19 +181,6 @@ Dashboard
                     'class' : 'error'
                 }]
             )
-        });
-
-        $("#kb-addcard").click(function() {
-            KanbanTest.addElement(
-            '_default',
-                {
-                    'title': $("#kb-ctitle").val(),
-                }
-            );
-        });
-
-        $("#kb-delboard").click(function() {
-            KanbanTest.removeBoard('_default');
         });
     });
 
