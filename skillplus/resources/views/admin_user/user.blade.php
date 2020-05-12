@@ -116,13 +116,13 @@ Dashboard
     <div class="card-body">
         <!--  <canvas id="myChart" width="400" height="200"></canvas> -->
         <div class="row">
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <label>Add board</label>
                 <input type="text" id="kb-btitle" placeholder="Enter list board title"/>
                 <button type="button" id="kb-addboard">Add</button>
-            </div>
+            </div> -->
             <div class="col-lg-12">
-                <div id="myKanban"></div>
+                <div id="myKanban" ></div>
             </div>
         </div>
     </div>
@@ -136,6 +136,32 @@ Dashboard
 <script>
 
     $(document).ready(function() {
+
+        var c = []
+        var f = []
+
+        $.ajax({
+            url: "{{ url('/admin/user_dashboard/course_overview') }}",
+            type: "get",
+            dataType: 'JSON',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data) {
+                console.log(data);
+                
+                for (let index = 0; index < data.courses.length; index++) {
+                    c.push({"title":data.courses[index].content_title});                            
+                }
+                for (let index = 0; index < data.favorite.length; index++) {
+                    f.push({"title":data.favorite[index].content_title});
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
+        });
+
         
         var countb = 0;
         var countc = 0;
@@ -206,11 +232,26 @@ Dashboard
 
                     countc++;
                 });
-                document.getElementById("CancelBtn").onclick = function() {
-                    formItem.parentNode.removeChild(formItem);
-                };
             },
+            boards  :[
+                    {
+                        'id' : '_todo',
+                        dragBoards : false,
+                        'title'  : 'My Courses',
+                        'class' : 'info',
+                        'item'  : c
+                    },
+                        {
+                    'id' : '_working',
+                    dragBoards : false,
+                    'title'  : 'Favorites',
+                    'class' : 'warning',
+                    'item'  : f
+                },
+            ]
         });
+        
+
 
         $("#kb-addboard").click(function() {
 
@@ -236,42 +277,6 @@ Dashboard
         });
     });
 
-    // var toDoButton = document.getElementById('addToDo');
-    // toDoButton.addEventListener('click',function(){
-    //     KanbanTest.addElement(
-    //         '_todo',
-    //         {
-    //             'title':'Test Add',
-    //         }
-    //     );
-    // });
 
-    // var addBoardDefault = document.getElementById('addDefault');
-    // addBoardDefault.addEventListener('click', function () {
-    //     KanbanTest.addBoards(
-    //         [{
-    //             'id' : '_default',
-    //             'title'  : 'Default (Can\'t drop in Done)',
-    //             'dragTo':['_todo','_working'],
-    //             'class' : 'error',
-    //             'item'  : [
-    //                 {
-    //                     'title':'Default Item',
-    //                 },
-    //                 {
-    //                     'title':'Default Item 2',
-    //                 },
-    //                 {
-    //                     'title':'Default Item 3',
-    //                 }
-    //             ]
-    //         }]
-    //     )
-    // });
-
-    // var removeBoard = document.getElementById('removeBoard');
-    // removeBoard.addEventListener('click',function(){
-    //     KanbanTest.removeBoard('_done');
-    // });
 </script>
 @endsection

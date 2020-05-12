@@ -24,7 +24,6 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/stylesheets/admin-custom.css">
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     
     <style>
         .custom-switch-input:checked~.custom-switch-description {
@@ -250,12 +249,24 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Financial</li>
-                        @if(checkAccess('buysell'))<li id="buysell">
-                            <a href="/admin/buysell/list" class="nav-link"><i class="fas fa-shopping-cart"></i> <span>My Profile</span></a>
-                        </li>
-                        <li id="buysell">
-                            <a href="/admin/buysell/list" class="nav-link"><i class="fas fa-cog"></i> <span>My Courses</span></a>
-                        </li>@endif                        
+                        @if(checkAccess('buysell'))
+                            <li id="mp">
+                                <a href="/admin/profile#main" class="nav-link"><i class="fas fa-shopping-cart"></i> <span>My Profile</span></a>
+                            </li>
+                            <li id="mc">
+                                <a href="/admin/user_dashboard/user" class="nav-link"><i class="fas fa-cog"></i> <span>My Courses</span></a>
+                            </li>
+                            <li id="ma">
+                                <a href="/admin/user_dashboard/user" class="nav-link"><i class="fas fa-cog"></i> <span>My Achievements</span></a>
+                            </li>
+                            <li class="dropdown" id="mfs">
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>My Feedback / Support</span></a>                        
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="/admin/ticket/tickets">{{{ trans('admin.list') }}}</a></li>
+                                    <li><a class="nav-link" href="/admin/ticket/new">{{{ trans('admin.submit_ticket') }}}</a></li>
+                                </ul>
+                            </li>    
+                        @endif                        
                         
        
                         <li>

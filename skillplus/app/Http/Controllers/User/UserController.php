@@ -191,6 +191,7 @@ class UserController extends Controller
             'email'=>$request->email,
             'password'=>encrypt($request->password),
             'create_at'=>time(),
+            'last_view'=>time(),
             'admin'=>0,
             'mode'=>get_option('user_register_mode','active'),
             'category_id'=>get_option('user_default_category',0),

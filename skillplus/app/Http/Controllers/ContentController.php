@@ -1138,7 +1138,7 @@ class ContentController extends Controller
         $New = Usage::create([
             'user_id'       => $user_id,
             'product_id'    => $product_id,
-            'created_at_sh' => time(),
+            '_sh' => time(),
             'updated_at_sh' => time()
         ]);
         return $New;
