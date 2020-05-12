@@ -116,15 +116,18 @@ Dashboard
     <div class="card-body">
         <!--  <canvas id="myChart" width="400" height="200"></canvas> -->
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <label>Add board</label>
                 <input type="text" id="kb-btitle" placeholder="Enter list board title"/>
                 <button type="button" id="kb-addboard">Add</button>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <label>Add card</label>
                 <input type="text" id="kb-ctitle" placeholder="Enter list card title"/>
                 <button type="button" id="kb-addcard">Add</button>
+            </div>
+            <div class="col-lg-4">
+                <button type="button" id="kb-delboard">Remove</button>
             </div>
             <div class="col-lg-12">
                 <div id="myKanban"></div>
@@ -167,6 +170,10 @@ Dashboard
                     'title': $("#kb-ctitle").val(),
                 }
             );
+        });
+
+        $("#kb-delboard").click(function() {
+            KanbanTest.removeBoard('_default');
         });
     });
 
