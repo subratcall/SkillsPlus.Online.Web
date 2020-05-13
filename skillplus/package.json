@@ -14,5 +14,11 @@
         "laravel-mix": "^0.8.1",
         "lodash": "^4.17.4",
         "vue": "^2.1.10"
+    },
+    "dependencies": {
+        "datatables.net": "^1.10.21",
+        "datatables.net-dt": "^1.10.21",
+        "jquery.nicescroll": "^3.7.6",
+        "tooltip": "^1.6.1"
     }
 }
