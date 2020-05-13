@@ -2,7 +2,11 @@
 <link href="{{ asset('assets/_plugins/responsive.dataTable.css') }}" rel="stylesheet"> 
 <link href="{{ asset('assets/_plugins/jquery.scrolling-tabs.min.css') }}" rel="stylesheet">
 <script src="{{ asset('assets/_plugins/datatable.js') }}"></script>
-
+<script>
+    window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+    ]) !!};
+</script>
 <style>
     #form .error{
         border-color: red;

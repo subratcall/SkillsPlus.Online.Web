@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -8,8 +7,12 @@ window._ = require('lodash');
  */
 
 window.$ = window.jQuery = require('jquery');
-
+require('jquery.nicescroll');
+require("datatables.net");
+require('tooltip');
 require('bootstrap-sass');
+
+$("#table_id").DataTable();
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -44,3 +47,5 @@ window.axios.defaults.headers.common = {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+// Global

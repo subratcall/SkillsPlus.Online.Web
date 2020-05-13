@@ -134,7 +134,6 @@ Dashboard
 @section('script')
 <script src='{{ asset('assets/_plugins/jkanban.min.js') }}'></script>
 <script>
-
     $(document).ready(function() {
 
         var c = []
@@ -188,13 +187,11 @@ Dashboard
                     `
             },
             click: function(el) {
-                if (el.target.value) {
-                    console.log(el.target.value);
-                }
+                // console.log("kanban click: "+el);
             },
             buttonClick: function(el, boardId) {
-                console.log(el);
-                console.log(boardId);
+                // console.log(el);
+                // console.log(boardId);
                 // create a form to enter element
                 var formItem = document.createElement("form");
                 formItem.setAttribute("class", "itemform");
@@ -209,15 +206,20 @@ Dashboard
                 KanbanTest.addForm(boardId, formItem);
                 formItem.addEventListener("submit", function(e) {
                     e.preventDefault();
+
                     var text = e.target[0].value;
 
-                    KanbanTest.addElement(boardId, {
-                        id: countc.toString(),
-                        title: text,
-                    });
+                    if (text) {
+                        KanbanTest.addElement(boardId, {
+                            id: countc.toString(),
+                            title: text,
+                        });
 
-                    formItem.parentNode.removeChild(formItem);
-                    countc++;
+                        formItem.parentNode.removeChild(formItem);
+                        countc++;
+                    } else {
+                        formItem.parentNode.removeChild(formItem);
+                    }
                 });
 
                 document.getElementById("CancelBtn").onclick = function() {
@@ -241,8 +243,6 @@ Dashboard
                     },
             ]
         });
-        
-
 
         $("#kb-addboard").click(function() {
 
@@ -262,12 +262,23 @@ Dashboard
                 )
             }
 
-            console.log(dragarr);
+            // console.log(dragarr);
 
             countb++;
         });
-    });
 
+        $(document).on("click", "#item_delete", function(e) {
+            var eid = $(this).parent('div').parent('div').attr("data-eid");
+
+            var r = confirm("Remove item?");
+            if (r == true) {
+                KanbanTest.removeElement(eid);   
+            } else {
+                return false;
+            }
+        });
+
+    });
 
 </script>
 @endsection

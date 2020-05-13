@@ -50,7 +50,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div>
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
             <nav class="navbar navbar-expand-lg main-navbar">

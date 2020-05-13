@@ -416,6 +416,17 @@ Route::group(['prefix' => 'admin'],function (){
     Route::post('dologin','Admin\UserController@dologin');
     Route::get('remember','Admin\UserController@remember');
 
+
+    ##################
+    ##### Custom #####
+    ##################
+
+    Route::group(['prefix'=>'test'],function (){
+        Route::get('/one', function() {
+            return view("admin.test.one");
+        });
+    });
+
 });
 
 Route::group(['prefix'=>'user'],function (){
