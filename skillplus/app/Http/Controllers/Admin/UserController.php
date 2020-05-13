@@ -23,9 +23,9 @@ class UserController extends Controller
 {
 
     public function login(Request $request){
-        if($request->session()->has('Admin') ){
+        /* if($request->session()->has('Admin') ){
             return redirect('/admin/user/lists');
-        }
+        } */
         return view('admin.login');
     }
     public function dologin(Request $request){
@@ -39,6 +39,7 @@ class UserController extends Controller
             $user->last_view = time();
             $user->save();
 
+            Session::put('user_id',$admin->id);
             if($admin->admin==1){
                 Session::put('user_type','admin');
                 return redirect('/admin/report/user');
@@ -68,6 +69,7 @@ class UserController extends Controller
         $fdate = strtotime(Input::get('fsdate'));
         $ldate = strtotime(Input::get('lsdate'));
         $userList = User::with('category')->withCount('contents','sells','buys')->where('admin','0');
+        //$userList = User::with('category')->withCount('contents','sells','buys');
 
         if($fdate>12601)
             $userList->where('create_at','>',$fdate);

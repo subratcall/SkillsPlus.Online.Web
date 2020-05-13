@@ -1,5 +1,6 @@
 <?php
 
+
 Route::group(['prefix' => 'admin'],function (){
 
     Route::group(['middleware'=>'admin'],function (){
@@ -22,6 +23,7 @@ Route::group(['prefix' => 'admin'],function (){
         ########################
         Route::group(['prefix'=>'user_dashboard'],function(){
             Route::get('user','Admin_user\UserController@dashboard');
+            Route::get('course_overview','Admin_user\UserController@getContentById');
         });
 
         #####################

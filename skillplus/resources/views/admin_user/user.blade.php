@@ -116,13 +116,13 @@ Dashboard
     <div class="card-body">
         <!--  <canvas id="myChart" width="400" height="200"></canvas> -->
         <div class="row">
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <label>Add board</label>
                 <input type="text" id="kb-btitle" placeholder="Enter list board title"/>
                 <button type="button" id="kb-addboard">Add</button>
-            </div>
+            </div> -->
             <div class="col-lg-12">
-                <div id="myKanban"></div>
+                <div id="myKanban" ></div>
             </div>
         </div>
     </div>
@@ -136,90 +136,60 @@ Dashboard
 <script>
 
     $(document).ready(function() {
-        var KanbanTest = new jKanban({
-            element : '#myKanban',
-            gutter  : '10px',
-                click : function(el){
-                    alert(el.innerHTML);
-                },
-            addItemButton: true,
-            buttonClick: function(el, boardId) {
-                console.log(el);
-                console.log(boardId);
-                // create a form to enter element
-                var formItem = document.createElement("form");
-                formItem.setAttribute("class", "itemform");
-                formItem.innerHTML =
-                    `<div class="form-group">
-                        <textarea class="form-control" rows="2" autofocus></textarea>
-                    </div><div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-xs pull-right">Submit</button>
-                        <button type="button" id="CancelBtn" class="btn btn-default btn-xs pull-right">Cancel</button>
-                    </div>`;
 
-                KanbanTest.addForm(boardId, formItem);
-                formItem.addEventListener("submit", function(e) {
-                    e.preventDefault();
-                    var text = e.target[0].value;
-                    KanbanTest.addElement(boardId, {
-                        title: text
-                    });
-                    formItem.parentNode.removeChild(formItem);
-                });
-                document.getElementById("CancelBtn").onclick = function() {
-                    formItem.parentNode.removeChild(formItem);
-                };
+        $.ajax({
+            url: "{{ url('/admin/user_dashboard/course_overview') }}",
+            type: "get",
+            dataType: 'JSON',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-        });
+            success: function(data) {
+                var c = []
+                var f = []
+                for (let index = 0; index < data.courses.length; index++) {
+                    c.push({"title":data.courses[index].content_title});                            
+                }
+                for (let index = 0; index < data.favorite.length; index++) {
+                    f.push({"title":data.favorite[index].content_title});
+                }
+                           
 
-        $("#kb-addboard").click(function() {
-            KanbanTest.addBoards(
-                [{
-                    'id' : '_default',
-                    'title'  : $('#kb-btitle').val(),
-                    'dragTo':['_todo','_working'],
-                    'class' : 'error'
-                }]
-            )
+
+                var KanbanTest = new jKanban({
+                    element : '#myKanban',
+                    gutter  : '10px',
+                            dragBoards : false,
+                    click : function(el){
+                        
+                    },
+                    boards  :[
+                        {
+                            'id' : '_todo',
+                            dragBoards : false,
+                            'title'  : 'My Courses',
+                            'class' : 'info',
+                            'item'  : c
+                        },
+                        {
+                            'id' : '_working',
+                            dragBoards : false,
+                            'title'  : 'Favorites',
+                            'class' : 'warning',
+                            'item'  : f
+                        },
+                    ]
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
         });
+        
+
+
     });
 
-    // var toDoButton = document.getElementById('addToDo');
-    // toDoButton.addEventListener('click',function(){
-    //     KanbanTest.addElement(
-    //         '_todo',
-    //         {
-    //             'title':'Test Add',
-    //         }
-    //     );
-    // });
 
-    // var addBoardDefault = document.getElementById('addDefault');
-    // addBoardDefault.addEventListener('click', function () {
-    //     KanbanTest.addBoards(
-    //         [{
-    //             'id' : '_default',
-    //             'title'  : 'Default (Can\'t drop in Done)',
-    //             'dragTo':['_todo','_working'],
-    //             'class' : 'error',
-    //             'item'  : [
-    //                 {
-    //                     'title':'Default Item',
-    //                 },
-    //                 {
-    //                     'title':'Default Item 2',
-    //                 },
-    //                 {
-    //                     'title':'Default Item 3',
-    //                 }
-    //             ]
-    //         }]
-    //     )
-    // });
-
-    // var removeBoard = document.getElementById('removeBoard');
-    // removeBoard.addEventListener('click',function(){
-    //     KanbanTest.removeBoard('_done');
-    // });
 </script>
 @endsection
