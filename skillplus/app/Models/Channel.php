@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Channel extends Model
 {
     protected $table = 'tbl_user_channel';
-    protected $fillable = ['title', 'user_id', 'description', 'formal', 'mode', 'image', 'avatar', 'attach'];
+    protected $fillable = ['title', 'user_id', 'username', 'description', 'formal', 'mode', 'image', 'avatar', 'attach'];
     public $timestamps = false;
 
     public function user(){

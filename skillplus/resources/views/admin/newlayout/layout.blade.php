@@ -239,7 +239,7 @@
                     </ul>
                 </aside>
                 @endif
-                @if(Session::get('user_type')=="reg_user")
+                @if(Session::get('user_type')=="reg_user"||Session::get('user_type')=="vend_user")
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
                         <a href="/admin">User Panel</a>
@@ -248,25 +248,61 @@
                         <a href="/admin">AP</a>
                     </div>
                     <ul class="sidebar-menu">
-                        <li class="menu-header">Financial</li>
-                        @if(checkAccess('buysell'))
+                        <li class="menu-header">Dashboard</li>
                             <li id="mp">
                                 <a href="/admin/profile#main" class="nav-link"><i class="fas fa-shopping-cart"></i> <span>My Profile</span></a>
                             </li>
-                            <li id="mc">
-                                <a href="/admin/user_dashboard/user" class="nav-link"><i class="fas fa-cog"></i> <span>My Courses</span></a>
+                            <li class="dropdown" id="mc">
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>Course</span></a>                        
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="/admin/user_dashboard/courses">Courses Overview</a></li>
+                                    <li><a href="/admin/user_dashboard/user" class="nav-link">My Courses</a> </li>
+                                </ul>
                             </li>
+                            
+                            <li class="dropdown" id="rq">
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>Request</span></a>                        
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="/admin/user_request/request">Request</a></li>
+                                    <li><a href="/admin/user_request/myrequest" class="nav-link">My Request</a> </li>
+                                </ul>
+                            </li> 
+
+                            <li id="mb">
+                                <a href="/admin/user_balance/mybalance" class="nav-link"><i class="fas fa-cog"></i> <span>My Balance</span></a>
+                            </li>
+
+                            
                             <li id="ma">
                                 <a href="/admin/user_dashboard/user" class="nav-link"><i class="fas fa-cog"></i> <span>My Achievements</span></a>
                             </li>
+                            
                             <li class="dropdown" id="mfs">
                                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>My Feedback / Support</span></a>                        
                                 <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="/admin/ticket/tickets">{{{ trans('admin.list') }}}</a></li>
                                     <li><a class="nav-link" href="/admin/ticket/new">{{{ trans('admin.submit_ticket') }}}</a></li>
                                 </ul>
+                            </li>   
+                            
+                            @if(Session::get('user_type')=="vend_user")
+
+                            <li class="dropdown" id="ms">
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>Channels</span></a>                        
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="/admin/user_channel/channel">List</a></li>
+                                    <li><a class="nav-link" href="/admin/user_channel/mychannel">New</a></li>
+                                </ul>
                             </li>    
-                        @endif                        
+
+                            @endif
+
+                            <li id="ms">
+                                <a href="/admin/user_settings/settings" class="nav-link"><i class="fas fa-cog"></i> <span>Settings</span></a>
+                            </li>
+
+                            <li id="ma">
+                                <a href="/admin/user_vendor/vendor" class="nav-link"><i class="fas fa-cog"></i> <span>Become A Vendor</span></a>
+                            </li>                      
                         
        
                         <li>

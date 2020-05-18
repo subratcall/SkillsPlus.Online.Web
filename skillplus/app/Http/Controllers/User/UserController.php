@@ -55,20 +55,24 @@ class UserController extends Controller
     public function dologin(Request $request){
         $username = $request->username;
         $password = $request->password;
+        /* $admin = User::with('usermetas')->where(function ($w) use($username){
+            $w->where('username',$username)->orWhere('email',$username);
+        })->where('admin','0')->first(); */
+
+
         $admin = User::with('usermetas')->where(function ($w) use($username){
             $w->where('username',$username)->orWhere('email',$username);
-        })->where('admin','0')->first();
-
+        })->first();
 
         if($admin && decrypt($admin->password) == $password){
 
             if($admin->mode != 'active') {
                 if (userMeta($admin->id, 'blockDate', time()) < time()) {
                     $admin->update(['mode'=>'active']);
-                } else {
+                } /* else {
                     $jBlockDate = date('d F Y', userMeta($admin->id, 'blockDate', time()));
                     return redirect()->back()->with('msg', trans('main.access_denied') . $jBlockDate );
-                }
+                } */
             }
 
             $login = Login::where('user_id', $admin->id)->orderBy('id','DESC')->first();

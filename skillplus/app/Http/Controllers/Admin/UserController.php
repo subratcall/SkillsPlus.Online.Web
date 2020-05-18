@@ -23,9 +23,9 @@ class UserController extends Controller
 {
 
     public function login(Request $request){
-        /* if($request->session()->has('Admin') ){
+        if($request->session()->has('Admin') ){
             return redirect('/admin/user/lists');
-        } */
+        }
         return view('admin.login');
     }
     public function dologin(Request $request){
@@ -43,6 +43,9 @@ class UserController extends Controller
             if($admin->admin==1){
                 Session::put('user_type','admin');
                 return redirect('/admin/report/user');
+            }else if($admin->vendor==1){
+                Session::put('user_type','vend_user');
+                return redirect('/admin/user_dashboard/user');
             }else{
                 Session::put('user_type','reg_user');
                 return redirect('/admin/user_dashboard/user');

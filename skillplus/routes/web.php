@@ -23,7 +23,50 @@ Route::group(['prefix' => 'admin'],function (){
         ########################
         Route::group(['prefix'=>'user_dashboard'],function(){
             Route::get('user','Admin_user\UserController@dashboard');
+            Route::get('courses','Admin_user\UserController@courses');
             Route::get('course_overview','Admin_user\UserController@getContentById');
+            Route::get('mycourses','Admin_user\UserController@getCourses');
+
+            
+        });
+
+        Route::group(['prefix'=>'user_request'],function(){
+            Route::get('request','Admin_user\RequestController@request');
+            Route::get('myrequest','Admin_user\RequestController@myrequest');
+            Route::get('getMyRequest','Admin_user\RequestController@getMyRequest');
+            Route::get('showRequest/{id}','Admin_user\RequestController@show');
+            Route::get('editRequest/{id}','Admin_user\RequestController@editrequest');
+            Route::get('getCateroy','Admin_user\RequestController@getAllCategory');
+            Route::post('add_request','Admin_user\RequestController@store');
+            Route::post('update_request','Admin_user\RequestController@update');
+            Route::get('delete_request/{id}','Admin_user\RequestController@destroy');
+        });
+
+        Route::group(['prefix'=>'user_balance'],function(){
+            Route::get('getAllMyBalance','Admin_user\BalanceController@getAllMyBalance');
+            Route::get('mybalance','Admin_user\BalanceController@mybalance');
+        });
+
+        Route::group(['prefix'=>'user_vendor'],function(){
+            Route::get('vendor','Admin_user\VendorController@vendor');
+            Route::get('getAllCategory','Admin_user\VendorController@getAllCategory');
+            Route::post('vendor_request','Admin_user\VendorController@store');
+        });
+
+        Route::group(['prefix'=>'user_settings'],function(){
+            Route::get('settings','Admin_user\SettingsController@settings');
+            Route::post('set','Admin_user\SettingsController@store');
+        });
+
+        Route::group(['prefix'=>'user_channel'],function(){
+            Route::get('channel','Admin_user\ChannelController@channel');
+            Route::get('mychannel','Admin_user\ChannelController@mychannel');
+            Route::get('mychannel/{id}','Admin_user\ChannelController@mychannel');
+            Route::get('getmychannel','Admin_user\ChannelController@getAllChannelsById');
+            Route::get('getmychannelbyid/{id}','Admin_user\ChannelController@show');
+            Route::get('delchannel','Admin_user\ChannelController@destroy');
+            Route::post('savechannel','Admin_user\ChannelController@save');
+            Route::get('delete_channel/{id}','Admin_user\ChannelController@destroy');
         });
 
         #####################
