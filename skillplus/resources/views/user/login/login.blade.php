@@ -97,6 +97,10 @@
 @section('script')
     <script>
         $(document).keypress(function(e) {
+                $('#username').val('');
+                $('#r-password').val('');
+            
+
             if(e.which == 13) {
                 $('#loginForm').submit();
             }

@@ -13,7 +13,7 @@
 
                         <div class="form-group">
                             <label class="control-label" for="inputDefault">{{{ trans('main.title') }}}</label>
-                            <input type="text" name="title" class="form-control" id="inputDefault" @if(isset($_GET['type']) && $_GET['type'] == 'become_vendor') value="{!! trans('main.become_vendor_title') !!}" disabled @endif required>
+                            <input type="text" name="title" class="form-control" id="inputDefault" @if(isset($_GET['type']) && $_GET['type'] == 'become_vendor') value="{!! trans('main.become_vendor_title') !!}" readonly @endif required>
                         </div>
 
                         <div class="form-group">
