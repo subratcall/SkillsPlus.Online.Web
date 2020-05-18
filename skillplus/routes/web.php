@@ -1,6 +1,4 @@
 <?php
-
-
 Route::group(['prefix' => 'admin'],function (){
 
     Route::group(['middleware'=>'admin'],function (){
@@ -21,8 +19,15 @@ Route::group(['prefix' => 'admin'],function (){
         ########################
         ## User Dashboard     ##
         ########################
+
         Route::group(['prefix'=>'user_dashboard'],function(){
             Route::get('user','Admin_user\UserController@dashboard');
+            Route::get('article','Admin_user\UserController@article');
+            Route::get('course_overview','Admin_user\UserController@getContentById');
+
+            Route::group(['prefix'=>'request'],function(){
+                Route::get('article','Admin_user\UserController@list');
+            });
             Route::get('courses','Admin_user\UserController@courses');
             Route::get('course_overview','Admin_user\UserController@getContentById');
             Route::get('mycourses','Admin_user\UserController@getCourses');
@@ -68,6 +73,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::post('savechannel','Admin_user\ChannelController@save');
             Route::get('delete_channel/{id}','Admin_user\ChannelController@destroy');
         });
+
 
         #####################
         ## Balance Section ##

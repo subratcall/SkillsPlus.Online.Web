@@ -13,6 +13,7 @@ class ArticleController extends Controller
         $lists = Article::with(['category'])->where('user_id',$user['id'])->orderBy('id','DESC')->get();
         return view('user.article.list',['lists'=>$lists]);
     }
+    
     public function articleNew(){
         return view('user.article.new');
     }

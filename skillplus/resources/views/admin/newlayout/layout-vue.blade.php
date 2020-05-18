@@ -47,6 +47,7 @@
     </script>
     <!-- /END GA -->
     <link href="{{ asset('css/app.css') }}">
+
 </head>
 
 <body>
@@ -260,6 +261,9 @@
                                 <li id="ma">
                                     <a href="/admin/user_dashboard/user" class="nav-link"><i class="fas fa-cog"></i> <span>My Achievements</span></a>
                                 </li>
+                                <li id="ma">
+                                    <a href="/admin/user_dashboard/article" class="nav-link"><i class="fas fa-book"></i> <span>Article</span></a>
+                                </li>
                                 <li class="dropdown" id="mfs">
                                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>My Feedback / Support</span></a>                        
                                     <ul class="dropdown-menu">
@@ -320,9 +324,6 @@
     <script src="/assets/admin/modules/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="/assets/admin/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
     <script src="/assets/admin/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script>
-    <script src="/assets/admin/modules/datatables/datatables.min.js"></script>
-    <script src="/assets/admin/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/assets/admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
     <script src="/assets/admin/modules/jquery-ui/jquery-ui.min.js"></script>
     <script src="/assets/admin/modules/summernote/summernote-bs4.js"></script>
     <script src="/assets/admin/modules/jquery-selectric/jquery.selectric.min.js"></script>

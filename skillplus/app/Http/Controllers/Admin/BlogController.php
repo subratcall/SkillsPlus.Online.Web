@@ -52,7 +52,6 @@ class BlogController extends Controller
         return view('admin.blog.edit',['category'=>$category,'item'=>$item]);
     }
 
-
     public function category()
     {
         $list = BlogCategory::withCount('posts')->get();
@@ -84,7 +83,6 @@ class BlogController extends Controller
         BlogCategory::find($id)->delete();
         return back();
     }
-
 
     public function comments()
     {
