@@ -563,12 +563,12 @@ function sendNotification($senderId, $source, $message_id, $recipentType, $recip
     $title = str_replace(
         array_keys($source),
         array_values($source),
-        $message->title);
+        $message['title']);
 
     $message = str_replace(
         array_keys($source),
         array_values($source),
-        $message->template);
+        $message['template']);
 
     $notification = \App\Models\Notification::create([
         'user_id'=>$senderId,
