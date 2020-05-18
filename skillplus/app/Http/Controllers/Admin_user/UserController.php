@@ -40,22 +40,9 @@ class UserController extends Controller
     }
     
 
-    public function model(Request $request) {
-        $type = $request->type;
-
-        if ($type == "category") {
-            $result = ContentCategory::with(['childs','filters'=>function($q){ 
-                $q->with(['tags']);
-            }])->get();
-        }
-
-        if ($type == "test") {
-            $result = [
-                "status" => "200"
-            ];
-        }
-
-        return response()->json($result);
+    public function category(Request $request) {
+        $contentMenu = contentMenu();
+        return response()->json($contentMenu);
     }
 
     public function article() {
@@ -104,16 +91,6 @@ class UserController extends Controller
         $sortRules = $request->input('sort');
         $limit = $request->input('per_page');
         list($field, $dir) = explode('|', $sortRules);
-
-        // return Article::where('title','LIKE','%'.$filter.'%')
-        //     ->orderBy($field, $dir)
-        //     ->paginate($limit);
-
-        // return Article::with(['category'])
-        //     ->where('title','LIKE','%'.$filter.'%')
-        //     ->where('user_id',$user['id'])
-        //     ->orderBy($field, $dir)
-        //     ->paginate($limit);
 
          return Article::leftJoin('tbl_contents_category', function($join) {
              $join->on('tbl_article.cat_id', '=', 'tbl_contents_category.id');
