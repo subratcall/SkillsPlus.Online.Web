@@ -36,19 +36,19 @@
         margin-top: 10px;
     }
 
-    .padding-top: {
+    .padding-top {
         padding-top: 10px;
     }
 
-    .padding-bottom: {
+    .padding-bottom {
         padding-bottom: 10px;
     }
 
-    .padding-left: {
+    .padding-left {
         padding-left: 10px;
     }
 
-    .padding-right: {
+    .padding-right {
         padding-right: 10px;
     }
 

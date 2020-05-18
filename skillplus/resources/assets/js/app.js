@@ -5,7 +5,7 @@
  */
 
 require('./bootstrap');
-
+require('../skillsready/script');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('example-component', require('./components/Example.vue'));
+
 
 const app = new Vue({
     el: '#app'

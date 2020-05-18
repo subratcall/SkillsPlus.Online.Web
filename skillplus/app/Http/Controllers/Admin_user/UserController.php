@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin_user;
-use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,12 @@ use Session;
 
 use App\Models\Favorite;
 use App\Models\Sell;
-//use Illuminate\Support\Facades\Input;
+use App\Models\Article;
+use App\Models\ContentCategory;
+use App\Models\BlogCategory;
+use Illuminate\Support\Facades\Input;
+use App\Models\User;
+use App\Models\Content;
 //use Illuminate\Support\Facades\Redirect;
 //use Illuminate\Validation\Rules\In;
 //use PayPal\Auth\OAuthTokenCredential;
@@ -31,6 +36,29 @@ class UserController extends Controller
     {    
         return view('admin_user.user');
     }
+    
+
+    public function model(Request $request) {
+        $type = $request->type;
+
+        if ($type == "category") {
+            $result = ContentCategory::with(['childs','filters'=>function($q){ 
+                $q->with(['tags']);
+            }])->get();
+        }
+
+        if ($type == "test") {
+            $result = [
+                "status" => "200"
+            ];
+        }
+
+        return response()->json($result);
+    }
+
+    public function article() {
+        return view('admin_user.article');
+    }
 
     public function getContentById()
     {
@@ -43,6 +71,7 @@ class UserController extends Controller
            $arr['content_title'] = $getContent->title;
            $cdata[] = $arr;
         }
+        
         $fdata = array();
         foreach ($getFavdatas as $key) {
            $arr= array();
@@ -54,5 +83,33 @@ class UserController extends Controller
         $output = array("courses" => $cdata,"favorite" => $fdata,);
 		echo json_encode($output);
         
+    }
+
+    public function list(Request $request) {
+        global $user;
+
+        $filter = $request->input('filter');
+        $sortRules = $request->input('sort');
+        $limit = $request->input('per_page');
+        list($field, $dir) = explode('|', $sortRules);
+
+        // return Article::where('title','LIKE','%'.$filter.'%')
+        //     ->orderBy($field, $dir)
+        //     ->paginate($limit);
+
+        // return Article::with(['category'])
+        //     ->where('title','LIKE','%'.$filter.'%')
+        //     ->where('user_id',$user['id'])
+        //     ->orderBy($field, $dir)
+        //     ->paginate($limit);
+
+         return Article::leftJoin('tbl_contents_category', function($join) {
+             $join->on('tbl_article.cat_id', '=', 'tbl_contents_category.id');
+         })
+            ->select('tbl_article.id', 'tbl_article.title', 'tbl_contents_category.title AS category')
+            ->where('tbl_article.title','LIKE','%'.$filter.'%')
+            ->where('tbl_article.user_id',$user['id'])
+            ->orderBy($field, $dir)
+            ->paginate($limit);
     }
 }

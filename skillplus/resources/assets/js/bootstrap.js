@@ -12,7 +12,6 @@ require("datatables.net");
 require('tooltip');
 require('bootstrap-sass');
 
-$("#table_id").DataTable();
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -21,7 +20,6 @@ $("#table_id").DataTable();
  */
 
 window.Vue = require('vue');
-
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -34,6 +32,7 @@ window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

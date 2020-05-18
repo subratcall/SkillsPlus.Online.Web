@@ -1,6 +1,4 @@
 <?php
-
-
 Route::group(['prefix' => 'admin'],function (){
 
     Route::group(['middleware'=>'admin'],function (){
@@ -21,10 +19,17 @@ Route::group(['prefix' => 'admin'],function (){
         ########################
         ## User Dashboard     ##
         ########################
+
         Route::group(['prefix'=>'user_dashboard'],function(){
             Route::get('user','Admin_user\UserController@dashboard');
+            Route::get('article','Admin_user\UserController@article');
             Route::get('course_overview','Admin_user\UserController@getContentById');
+
+            Route::group(['prefix'=>'request'],function(){
+                Route::get('article','Admin_user\UserController@list');
+            });
         });
+
 
         #####################
         ## Balance Section ##

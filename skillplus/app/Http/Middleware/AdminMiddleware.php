@@ -21,9 +21,14 @@ class AdminMiddleware
 
         session_start();
         global $admin;
+        global $user;
+
         if($request->session()->get('Admin') == null)
             return redirect('/admin');
+            
         $admin = unserialize($request->session()->get('Admin'));
+        $user = User::with('category')->where('id',$admin['id'])->first()->toArray();
+
         $_SESSION["kc_disable"] = false;
         $_SESSION["kc_uploadedir"] = $admin['username'];
         $_SESSION["kc_allow"] = true;

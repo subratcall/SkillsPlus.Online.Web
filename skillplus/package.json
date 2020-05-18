@@ -8,17 +8,32 @@
         "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@babel/plugin-transform-runtime": "^7.9.6",
         "axios": "^0.15.3",
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.3",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-stage-2": "^6.24.1",
         "bootstrap-sass": "^3.3.7",
+        "eslint": "^7.0.0",
+        "eslint-plugin-vue": "^7.0.0-alpha.2",
         "jquery": "^3.1.1",
         "laravel-mix": "^0.8.1",
         "lodash": "^4.17.4",
         "vue": "^2.1.10"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^19.0.0",
+        "@ckeditor/ckeditor5-vue": "^1.0.1",
+        "accounting": "^0.4.1",
+        "ckeditor4-vue": "^0.2.0",
         "datatables.net": "^1.10.21",
         "datatables.net-dt": "^1.10.21",
         "jquery.nicescroll": "^3.7.6",
-        "tooltip": "^1.6.1"
+        "moment": "^2.25.3",
+        "tooltip": "^1.6.1",
+        "vue-events": "^3.1.0",
+        "vuetable-2": "^1.2.0"
     }
 }

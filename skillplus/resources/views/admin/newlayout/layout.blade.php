@@ -259,6 +259,9 @@
                             <li id="ma">
                                 <a href="/admin/user_dashboard/user" class="nav-link"><i class="fas fa-cog"></i> <span>My Achievements</span></a>
                             </li>
+                            <li id="ma">
+                                <a href="/admin/user_dashboard/article" class="nav-link"><i class="fas fa-book"></i> <span>Articles</span></a>
+                            </li>
                             <li class="dropdown" id="mfs">
                                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>My Feedback / Support</span></a>                        
                                 <ul class="dropdown-menu">
