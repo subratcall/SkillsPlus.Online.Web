@@ -2,103 +2,173 @@
 .btn-save-article {
   margin-top: 30px;
 }
+
+/* input {
+  border: 1px solid silver;
+  border-radius: 4px;
+  background: white;
+  padding: 5px 10px;
+}
+
+.dirty {
+  border-color: #5a5;
+  background: #efe;
+}
+
+.dirty:focus {
+  outline-color: #8e8;
+}
+
+.error {
+  border-color: red;
+  background: #fdd;
+}
+
+.error:focus {
+  outline-color: #f99;
+} */
 </style>
 <template>
   <div>
-    <div class="row">
-      <div class="col-6">
-        <div class="row">
-          <div class="col-4">
-            <label>Title</label>
+    <!-- <div>
+      <form method="post" action="/admin/user_dashboard/request/article/store">
+        <input type="hidden" name="title" value="test" />
+        <input type="hidden" name="cat_id" value="1" />
+        <input type="hidden" name="pre_text" value="test" />
+        <input type="hidden" name="text" value="test" />
+        <input type="hidden" name="image" value="test" />
+        <input type="hidden" name="mode" value="test" />
+        <button type="submit">Submit</button>
+      </form>
+    </div> -->
+
+    <form @submit="add">
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <div class="col-4">
+              <label>Title</label>
+            </div>
+            <div class="col-8">
+              <input type="text" class="form-control" v-model.trim="$v.input.title.$model" />
+              <div class="error" v-if="!$v.input.title.required">Field is required</div>
+            </div>
           </div>
-          <div class="col-8">
-            <input type="text" class="form-control" />
+        </div>
+
+        <div class="col-6">
+          <div class="row">
+            <div class="col-4">
+              <label>Category</label>
+            </div>
+            <div class="col-8">
+              <select class="form-control" v-model.trim="$v.input.cat_id.$model">
+                <optgroup v-for="(item, index) in form.category" :label="item.title" :key="index">
+                  <option
+                    v-for="(item, index) in item.submenu"
+                    :key="index"
+                    :value="item.id"
+                  >{{ item.title }}</option>
+                </optgroup>
+              </select>
+              <div class="error" v-if="!$v.input.cat_id.required">Field is required</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="col-6">
-        <div class="row">
-          <div class="col-4">
-            <label>Category</label>
+      <div class="row margin-top">
+        <div class="col-6">
+          <div class="row">
+            <div class="col-4">
+              <label class="control-label">Thumbnail</label>
+            </div>
+            <div class="col-8">
+              <input type="text" dir="ltr" class="form-control" v-model="input.image" />
+            </div>
           </div>
-          <div class="col-8">
-            <select class="form-control" name="cat_id">
-              <optgroup v-for="(item, index) in form.category" :label="item.title" :key="index">
-                <option v-for="(item, index) in item.submenu" :key="index">{{ item.title }}</option>
-              </optgroup>
-            </select>
+        </div>
+
+        <div class="col-6">
+          <div class="row">
+            <div class="col-4">
+              <label class="control-label">Status</label>
+            </div>
+            <div class="col-8">
+              <select class="form-control font-s" v-model.trim="$v.input.mode.$model">
+                <option value="draft">Draft</option>
+                <option value="request">Send for review</option>
+                <option value="delete">Unpublish Request</option>
+              </select>
+              <div class="error" v-if="!$v.input.mode.required">Field is required</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="row margin-top">
-      <div class="col-6">
-        <div class="row">
-          <div class="col-4">
-            <label class="control-label">Thumbnail</label>
-          </div>
-          <div class="col-8">
-            <input type="text" name="image" dir="ltr" class="form-control" />
-          </div>
+      <div class="row">
+        <div class="col-12 margin-top">
+          <label>Article Summary</label>
+          <ckeditor v-model="input.pre_text" :config="editorConfig"></ckeditor>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 margin-top">
+          <label>Description</label>
+          <ckeditor v-model="input.text" :config="editorConfig"></ckeditor>
         </div>
       </div>
 
-      <div class="col-6">
-        <div class="row">
-          <div class="col-4">
-            <label class="control-label">Status</label>
-          </div>
-          <div class="col-8">
-            <select class="form-control font-s" name="mode">
-              <option value="draft">Draft</option>
-              <option value="request">Send for review</option>
-              <option value="delete">Unpublish Request</option>
-            </select>
-          </div>
+      <div class="row">
+        <div class="col-12">
+          <input type="submit" value="Save Article" class="btn btn-custom btn-save-article" />
         </div>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12 margin-top">
-        <label>Article Summary</label>
-        <ckeditor v-model="form.summary" :config="editorConfig"></ckeditor>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 margin-top">
-        <label>Description</label>
-        <ckeditor v-model="form.description" :config="editorConfig"></ckeditor>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12">
-        <input type="submit" value="Save Article" class="btn btn-custom btn-save-article" />
-      </div>
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
 import CKEditor from "ckeditor4-vue";
+import Vuelidate from "vuelidate";
+import { required, minLength, between } from "vuelidate/lib/validators";
+Vue.use(Vuelidate);
+
 export default {
   data() {
     return {
       editorConfig: {
         // The configuration of the editor.
+        placeholder: "Type the content here!"
+      },
+      input: {
+        title: "",
+        cat_id: "",
+        image: "",
+        mode: "",
+        pre_text: "<p>Content of the editor.</p>",
+        text: "<p>Content of the editor.</p>"
       },
       form: {
-        category: null,
-        summary: "<p>Content of the editor.</p>",
-        description: "<p>Content of the editor.</p>"
+        category: ""
       },
       data: {
         article: null
       }
     };
+  },
+  validations: {
+    input: {
+      title: {
+        required
+      },
+      cat_id: {
+        required
+      },
+      mode: {
+        required
+      }
+    }
   },
   components: {
     ckeditor: CKEditor.component
@@ -107,6 +177,24 @@ export default {
     this.getCategory();
   },
   methods: {
+    add(e) {
+      e.preventDefault();
+
+      console.log(this.input);
+
+      this.$v.$touch();
+
+      if (this.$v.$invalid) {
+        window.alert("error");
+      } else {
+        axios
+          .post("/admin/user_dashboard/request/article/store", this.input)
+          .then(res => {
+            this.$events.fire("redirect-tab");
+          });
+      }
+    },
+
     getCategory() {
       let vm = this;
       axios({
@@ -114,9 +202,10 @@ export default {
         method: "get"
       }).then(function(response) {
         vm.form.category = response.data;
-        console.log(vm.form.category);
+        console.log(vm.form);
       });
     }
-  }
+  },
+  events: {}
 };
 </script>

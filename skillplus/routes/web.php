@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin'],function (){
 
             Route::group(['prefix'=>'request'],function(){
                 Route::get('article','Admin_user\UserController@list');
+                Route::post('article/store','Admin_user\UserController@store');
                 Route::get('category','Admin_user\UserController@category');
             });
 

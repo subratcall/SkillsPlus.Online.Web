@@ -33,13 +33,11 @@ class UserController extends Controller
         //
     }
 
-
     public function dashboard()
     {    
         return view('admin_user.user');
     }
     
-
     public function category(Request $request) {
         $contentMenu = contentMenu();
         return response()->json($contentMenu);
@@ -52,6 +50,13 @@ class UserController extends Controller
     public function courses()
     {    
         return view('admin_user.courses');
+    }
+
+    public function store(Request $request) {
+        global $user;
+        $request->request->add(['user_id'=>$user['id'],'create_at'=>time()]);
+        $article = Article::create($request->toArray());
+        return response()->json(($article) ? 'success' : 'not');
     }
 
     public function getContentById()

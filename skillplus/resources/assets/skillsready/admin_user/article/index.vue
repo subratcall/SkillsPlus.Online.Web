@@ -54,6 +54,11 @@ export default {
   components: {
     "article-list": ListComponent,
     "article-new": NewComponent
+  },
+  events: {
+    'redirect-tab': function() {
+      this.tab = "list"
+    }
   }
 };
 </script>
