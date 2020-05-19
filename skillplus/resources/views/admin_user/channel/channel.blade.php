@@ -40,7 +40,8 @@ My Channels
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <table id="tbl" class="table table-bordered table-striped mb-none display responsive nowrap" style="width:100%">
+                <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
+                width="100%">
                     <thead>
                         <tr>
                             <th>Link</th>
@@ -60,7 +61,7 @@ My Channels
 @section('script')
 <script>
     $(document).ready(function() {
-        tbl = $('#tbl').DataTable({
+        tbl = $('#tbl').dtcustom({
                     "ajax": {
                         "type": "GET",
                         "url": "{{ url('/admin/user_channel/getmychannel') }}",
@@ -68,8 +69,6 @@ My Channels
                             return json.data;
                         }
                     },
-                      "searching": true,
-        "bFilter": true,
                     "columns": [{
                             "data": "username"
                         },{

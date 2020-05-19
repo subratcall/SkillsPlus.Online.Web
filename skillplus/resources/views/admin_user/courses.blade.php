@@ -10,18 +10,22 @@ Courses Overview
         overflow-x: auto;
         padding: 20px 0;
     }
+
     .success {
         background: #00B961;
         color: #fff
     }
+
     .info {
         background: #2A92BF;
         color: #fff
     }
+
     .warning {
         background: #F4CE46;
         color: #fff
     }
+
     .error {
         background: #FB7D44;
         color: #fff
@@ -32,8 +36,8 @@ Courses Overview
 @section('page')
 <div class="row">
     <div class="col-xs-6 col-md-3 col-sm-6 text-center">
-    
-    </div>  
+
+    </div>
 </div>
 </div>
 <section class="card">
@@ -46,7 +50,8 @@ Courses Overview
                 <button type="button" id="kb-addboard">Add</button>
             </div> -->
             <div class="col-lg-12">
-                <table id="tblCourse" class="display" style="width:100%">
+                <table class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
+                    width="100%" id="table-courses">
                     <thead>
                         <tr>
                             <th>Title</th>
@@ -67,28 +72,51 @@ Courses Overview
 @section('script')
 <script>
     $(document).ready(function() {
-        tabluc = $('#tblCourse').DataTable({
-                    "ajax": {
+        setTimeout(function() {
+            $('#table-courses').dtcustom({
+                "ajax": {
                         "type": "GET",
                         "url": "{{ url('/admin/user_dashboard/mycourses') }}",
                         "dataSrc": function(json) {
                             return json.data;
                         }
                     },
-                    "columns": [{
-                            "data": "content_title"
-                        },{
-                            "data": "date"
-                        },
-                        {
-                            "data": "vendor"
-                        },
-                        {
-                            "data": "price"
-                        },
-                    ],
+                "columns": [{
+                    "data": "content_title"
+                    },{
+                    "data": "date"
+                    },{
+                    "data": "vendor"
+                    },{
+                    "data": "price"
+                    }]
                 });
-        
+        }, 500);
     });
+
+    // $(document).ready(function() {
+    //     tabluc = $('#tblCourse').DataTable({
+    //                 "ajax": {
+    //                     "type": "GET",
+    //                     "url": "{{ url('/admin/user_dashboard/mycourses') }}",
+    //                     "dataSrc": function(json) {
+    //                         return json.data;
+    //                     }
+    //                 },
+    //                 "columns": [{
+    //                         "data": "content_title"
+    //                     },{
+    //                         "data": "date"
+    //                     },
+    //                     {
+    //                         "data": "vendor"
+    //                     },
+    //                     {
+    //                         "data": "price"
+    //                     },
+    //                 ],
+    //             });
+        
+    // });
 </script>
 @endsection

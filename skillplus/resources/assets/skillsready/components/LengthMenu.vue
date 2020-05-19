@@ -1,17 +1,27 @@
 <template>
-  <form>
-    <label class="control-label margin-right">Length:</label>
-    <select class="form-control" v-model="pagelength" @change="pageLength">
-      <option v-for="(value, index) in length">{{ value }}</option>
-    </select>
-  </form>
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-xs-1 col-sm-3 col-md-3 col-lg-2">
+          <label class="col-form-label">Limit</label>
+        </div>
+        <div class="col-xs-1 col-sm-5 col-md-4 col-lg-4">
+          <select class="form-control" @change="pageLength" v-model="pagelength">
+            <option v-for="(value, index) in menu" :key="index">{{ value }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
+  props: ["length"],
   data() {
     return {
-      length: [5, 30, 100],
+      // length: this.vtLengthmenu,
+      menu: this.length,
       pagelength: 5
     };
   },
@@ -20,7 +30,8 @@ export default {
       console.log(this.pagelength);
       this.$events.fire("perpage-set", this.pagelength);
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 

@@ -14,8 +14,7 @@ Article
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-12">
-                       <article-content></article-content>
-                       {{-- <test-content></test-content> --}}
+                       <article-index></article-index>
                     </div>
                 </div>
             </div>

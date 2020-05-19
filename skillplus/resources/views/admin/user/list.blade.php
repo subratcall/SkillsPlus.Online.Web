@@ -71,7 +71,7 @@
         </header>
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped mb-none m-b-0 display responsive nowrap" cellspacing="0" width="100%" id="datatable-details">
+                <table class="table table-bordered table-striped mb-none m-b-0" id="datatable-details">
                     <thead>
                     <tr>
                         <th class="text-center">{{{ trans('admin.username') }}}</th>

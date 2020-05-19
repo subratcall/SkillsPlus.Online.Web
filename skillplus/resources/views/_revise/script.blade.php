@@ -1,10 +1,12 @@
 {{-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> --}}
-<script src="/assets/_plugins/jquery.validate.min.js" ></script>
+<script src="/assets/_plugins/jquery.validate.min.js"></script>
 <script>
-
     $(document).ready(function() {
         setTimeout(function() {
-             $('#datatable-details').dtcustom({});
+             $('#datatable-details').dtcustom({
+                 ajax: null,
+                 columns: null
+             });
         }, 500);
 
         $(".table-responsive").removeClass();
@@ -19,16 +21,33 @@
                 bLengthChange: true,
                 bFilter: true,
                 responsive: true,
+                ajax: {
+                    type: "GET",
+                    url: "{{ asset('assets/_plugins/sample.json') }}",
+                    dataSrc: function(json) {
+                        return json.data;
+                    }
+                },
                 columnDefs: [
                     { responsivePriority: 1, targets: 0 },
                     { responsivePriority: 2, targets: -1 }
-               ]
+               ],
+               columns: [
+                    { "data": "name" },
+                    { "data": "position" },
+                    { "data": "office" },
+                    { "data": "extn" },
+                    { "data": "start_date" },
+                    { "data": "salary" }
+                ]
             }, option);
 
             return this.DataTable({
                 initComplete: function () {
 
                 var vm = this;
+
+                console.log(settings.columns, settings.ajax);
 
                 $(this).parent('div').prepend(`
                     <div class="col-12 margin-bottom margin-top">
@@ -83,11 +102,13 @@
                 bLengthChange : settings.bLengthChange,
                 bFilter: settings.bFilter,
                responsive: settings.responsive,
-               columnDefs: settings.columnDefs
+               columnDefs: settings.columnDefs,
+               ajax: settings.ajax,
+               columns: settings.columns
            });
 
         }
 
     }(jQuery));
 
- </script>
+</script>

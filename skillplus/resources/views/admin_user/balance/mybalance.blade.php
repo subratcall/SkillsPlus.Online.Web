@@ -67,7 +67,7 @@ My Request
 @section('script')
 <script>
     $(document).ready(function() {
-        tbl = $('#tbl').DataTable({
+        tbl = $('#tbl').dtcustom({
                     "ajax": {
                         "type": "GET",
                         "url": "{{ url('/admin/user_balance/getAllMyBalance') }}",
@@ -75,8 +75,6 @@ My Request
                             return json.data;
                         }
                     },
-                      "searching": true,
-        "bFilter": true,
                     "columns": [{
                             "data": "title"
                         },{
