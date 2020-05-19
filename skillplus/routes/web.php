@@ -75,6 +75,16 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('delete_channel/{id}','Admin_user\ChannelController@destroy');
         });
 
+        Route::group(['prefix'=>'user_article'],function(){
+            Route::get('list','Admin_user\ArticleController@list');
+            Route::get('updatepage','Admin_user\ArticleController@updatepage');
+            Route::get('updatepage/{id}','Admin_user\ArticleController@mychannel');
+            Route::get('getmyarticle','Admin_user\ArticleController@getAllArticlesById');
+            Route::get('getmyarticlebyid/{id}','Admin_user\ArticleController@show');
+            Route::get('delarticle','Admin_user\ArticleController@destroy');
+            Route::post('savearticle','Admin_user\ArticleController@save');
+        });
+
 
         #####################
         ## Balance Section ##
