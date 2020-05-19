@@ -13,8 +13,6 @@ use App\Models\Favorite;
 use App\Models\Sell;
 use App\Models\Article;
 use App\Models\ContentCategory;
-use App\Models\BlogCategory;
-use Illuminate\Support\Facades\Input;
 use App\Models\User;
 use App\Models\Content;
 use App\Models\Transaction;

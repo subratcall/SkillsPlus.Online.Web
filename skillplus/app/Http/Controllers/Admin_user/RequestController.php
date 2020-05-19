@@ -9,11 +9,7 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 
-use App\Models\Favorite;
-use App\Models\Sell;
 use App\Models\Content;
-use App\Models\User;
-use App\Models\Transaction;
 use App\Models\Requests;
 use App\Models\ContentCategory;
 //use Illuminate\Support\Facades\Input;
