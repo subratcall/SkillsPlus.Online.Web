@@ -271,13 +271,9 @@
                             <li id="mb">
                                 <a href="/admin/user_balance/mybalance" class="nav-link"><i class="fas fa-cog"></i> <span>My Balance</span></a>
                             </li>
-
                             
                             <li id="ma">
                                 <a href="/admin/user_dashboard/user" class="nav-link"><i class="fas fa-cog"></i> <span>My Achievements</span></a>
-                            </li>
-                            <li id="ma">
-                                <a href="/admin/user_dashboard/article" class="nav-link"><i class="fas fa-book"></i> <span>Articles</span></a>
                             </li>
                             
                             <li class="dropdown" id="mfs">
@@ -296,6 +292,9 @@
                                     <li><a class="nav-link" href="/admin/user_channel/mychannel">New</a></li>
                                 </ul>
                             </li>    
+                            <li id="mart">
+                                <a href="/admin/user_dashboard/article" class="nav-link"><i class="fas fa-book"></i> <span>Articles</span></a>
+                            </li>
 
                             @endif
 
