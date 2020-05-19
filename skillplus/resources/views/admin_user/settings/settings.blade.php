@@ -379,11 +379,11 @@ New Request
 
 
             </div>
+            
+            <div class="col-12">
+                <input type="submit" name="submit" class="btn btn-orange pull-left" value="Save">
+            </div>
         </form>
-
-        <div class="col-12">
-            <input type="submit" name="submit" class="btn btn-orange pull-left" value="Save">
-        </div>
 </section>
 
 
