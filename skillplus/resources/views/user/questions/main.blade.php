@@ -44,7 +44,7 @@
 
                             <div class="form-group hidden" id="shortAnswer">
                                 <label class="control-label">Short Answer</label>
-                                <textarea class="form-control" name="short_description" id="short_description"></textarea>
+                                <textarea class="form-control" name="short_ans" id="short_ans"></textarea>
                             </div>
 
                             <div class="form-group hidden" id="multipleDiv">
@@ -103,7 +103,14 @@
     var inputId = 0;
     var inputIdCheck = 0;
     var selecetdMultipleAnswer = '';
+    tbl = '';
     $(document).ready(function() {
+              
+        list();  
+    });
+
+    function list() {
+        $('#tbl').dataTable().fnDestroy();
         tbl = $('#tbl').dataTable({
                     "ajax": {
                         "type": "GET",
@@ -121,9 +128,8 @@
                             "data": "action"
                         },
                     ],
-                });       
-                
-    });
+                }); 
+    }
 
     function selectType(){
         if($("#type").val()=="Multiple Choice"){
@@ -204,17 +210,20 @@
     function save(){
         var data = $('#form').serializeArray();
         
-        /* data.push({
-            name: 'mode',
-            value: id?"Update":"Save"
-        }); */
+        data.push({
+            name: 'swtich',
+            value: $("#switchOpt").prop("checked") == true?true:false
+        });
         $.ajax({
             url: "{{ url('/user/question/store') }}",
             type: "post",
             data: data,
             dataType: 'JSON',
             success: function(data) {
-               //location = "/admin/user_channel/channel";
+                //location = "/admin/user_channel/channel";
+                // tbl.ajax.reload();
+                //$('#tbl').data.reload();
+                list();  
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');

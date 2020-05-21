@@ -469,8 +469,11 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-xs-12 video-details">
+                    {{{ $meta['video'] }}}
+                    vvvv{{{ $partVideoxx }}}
                     <video id="myDiv" controls>
-                        <source src="{{{ $partVideo or $meta['video'] }}}" type="video/mp4"/>
+                        <source src="{{{$partVideo or $meta['video']}}}" type="video/mp4"/> 
+                     {{--    <source src="{{{ $meta['video']  }}}" type="video/mp4"/>  --}}
                     </video>
                     <div class="video-details-section">
                         @if(count($product->favorite)>0)

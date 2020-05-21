@@ -52,6 +52,36 @@ class QuestionController extends Controller
                 'created_dt'=>date("Y-m-d H:i:s")
             ]);
         }
+
+        if($request->type=="Short Answer"){            
+            Questions::create([
+                'question'=>$request->question,
+                'type'=> $request->type ,
+                'answer'=>$request->short_ans,
+                'created_by'=>Session::get('user_id'),
+                'created_dt'=>date("Y-m-d H:i:s")
+            ]);
+        }
+
+        if($request->type=="Paragraph"){
+            Questions::create([
+                'question'=>$request->question,
+                'type'=> $request->type ,
+                'answer'=>$request->paragraph,
+                'created_by'=>Session::get('user_id'),
+                'created_dt'=>date("Y-m-d H:i:s")
+            ]);
+        }
+
+        if($request->type=="Switch"){
+            Questions::create([
+                'question'=>$request->question,
+                'type'=> $request->type ,
+                'answer'=>$request->swtich,
+                'created_by'=>Session::get('user_id'),
+                'created_dt'=>date("Y-m-d H:i:s")
+            ]);
+        }
         echo true;
     }
 

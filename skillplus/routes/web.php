@@ -830,10 +830,10 @@ Route::group(['middleware'=>'notification'],function (){
     });
 
     ## Video Section ##
-    Route::group(['prefix'=>'video'],function (){
+    /* Route::group(['prefix'=>'video'],function (){
         Route::get('stream/{id}','VideoController@stream');
         Route::get('download/{id}','VideoController@download');
-    });
+    }); */
 });
 
 Route::group(['prefix'=>'api'],function (){
@@ -864,3 +864,9 @@ Route::get('login/{user}','ContentController@login');
 Route::get('/progress','VideoController@progress');
 
 Route::any('payment/wallet/status','PaymentController@walletStatus');
+
+    ## Video Section ##
+Route::group(['prefix'=>'video'],function (){
+    Route::get('stream/{id}','VideoController@stream');
+    Route::get('download/{id}','VideoController@download');
+});

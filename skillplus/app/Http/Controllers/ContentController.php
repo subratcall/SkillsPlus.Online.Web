@@ -712,6 +712,7 @@ class ContentController extends Controller
 
         $meta = arrayToList($product->metas,'option','value');
         $parts = $product->parts->toArray();
+        $lesson = arrayToList($product->parts,'option','value');
         $rates = getRate($product->user->toArray());
 
 
@@ -733,8 +734,12 @@ class ContentController extends Controller
             $product->increment('view');
             setcookie('cv'.$id,'1');
         }
-
-        return view('view.product.product',['product'=>$product,'meta'=>$meta,'parts'=>$parts,'rates'=>$rates,'buy'=>$buy,'related'=>$relatedContent,'precourse'=>$preCousreContent,'partVideo'=>'/video/stream/'.$pid]);
+        //dd($parts);exit;
+        return view('view.product.product',['product'=>$product,'meta'=>$meta,
+        'parts'=>$parts,'rates'=>$rates,'buy'=>$buy,'related'=>$relatedContent,
+        'precourse'=>$preCousreContent,
+        'partVideo'=>'/video/stream/'.$pid,
+        'lessontVideo'=>'/bin/'.$pid ]);
     }
     public function productFav($id){
         global $user;

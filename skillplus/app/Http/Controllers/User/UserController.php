@@ -83,6 +83,7 @@ class UserController extends Controller
                 }
             }
             Session::put('user_id',$admin->id);
+            Session::put('user_name',$admin->name);
 
             $New = Login::create([
                 'user_id'       => $admin->id,
