@@ -250,10 +250,10 @@
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
                             <li id="mp">
-                                <a href="/admin/profile#main" class="nav-link"><i class="fas fa-shopping-cart"></i> <span>My Profile</span></a>
+                                <a href="/admin/profile#main" class="nav-link"><i class="fas fa-tachometer-alt"></i> <span>My Profile</span></a>
                             </li>
                             <li class="dropdown" id="mc">
-                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>Course</span></a>                        
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-play-circle"></i> <span>Course</span></a>                        
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="/admin/user_dashboard/courses">Courses Overview</a></li>
                                     <li><a href="/admin/user_dashboard/user" class="nav-link">My Courses</a> </li>
@@ -261,7 +261,7 @@
                             </li>
                             
                             <li class="dropdown" id="rq">
-                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>Request</span></a>                        
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-camera"></i> <span>Request</span></a>                        
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="/admin/user_request/request">Request</a></li>
                                     <li><a href="/admin/user_request/myrequest" class="nav-link">My Request</a> </li>
@@ -269,15 +269,15 @@
                             </li> 
 
                             <li id="mb">
-                                <a href="/admin/user_balance/mybalance" class="nav-link"><i class="fas fa-cog"></i> <span>My Balance</span></a>
+                                <a href="/admin/user_balance/mybalance" class="nav-link"><i class="fas fa-dollar-sign"></i> <span>My Balance</span></a>
                             </li>
                             
                             <li id="ma">
-                                <a href="/admin/user_dashboard/user" class="nav-link"><i class="fas fa-cog"></i> <span>My Achievements</span></a>
+                                <a href="/admin/user_dashboard/user" class="nav-link"><i class="fas fa-award"></i> <span>My Achievements</span></a>
                             </li>
                             
                             <li class="dropdown" id="mfs">
-                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>My Feedback / Support</span></a>                        
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-comments"></i> <span>My Feedback / Support</span></a>                        
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="/admin/ticket/new">{{{ trans('admin.submit_ticket') }}}</a></li>
                                 </ul>
@@ -286,7 +286,7 @@
                             @if(Session::get('user_type')=="vend_user")
 
                             <li class="dropdown" id="ms">
-                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-life-ring"></i> <span>Channels</span></a>                        
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-bullhorn"></i> <span>Channels</span></a>                        
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="/admin/user_channel/channel">List</a></li>
                                     <li><a class="nav-link" href="/admin/user_channel/mychannel">New</a></li>
@@ -303,7 +303,7 @@
                             </li>
 
                             <li id="ma">
-                                <a href="/admin/user_vendor/vendor" class="nav-link"><i class="fas fa-cog"></i> <span>Become A Vendor</span></a>
+                                <a href="/admin/user_vendor/vendor" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> <span>Become A Vendor</span></a>
                             </li>                      
                         
        
