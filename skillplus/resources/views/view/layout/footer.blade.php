@@ -97,6 +97,7 @@
 <script type="application/javascript">var sliderTimer = <?=get_option('main_page_slider_timer',10000);?>;</script>
 <script>var preloader = {!! get_option('site_preloader',0) !!};</script>
 <script type="application/javascript" src="/assets/javascripts/view-custom.js"></script>
+
 @if(isset($user))
     <script>login({!! $user['id'] !!})</script>
 @endif

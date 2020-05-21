@@ -21,10 +21,11 @@ use App\Models\UserRate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
-use kcfinder\session;
+//use kcfinder\session;
 use Laravel\Socialite\Facades\Socialite;
 use Psy\Test\Exception\RuntimeExceptionTest;
 use App\Models\Sell;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -81,6 +82,7 @@ class UserController extends Controller
                     return back()->with('msg', trans('main.access_denied_duplicate_login'));
                 }
             }
+            Session::put('user_id',$admin->id);
 
             $New = Login::create([
                 'user_id'       => $admin->id,

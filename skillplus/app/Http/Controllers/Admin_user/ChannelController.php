@@ -28,7 +28,12 @@ class ChannelController extends Controller
                 'username'=>$request->username,//link
                 ]
             );
-        }     
+        }    
+        
+        /* foreach ($request->test as  $value) {
+            echo $value.'<br>';
+        }
+        exit; */
         echo true;
     }
 
