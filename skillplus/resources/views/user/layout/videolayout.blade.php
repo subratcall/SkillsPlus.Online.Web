@@ -29,6 +29,10 @@
                 <li class="@yield('tab6')"><a href="/user/video/request">
                         <span class="submicon mdi mdi-camera-enhance"></span>
                         {{{ trans('main.requests') }}}</a></li>
+                        
+                <li class="@yield('tab7')"><a href="/user/question">
+                        <span class="submicon mdi mdi-camera-enhance"></span>
+                        Questions</a></li>
             </ul>
             <div class="tab-content">
                     <div class="active tab-pane fade in" id="tab1">

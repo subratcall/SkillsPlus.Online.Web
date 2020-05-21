@@ -63,7 +63,12 @@ New Channel
                         <div class="col-md-12">
                             <textarea class="form-control" name="description" id="description" required></textarea>
                         </div>
-                    </div>                
+                    </div>     
+
+                    <!-- <input type="text" name="test[]" class="form-control">
+                    <input type="text" name="test[]" class="form-control">
+                    <input type="text" name="test[]"  class="form-control"> -->
+                               
 
                     <div class="form-group">
                         <div class="col-md-12">
@@ -114,7 +119,7 @@ var id = "{{request()->route('id')}}";
     }
 
     function save() {
-    var data = $('#form').serializeArray();
+        var data = $('#form').serializeArray();
         
         data.push({
             name: 'mode',
@@ -126,7 +131,7 @@ var id = "{{request()->route('id')}}";
             data: data,
             dataType: 'JSON',
             success: function(data) {
-                location = "/admin/user_channel/channel";
+               location = "/admin/user_channel/channel";
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');

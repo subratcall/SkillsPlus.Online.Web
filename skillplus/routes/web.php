@@ -574,13 +574,28 @@ Route::group(['prefix'=>'user'],function (){
                 Route::post('store','User\RequestController@store');
                 Route::post('edit/store/{id}','User\RequestController@editStore');
                 Route::post('admit','User\RequestController@admit');
-            });
+            });           
 
             Route::group(['prefix'=>'subscribe'], function(){
                Route::get('','User\BuyController@subscribeList');
             });
 
         });
+
+        /**
+             * custom code
+             */
+
+            Route::group(['prefix'=>'question'],function (){
+                Route::get('','User\QuestionController@main');
+                Route::get('edit/{id}','User\RequestController@edit');
+                Route::get('delete/{id}','User\RequestController@delete');
+                Route::post('store','User\QuestionController@store');
+                Route::get('list','User\QuestionController@getAllQuestionById');
+                Route::post('edit/store/{id}','User\RequestController@editStore');
+                Route::post('admit','User\RequestController@admit');
+                
+            });
 
         ## Article Section
         Route::group(['prefix'=>'article'],function (){
