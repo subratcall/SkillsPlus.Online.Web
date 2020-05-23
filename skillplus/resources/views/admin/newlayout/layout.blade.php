@@ -255,16 +255,19 @@
                             <li class="dropdown" id="mc">
                                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-play-circle"></i> <span>Course</span></a>                        
                                 <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="/admin/user_dashboard/courses">Courses Overview</a></li>
-                                    <li><a href="/admin/user_dashboard/user" class="nav-link">My Courses</a> </li>
+                                    <li><a href="/admin/user_dashboard/user" class="nav-link">Courses Overview </a> </li>
+                                    <li><a class="nav-link" href="/admin/user_dashboard/courses">My Courses</a></li>
                                 </ul>
                             </li>
                             
                             <li class="dropdown" id="rq">
-                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-camera"></i> <span>Request</span></a>                        
+                            
+                            
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-camera"></i> <span>Vendor Courses</span></a>                     
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="/admin/user_request/request">Request</a></li>
                                     <li><a href="/admin/user_request/myrequest" class="nav-link">My Request</a> </li>
+                                    <li><a href="/admin/question" class="nav-link">Question Bank</a> </li>
                                 </ul>
                             </li> 
 

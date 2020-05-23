@@ -103,7 +103,12 @@ class QuestionController extends Controller
 
     public function main()
     {    
-        return view('user.questions.main');
+        return view('vendor.question.list');
+    }
+
+    public function new()
+    {    
+        return view('vendor.question.new');
     }
 
     function list(){}

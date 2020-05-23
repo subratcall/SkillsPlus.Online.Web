@@ -3,6 +3,18 @@ Route::group(['prefix' => 'admin'],function (){
 
     Route::group(['middleware'=>'admin'],function (){
 
+        Route::group(['prefix'=>'question'],function (){
+                Route::get('','User\QuestionController@main');
+                Route::get('new','User\QuestionController@new');
+                Route::get('edit/{id}','User\RequestController@edit');
+                Route::get('delete/{id}','User\RequestController@delete');
+                Route::post('store','User\QuestionController@store');
+                Route::get('list','User\QuestionController@getAllQuestionById');
+                Route::post('edit/store/{id}','User\RequestController@editStore');
+                Route::post('admit','User\RequestController@admit');
+                
+            });
+
         Route::get('profile','Admin\SettingController@profile');
         Route::post('profile/main/update','Admin\SettingController@profileMainUpdate');
         Route::post('profile/security/update','Admin\SettingController@profileSecurityUpdate');
@@ -586,8 +598,9 @@ Route::group(['prefix'=>'user'],function (){
              * custom code
              */
 
-            Route::group(['prefix'=>'question'],function (){
+            /* Route::group(['prefix'=>'question'],function (){
                 Route::get('','User\QuestionController@main');
+                Route::get('new','User\QuestionController@new');
                 Route::get('edit/{id}','User\RequestController@edit');
                 Route::get('delete/{id}','User\RequestController@delete');
                 Route::post('store','User\QuestionController@store');
@@ -595,7 +608,7 @@ Route::group(['prefix'=>'user'],function (){
                 Route::post('edit/store/{id}','User\RequestController@editStore');
                 Route::post('admit','User\RequestController@admit');
                 
-            });
+            }); */
 
         ## Article Section
         Route::group(['prefix'=>'article'],function (){
