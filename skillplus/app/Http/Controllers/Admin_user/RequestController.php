@@ -12,12 +12,6 @@ use Session;
 use App\Models\Content;
 use App\Models\Requests;
 use App\Models\ContentCategory;
-//use Illuminate\Support\Facades\Input;
-//use Illuminate\Support\Facades\Redirect;
-//use Illuminate\Validation\Rules\In;
-//use PayPal\Auth\OAuthTokenCredential;
-//use PayPal\Rest\ApiContext;
-//use SoapClient;
 
 class RequestController extends Controller
 {

@@ -263,11 +263,10 @@
                             <li class="dropdown" id="rq">
                             
                             
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-camera"></i> <span>Vendor Courses</span></a>                     
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-camera"></i> <span>Request Course</span></a>                     
                                 <ul class="dropdown-menu">
                                     <li><a class="nav-link" href="/admin/user_request/request">Request</a></li>
                                     <li><a href="/admin/user_request/myrequest" class="nav-link">My Request</a> </li>
-                                    <li><a href="/admin/question" class="nav-link">Question Bank</a> </li>
                                 </ul>
                             </li> 
 
@@ -298,6 +297,14 @@
                             <li id="mart">
                                 <a href="/admin/user_dashboard/article" class="nav-link"><i class="fas fa-book"></i> <span>Articles</span></a>
                             </li>
+
+                            <li class="dropdown" id="vc">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-camera"></i> <span>Vendor Course</span></a>                     
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="/admin/user_vendor/vendor_course_list">Courses</a></li>
+                                    <li><a href="/admin/question" class="nav-link">Question Bank</a> </li>
+                                </ul>
+                            </li> 
 
                             @endif
 

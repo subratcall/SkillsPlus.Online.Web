@@ -29,11 +29,6 @@ class ChannelController extends Controller
                 ]
             );
         }    
-        
-        /* foreach ($request->test as  $value) {
-            echo $value.'<br>';
-        }
-        exit; */
         echo true;
     }
 
