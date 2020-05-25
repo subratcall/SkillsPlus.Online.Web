@@ -41,6 +41,18 @@ return [
         'redirect' => env('GOOGLE_REDIRECT_URL'),
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_SECRET'),
+        'redirect' => env("FACEBOOK_REDIRECT_URL"),
+    ],
+
+    // 'twitter' => [
+    //     'client_id' => env('TWITTER_CLIENT_ID'),
+    //     'client_secret' => env('CLIENT_SECRET'),
+    //     'redirect' => env("TWITTER_REDIRECT_URL"),
+    // ],
+
     'paytm-wallet' => [
         'env' => env('PAYTM_ENVIRONMENT'), // values : (local | production)
         'merchant_id' => env('PAYTM_MERCHANT_ID'),

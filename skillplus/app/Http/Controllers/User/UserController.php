@@ -291,13 +291,14 @@ class UserController extends Controller
         return ['status'=>'success'];
     }
 
-    public function googleLogin()
-    {
-        return Socialite::driver('google')->redirect();
+    public function redirectToProvider($provider) {
+        return Socialite::driver($provider)->redirect();
     }
-    public function googledoLogin(Request $request){
+
+    public function handleProviderCallback($provider)
+    {
         session()->put('state', $request->input('state'));
-        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver($provider)->user();
         $newUser = [
             'username'=>$user->name,
             'create_at'=>time(),
@@ -319,6 +320,32 @@ class UserController extends Controller
             return redirect('/user/dashboard');
         }
     }
+
+
+    // public function googledoLogin(Request $request){
+    //     session()->put('state', $request->input('state'));
+    //     $user = Socialite::driver('google')->user();
+    //     $newUser = [
+    //         'username'=>$user->name,
+    //         'create_at'=>time(),
+    //         'admin'=>0,
+    //         'email'=>$user->email,
+    //         'token'=>$user->token,
+    //         'password'=>encrypt(str_random(10)),
+    //         'mode'=>'active',
+    //         'category_id'=>get_option('user_default_category'),
+    //     ];
+    //     $ifUserExist = User::where('email',$newUser['email'])->first();
+
+    //     if(empty($ifUserExist)){
+    //         $insertUser = User::create($newUser);
+    //         $request->session()->put('user',serialize($insertUser));
+    //         return redirect('/user/profile');
+    //     }else{
+    //         $request->session()->put('user',serialize($ifUserExist->toArray()));
+    //         return redirect('/user/dashboard');
+    //     }
+    // }
 
     public function profile()
     {

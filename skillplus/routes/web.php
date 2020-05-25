@@ -716,8 +716,12 @@ Route::group(['prefix'=>'user'],function (){
         Route::post('reset','User\UserController@reset');
         Route::get('reset/token/{token}','User\UserController@resetToken');
 
-        Route::get('/sociliate/google','User\UserController@googleLogin');
-        Route::get('/google/login','User\UserController@googleDoLogin');
+        // Route::get('/sociliate/google','User\UserController@googleLogin');
+        // Route::get('/google/login','User\UserController@googleDoLogin');
+
+        Route::get('/socialite/{provider}', 'User\UserController@redirectToProvider');
+        Route::get('/socialite/{provider}/callback', 'User\UserController@handleProviderCallback');
+
 
         Route::get('/register','User\UserController@register');
         Route::post('/doregister','User\UserController@doregister');
