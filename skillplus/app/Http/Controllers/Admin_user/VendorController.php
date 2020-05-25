@@ -5,18 +5,15 @@ use App\Http\Controllers\Controller;
 
 
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Auth;
+use App\Models\Content;
+use App\Models\Questions;
+use App\Models\QuestionsLesson;
 use DB;
 use Session;
 
 use App\Models\TicketsCategory;
 use App\Models\Tickets;
-//use Illuminate\Support\Facades\Input;
-//use Illuminate\Support\Facades\Redirect;
-//use Illuminate\Validation\Rules\In;
-//use PayPal\Auth\OAuthTokenCredential;
-//use PayPal\Rest\ApiContext;
-//use SoapClient;
+use App\Models\ContentPart;
 
 class VendorController extends Controller
 {
@@ -51,5 +48,189 @@ class VendorController extends Controller
     {    
         return view('admin_user.vendor.vendor');
     }
+
+    /**Courses */
+    function vendorCourse(){
+        $content = Content::where(['user_id'=>Session::get('user_id')])->get();
+        $data = array();
+        foreach ($content as $myList)
+		{
+			$row = array();
+			$row['title'] = strtoupper($myList->title);
+			$row['content'] = strtoupper($myList->content);
+			$row['mode'] = strtoupper($myList->mode);
+			$row['type'] = strtoupper($myList->type);
+            $row['id'] = $myList->id;            
+            $btn = ''; 
+            $btn = $btn.'<a href="/admin/user_vendor/vendor_lesson_list/'.$myList->id.'" class="btn  btn-warning btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
+            $btn = $btn.'<a href="/admin/user_vendor/vendor_course_new/'.$myList->id.'" class="btn  btn-primary btn-xs" title="Edit"><i class="far fa-save"></i></a>  ';
+            $btn = $btn.'<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_course('."'".$myList->id."'".')"><i class="fas fa-trash"></i></button>  ';
+            $row['action'] = $btn;
+			$data[] = $row;
+		}
+        $output = array("data" => $data);
+		echo json_encode($output);
+    }
+
+    public function vendorCourseList()
+    {    
+        return view('vendor.course.list');
+    }
+
+    public function vendorCourseNew()
+    {    
+        return view('vendor.course.new');
+    }
     
+    public function saveCourse(Request $request){
+        if($request->mode=="Save"){
+            Content::create([
+                'create_at'=>time(),
+                'user_id'=> Session::get('user_id'),
+                'title'=>$request->title,
+                'content'=>$request->content,
+                'type'=>$request->type,
+                'mode'=>'draft',
+                'private'=>$request->private,
+            ]);
+        }else if($request->mode=="Update"){
+            Content::where(['id'=>$request->id])->update([
+                    'title'=>$request->title,
+                    'content'=>$request->content,
+                    'type'=>$request->type,
+                    'private'=>$request->private,
+                ]
+            );
+        }    
+        echo true;
+    }
+
+    public function destroyCourse($id){        
+        Content::where('id',$id)->delete();
+        echo true;
+    }
+
+    public function showCourse($id)
+    {
+        $getData = Content::where(['id'=>$id])->first();
+        return $getData;
+    }
+
+    /**Lessons */
+
+    function vendorLessons($id){
+        $content = ContentPart::where(['content_id'=>$id])->get();
+        $data = array();
+        $cbid = 1;
+        foreach ($content as $myList)
+		{
+			$row = array();
+			$row['title'] = strtoupper($myList->title);
+			$row['desc'] = strtoupper($myList->description);
+            $row['id'] = $myList->id;   
+            $row['cb'] ='<input type="checkbox" value="'.$myList->id.'" name="cb" id="cb_'.$cbid.'" >';            
+            $btn = ''; 
+            $btn = $btn.'<a href="/admin/user_vendor/vendor_lesson_new/'.$id."/".$myList->id.'" class="btn  btn-primary btn-xs" title="Edit"><i class="far fa-save"></i></a>  ';
+            $btn = $btn.'<a href="/admin/user_vendor/vendor_question_add/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
+            $btn = $btn.'<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_course('."'".$myList->id."'".')"><i class="fas fa-trash"></i></button>  ';
+            $row['action'] = $btn;
+			$data[] = $row;
+		}
+        $output = array("data" => $data);
+		echo json_encode($output);
+    }
+
+    public function vendorLessonsList()
+    {    
+        return view('vendor.lesson.list');
+    }
+
+    public function vendorLessonNew()
+    {    
+        return view('vendor.lesson.new');
+    }
+    
+    public function saveLesson(Request $request){
+        if($request->mode=="Save"){
+            ContentPart::create([
+                'create_at'=>time(),
+                'content_id'=> $request->cid,//content id
+                'title'=>$request->title,
+                'description'=>$request->desc,
+                'upload_video'=>$request->upload_video,
+                'duration'=>$request->duration,
+                'size'=>$request->size,
+                'sort'=>$request->sort,
+                'mode'=>'request',
+            ]);
+        }else if($request->mode=="Update"){
+            ContentPart::where(['id'=>$request->id])->update([
+                    'title'=>$request->title,
+                    'description'=>$request->desc,
+                    'upload_video'=>$request->upload_video,
+                    'duration'=>$request->duration,
+                    'size'=>$request->size,
+                    'sort'=>$request->sort,
+                ]
+            );
+        }    
+        echo true;
+    }
+
+    public function destroyLesson($id){        
+        ContentPart::where('id',$id)->delete();
+        echo true;
+    }
+
+    public function showLesson($id)
+    {
+        $getData = ContentPart::where(['id'=>$id])->first();
+        return $getData;
+    }
+
+    /****Question */
+    public function vendorQuestionAdd()
+    {    
+        return view('vendor.question.list');
+    }
+
+    function vendorQuestion($id){
+        $content = Questions::where(['created_by'=>Session::get('user_id')])->get();
+        $data = array();
+        $cbid = 1;
+        foreach ($content as $myList)
+		{
+            $row = array();            
+            $checkRec = QuestionsLesson::where(['question_id'=>$myList->id,'lesson_id'=>$id])->first();
+            if($checkRec==null){
+                $row['question'] = strtoupper($myList->question);
+                $row['type'] = strtoupper($myList->type);
+                $row['id'] = $myList->id;   
+                $row['cb'] ='<input type="checkbox" value="'.$myList->id.'" name="cb" id="cb_'.$cbid.'" >';            
+                $btn = ''; 
+                $btn = $btn.'<a href="/admin/user_vendor/vendor_question_add/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
+                $btn = $btn.'<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_course('."'".$myList->id."'".')"><i class="fas fa-trash"></i></button>  ';
+                $row['action'] = $btn;
+                $data[] = $row;
+            }			
+		}
+        $output = array("data" => $data);
+		echo json_encode($output);
+    }
+
+    public function vendorQuestionList()
+    {    
+        return view('vendor.question.listAdd');
+    }
+
+    public function addQuestion(Request $request){
+        foreach ($request->data as $value) {
+            //echo $value['qid'].' '.$value['lid'].'<br>';
+            QuestionsLesson::create([
+                'question_id'=>$value['qid'],
+                'lesson_id'=>$value['lid'],
+            ]);
+        }                      
+        echo true;
+    }
 }

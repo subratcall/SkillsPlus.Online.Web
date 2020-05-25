@@ -43,9 +43,10 @@ Route::group(['prefix' => 'admin'],function (){
                 Route::get('category','Admin_user\UserController@category');
             });
 
-            Route::get('courses','Admin_user\UserController@courses');
-            Route::get('course_overview','Admin_user\UserController@getContentById');
-            Route::get('mycourses','Admin_user\UserController@getCourses');
+             Route::get('courses','Admin_user\UserController@courses');
+             Route::get('mycourses','Admin_user\UserController@getCourses'); 
+           /* Route::get('course_overview','Admin_user\UserController@getContentById');
+            Route::get('mycourses','Admin_user\UserController@getCourses'); */
         });
 
         Route::group(['prefix'=>'user_request'],function(){
@@ -69,6 +70,27 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor','Admin_user\VendorController@vendor');
             Route::get('getAllCategory','Admin_user\VendorController@getAllCategory');
             Route::post('vendor_request','Admin_user\VendorController@store');
+            /***Cousrse */
+            Route::get('vendor_course_new','Admin_user\VendorController@vendorCourseNew');
+            Route::get('vendor_course_new/{id}','Admin_user\VendorController@vendorCourseNew');
+            Route::get('vendor_course_list','Admin_user\VendorController@vendorCourseList');
+            Route::get('vendor_course_getList','Admin_user\VendorController@vendorCourse');
+            Route::get('vendor_course_show/{id}','Admin_user\VendorController@showCourse');
+            Route::get('vendor_course_destroy/{id}','Admin_user\VendorController@destroyCourse');
+            Route::post('vendor_course_saveCourse','Admin_user\VendorController@saveCourse');
+            /***Lessons */
+            Route::get('vendor_lesson_list/{id}','Admin_user\VendorController@vendorLessonsList');
+            Route::get('vendor_lesson_getList/{id}','Admin_user\VendorController@vendorLessons');
+            Route::get('vendor_lesson_new/{cid}','Admin_user\VendorController@vendorLessonNew');
+            Route::get('vendor_lesson_new/{cid}/{id}','Admin_user\VendorController@vendorLessonNew');
+            Route::get('vendor_lesson_show/{id}','Admin_user\VendorController@showLesson');
+            Route::post('vendor_lesson_saveLesson','Admin_user\VendorController@saveLesson');
+            /**Question */
+            Route::get('vendor_question_add/{id}','Admin_user\VendorController@vendorQuestionList');
+            Route::get('vendor_question_list/{id}','Admin_user\VendorController@vendorQuestion');            
+            Route::post('vendor_question_add_question','Admin_user\VendorController@addQuestion');
+            
+            
         });
 
         Route::group(['prefix'=>'user_settings'],function(){
