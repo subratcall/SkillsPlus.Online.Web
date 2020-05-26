@@ -95,8 +95,10 @@ var id = "{{request()->route('id')}}";
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    data.data.forEach(function(entry) {
+                    data.data.forEach(function(entry,i) {
                         console.log(entry);
+                        i++;
+                        var cnt = 1;
                         if(entry.type=="CHECKBOX"){
                             var res = entry.options.split("|");
                             var g = '';
@@ -106,12 +108,13 @@ var id = "{{request()->route('id')}}";
                             $("#form").append(
                             '<div class="form-group">'+
                                 '<div class="form-group">'+
-                                    '<label class="col-md-2 control-label" for="inputDefault">'+entry.question+'</label>'+
+                                    '<label class="col-md-2 control-label" for="inputDefault">'+i+'. '+entry.question+'</label>'+
                                     '<div class="col-md-1">'+
                                         g+
                                     '</div>'+
                                 '</div>'+
                             '</div>');
+                        cnt++;
                         }
 
                         if(entry.type=="MULTIPLE CHOICE"){
@@ -123,12 +126,13 @@ var id = "{{request()->route('id')}}";
                             $("#form").append(
                             '<div class="form-group">'+
                                 '<div class="form-group">'+
-                                    '<label class="col-md-2 control-label" for="inputDefault">'+entry.question+'</label>'+
+                                    '<label class="col-md-2 control-label" for="inputDefault">'+i+'. '+entry.question+'</label>'+
                                     '<div class="col-md-1">'+
                                         g+
                                     '</div>'+
                                 '</div>'+
                             '</div>');
+                        cnt++;
                         }
 
                         if(entry.type=="SHORT ANSWER"){
@@ -136,12 +140,13 @@ var id = "{{request()->route('id')}}";
                             $("#form").append(
                             '<div class="form-group">'+
                                 '<div class="form-group">'+
-                                    '<label class="col-md-2 control-label" for="inputDefault">'+entry.question+'</label>'+
+                                    '<label class="col-md-2 control-label" for="inputDefault">'+i+'. '+entry.question+'</label>'+
                                     '<div class="col-md-6">'+
                                         '<input type="text" name="title" id="title" class="form-control">'+
                                     '</div>'+
                                 '</div>'+
                             '</div>');
+                        cnt++;
                         }
 
                         if(entry.type=="PARAGRAPH"){
@@ -149,12 +154,13 @@ var id = "{{request()->route('id')}}";
                             $("#form").append(
                             '<div class="form-group">'+
                                 '<div class="form-group">'+
-                                    '<label class="col-md-2 control-label" for="inputDefault">'+entry.question+'</label>'+
+                                    '<label class="col-md-2 control-label" for="inputDefault">'+i+'. '+entry.question+'</label>'+
                                     '<div class="col-md-6">'+
                                         '<textarea name="title" id="title" class="form-control"></textarea>'+
                                     '</div>'+
                                 '</div>'+
                             '</div>');
+                        cnt++;
                         }
 
                         if(entry.type=="SWITCH"){
@@ -162,12 +168,13 @@ var id = "{{request()->route('id')}}";
                             $("#form").append(
                             '<div class="form-group">'+
                                 '<div class="form-group">'+
-                                    '<label class="col-md-2 control-label" for="inputDefault">'+entry.question+'</label>'+
+                                    '<label class="col-md-2 control-label" for="inputDefault">'+i+'. '+entry.question+'</label>'+
                                     '<div class="col-md-6">'+
                                         '<textarea name="title" id="title" class="form-control"></textarea>'+
                                     '</div>'+
                                 '</div>'+
                             '</div>');
+                        cnt++;
                         }
                     });
                 },
