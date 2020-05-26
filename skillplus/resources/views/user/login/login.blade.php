@@ -32,7 +32,7 @@
                         <a href="/user/socialite/google" class="btn btn-custom btn-check-form pull-left"><i class="fa fa-google-plus icon-rs"></i><span>{{{ trans('main.sign_in_google') }}}</span></a>
                     </div>
                     <div>
-                        <a href="/user/socialite/facebook">Facebook</a>
+                        <a href="/user/socialite/facebook" class="btn btn-custom btn-check-form pull-left"><i class="fa fa-facebook icon-rs"></i><span> Facebook</a></span></a>
                     </div>
                 </form>
             </div>
