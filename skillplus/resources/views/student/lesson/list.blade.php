@@ -1,7 +1,7 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Courses','Lessons']])
 @section('title')
             <a href="/admin/user_vendor/vendor_course_list" class="btn btn-warning btn-sm">Back</a>
-Lessons
+Student Lessons
 @endsection
 
 @section('style')
@@ -61,7 +61,7 @@ Lessons
 @section('script')
 <script>
 var tbl = '';
-var id = "{{request()->route('id')}}";
+var id = "{{request()->route('cid')}}";
     $(document).ready(function() {
         list();
     });
@@ -70,7 +70,7 @@ var id = "{{request()->route('id')}}";
         tbl = $('#tbl').dtcustom({
                     "ajax": {
                         "type": "GET",
-                        "url": "{{ url('/admin/user_vendor/vendor_lesson_getList') }}/"+id,
+                        "url": "{{ url('/admin/user_student/student_lesson_get_list') }}/"+id,
                         "dataSrc": function(json) {
                             return json.data;
                         }
