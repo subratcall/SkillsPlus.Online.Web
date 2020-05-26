@@ -36,23 +36,59 @@ Add Question
     </div>  
 </div>
 </div>
+
 <section class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-lg-12">
-            <button type="button" class="btn btn-success btn-sm" onclick="getcb()">Add</button>
-                <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
-                    width="100%">
-                        <thead>
-                            <tr>
-                                <th>Question</th>
-                                <th>Type</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                </table>
+    <div class="card-body">   
+
+        <div class="bs-example">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="#questions" class="nav-link active" data-toggle="tab">Questions</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#selected" class="nav-link" data-toggle="tab">Selected</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="questions">
+                    <h4 class="mt-2"></h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                        <button type="button" class="btn btn-success btn-sm" onclick="getcb()">Add</button>
+                            <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
+                                width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Question</th>
+                                            <th>Type</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="selected">
+                    <h4 class="mt-2">Profile tab content</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="getcb()">Remove</button>
+                            <table id="tbl2"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
+                                width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Question</th>
+                                            <th>Type</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
             </div>
         </div>
+        
     </div>
 </section>
 @endsection
@@ -60,13 +96,15 @@ Add Question
 <script>
 var id = "{{request()->route('id')}}";
 var q = []
+var tbl = '';
+var tbl2 = '';
     $(document).ready(function() {
         list();
+        selectedList();
     });
 
     function list() {
-        $('#tbl').dataTable().fnDestroy();
-        tbl = $('#tbl').dataTable({
+        tbl = $('#tbl').dtcustom({
                     "ajax": {
                         "type": "GET",
                         "url": "{{ url('/admin/user_vendor/vendor_question_list') }}/"+id,
@@ -100,13 +138,56 @@ var q = []
             },
             dataType: 'JSON',
             success: function(data) {
-                
+                tbl.ajax.reload();   
+                tbl2.ajax.reload();                
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
             }
         });
         console.log(q)
+    }
+
+    function selectedList() {
+        tbl2 = $('#tbl2').dtcustom({
+                    "ajax": {
+                        "type": "GET",
+                        "url": "{{ url('/admin/user_vendor/vendor_selected_question_list') }}/"+id,
+                        "dataSrc": function(json) {
+                            return json.data;
+                        }
+                    },
+                    "columns": [{
+                            "data": "question"
+                        },{
+                            "data": "type"
+                        },
+                        {
+                            "data": "action"
+                        },
+                    ],
+                }); 
+    }
+
+    function delete_question(id){
+        var result = confirm("Want to delete?");
+        if (result) {
+            $.ajax({
+                url: "{{url('/admin/user_vendor/vendor_selected_question_delete')}}/" + id,
+                type: 'get',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                tbl.ajax.reload();   
+                tbl2.ajax.reload();              
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error get data from ajax');
+                }
+            });
+        }        
     }
 </script>
 @endsection

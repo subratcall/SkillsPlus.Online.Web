@@ -58,6 +58,7 @@ Courses Overview
                             <th>Purchased Date</th>
                             <th>Vendor</th>
                             <th>Price</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -89,6 +90,8 @@ Courses Overview
                     "data": "vendor"
                     },{
                     "data": "price"
+                    },{
+                    "data": "action"
                     }]
                 });
         }, 500);

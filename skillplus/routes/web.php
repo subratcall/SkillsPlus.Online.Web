@@ -4,16 +4,15 @@ Route::group(['prefix' => 'admin'],function (){
     Route::group(['middleware'=>'admin'],function (){
 
         Route::group(['prefix'=>'question'],function (){
-                Route::get('','User\QuestionController@main');
-                Route::get('new','User\QuestionController@new');
-                Route::get('edit/{id}','User\RequestController@edit');
-                Route::get('delete/{id}','User\RequestController@delete');
-                Route::post('store','User\QuestionController@store');
-                Route::get('list','User\QuestionController@getAllQuestionById');
-                Route::post('edit/store/{id}','User\RequestController@editStore');
-                Route::post('admit','User\RequestController@admit');
-                
-            });
+            Route::get('','User\QuestionController@main');
+            Route::get('new','User\QuestionController@new');
+            Route::get('edit/{id}','User\RequestController@edit');
+            Route::get('delete/{id}','User\RequestController@delete');
+            Route::post('store','User\QuestionController@store');
+            Route::get('list','User\QuestionController@getAllQuestionById');
+            Route::post('edit/store/{id}','User\RequestController@editStore');
+            Route::post('admit','User\RequestController@admit');                
+        });
 
         Route::get('profile','Admin\SettingController@profile');
         Route::post('profile/main/update','Admin\SettingController@profileMainUpdate');
@@ -89,7 +88,16 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor_question_add/{id}','Admin_user\VendorController@vendorQuestionList');
             Route::get('vendor_question_list/{id}','Admin_user\VendorController@vendorQuestion');            
             Route::post('vendor_question_add_question','Admin_user\VendorController@addQuestion');
-            
+            Route::get('vendor_selected_question_list/{id}','Admin_user\VendorController@vendorSelectedQuestion');      
+            Route::get('vendor_selected_question_delete/{id}','Admin_user\VendorController@removeQuestion');             
+        });
+
+        Route::group(['prefix'=>'user_student'],function(){
+            /***Student Lesson */
+            Route::get('student_lesson_get_list/{id}','Admin_user\VendorController@studentLessons'); 
+            Route::get('student_lesson_list/{cid}','Admin_user\VendorController@studentLessonsList');     
+            Route::get('student_lesson_quiz/{id}','Admin_user\VendorController@studentTakeQuiz');          
+            Route::get('student_lesson_take_quiz/{id}','Admin_user\VendorController@studentLoadQuiz');            
             
         });
 
