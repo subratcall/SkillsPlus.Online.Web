@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Content;
+use App\Models\ContentMeta;
 use App\Models\Questions;
 use App\Models\QuestionsLesson;
 use DB;
@@ -114,6 +115,23 @@ class VendorController extends Controller
     {
         $getData = Content::where(['id'=>$id])->first();
         return $getData;
+    }
+
+    public function showCourseMeta($id)
+    {
+        $getData = ContentMeta::where(['content_id'=>$id])->get();
+        $data = array();
+        foreach ($getData as $myList)
+		{
+            $row = array();
+			$row['option_id'] = $myList->option_id;
+			$row['value'] = $myList->value;
+			$row['mode'] = $myList->mode;
+            $row['id'] = $myList->id;
+			$data[] = $row;
+		}
+        $output = array("data" => $getData);
+		echo json_encode($output);
     }
 
     /**Lessons */
