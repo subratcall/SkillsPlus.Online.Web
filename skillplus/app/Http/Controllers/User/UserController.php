@@ -295,9 +295,10 @@ class UserController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback(Request $request, $provider)
     {
-        session()->put('state', $request->input('state'));
+
+        session()->put('code', $request->input('code'));
         $user = Socialite::driver($provider)->user();
         $newUser = [
             'username'=>$user->name,
@@ -309,6 +310,7 @@ class UserController extends Controller
             'mode'=>'active',
             'category_id'=>get_option('user_default_category'),
         ];
+        
         $ifUserExist = User::where('email',$newUser['email'])->first();
 
         if(empty($ifUserExist)){
