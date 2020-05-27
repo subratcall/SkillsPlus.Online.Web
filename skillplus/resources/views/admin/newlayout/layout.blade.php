@@ -242,7 +242,14 @@
                 @if(Session::get('user_type')=="reg_user"||Session::get('user_type')=="vend_user")
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="/admin">User Panel</a>
+                        
+                        @if(Session::get('user_type')=="reg_user")
+                            <a href="/admin">User Panel</a>
+                        @endif
+
+                        @if(Session::get('user_type')=="vend_user")
+                            <a href="/admin">Vendor Panel</a>
+                        @endif
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="/admin">AP</a>

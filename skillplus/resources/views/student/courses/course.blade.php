@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Lesson','Edit']])
 @section('title')
-<p id="titleHeader">Quiz</p>
+<p id="titleHeader">Course Content</p>
 @endsection
 
 @section('style')
