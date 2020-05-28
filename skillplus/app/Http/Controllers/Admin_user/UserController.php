@@ -135,4 +135,9 @@ class UserController extends Controller
     {    
         return view('student.courses.course');
     }
+
+    public function viewLesson()
+    {    
+        return view('student.courses.lesson');
+    }
 }

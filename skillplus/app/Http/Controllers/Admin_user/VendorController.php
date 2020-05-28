@@ -318,8 +318,9 @@ class VendorController extends Controller
             $row['id'] = $myList->id;   
             $row['cb'] ='<input type="checkbox" value="'.$myList->id.'" name="cb" id="cb_'.$cbid.'" >';            
             $btn = ''; 
-            $btn = $btn.'<a href="/admin/user_student/student_lesson_quiz/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
-            $btn .= ' <a href="/admin/user_student/student_show_lesson/'.$myList->content_id.'" type="button" class="btn btn-primary">View Lesson</a>';
+            //$btn = $btn.'<a href="/admin/user_student/student_lesson_quiz/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
+            $btn = $btn.'<a href="/admin/user_student/student_lesson_take_quiz/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
+            $btn .= ' <a href="/admin/user_student/student_show_lesson/'.$myList->id.'/'.$id.'" type="button" class="btn btn-primary">View Lesson</a>';
             $row['action'] = $btn;
 			$data[] = $row;
 		}

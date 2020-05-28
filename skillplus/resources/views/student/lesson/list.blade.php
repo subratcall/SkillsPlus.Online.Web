@@ -1,6 +1,7 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Courses','Lessons']])
 @section('title')
-            <a href="/admin/user_vendor/vendor_course_list" class="btn btn-warning btn-sm">Back</a>
+{{-- <a href="/admin/user_vendor/vendor_course_list" class="btn btn-warning btn-sm">Back</a> --}}
+<a href="/admin/user_dashboard/courses" class="btn btn-warning btn-sm">Back</a>
 Student Lessons
 @endsection
 

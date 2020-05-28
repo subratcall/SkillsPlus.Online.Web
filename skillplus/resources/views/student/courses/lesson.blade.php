@@ -1,7 +1,7 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Lesson','Edit']])
 @section('title')
-<a href="/admin/user_dashboard/courses" class="btn btn-warning btn-sm">Back</a>
-Course Content
+<a href="/admin/user_student/student_lesson_list/{{request()->route('lid')}}" class="btn btn-warning btn-sm">Back</a>
+Lesson Content
 @endsection
 
 @section('style')
@@ -48,11 +48,13 @@ Course Content
 <section class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-12" id="content">
-                              
+            <div class="col-lg-12">
+                <h1  id="content"></h1>
+            </div>
+            <div class="col-lg-12">
+                <p id="desc"></p>
             </div>
             <div class="col-lg-12" id="content">
-
                 <video id="video" class="w-100 h-a" controls>
                     {{-- <source src="http://192.168.110.16:8080/bin/admin/file_example_MP4_480_1_5MG.mp4" type="video/mp4"> --}}
                     <source type="video/mp4">
@@ -64,24 +66,16 @@ Course Content
     </div>
 </section>
 
-
 @endsection
-
 @section('script')
-
-
-
-
 <script type="application/javascript" src="/assets/vendor/jquery-te/jquery-te-1.4.0.min.js"></script>
-
-
 <script>
 var isSave = 1;
 var id = "{{request()->route('id')}}";
 var getvideo;
     $(document).ready(function() {
         $('.editor-te').jqte({format: false});
-        loadMetaData();
+        //loadMetaData();
         loadData();             
         $.ajax({
                 url: "{{ url('/admin/user_dashboard/course_progress') }}/"+id,
@@ -102,14 +96,28 @@ var getvideo;
     function loadData() {
         if(id!=null||id!=""){
             $.ajax({
-                url: "{{ url('/admin/user_vendor/vendor_course_show') }}/"+id,
+                url: "{{ url('/admin/user_vendor/vendor_lesson_show') }}/"+id,
                 type: "get",
                 dataType: 'JSON',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                   $("#content").append(data.content)
+                   $("#content").text(data.title)
+                   $("#desc").text(data.description)
+                   var video = document.getElementById('video');
+                    var source = document.createElement('source');
+                    source.setAttribute('src', data.upload_video);
+
+                    video.appendChild(source);
+                    video.play();
+
+                    setTimeout(function() {  
+                        video.pause();
+                        source.setAttribute('src', data.upload_video); 
+                        video.load();
+                        video.play();
+                    }, 3000);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert('Error! Contact IT Department.');

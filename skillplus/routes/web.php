@@ -100,8 +100,11 @@ Route::group(['prefix' => 'admin'],function (){
             /***Student Lesson */
             Route::get('student_lesson_get_list/{id}','Admin_user\VendorController@studentLessons'); 
             Route::get('student_lesson_list/{cid}','Admin_user\VendorController@studentLessonsList');     
-            Route::get('student_lesson_quiz/{id}','Admin_user\VendorController@studentTakeQuiz');          
-            Route::get('student_show_course/{id}','Admin_user\UserController@viewCourses');            
+            //Route::get('student_lesson_quiz/{id}','Admin_user\VendorController@studentTakeQuiz');          
+            Route::get('student_lesson_take_quiz/{id}','Admin_user\VendorController@studentTakeQuiz');          
+            Route::get('student_show_course/{id}','Admin_user\UserController@viewCourses');          
+            Route::get('student_show_lesson/{id}/{lid}','Admin_user\UserController@viewLesson');       
+                 
             
         });
 
