@@ -9,6 +9,7 @@ use App\Models\Content;
 use App\Models\ContentMeta;
 use App\Models\Questions;
 use App\Models\QuestionsLesson;
+use App\Models\CourseLog;
 use DB;
 use Session;
 
@@ -362,13 +363,85 @@ class VendorController extends Controller
     /**Answers */
 
     public function submitAnswers(Request $request){
-        foreach ($request->data as $value) {
-            QuestionsLesson::create([
-                'question_id'=>$value['qid'],
-                'lesson_id'=>$value['lid'],
-                'content_id'=>$value['cid'],
+        if($request->type=="Multiple Choice"){
+            $storeValue = '';
+            foreach ($request->option as $value) {
+                $storeValue .=$value.'|';
+            }
+            $storeValue = substr_replace($storeValue ,"",-1);
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),                
             ]);
-        }                      
-        echo true;
+        }
+
+        if($request->type=="Checkbox"){
+            $storeValue = '';
+            $storeAnswer = '';
+            foreach ($request->optioncheck as $value) {
+                $storeValue .=$value.'|';
+            }
+            foreach ($request->checkboxcheck as $value) {
+                $storeAnswer .=$value.'|';
+            }
+            $storeValue = substr_replace($storeValue ,"",-1);
+            $storeAnswer = substr_replace($storeAnswer ,"",-1);
+            
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),  
+            ]);
+        }
+
+        if($request->type=="Short Answer"){            
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),  
+            ]);
+        }
+
+        if($request->type=="Paragraph"){
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),  
+            ]);
+        }
+
+        if($request->type=="Switch"){
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),  
+            ]);
+        }
     }
 }

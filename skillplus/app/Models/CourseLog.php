@@ -24,6 +24,7 @@ class CourseLog extends Model
         'doneLesson',
         'doneCourse',
         'points',
+        'submittedBy',
     ];
 }
 
