@@ -134,6 +134,28 @@ class VendorController extends Controller
 		echo json_encode($output);
     }
 
+
+    public function courseProgress($id)
+    {
+        $content = ContentPart::where(['content_id'=>$id])->get();
+        $data = array();
+        $cbid = 1;
+        $getcnt = 0;
+        $cnt=0;
+        foreach ($content as $myList)
+		{
+            $row = array();
+            $lesson = QuestionsLesson::where(['lesson_id'=>$myList->id])->get();
+            foreach ($lesson as $val)
+            {
+                $val['lesson_id'];
+                $cnt++;
+            }            
+		}
+        $output = array("data" => $cnt);
+		echo json_encode($output);
+    }
+
     /**Lessons */
 
     function vendorLessons($id){
@@ -149,7 +171,7 @@ class VendorController extends Controller
             $row['cb'] ='<input type="checkbox" value="'.$myList->id.'" name="cb" id="cb_'.$cbid.'" >';            
             $btn = ''; 
             $btn = $btn.'<a href="/admin/user_vendor/vendor_lesson_new/'.$id."/".$myList->id.'" class="btn  btn-primary btn-xs" title="Edit"><i class="far fa-save"></i></a>  ';
-            $btn = $btn.'<a href="/admin/user_vendor/vendor_question_add/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
+            $btn = $btn.'<a href="/admin/user_vendor/vendor_question_add/'.$myList->id.'/'.$id.'" class="btn  btn-success btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
             $btn = $btn.'<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_course('."'".$myList->id."'".')"><i class="fas fa-trash"></i></button>  ';
             $row['action'] = $btn;
 			$data[] = $row;
@@ -246,6 +268,7 @@ class VendorController extends Controller
             QuestionsLesson::create([
                 'question_id'=>$value['qid'],
                 'lesson_id'=>$value['lid'],
+                'content_id'=>$value['cid'],
             ]);
         }                      
         echo true;
@@ -334,5 +357,18 @@ class VendorController extends Controller
 		}
         $output = array("data" => $data);
 		echo json_encode($output);
+    }
+
+    /**Answers */
+
+    public function submitAnswers(Request $request){
+        foreach ($request->data as $value) {
+            QuestionsLesson::create([
+                'question_id'=>$value['qid'],
+                'lesson_id'=>$value['lid'],
+                'content_id'=>$value['cid'],
+            ]);
+        }                      
+        echo true;
     }
 }

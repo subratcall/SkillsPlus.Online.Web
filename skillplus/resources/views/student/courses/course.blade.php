@@ -81,7 +81,21 @@ var getvideo;
     $(document).ready(function() {
         $('.editor-te').jqte({format: false});
         loadMetaData();
-        loadData();               
+        loadData();             
+        $.ajax({
+                url: "{{ url('/admin/user_dashboard/course_progress') }}/"+id,
+                type: "get",
+                dataType: 'JSON',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error! Contact IT Department.');
+                }
+            });  
     });
     
     function loadData() {

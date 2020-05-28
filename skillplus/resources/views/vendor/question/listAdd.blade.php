@@ -69,10 +69,9 @@ Add Question
                     </div>
                 </div>
                 <div class="tab-pane fade" id="selected">
-                    <h4 class="mt-2">Profile tab content</h4>
+                    <!-- <h4 class="mt-2">Profile tab content</h4> -->
                     <div class="row">
                         <div class="col-lg-12">
-                        <button type="button" class="btn btn-danger btn-sm" onclick="getcb()">Remove</button>
                             <table id="tbl2"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
                                 width="100%">
                                     <thead>
@@ -95,6 +94,7 @@ Add Question
 @section('script')
 <script>
 var id = "{{request()->route('id')}}";
+var cid = "{{request()->route('cid')}}";
 var q = []
 var tbl = '';
 var tbl2 = '';
@@ -126,7 +126,7 @@ var tbl2 = '';
 
     function getcb(){
         $("input:checkbox[name=cb]:checked").each(function(){
-            q.push({"lid":id,"qid":$(this).val()});
+            q.push({"lid":id,"cid":cid,"qid":$(this).val()});
             console.log($(this).val())
         });
         
