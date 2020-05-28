@@ -72,6 +72,7 @@ Courses Overview
 
 @section('script')
 <script>
+var id = "{{request()->route('id')}}";
     $(document).ready(function() {
         setTimeout(function() {
             $('#table-courses').dtcustom({
@@ -95,6 +96,9 @@ Courses Overview
                     }]
                 });
         }, 500);
+
+        
+ 
     });
 
     // $(document).ready(function() {

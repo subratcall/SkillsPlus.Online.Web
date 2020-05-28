@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Content;
+use App\Models\ContentMeta;
 use App\Models\Questions;
 use App\Models\QuestionsLesson;
+use App\Models\CourseLog;
 use DB;
 use Session;
 
@@ -116,6 +118,45 @@ class VendorController extends Controller
         return $getData;
     }
 
+    public function showCourseMeta($id)
+    {
+        $getData = ContentMeta::where(['content_id'=>$id])->get();
+        $data = array();
+        foreach ($getData as $myList)
+		{
+            $row = array();
+			$row['option_id'] = $myList->option_id;
+			$row['value'] = $myList->value;
+			$row['mode'] = $myList->mode;
+            $row['id'] = $myList->id;
+			$data[] = $row;
+		}
+        $output = array("data" => $getData);
+		echo json_encode($output);
+    }
+
+
+    public function courseProgress($id)
+    {
+        $content = ContentPart::where(['content_id'=>$id])->get();
+        $data = array();
+        $cbid = 1;
+        $getcnt = 0;
+        $cnt=0;
+        foreach ($content as $myList)
+		{
+            $row = array();
+            $lesson = QuestionsLesson::where(['lesson_id'=>$myList->id])->get();
+            foreach ($lesson as $val)
+            {
+                $val['lesson_id'];
+                $cnt++;
+            }            
+		}
+        $output = array("data" => $cnt);
+		echo json_encode($output);
+    }
+
     /**Lessons */
 
     function vendorLessons($id){
@@ -131,7 +172,7 @@ class VendorController extends Controller
             $row['cb'] ='<input type="checkbox" value="'.$myList->id.'" name="cb" id="cb_'.$cbid.'" >';            
             $btn = ''; 
             $btn = $btn.'<a href="/admin/user_vendor/vendor_lesson_new/'.$id."/".$myList->id.'" class="btn  btn-primary btn-xs" title="Edit"><i class="far fa-save"></i></a>  ';
-            $btn = $btn.'<a href="/admin/user_vendor/vendor_question_add/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
+            $btn = $btn.'<a href="/admin/user_vendor/vendor_question_add/'.$myList->id.'/'.$id.'" class="btn  btn-success btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
             $btn = $btn.'<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_course('."'".$myList->id."'".')"><i class="fas fa-trash"></i></button>  ';
             $row['action'] = $btn;
 			$data[] = $row;
@@ -228,6 +269,7 @@ class VendorController extends Controller
             QuestionsLesson::create([
                 'question_id'=>$value['qid'],
                 'lesson_id'=>$value['lid'],
+                'content_id'=>$value['cid'],
             ]);
         }                      
         echo true;
@@ -276,7 +318,9 @@ class VendorController extends Controller
             $row['id'] = $myList->id;   
             $row['cb'] ='<input type="checkbox" value="'.$myList->id.'" name="cb" id="cb_'.$cbid.'" >';            
             $btn = ''; 
-            $btn = $btn.'<a href="/admin/user_student/student_lesson_quiz/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
+            //$btn = $btn.'<a href="/admin/user_student/student_lesson_quiz/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
+            $btn = $btn.'<a href="/admin/user_student/student_lesson_take_quiz/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
+            $btn .= ' <a href="/admin/user_student/student_show_lesson/'.$myList->id.'/'.$id.'" type="button" class="btn btn-primary">View Lesson</a>';
             $row['action'] = $btn;
 			$data[] = $row;
 		}
@@ -315,5 +359,90 @@ class VendorController extends Controller
 		}
         $output = array("data" => $data);
 		echo json_encode($output);
+    }
+
+    /**Answers */
+
+    public function submitAnswers(Request $request){
+        if($request->type=="Multiple Choice"){
+            $storeValue = '';
+            foreach ($request->option as $value) {
+                $storeValue .=$value.'|';
+            }
+            $storeValue = substr_replace($storeValue ,"",-1);
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),                
+            ]);
+        }
+
+        if($request->type=="Checkbox"){
+            $storeValue = '';
+            $storeAnswer = '';
+            foreach ($request->optioncheck as $value) {
+                $storeValue .=$value.'|';
+            }
+            foreach ($request->checkboxcheck as $value) {
+                $storeAnswer .=$value.'|';
+            }
+            $storeValue = substr_replace($storeValue ,"",-1);
+            $storeAnswer = substr_replace($storeAnswer ,"",-1);
+            
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),  
+            ]);
+        }
+
+        if($request->type=="Short Answer"){            
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),  
+            ]);
+        }
+
+        if($request->type=="Paragraph"){
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),  
+            ]);
+        }
+
+        if($request->type=="Switch"){
+            CourseLog::create([
+                'content_id'=>$request->cid,
+                'lesson_id'=>$request->lid,
+                'question_id'=>$request->qid,
+                'answer'=>$request->checkbox,
+                'doneQuestion'=>$request->checkbox,
+                'doneLesson'=>$request->isDoneLesson,
+                'doneCourse'=>$request->isDoneCourse,
+                'submittedBy'=>Session::get('user_id'),  
+            ]);
+        }
     }
 }

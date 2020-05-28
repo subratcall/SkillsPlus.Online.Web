@@ -12,7 +12,7 @@ use Session;
 use App\Models\Favorite;
 use App\Models\Sell;
 use App\Models\Article;
-use App\Models\ContentCategory;
+use App\Models\ContentMeta;
 use App\Models\User;
 use App\Models\Content;
 use App\Models\Transaction;
@@ -112,6 +112,7 @@ class UserController extends Controller
         $cdata = array();
         foreach ($datas as $key) {
            $arr= array();
+           //$meta = ContentMeta::where('content_id',$key->content_id)->first()->get();
            $getContent = Content::where('id',$key->content_id)->first();
            $getUser = User::where('id',$key->user_id)->first();
            $getTransaction = Transaction::where(['content_id'=>$getContent->id,'buyer_id'=>$key->buyer_id])->first();
@@ -119,14 +120,24 @@ class UserController extends Controller
            $arr['vendor'] = $getUser->name;
            $arr['date'] = date("F d, Y H:i:s", $key->create_at);
            $arr['price'] = ($getTransaction?$getTransaction->price:'');
+           //$arr['data'] = $meta;
            $btn = '';
            $btn .= '<a href="/admin/user_student/student_lesson_list/'.$key->content_id.'" type="button" class="btn btn-warning">View Lesson</a>';
+           $btn .= ' <a href="/admin/user_student/student_show_course/'.$key->content_id.'" type="button" class="btn btn-success">View Course</a>';
            $arr['action'] = $btn;
            $cdata[] = $arr;
         }
+        $output = array("data" => $cdata);
+		echo json_encode($output);        
+    }
 
-        $output = array("data" => $cdata,);
-		echo json_encode($output);
-        
+    public function viewCourses()
+    {    
+        return view('student.courses.course');
+    }
+
+    public function viewLesson()
+    {    
+        return view('student.courses.lesson');
     }
 }
