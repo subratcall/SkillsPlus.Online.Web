@@ -10,18 +10,22 @@
         overflow-x: auto;
         padding: 20px 0;
     }
+
     .success {
         background: #00B961;
         color: #fff
     }
+
     .info {
         background: #2A92BF;
         color: #fff
     }
+
     .warning {
         background: #F4CE46;
         color: #fff
     }
+
     .error {
         background: #FB7D44;
         color: #fff
@@ -35,61 +39,80 @@
 
 <div class="row">
     <div class="col-xs-6 col-md-3 col-sm-6 text-center">
-    
-    </div>  
+
+    </div>
 </div>
 </div>
 <section class="card">
     <div class="card-body">
-        <div class="row">
-            <div class="col-lg-12">
-                
-                <form id="form" class="form-horizontal form-bordered" method="post">                    
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2 tab-con" for="inputDefault">Course Type</label>
-                            <div class="col-md-10 tab-con">
+        <div class="row">
+            <div class="col-12">
+
+                <form id="form" class="form-horizontal form-bordered" method="post">
+
+                    <div class="row">
+
+                        <div class="form-group col-4">
+                            <label class="control-label tab-con" for="inputDefault">Course Type</label>
+                            <div class="tab-con">
                                 <select name="type" id="type" class="form-control font-s">
                                     <option value="single">Single Part</option>
                                     <option value="course">Course</option>
                                 </select>
                             </div>
-                    </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2 tab-con" for="inputDefault">{{{ trans('main.publish_type') }}}</label>
-                            <div class="col-md-10 tab-con">
+                        <div class="form-group col-4">
+                            <label class="control-label tab-con"
+                                for="inputDefault">{{{ trans('main.publish_type') }}}</label>
+                            <div class="tab-con">
                                 <select name="private" id="private" class="form-control font-s">
                                     <option value="1">Exclusive</option>
                                     <option value="0">Open</option>
                                 </select>
                             </div>
-                    </div> 
-
-                    <div class="form-group">
-                        <label class="col-md-2 control-label" for="inputDefault">Course Title</label>
-                        <div class="col-md-10">
-                            <input type="hidden" name="id" id="id" class="form-control">
-                            <input type="text" name="title" id="title" class="form-control">
                         </div>
-                    </div>          
 
-                    <label class="col-md-2 control-label" for="inputDefault">Description</label>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                        <textarea class="form-control editor-te" rows="12" placeholder="Description..." name="content" id="content" required></textarea>
+                        <div class="form-group col-4">
+                            <label class="control-label" for="inputDefault">Course Title</label>
+                            <div class="">
+                                <input type="hidden" name="id" id="id" class="form-control">
+                                <input type="text" name="title" id="title" class="form-control">
+                            </div>
                         </div>
-                    </div>                                    
 
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <button class="btn btn-primary pull-left" onclick="save()" type="button">save</button>
-                            <a href="/admin/user_vendor/vendor_course_list"  class="btn btn-danger pull-left">Cancel</a>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+
+                            <label class="control-label" for="inputDefault">Description</label>
+                            <div class="form-group">
+                                <textarea class="form-control editor-te" rows="12" placeholder="Description..."
+                                    name="content" id="content" required></textarea>
+                            </div>
+
                         </div>
                     </div>
-                </form>                
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button class="btn btn-primary pull-left" onclick="save()" type="button">save</button>
+                                <a href="/admin/user_vendor/vendor_course_list"
+                                    class="btn btn-danger pull-left">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
             </div>
         </div>
+
+
     </div>
 </section>
 
@@ -101,7 +124,7 @@
 <script type="application/javascript" src="/assets/vendor/jquery-te/jquery-te-1.4.0.min.js"></script>
 
 <script>
-var isSave = 1;
+    var isSave = 1;
 var id = "{{request()->route('id')}}";
     $(document).ready(function() {
         $('.editor-te').jqte({format: false});
