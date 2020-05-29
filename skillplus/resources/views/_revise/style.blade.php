@@ -76,5 +76,9 @@
             padding-right: 5px !important;
         }
     }
+
+    .select2 {
+        
+    }
 }​
 </style>
