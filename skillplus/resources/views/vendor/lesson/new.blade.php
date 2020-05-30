@@ -111,7 +111,7 @@
 
                     <input type="hidden" name="id" id="id">
 
-                    <div class="row">
+                    <div class="row col-md-6">
 
                         <div class="form-group col-12">
 
@@ -158,15 +158,6 @@
                         </div>
 
                         <div class="form-group col-12">
-                            <label class="control-label tab-con"
-                                for="inputDefault">{{{ trans('main.description') }}}</label>
-                            <div class="tab-con te-10">
-                                <textarea class="form-control editor-te oflows" rows="12" placeholder="Description..."
-                                    name="desc" id="description" required></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-12">
                             <label class="control-label tab-con">{{{ trans('main.volume') }}}</label>
                             <div class="tab-con">
                                 <div class="input-group">
@@ -174,6 +165,9 @@
                                     <span class="input-group-addon img-icon-s">{{{ trans('main.mb') }}}</span>
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="form-group col-12">
                             <label class="control-label tab-con">{{{ trans('main.duration') }}}</label>
                             <div class="tab-con">
                                 <div class="input-group">
@@ -198,6 +192,15 @@
                             <label class="control-label tab-con" for="inputDefault">{{{ trans('main.title') }}}</label>
                             <div class="tab-con">
                                 <input type="text" name="title" id="title" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label class="control-label tab-con"
+                                for="inputDefault">{{{ trans('main.description') }}}</label>
+                            <div class="tab-con te-10">
+                                <textarea class="form-control editor-te oflows" rows="12" placeholder="Description..."
+                                    name="desc" id="description" required></textarea>
                             </div>
                         </div>
 
