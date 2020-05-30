@@ -58,6 +58,9 @@ export default {
   events: {
     'redirect-tab': function() {
       this.tab = "list"
+    },
+    'edit': function(id) {
+      console.log(id);
     }
   }
 };
