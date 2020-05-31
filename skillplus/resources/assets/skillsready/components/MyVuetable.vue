@@ -63,14 +63,29 @@ export default {
     VuetablePagination,
     VuetablePaginationInfo
   },
-  props: [
-    "vt-api-url",
-    "vt-fields",
-    "vt-css",
-    "vt-sort",
-    "vt-params",
-    "vt-length-menu"
-  ],
+  props: {
+    "vt-api-url": {
+      type: String
+    },
+    "vt-fields": {
+      type: Array
+    },
+    "vt-css": {
+      type: Object
+    },
+    "vt-sort": {
+      type: Array
+    },
+    "vt-params": {
+      type: Object
+    },
+    "vt-length-menu": {
+      type: Array
+    },
+    "vt-callback": {
+      type: Function
+    }
+  },
   data() {
     return {
       fields: this.vtFields,
@@ -128,6 +143,8 @@ export default {
     }
   },
   mounted() {
+    this.vtCallback();
+
     // console.log(this.vtApiUrl, this.vtFields, this.vtCss, this.vtSort, this.vtParams, this.vtLengthMenu);
     // console.log(this.vtLengthMenu);
   }

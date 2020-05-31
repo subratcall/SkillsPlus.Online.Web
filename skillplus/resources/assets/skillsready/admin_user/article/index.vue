@@ -12,7 +12,7 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              :class="[ tab == 'new' ? 'nav-link active' : 'nav-link']"
+              :class="[ tab == 'new' || tab == 'edit' ? 'nav-link active' : 'nav-link']"
               @click="tab = 'new'"
             >New Article</a>
           </li>
@@ -25,7 +25,7 @@
         <article-list></article-list>
       </div>
 
-      <div v-if="tab == 'new'">
+      <div v-if="tab == 'new' || tab == 'edit'">
         <article-new></article-new>
       </div>
     </transition>
@@ -59,8 +59,10 @@ export default {
     'redirect-tab': function() {
       this.tab = "list"
     },
-    'edit': function(id) {
-      console.log(id);
+    'custom-action': function(action, data, index) {
+      if (action === "edit-item") {
+         this.tab = "edit";
+      }
     }
   }
 };
