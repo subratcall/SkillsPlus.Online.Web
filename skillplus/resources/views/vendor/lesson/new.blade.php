@@ -114,25 +114,6 @@
                     <div class="row col-md-6">
 
                         <div class="form-group col-12">
-
-                            {{-- <label class="control-label tab-con">{{{ trans('main.video_file') }}}</label>
-
-                            <div class="tab-con">
-                                <div class="input-group">
-
-                                    <span class="input-group-prepend view-selected img-icon-s" data-toggle="modal"
-                                        data-target="#VideoModal" data-whatever="upload_video"><span
-                                            class="formicon mdi mdi-eye"></span></span>
-
-                                    <input type="text" name="upload_video" id="upload_video" dir="ltr"
-                                        class="form-control">
-
-                                    <span class="input-group-append click-for-upload img-icon-s"><span
-                                            class="formicon mdi mdi-arrow-up-thick"></span></span>
-                                </div>
-                            </div> --}}
-
-
                             <label class="control-label">{{{ trans('main.video_file') }}}</label>
                             <div class="input-group">
                                 <span class="input-group-prepend view-selected img-icon-s" data-toggle="modal"
@@ -140,13 +121,11 @@
                                     <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 </span>
                                 <input type="text" name="upload_video" id="upload_video" dir="ltr" class="form-control">
-
                                 <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text"><i class="fa fa-upload"
                                             aria-hidden="true"></i></span>
                                 </span>
                             </div>
-
                         </div>
 
                         <div class="form-group col-12">

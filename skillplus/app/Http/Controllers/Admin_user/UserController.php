@@ -16,6 +16,9 @@ use App\Models\ContentMeta;
 use App\Models\User;
 use App\Models\Content;
 use App\Models\Transaction;
+use App\Models\QuestionsLesson;
+use App\Models\CourseLog;
+use App\Models\ContentPart;
 //use Illuminate\Support\Facades\Input;
 //use Illuminate\Support\Facades\Redirect;
 //use Illuminate\Validation\Rules\In;
@@ -123,6 +126,11 @@ class UserController extends Controller
         $datas = Sell::where('buyer_id',Session::get('user_id'))->get();
         $getFavdatas = Favorite::where('user_id',Session::get('user_id'))->get();
         $cdata = array();
+
+        
+        $cbid = 1;
+        $getcnt = 0;
+        $cnt_lwqa = 0;
         foreach ($datas as $key) {
            $arr= array();
            //$meta = ContentMeta::where('content_id',$key->content_id)->first()->get();
@@ -135,9 +143,37 @@ class UserController extends Controller
            $arr['price'] = ($getTransaction?$getTransaction->price:'');
            //$arr['data'] = $meta;
            $btn = '';
-           $btn .= '<a href="/admin/user_student/student_lesson_list/'.$key->content_id.'" type="button" class="btn btn-warning">View Lesson</a>';
+           //$btn .= '<a href="/admin/user_student/student_lesson_list/'.$key->content_id.'" type="button" class="btn btn-warning">View Lesson</a>';
            $btn .= ' <a href="/admin/user_student/student_show_course/'.$key->content_id.'" type="button" class="btn btn-success">View Course</a>';
            $arr['action'] = $btn;
+           /*** */
+            $content = ContentPart::where(['content_id'=>$key->content_id])->get();
+            //$data = array();
+            $cnt=0;
+            foreach ($content as $myList)
+            {
+                $mrow = array();
+                $lesson = QuestionsLesson::where(['lesson_id'=>$myList->id])->get();
+                foreach ($lesson as $val)
+                {
+                    $lesson_with_questions_answers = CourseLog::where(['lesson_id'=>$val['lesson_id'],'status' => 'Done'])->get(); 
+                    //$val['lesson_id'];
+                   $cnt_lwqa =  count($lesson_with_questions_answers);
+                    $cnt++;
+                }            
+            }
+            $arr['count'] = $cnt;
+            $arr['id'] =$key->content_id;
+            $arr['lwqa'] = $cnt_lwqa;
+            if($cnt_lwqa!=0&&$cnt!=0){
+                $p = (floatval($cnt_lwqa) / floatval($cnt)) * 100;
+                $prog = floor($p * 100)/100;
+                $arr['progress'] = $prog.'%';
+            }else{
+                
+            $arr['progress'] = 0;
+            }
+           /*** */
            $cdata[] = $arr;
         }
         $output = array("data" => $cdata);

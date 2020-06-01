@@ -385,7 +385,9 @@
     <script src="/assets/admin/modules/select2/dist/js/select2.full.min.js"></script>
     <script src="/assets/admin/modules/jquery-selectric/jquery.selectric.min.js"></script>
     <script src="/assets/admin/js/scripts.js"></script>
-    <script src="/assets/admin/js/custom.js"></script>
+    <script src="/assets/admin/js/custom.js"></script>    
+    <div id="footerScript">
+    </div>
     <script>
         @if(isset($menu))
         $(function() {

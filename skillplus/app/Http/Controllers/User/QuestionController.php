@@ -27,7 +27,11 @@ class QuestionController extends Controller
                 'options'=>$storeValue,
                 'answer'=>$request->checkbox,
                 'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s")
+                'created_dt'=>date("Y-m-d H:i:s"),
+                'hint'=>$request->hint,
+                'correctremarks'=>$request->remarks,
+                'attachment'=>$request->file,
+                'timelimit'=>$request->timer,
             ]);
         }
 
@@ -49,7 +53,11 @@ class QuestionController extends Controller
                 'options'=>$storeValue,
                 'answer'=>$storeAnswer,
                 'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s")
+                'created_dt'=>date("Y-m-d H:i:s"),
+                'hint'=>$request->hint,
+                'correctremarks'=>$request->remarks,
+                'attachment'=>$request->file,
+                'timelimit'=>$request->timer,
             ]);
         }
 
@@ -59,7 +67,11 @@ class QuestionController extends Controller
                 'type'=> $request->type ,
                 'answer'=>$request->short_ans,
                 'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s")
+                'created_dt'=>date("Y-m-d H:i:s"),
+                'hint'=>$request->hint,
+                'correctremarks'=>$request->remarks,
+                'attachment'=>$request->file,
+                'timelimit'=>$request->timer,
             ]);
         }
 
@@ -69,7 +81,11 @@ class QuestionController extends Controller
                 'type'=> $request->type ,
                 'answer'=>$request->paragraph,
                 'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s")
+                'created_dt'=>date("Y-m-d H:i:s"),
+                'hint'=>$request->hint,
+                'correctremarks'=>$request->remarks,
+                'attachment'=>$request->file,
+                'timelimit'=>$request->timer,
             ]);
         }
 
@@ -79,7 +95,11 @@ class QuestionController extends Controller
                 'type'=> $request->type ,
                 'answer'=>$request->swtich,
                 'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s")
+                'created_dt'=>date("Y-m-d H:i:s"),
+                'hint'=>$request->hint,
+                'correctremarks'=>$request->remarks,
+                'attachment'=>$request->file,
+                'timelimit'=>$request->timer,
             ]);
         }
         echo true;

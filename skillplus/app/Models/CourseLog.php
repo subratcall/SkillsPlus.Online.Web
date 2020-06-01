@@ -25,6 +25,7 @@ class CourseLog extends Model
         'doneCourse',
         'points',
         'submittedBy',
+        'status',
     ];
 }
 

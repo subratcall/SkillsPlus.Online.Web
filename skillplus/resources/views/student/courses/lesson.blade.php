@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Lesson','Edit']])
 @section('title')
-<a href="/admin/user_student/student_lesson_list/{{request()->route('lid')}}" class="btn btn-warning btn-sm">Back</a>
+<a href="/admin/user_student/student_show_course/{{request()->route('lid')}}" class="btn btn-warning btn-sm">Back</a>
 Lesson Content
 @endsection
 

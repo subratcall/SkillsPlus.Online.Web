@@ -25,6 +25,10 @@ class Questions extends Model
         'created_dt',
         'updated_by',
         'updated_dt',
+        'hint',
+        'correctremarks',
+        'attachment',
+        'timelimit',
     ];
 }
 
