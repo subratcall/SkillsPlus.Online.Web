@@ -101,7 +101,7 @@ class UserController extends Controller
          return Article::leftJoin('tbl_contents_category', function($join) {
              $join->on('tbl_article.cat_id', '=', 'tbl_contents_category.id');
          })
-            ->select('tbl_article.id', 'tbl_article.title', 'tbl_contents_category.title AS category')
+            ->select('tbl_article.id', 'tbl_article.title', 'tbl_article.mode AS status', 'tbl_contents_category.title AS category')
             ->where('tbl_article.title','LIKE','%'.$filter.'%')
             ->where('tbl_article.user_id',$user['id'])
             ->orderBy($field, $dir)

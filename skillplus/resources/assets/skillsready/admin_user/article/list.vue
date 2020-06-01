@@ -8,6 +8,7 @@
         :vt-params="vt.moreParams"
         :vt-sort="vt.sortOrder"
         :vt-length-menu="vt.lengthmenu"
+        :vt-callback="callback"
       ></my-vuetable>
     </div>
   </div>
@@ -17,6 +18,27 @@
 export default {
   data() {
     return {
+      callback: (value, type) => {
+        console.log(value, type);
+
+        if (type == "status") {
+          if (value == "publish") {
+            return "<label class='alert alert-success'>Publish</label>";
+          }
+          else if (value == "draft") {
+            return "<label class='alert alert-warning'>Draft</label>";
+          }
+          else if (value == "request") {
+             return "<label class='alert alert-primary'>Send for review</label>";
+          }
+          else if (value == "delete") {
+            return "<label class='alert alert-danger'>Unpublish Request</label>";
+          }
+          else {
+            return "<label></label>";
+          }
+        }
+      },
       vt: {
         apiUrl: "/admin/user_dashboard/request/article",
         fields: [
@@ -52,7 +74,8 @@ export default {
           {
             name: "status",
             title: "Status",
-            sortField: "status"
+            sortField: "status",
+            callback: "vtCallback|status"
           },
           {
             name: "__component:custom-actions",
@@ -94,7 +117,8 @@ export default {
         lengthmenu: [5, 25, 50]
       }
     };
-  }
+  },
+  methods: {}
 };
 </script>
 

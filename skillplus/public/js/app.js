@@ -36365,6 +36365,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   events: {
     'redirect-tab': function redirectTab() {
       this.tab = "list";
+    },
+    'custom-action': function customAction(action, data, index) {
+      if (action === "edit-item") {
+        this.tab = "edit";
+      }
     }
   }
 });
@@ -36390,10 +36395,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      callback: function callback(value, type) {
+        console.log(value, type);
+
+        if (type == "status") {
+          if (value == "publish") {
+            return "<label class='alert alert-success'>Publish</label>";
+          } else if (value == "draft") {
+            return "<label class='alert alert-warning'>Draft</label>";
+          } else if (value == "request") {
+            return "<label class='alert alert-primary'>Send for review</label>";
+          } else if (value == "delete") {
+            return "<label class='alert alert-danger'>Unpublish Request</label>";
+          } else {
+            return "<label></label>";
+          }
+        }
+      },
       vt: {
         apiUrl: "/admin/user_dashboard/request/article",
         fields: [{
@@ -36423,7 +36446,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }, {
           name: "status",
           title: "Status",
-          sortField: "status"
+          sortField: "status",
+          callback: "vtCallback|status"
         }, {
           name: "__component:custom-actions",
           title: "Actions",
@@ -36463,7 +36487,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         lengthmenu: [5, 25, 50]
       }
     };
-  }
+  },
+
+  methods: {}
 });
 
 /***/ }),
@@ -36478,6 +36504,87 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuelidate__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuelidate_lib_validators__ = __webpack_require__(386);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuelidate_lib_validators__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -36648,6 +36755,12 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vuelidate___default.a);
       },
       mode: {
         required: __WEBPACK_IMPORTED_MODULE_2_vuelidate_lib_validators__["required"]
+      },
+      pre_text: {
+        required: __WEBPACK_IMPORTED_MODULE_2_vuelidate_lib_validators__["required"]
+      },
+      text: {
+        required: __WEBPACK_IMPORTED_MODULE_2_vuelidate_lib_validators__["required"]
       }
     }
   },
@@ -36658,18 +36771,17 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vuelidate___default.a);
     this.getCategory();
   },
 
+
   methods: {
     add: function add(e) {
       var _this = this;
 
       e.preventDefault();
 
-      console.log(this.input);
-
       this.$v.$touch();
 
       if (this.$v.$invalid) {
-        window.alert("error");
+        return false;
       } else {
         axios.post("/admin/user_dashboard/request/article/store", this.input).then(function (res) {
           _this.$events.fire("redirect-tab");
@@ -36683,11 +36795,14 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vuelidate___default.a);
         method: "get"
       }).then(function (response) {
         vm.form.category = response.data;
-        console.log(vm.form);
       });
     }
   },
-  events: {}
+  events: {
+    "custom-action": function customAction(action, data, index) {
+      console.log("hello world");
+    }
+  }
 });
 
 /***/ }),
@@ -36723,7 +36838,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     itemAction: function itemAction(action, data, index) {
-      console.log("custom-actions: " + action, data.name, index);
+      this.$events.fire("custom-action", action, data, index);
     }
   }
 });
@@ -36956,7 +37071,29 @@ __WEBPACK_IMPORTED_MODULE_5_vue___default.a.component("length-menu", __WEBPACK_I
     VuetablePagination: __WEBPACK_IMPORTED_MODULE_3_vuetable_2_src_components_VuetablePagination___default.a,
     VuetablePaginationInfo: __WEBPACK_IMPORTED_MODULE_4_vuetable_2_src_components_VuetablePaginationInfo___default.a
   },
-  props: ["vt-api-url", "vt-fields", "vt-css", "vt-sort", "vt-params", "vt-length-menu"],
+  props: {
+    "vt-api-url": {
+      type: String
+    },
+    "vt-fields": {
+      type: Array
+    },
+    "vt-css": {
+      type: Object
+    },
+    "vt-sort": {
+      type: Array
+    },
+    "vt-params": {
+      type: Object
+    },
+    "vt-length-menu": {
+      type: Array
+    },
+    "vt-callback": {
+      type: Function
+    }
+  },
   data: function data() {
     return {
       fields: this.vtFields,
@@ -37027,6 +37164,8 @@ __WEBPACK_IMPORTED_MODULE_5_vue___default.a.component("length-menu", __WEBPACK_I
     }
   },
   mounted: function mounted() {
+    this.vtCallback();
+
     // console.log(this.vtApiUrl, this.vtFields, this.vtCss, this.vtSort, this.vtParams, this.vtLengthMenu);
     // console.log(this.vtLengthMenu);
   }
@@ -42666,7 +42805,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 289 */
@@ -42688,7 +42827,7 @@ exports.push([module.i, "\n.pagination {\r\n  margin: 0;\r\n  float: right;\n}\n
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)();
-exports.push([module.i, "\n.btn-save-article {\r\n  margin-top: 30px;\n}\r\n\r\n/* input {\r\n  border: 1px solid silver;\r\n  border-radius: 4px;\r\n  background: white;\r\n  padding: 5px 10px;\r\n}\r\n\r\n.dirty {\r\n  border-color: #5a5;\r\n  background: #efe;\r\n}\r\n\r\n.dirty:focus {\r\n  outline-color: #8e8;\r\n}\r\n\r\n.error {\r\n  border-color: red;\r\n  background: #fdd;\r\n}\r\n\r\n.error:focus {\r\n  outline-color: #f99;\r\n} */\r\n", ""]);
+exports.push([module.i, "\n.btn-save-article {\r\n  margin-top: 30px;\n}\r\n\r\n/* input {\r\n  border: 1px solid silver;\r\n  border-radius: 4px;\r\n  background: white;\r\n  padding: 5px 10px;\r\n}\r\n\r\n.dirty {\r\n  border-color: #5a5;\r\n  background: #efe;\r\n}\r\n\r\n.dirty:focus {\r\n  outline-color: #8e8;\r\n}\r\n\r\n.error {\r\n  border-color: red;\r\n  background: #fdd;\r\n}\r\n\r\n.error:focus {\r\n  outline-color: #f99;\r\n} */\ninput {\r\n  border: 1px solid silver;\r\n  border-radius: 4px;\r\n  background: white;\r\n  padding: 5px 10px;\n}\n.error {\r\n  color: red;\n}\n.error:focus {\r\n  color: red;\n}\n.error-border {\r\n  border: 1px solid red !important;\n}\n.valid {\r\n  border-color: #5a5;\r\n  background: #efe;\n}\n.valid:focus {\r\n  outline-color: #8e8;\n}\r\n", ""]);
 
 /***/ }),
 /* 292 */
@@ -84396,7 +84535,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nav-item"
   }, [_c('a', {
     staticClass: "nav-link",
-    class: [_vm.tab == 'new' ? 'nav-link active' : 'nav-link'],
+    class: [_vm.tab == 'new' || _vm.tab == 'edit' ? 'nav-link active' : 'nav-link'],
     on: {
       "click": function($event) {
         _vm.tab = 'new'
@@ -84406,7 +84545,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "name": "fade"
     }
-  }, [(_vm.tab == 'list') ? _c('div', [_c('article-list')], 1) : _vm._e(), _vm._v(" "), (_vm.tab == 'new') ? _c('div', [_c('article-new')], 1) : _vm._e()])], 1)
+  }, [(_vm.tab == 'list') ? _c('div', [_c('article-list')], 1) : _vm._e(), _vm._v(" "), (_vm.tab == 'new' || _vm.tab == 'edit') ? _c('div', [_c('article-new')], 1) : _vm._e()])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -84687,7 +84826,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "vt-css": _vm.vt.css,
       "vt-params": _vm.vt.moreParams,
       "vt-sort": _vm.vt.sortOrder,
-      "vt-length-menu": _vm.vt.lengthmenu
+      "vt-length-menu": _vm.vt.lengthmenu,
+      "vt-callback": _vm.callback
     }
   })], 1)])
 },staticRenderFns: []}
@@ -84783,30 +84923,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('input', {
     directives: [{
       name: "model",
-      rawName: "v-model.trim",
-      value: (_vm.$v.input.title.$model),
-      expression: "$v.input.title.$model",
-      modifiers: {
-        "trim": true
-      }
+      rawName: "v-model",
+      value: (_vm.input.title),
+      expression: "input.title"
     }],
     staticClass: "form-control",
+    class: {
+      'error-border': _vm.$v.input.title.$error
+    },
     attrs: {
       "type": "text"
     },
     domProps: {
-      "value": (_vm.$v.input.title.$model)
+      "value": (_vm.input.title)
     },
     on: {
-      "input": function($event) {
+      "input": [function($event) {
         if ($event.target.composing) { return; }
-        _vm.$set(_vm.$v.input.title, "$model", $event.target.value.trim())
-      },
-      "blur": function($event) {
-        return _vm.$forceUpdate()
-      }
+        _vm.$set(_vm.input, "title", $event.target.value)
+      }, _vm.$v.input.title.$touch]
     }
-  }), _vm._v(" "), (!_vm.$v.input.title.required) ? _c('div', {
+  }), _vm._v(" "), (_vm.$v.input.title.$error || _vm.$v.input.title.$dirty && !_vm.$v.input.title.$invalid && !_vm.$v.input.title.required) ? _c('div', {
     staticClass: "error"
   }, [_vm._v("Field is required")]) : _vm._e()])])]), _vm._v(" "), _c('div', {
     staticClass: "col-6"
@@ -84817,15 +84954,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('select', {
     directives: [{
       name: "model",
-      rawName: "v-model.trim",
-      value: (_vm.$v.input.cat_id.$model),
-      expression: "$v.input.cat_id.$model",
-      modifiers: {
-        "trim": true
-      }
+      rawName: "v-model",
+      value: (_vm.input.cat_id),
+      expression: "input.cat_id"
     }],
     staticClass: "form-control",
+    class: {
+      'error-border': _vm.$v.input.cat_id.$error
+    },
     on: {
+      "input": _vm.$v.input.cat_id.$touch,
       "change": function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
           return o.selected
@@ -84833,7 +84971,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.$set(_vm.$v.input.cat_id, "$model", $event.target.multiple ? $$selectedVal : $$selectedVal[0])
+        _vm.$set(_vm.input, "cat_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0])
       }
     }
   }, _vm._l((_vm.form.category), function(item, index) {
@@ -84850,7 +84988,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }, [_vm._v(_vm._s(item.title))])
     }), 0)
-  }), 0), _vm._v(" "), (!_vm.$v.input.cat_id.required) ? _c('div', {
+  }), 0), _vm._v(" "), (_vm.$v.input.cat_id.$error || _vm.$v.input.cat_id.$dirty && !_vm.$v.input.cat_id.$invalid && !_vm.$v.input.cat_id.required) ? _c('div', {
     staticClass: "error"
   }, [_vm._v("Field is required")]) : _vm._e()])])])]), _vm._v(" "), _c('div', {
     staticClass: "row margin-top"
@@ -84890,15 +85028,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('select', {
     directives: [{
       name: "model",
-      rawName: "v-model.trim",
-      value: (_vm.$v.input.mode.$model),
-      expression: "$v.input.mode.$model",
-      modifiers: {
-        "trim": true
-      }
+      rawName: "v-model",
+      value: (_vm.input.mode),
+      expression: "input.mode"
     }],
     staticClass: "form-control font-s",
+    class: {
+      'error-border': _vm.$v.input.mode.$error
+    },
     on: {
+      "input": _vm.$v.input.mode.$touch,
       "change": function($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
           return o.selected
@@ -84906,7 +85045,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.$set(_vm.$v.input.mode, "$model", $event.target.multiple ? $$selectedVal : $$selectedVal[0])
+        _vm.$set(_vm.input, "mode", $event.target.multiple ? $$selectedVal : $$selectedVal[0])
       }
     }
   }, [_c('option', {
@@ -84921,15 +85060,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": "delete"
     }
-  }, [_vm._v("Unpublish Request")])]), _vm._v(" "), (!_vm.$v.input.mode.required) ? _c('div', {
+  }, [_vm._v("Unpublish Request")])]), _vm._v(" "), (_vm.$v.input.mode.$error || _vm.$v.input.mode.$dirty && !_vm.$v.input.mode.$invalid && !_vm.$v.input.mode.required) ? _c('div', {
     staticClass: "error"
   }, [_vm._v("Field is required")]) : _vm._e()])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-12 margin-top"
   }, [_c('label', [_vm._v("Article Summary")]), _vm._v(" "), _c('ckeditor', {
+    class: {
+      'error-border': _vm.$v.input.pre_text.$error
+    },
     attrs: {
       "config": _vm.editorConfig
+    },
+    on: {
+      "input": _vm.$v.input.pre_text.$touch
     },
     model: {
       value: (_vm.input.pre_text),
@@ -84943,8 +85088,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "col-12 margin-top"
   }, [_c('label', [_vm._v("Description")]), _vm._v(" "), _c('ckeditor', {
+    class: {
+      'error-border': _vm.$v.input.text.$error
+    },
     attrs: {
       "config": _vm.editorConfig
+    },
+    on: {
+      "input": _vm.$v.input.text.$touch
     },
     model: {
       value: (_vm.input.text),
@@ -84980,7 +85131,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "col-12"
   }, [_c('input', {
-    staticClass: "btn btn-custom btn-save-article",
+    staticClass: "btn btn-success btn-custom btn-save-article",
     attrs: {
       "type": "submit",
       "value": "Save Article"

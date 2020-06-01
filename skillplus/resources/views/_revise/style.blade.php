@@ -8,6 +8,11 @@
     ]) !!};
 </script>
 <style>
+    section.card div.card-body {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
     #form .error{
         border-color: red;
     }
