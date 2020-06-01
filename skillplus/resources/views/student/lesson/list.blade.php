@@ -1,6 +1,5 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Courses','Lessons']])
 @section('title')
-{{-- <a href="/admin/user_vendor/vendor_course_list" class="btn btn-warning btn-sm">Back</a> --}}
 <a href="/admin/user_dashboard/courses" class="btn btn-warning btn-sm">Back</a>
 Student Lessons
 @endsection
@@ -42,7 +41,7 @@ Student Lessons
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-            <a href="/admin/user_vendor/vendor_lesson_new/{{request()->route('id')}}" class="btn btn-success btn-sm">Add Lesson</a>
+            <!-- <a href="/admin/user_vendor/vendor_lesson_new/{{request()->route('id')}}" class="btn btn-success btn-sm">Add Lesson</a> -->
             <!-- <button type="button" class="btn btn-success btn-sm" onclick="getcb()">Get</button> -->
                 <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
                     width="100%">

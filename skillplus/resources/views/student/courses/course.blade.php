@@ -64,6 +64,34 @@ Course Content
     </div>
 </section>
 
+<section class="card">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card"  id="secAc">
+                            
+
+                        </div>
+                    </div>
+</section>
+
+<!-- <section class="card">                    
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
+                    width="100%">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+
 
 @endsection
 
@@ -82,7 +110,8 @@ var getvideo;
     $(document).ready(function() {
         $('.editor-te').jqte({format: false});
         loadMetaData();
-        loadData();             
+        loadData();
+        list();             
         $.ajax({
                 url: "{{ url('/admin/user_dashboard/course_progress') }}/"+id,
                 type: "get",
@@ -179,6 +208,66 @@ var getvideo;
                 alert('Error! Contact IT Department.');
             }
         });
+    }
+
+    function list() {
+        /* tbl = $('#tbl').dtcustom({
+                    "ajax": {
+                        "type": "GET",
+                        "url": "{{ url('/admin/user_student/student_lesson_get_list') }}/"+id,
+                        "dataSrc": function(json) {
+                            return json.data;
+                        }
+                    },
+                    "columns": [{
+                            "data": "title"
+                        }
+                        ,{
+                            "data": "action"
+                        },
+                    ],
+                });  */
+
+                $.ajax({
+                    url: "{{ url('/admin/user_student/student_lesson_get_list') }}/"+id,
+                    type: "get",
+                    dataType: 'JSON',
+                    success: function(data) {
+                        
+                        data.data.forEach(function(a,i) {
+                            dr = a.duration?a.duartion:'N/A';
+                            size = a.size?a.size:'N/A';
+                            $("#secAc").append(
+                                '<div class="card-header" id="heading_"'+i+'>'+
+                                   ' <h2 class="mb-0">'+
+                                       ' <button class="btn btn-link" type="button" data-toggle="collapse"'+
+                                           ' data-target="#col_'+i+'" aria-expanded="true" aria-controls="col_'+i+'">'+
+                                            a.title+
+                                       ' </button>'+
+                                   ' </h2>'+
+                                '</div>'+
+
+                               ' <div id="col_'+i+'" class="collapse" aria-labelledby="heading_'+i+'"'+
+                                   ' data-parent="#accordionExample">'+
+                                    '<div class="card-body"><ul>'+
+                                        '<li>Duration: '+dr+'</li>'+
+                                        '<li>Size: '+size+'</li>'+
+                                        '</ul>'+
+                                        '<a href="/admin/user_student/student_lesson_quiz/'+a.id+'/'+id+'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>'+
+                                        ' <a href="/admin/user_student/student_show_lesson/'+a.id+'/'+id+'" type="button" class="btn btn-primary">View Full Lesson</a>'+
+                                   ' </div>'+
+                              '  </div>'
+                            );
+
+                        });
+
+                        
+                   
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error! Contact IT Department.');
+                    }
+                });
     }
 </script>
 @endsection

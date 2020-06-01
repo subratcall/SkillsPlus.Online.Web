@@ -85,7 +85,32 @@ New Channel
                     <input type="checkbox" checked  id="switchOpt"  name="switchOpt" data-toggle="toggle" data-on="True" data-off="False" data-onstyle="primary" data-offstyle="danger">
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-custom pull-left" onclick="save()">{{{ trans('main.save_changes') }}}</button>
+                    <label class="control-label" for="inputDefault">Hint</label>
+                    <textarea name="hint" id="hint" cols="30" rows="5" class="form-control"></textarea>
+                </div>                
+                <div class="form-group">
+                    <label class="control-label" for="inputDefault">Remarks</label>
+                    <textarea name="remarks" id="remarks" cols="30" rows="5" class="form-control"></textarea>
+                </div>
+                <div class="form-group col-12">
+                    <label class="control-label">{{{ trans('main.video_file') }}}</label>
+                    <div class="input-group">
+                        <span class="input-group-prepend view-selected img-icon-s" data-toggle="modal" data-target="#VideoModal" data-whatever="upload_video" data-toggle="modal">
+                            <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                        </span>
+                        <input type="text" name="file" id="file" dir="ltr" class="form-control">
+                        <span class="input-group-append click-for-upload cu-p">
+                            <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                            </span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="inputDefault">Timer in Minutes</label>
+                    <input type="number" name="timer" id="timer" class="form-control">
+                </div>  
+                <div class="form-group">
+                    <button type="button" class="btn btn-success pull-left" onclick="save()">{{{ trans('main.save_changes') }}}</button>
                 </div>
             </form>                        
             </div>
@@ -197,7 +222,7 @@ New Channel
             data: data,
             dataType: 'JSON',
             success: function(data) {
-                location = "/admin/question";                
+                //location = "/admin/question";                
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');

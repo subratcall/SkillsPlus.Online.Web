@@ -103,8 +103,9 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('student_lesson_quiz/{id}/{lid}','Admin_user\VendorController@studentTakeQuiz');          
             Route::get('student_lesson_take_quiz/{id}','Admin_user\VendorController@studentLoadQuiz');          
             Route::get('student_show_course/{id}','Admin_user\UserController@viewCourses');          
-            Route::get('student_show_lesson/{id}/{lid}','Admin_user\UserController@viewLesson');       
-                 
+            Route::get('student_show_lesson/{id}/{lid}','Admin_user\UserController@viewLesson');
+            Route::post('student_quiz_submit_answers','Admin_user\VendorController@submitAnswers');       
+            
             
         });
 

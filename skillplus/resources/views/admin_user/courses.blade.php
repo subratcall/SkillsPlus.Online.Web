@@ -55,6 +55,7 @@ Courses Overview
                     <thead>
                         <tr>
                             <th>Title</th>
+                            <th>Progress</th>
                             <th>Purchased Date</th>
                             <th>Vendor</th>
                             <th>Price</th>
@@ -85,6 +86,8 @@ var id = "{{request()->route('id')}}";
                     },
                 "columns": [{
                     "data": "content_title"
+                    },{
+                    "data": "progress"
                     },{
                     "data": "date"
                     },{
