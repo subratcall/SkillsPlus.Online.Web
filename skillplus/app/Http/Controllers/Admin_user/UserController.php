@@ -158,7 +158,7 @@ class UserController extends Controller
                 $arr['progress'] = $prog.'%';
             }else{
                 
-            $arr['progress'] = 0;
+            $arr['progress'] = '0%';
             }
            /*** */
            $cdata[] = $arr;

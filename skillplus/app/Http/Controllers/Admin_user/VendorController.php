@@ -270,6 +270,7 @@ class VendorController extends Controller
                 'question_id'=>$value['qid'],
                 'lesson_id'=>$value['lid'],
                 'content_id'=>$value['cid'],
+                'qh_id'=>$value['qh_id'],
             ]);
         }                      
         echo true;
@@ -370,11 +371,128 @@ class VendorController extends Controller
 
     public function submitAnswers(Request $request)
     {
-            if($request->type=="CHECKBOX"){
-                $storeValue = '';
-                foreach ($request->checkbox as $value) {
-                    $storeValue .=$value.'|';
+        $checkAns = CourseLog::where(['question_id'=>$request->qid])->first();
+            if($checkAns)
+            {                
+                if($request->type=="CHECKBOX"){
+                    $storeValue = '';
+                    if($request->checkbox){
+                        foreach ($request->checkbox as $value) {
+                            $storeValue .=$value.'|';
+                        }
+                    }                    
+                    $storeValue = substr_replace($storeValue ,"",-1);
+                    CourseLog::where(['id'=>$request->cb_update_id])->update([
+                            'answer'=>$storeValue,
+                            'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        ]
+                    );
                 }
+        
+                if($request->type=="MULTIPLE CHOICE"){
+                    CourseLog::where(['id'=>$request->mc_update_id])->update([
+                            'answer'=>$request->mc,
+                            'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        ]
+                    );
+                }        
+        
+                if($request->type=="SHORT ANSWER"){     
+                    CourseLog::where(['id'=>$request->sa_update_id])->update([
+                            'answer'=>$request->shortanswer,
+                            'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        ]
+                    );
+                }
+        
+                if($request->type=="PARAGRAPH"){
+                    CourseLog::where(['id'=>$request->pr_update_id])->update([
+                            'answer'=>$request->paragraph,
+                            'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        ]
+                    );
+                }
+        
+                if($request->type=="SWITCH"){                    
+                    CourseLog::where(['id'=>$request->sw_update_id])->update([
+                            'answer'=>$request->swopt,
+                            'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        ]
+                    );
+                }
+            }else{
+                if($request->type=="CHECKBOX"){
+                    $storeValue = '';
+                    if($request->checkbox){
+                        foreach ($request->checkbox as $value) {
+                            $storeValue .=$value.'|';
+                        }
+                    }
+                    
+                    $storeValue = substr_replace($storeValue ,"",-1);
+                    CourseLog::create([
+                        'content_id'=>$request->cid,
+                        'lesson_id'=>$request->lid,
+                        'question_id'=>$request->qid,
+                        'answer'=>$storeValue,
+                        'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        'submittedBy'=>Session::get('user_id'),                
+                    ]);
+                }
+        
+                if($request->type=="MULTIPLE CHOICE"){
+                    CourseLog::create([
+                        'content_id'=>$request->cid,
+                        'lesson_id'=>$request->lid,
+                        'question_id'=>$request->qid,
+                        'answer'=>$request->mc,
+                        'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        'submittedBy'=>Session::get('user_id'),                
+                    ]);
+                }        
+        
+                if($request->type=="SHORT ANSWER"){            
+                    CourseLog::create([
+                        'content_id'=>$request->cid,
+                        'lesson_id'=>$request->lid,
+                        'question_id'=>$request->qid,
+                        'answer'=>$request->shortanswer,
+                        'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        'submittedBy'=>Session::get('user_id'),  
+                    ]);
+                }
+        
+                if($request->type=="PARAGRAPH"){
+                    CourseLog::create([
+                        'content_id'=>$request->cid,
+                        'lesson_id'=>$request->lid,
+                        'question_id'=>$request->qid,
+                        'answer'=>$request->paragraph,
+                        'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        'submittedBy'=>Session::get('user_id'),  
+                    ]);
+                }
+        
+                if($request->type=="SWITCH"){
+                    CourseLog::create([
+                        'content_id'=>$request->cid,
+                        'lesson_id'=>$request->lid,
+                        'question_id'=>$request->qid,
+                        'answer'=>$request->swopt,
+                        'status'=> $request->isskip=='true'?'Skipped':'Done',
+                        'submittedBy'=>Session::get('user_id'),  
+                    ]);
+                } 
+            }
+
+            /* if($request->type=="CHECKBOX"){
+                $storeValue = '';
+                if($request->checkbox){
+                    foreach ($request->checkbox as $value) {
+                        $storeValue .=$value.'|';
+                    }
+                }
+                
                 $storeValue = substr_replace($storeValue ,"",-1);
                 CourseLog::create([
                     'content_id'=>$request->cid,
@@ -382,9 +500,6 @@ class VendorController extends Controller
                     'question_id'=>$request->qid,
                     'answer'=>$storeValue,
                     'status'=> $request->isskip=='true'?'Skipped':'Done',
-                    //'doneQuestion'=>$request->checkbox,
-                    //'doneLesson'=>$request->isDoneLesson,
-                    //'doneCourse'=>$request->isDoneCourse,
                     'submittedBy'=>Session::get('user_id'),                
                 ]);
             }
@@ -396,9 +511,6 @@ class VendorController extends Controller
                     'question_id'=>$request->qid,
                     'answer'=>$request->mc,
                     'status'=> $request->isskip=='true'?'Skipped':'Done',
-                    //'doneQuestion'=>$request->checkbox,
-                    //'doneLesson'=>$request->isDoneLesson,
-                    //'doneCourse'=>$request->isDoneCourse,
                     'submittedBy'=>Session::get('user_id'),                
                 ]);
             }        
@@ -410,9 +522,6 @@ class VendorController extends Controller
                     'question_id'=>$request->qid,
                     'answer'=>$request->shortanswer,
                     'status'=> $request->isskip=='true'?'Skipped':'Done',
-                    //'doneQuestion'=>$request->checkbox,
-                    //'doneLesson'=>$request->isDoneLesson,
-                    //'doneCourse'=>$request->isDoneCourse,
                     'submittedBy'=>Session::get('user_id'),  
                 ]);
             }
@@ -424,9 +533,6 @@ class VendorController extends Controller
                     'question_id'=>$request->qid,
                     'answer'=>$request->paragraph,
                     'status'=> $request->isskip=='true'?'Skipped':'Done',
-                    //'doneQuestion'=>$request->checkbox,
-                    //'doneLesson'=>$request->isDoneLesson,
-                    //'doneCourse'=>$request->isDoneCourse,
                     'submittedBy'=>Session::get('user_id'),  
                 ]);
             }
@@ -438,16 +544,31 @@ class VendorController extends Controller
                     'question_id'=>$request->qid,
                     'answer'=>$request->swopt,
                     'status'=> $request->isskip=='true'?'Skipped':'Done',
-                    //'doneQuestion'=>true,
-                    //'doneLesson'=>$request->isDoneLesson,
-                    //'doneCourse'=>$request->isDoneCourse,
                     'submittedBy'=>Session::get('user_id'),  
                 ]);
-            }
+            } */
 
-            echo 1;
+            $e = $checkAns?$checkAns:0;
+            echo json_encode($e);
         
     }
 
-    
+    public function viewSubmittedAnswer($id)
+    {
+        $data = CourseLog::where(['question_id'=>$id])->first();
+        $output = array("data" => $data);
+		echo json_encode($output);
+    }
+
+    public function getScoreDetails(Request $request)
+    {
+        $checkAns = CourseLog::where(['lesson_id'=>$request->qid])->get();
+        $cntQuestion = QuestionsLesson::where(['lesson_id'=>$request->qid])->get();
+
+        foreach ($checkAns as $value) {
+            # code...
+        }
+
+        $output = array("number_of_questions" => count($cntQuestion),"number_of_correct");
+    }
 }

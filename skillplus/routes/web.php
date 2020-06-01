@@ -11,7 +11,10 @@ Route::group(['prefix' => 'admin'],function (){
             Route::post('store','User\QuestionController@store');
             Route::get('list','User\QuestionController@getAllQuestionById');
             Route::post('edit/store/{id}','User\RequestController@editStore');
-            Route::post('admit','User\RequestController@admit');                
+            Route::post('admit','User\RequestController@admit');       
+            Route::post('save_qh','User\QuestionController@saveQuestionHeader');       
+            Route::post('update_qh','User\QuestionController@updateQuestionHeader');     
+            Route::get('get_qh/{id}','User\QuestionController@getQuestionHeader');
         });
 
         Route::get('profile','Admin\SettingController@profile');
@@ -104,7 +107,8 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('student_lesson_take_quiz/{id}','Admin_user\VendorController@studentLoadQuiz');          
             Route::get('student_show_course/{id}','Admin_user\UserController@viewCourses');          
             Route::get('student_show_lesson/{id}/{lid}','Admin_user\UserController@viewLesson');
-            Route::post('student_quiz_submit_answers','Admin_user\VendorController@submitAnswers');       
+            Route::post('student_quiz_submit_answers','Admin_user\VendorController@submitAnswers');        
+            Route::get('student_quiz_show_submit_answers/{lid}','Admin_user\VendorController@viewSubmittedAnswer'); 
             
             
         });

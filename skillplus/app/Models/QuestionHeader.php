@@ -4,22 +4,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
-class QuestionsLesson extends Model
+class QuestionHeader extends Model
 {
     //use SoftDeletes;
 
-    protected $table = "lesson_with_question";
+    protected $table = "question_header";
 
     protected $primaryKey = "id";
 
     public $timestamps = false;
 
     protected $fillable = [
-        "id",
-        'question_id',
-        'lesson_id',
+        'id',
+        'title',
+        'timer',
         'content_id',
-        'qh_id',
+        'lesson_id',
     ];
 }
 

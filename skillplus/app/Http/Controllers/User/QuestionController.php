@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 use App\Models\Questions;
+use App\Models\QuestionHeader;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -132,5 +133,30 @@ class QuestionController extends Controller
     }
 
     function list(){}
-    
+
+    public function saveQuestionHeader(Request $request)
+    {
+        $a = QuestionHeader::create([
+            'title'=>$request->title,
+            'timer'=> $request->timer ,
+            'content_id'=> $request->cid ,
+            'lesson_id'=> $request->lid ,
+        ]);
+        echo $a;
+    }
+
+    public function updateQuestionHeader(Request $request)
+    {
+        $a = QuestionHeader::where(['id'=>$request->id])->update([
+            'title'=>$request->title,
+            'timer'=> $request->timer ,
+        ]);
+        echo $a;
+    }
+
+    public function getQuestionHeader($id)
+    {
+        $checkAns = QuestionHeader::where(['lesson_id'=>$id])->first();
+        echo json_encode($checkAns);
+    }
 }

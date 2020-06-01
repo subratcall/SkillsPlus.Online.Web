@@ -77,8 +77,44 @@ Quiz
     </div>
 </section>
 
+@endsection
 
+@section('modals')
+<div class="modal fade" role="dialog" id="hintModal">
+    <div class="modal-dialog" style="z-index: 1050">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="hint"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{{{ trans('admin.close') }}}</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" role="dialog" id="msgModal">
+    <div class="modal-dialog" style="z-index: 1050">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="hint">Answer Submitted!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{{{ trans('admin.close') }}}</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
@@ -295,6 +331,7 @@ var isskip = false;
                     getData = data.data;
                     var getii = 0;
                     var getcnt = 0;
+                    var gethint = '';
                     data.data.forEach(function(entry,ii) {
                         //console.log(ii);
                         //i++;
@@ -331,7 +368,7 @@ var isskip = false;
                                 res.forEach(function(a) {
                                     //g+='<div class="checkbox"><input type="radio" value='+a+' name="mc_'+i+'" id="mc_'+i+'" class=""><label>'+a+'</label></div>'
                                     g+= '<div class="form-check">'+
-                                            '<input class="form-check-input" type="radio" value="'+a+'" name="mc" id="mc">'+
+                                            '<input class="form-check-input" type="radio" value="'+a+'" name="mc" id="mc_'+a+'">'+
                                             '<label class="form-check-label" for="'+a+'">'+
                                             '<input type="hidden" name="type" value="MULTIPLE CHOICE">'+
                                             '<input type="hidden" name="qid" value="'+entry.id+'">'+
@@ -444,19 +481,22 @@ var isskip = false;
                                 cnt++;
                             }
                             ii++;
-                            
+                            $("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+ii+","+cnt+')" class="btn btn-primary">Next</button> ');  
+                            $("#btns").append('<button type="button" id="skipBtn" onclick="skip('+ii+","+cnt+')" class="btn btn-danger">Skip</button> '); 
+                            $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+gethint+')" class="btn btn-warning">Hint</button> ');  
+                            $("#btns").append('<button type="button" btn="submitBtn" onclick="save('+ii+","+cnt+')" class="btn btn-success">Submit</button> ');  
                             getii = ii;
                             getcnt = cnt;
-                            $("#btns").append('<button type="button" onclick="next('+ii+","+cnt+')" class="btn btn-primary">Next</button> ');  
+                            gethint=entry.id;
                         }else{
                             
                         }
                                                
                         
                     });
-                    $("#btns").append('<button type="button" onclick="skip('+getii+","+getcnt+')" class="btn btn-danger">Skip</button> ');  
-                    $("#btns").append('<button type="button" onclick="save()" class="btn btn-warning">Hint</button> ');  
-                    $("#btns").append('<button type="button" onclick="save()" class="btn btn-success">Submit</button> ');  
+                    /* $("#btns").append('<button type="button" id="skipBtn" onclick="skip('+getii+","+getcnt+')" class="btn btn-danger">Skip</button> ');   */
+                    /* $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+gethint+')" class="btn btn-warning">Hint</button> ');  
+                    $("#btns").append('<button type="button" btn="submitBtn" onclick="save()" class="btn btn-success">Submit</button> ');   */
                     
                     $("#footerScript").empty();    
                     $("#headerStyle").empty();
@@ -471,35 +511,47 @@ var isskip = false;
     }
 
     function next(counter,cnt) {
+        
+        $("#nextBtn").attr("disabled",true)
+        $("#skipBtn").attr("disabled",false)
         var origcnt = cnt;
             var item = getData[counter];//getData.find(item => item.id === counter);                
             var nxt_counter = counter+1;
             var prev_counter = counter-1;                  
             var nxt_cnt = cnt+1;
-            var prev_cnt = cnt-1;           
+            var prev_cnt = cnt-1; 
+            /* if(item.id){
+                showAnswer(item.id)
+            }   */  
+            console.log(counter)
+            console.log(counter+" prev counter")
+            console.log(item.type+" type")
                             if(item.type=="CHECKBOX"){
                                 $("#f").empty();
                                 var res = item.options.split("|");
                                 var g = '';
                                 res.forEach(function(a) {
                                 g+= '<div class="form-check">'+
-                                                        '<input class="form-check-input" type="checkbox" value="'+a+'" name="checkbox[]" id="checkbox">'+
+                                                        '<input class="form-check-input" type="checkbox" value="'+a+'" name="checkbox[]" id="checkbox_'+a+'">'+
                                                         '<label class="form-check-label" for="">'+
-                                                        a+
+                                                            a+
                                                         '</label>'+
                                                     '</div>'
                                 })
+                                if(item.id){
+                                    showAnswer(item.id,res,"cb")
+                                }  
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
+                                        '<input type="hidden" id="cb_update_id" name="cb_update_id">'+
                                         '<input type="hidden" name="type" value="CHECKBOX">'+
                                             g+
                                         '</div>'+
                                     '</div>'                            
                                 );   
-                                //cnt++;
                             } 
 
                             if(item.type=="MULTIPLE CHOICE"){
@@ -508,32 +560,39 @@ var isskip = false;
                                 var g = '';
                                 res.forEach(function(a) {
                                      g+= '<div class="form-check">'+
-                                            '<input class="form-check-input" type="radio" value="'+a+'" name="mc" id="mc">'+
+                                            '<input class="form-check-input" type="radio" value="'+a+'" name="mc" id="mc_'+a+'">'+
                                             '<label class="form-check-label" for="">'+
                                                 a+
                                             '</label>'+
                                         '</div>'
                                 })
+                                if(item.id){
+                                    showAnswer(item.id,res,"mc")
+                                }  
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
+                                        '<input type="hidden" id="mc_update_id" name="mc_update_id">'+
                                         '<input type="hidden" name="type" value="MULTIPLE CHOICE">'+
                                             g+
                                         '</div>'+
                                     '</div>'                            
                                 );
-                                //cnt++;
                             }
 
                             if(item.type=="SHORT ANSWER"){
+                                if(item.id){
+                                    showAnswer(item.id,'',"sa")
+                                }  
                                 $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
+                                            '<input type="hidden" id="sa_update_id" name="sa_update_id">'+
                                             '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
                                             '<input type="hidden" name="type" value="SHORT ANSWER">'+
                                         '</div>'+
@@ -542,12 +601,16 @@ var isskip = false;
                             }
 
                             if(item.type=="PARAGRAPH"){
+                                if(item.id){
+                                    showAnswer(item.id,'',"pr")
+                                }  
                                 $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
+                                            '<input type="hidden" id="pr_update_id" name="pr_update_id">'+
                                             '<textarea name="paragraph" id="paragraph" class="form-control"></textarea>'+
                                             '<input type="hidden" name="type" value="PARAGRAPH">'+
                                         '</div>'+
@@ -556,53 +619,52 @@ var isskip = false;
                             }
 
                             if(item.type=="SWITCH"){
-                                $("#f").empty();
+                                if(item.id){
+                                    showAnswer(item.id,'',"sw")
+                                }  
+                                   $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
-                                        ' <input type="checkbox"  id="sws_'+cnt+'"  name="sws_'+cnt+'" data-toggle="toggle" data-onstyle="primary" data-offstyle="danger">'+
-                                        '<input type="hidden" name="type" value="SWITCH">'+
-                                        '</div>'+
+                                            '<input type="hidden" id="sw_update_id" name="sw_update_id">'+
+                                            ' <input type="checkbox"  id="sws_'+cnt+'"  name="sws_'+cnt+'" data-toggle="toggle" data-onstyle="primary" data-offstyle="danger">'+
+                                            '<input type="hidden" name="type" value="SWITCH">'+
+                                            '</div>'+
                                     '</div>'                           
                                 );
                                 $('#sws_'+cnt).bootstrapToggle();
                                 getsws = "sws_"+cnt;
-                                //cnt_sw++;
-                                //cnt++;
                             }
                             cnt++;
                             $("#btns").empty();
-                            //$("#btns").append('<button type="button" onclick="next('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button>');  
-                            
+                           
 
                             if(origcnt>1){
-                                $("#btns").append('<button type="button" onclick="next('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button> ');  
+                                $("#btns").append('<button type="button" id="prevBtn" onclick="next('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button> ');  
                             }
 
                             if(origcnt<getData.length){
-                                $("#btns").append('<button type="button" onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
+                                $("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
+                               $("#btns").append('<button type="button" id="skipBtn" onclick="skip('+nxt_counter+","+nxt_cnt+')" class="btn btn-danger">Skip</button> ');  
                             }  
                             
-                            $("#btns").append('<button type="button" onclick="skip('+prev_counter+","+prev_cnt+')" class="btn btn-danger">Skip</button> ');  
-                            $("#btns").append('<button type="button" onclick="save()" class="btn btn-warning">Hint</button> ');  
-                            $("#btns").append('<button type="button" onclick="save()" class="btn btn-success">Submit</button> ');      
-                                         
-                  /*   $("#footerScript").empty();    
-                    $("#headerStyle").empty();        
-                    
-                            $('<script/>',{type:'text/javascript', src:'/assets/toggle/bootstrap-toggle.min.js'}).appendTo('#footerScript');   
-                            $('#headerStyle').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '/assets/toggle/bootstrap-toggle.min.css') ); */
-      
-    }
+                            $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+item.id+')" class="btn btn-warning">Hint</button> ');  
+                            $("#btns").append('<button type="button" btn="submitBtn" onclick="save('+nxt_counter+","+nxt_cnt+')" class="btn btn-success">Submit</button> ');      
+                     
+                            if((counter+1)==getData.length){
+                                $("#btns").append('<button type="button" btn="donetBtn" onclick="setDone()" class="btn btn-success">Finish Quiz</button> ');
+                            } 
 
-    function save() {
+     }
+
+    function save(counter,cnt) {
         var datas = $('#form').serializeArray();
         datas.push({
-                name: "swopt",
-                value: $("#"+getsws).prop("checked") == true?true:false,
-            });   
+            name: "swopt",
+            value: $("#"+getsws).prop("checked") == true?true:false,
+        });   
         datas.push({
             name: "lid",
             value: id,
@@ -624,6 +686,9 @@ var isskip = false;
             success: function(data) {
               // location = "/admin/user_vendor/vendor_lesson_list/{{request()->route('cid')}}";
               isskip = false;
+              $("#nextBtn").attr("disabled",false)
+              $("#skipBtn").attr("disabled",true)
+              next(counter,cnt)
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
@@ -638,6 +703,94 @@ var isskip = false;
             save();
             next(i,cnt)
         }
+    }
+
+    function hint(id){
+        $("#hintModal").modal('show');
+        i = getData.find(item => item.id === id);     
+        $("#hint").text(i.hint) 
+    }
+
+    function showAnswer(thisLid,val,type) {
+        console.log(val)
+        $.ajax({
+            url: "{{ url('/admin/user_student/student_quiz_show_submit_answers') }}/"+thisLid,
+            type: "get",
+            dataType: 'JSON',
+            success: function(data) {
+                if(data.data){
+                    $("#nextBtn").attr("disabled",false);
+                    $("#skipBtn").attr("disabled",true);
+                }else{
+                    $("#nextBtn").attr("disabled",true);
+                    $("#skipBtn").attr("disabled",false);
+                }
+                if(type=="cb")
+                {
+                    $("#cb_update_id").val(data.data.id)
+                    var ans = data.data.answer.split("|");
+                    val.forEach(function(a) {
+                        ans.forEach(function(b) {
+                            if(a==b){
+                                $("#checkbox_"+a).prop("checked", true);
+                            }
+                        })                  
+                    })
+                }
+
+                if(type=="mc")
+                {
+                    $("#mc_update_id").val(data.data.id)
+                    val.forEach(function(a) {
+
+                        if(a==data.data.answer){
+                            $("#mc_"+a).prop("checked", true);
+                        }             
+                    });
+                }
+
+                if(type=="sa")
+                {
+                    $("#sa_update_id").val(data.data.id);
+                    $("#shortanswer").val(data.data.answer);
+                }
+
+                if(type=="pr")
+                {
+                    $("#pr_update_id").val(data.data.id);
+                    $("#paragraph").val(data.data.answer);
+                }
+
+                if(type=="sw")
+                {
+                    $("#sw_update_id").val(data.data.id);
+                    if(data.data.answer=='true'){
+                        $("#"+getsws).bootstrapToggle('on')
+                    }else{
+                        $("#"+getsws).bootstrapToggle('off')
+                    }                
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
+        });
+    }
+
+    function setDone() {
+        
+        $("#f").empty();
+                                $("#f").append(                                      
+                                    '<div class="col-md-12">'+
+                                        '<label class="col-md-6 control-label" for="">No. of Questions: 5</label><br>'     +  
+                                        '<label class="col-md-6 control-label" for="">No. of Correct Answer: 6</label><br>'     +  
+                                        '<label class="col-md-6 control-label" for="">Marks:</label><ul>'     +  
+                                        '<li><label class="col-md-6 control-label" for="">Total: 100</label></li>'     +  
+                                        '<li><label class="col-md-6 control-label" for="">Achieve: 80</label></li>'     +  
+                                        '<li><label class="col-md-6 control-label" for="">Total: 80%</label></li></ul>'     +   
+                                    '</div>'                            
+                                );
     }
 </script>
 
