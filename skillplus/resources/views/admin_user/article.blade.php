@@ -14,7 +14,7 @@ Article
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-12">
-                       <article-index></article-index>
+                      <article-index></article-index>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,4 @@ Article
 @endsection
 
 @section('script')
-<script>
-
-</script>
 @endsection

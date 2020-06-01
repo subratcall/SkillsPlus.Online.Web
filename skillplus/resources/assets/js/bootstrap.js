@@ -7,9 +7,6 @@ window._ = require('lodash');
  */
 
 window.$ = window.jQuery = require('jquery');
-require('jquery.nicescroll');
-require("datatables.net");
-require('tooltip');
 require('bootstrap-sass');
 
 
