@@ -15,6 +15,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -24,17 +25,13 @@ export default {
         if (type == "status") {
           if (value == "publish") {
             return "<label class='alert alert-success'>Publish</label>";
-          }
-          else if (value == "draft") {
+          } else if (value == "draft") {
             return "<label class='alert alert-warning'>Draft</label>";
-          }
-          else if (value == "request") {
-             return "<label class='alert alert-primary'>Send for review</label>";
-          }
-          else if (value == "delete") {
+          } else if (value == "request") {
+            return "<label class='alert alert-primary'>Send for review</label>";
+          } else if (value == "delete") {
             return "<label class='alert alert-danger'>Unpublish Request</label>";
-          }
-          else {
+          } else {
             return "<label></label>";
           }
         }
@@ -121,6 +118,3 @@ export default {
   methods: {}
 };
 </script>
-
-<style>
-</style>

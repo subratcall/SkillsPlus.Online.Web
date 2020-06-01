@@ -108,6 +108,19 @@ class UserController extends Controller
             ->paginate($limit);
     }
 
+    //    public function list(Request $request) {
+    //     global $user;
+
+    //     $lists = Article::leftJoin('tbl_contents_category', function($join) {
+    //         $join->on('tbl_article.cat_id', '=', 'tbl_contents_category.id');
+    //     })
+    //        ->select('tbl_article.id', 'tbl_article.title', 'tbl_article.mode AS status', 'tbl_article.create_at AS date', 'tbl_contents_category.title AS category')
+    //        ->where('tbl_article.user_id',$user['id'])
+    //        ->get();
+
+    //      return response()->json(["data" => $lists]);
+    // }
+
     public function getCourses()
     {
         $datas = Sell::where('buyer_id',Session::get('user_id'))->get();
