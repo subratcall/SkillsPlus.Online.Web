@@ -109,6 +109,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('student_show_lesson/{id}/{lid}','Admin_user\UserController@viewLesson');
             Route::post('student_quiz_submit_answers','Admin_user\VendorController@submitAnswers');        
             Route::get('student_quiz_show_submit_answers/{lid}','Admin_user\VendorController@viewSubmittedAnswer'); 
+            Route::get('student_quiz_check_submit_answers/{lid}','Admin_user\VendorController@getScoreDetails'); 
             
             
         });

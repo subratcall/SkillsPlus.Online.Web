@@ -353,7 +353,7 @@ class VendorController extends Controller
             if($checkRec!=null){
                 $row['question'] = strtoupper($checkRec->question);
                 $row['type'] = strtoupper($checkRec->type);
-                $row['options'] = strtoupper($checkRec->options);
+                $row['options'] = $checkRec->options;
                 $row['hint'] = strtoupper($checkRec->hint);
                 $row['remarks'] = strtoupper($checkRec->remarks);
                 $row['id'] = $checkRec->id;   
@@ -560,15 +560,34 @@ class VendorController extends Controller
 		echo json_encode($output);
     }
 
-    public function getScoreDetails(Request $request)
+    public function getScoreDetails($lid)
     {
-        $checkAns = CourseLog::where(['lesson_id'=>$request->qid])->get();
-        $cntQuestion = QuestionsLesson::where(['lesson_id'=>$request->qid])->get();
+        $checkAns = CourseLog::where(['lesson_id'=>$lid])->get();
+        $cntQuestion = QuestionsLesson::where(['lesson_id'=>$lid])->get();
 
-        foreach ($checkAns as $value) {
-            # code...
+        $correctAns = 0;
+        $totalPoints = 0;
+        $totalCorrectPoints = 0;
+        foreach ($checkAns as $value)
+        {
+            $queryQuestion = Questions::where(['id'=>$value->question_id])->first();
+
+            if($queryQuestion){
+                if($queryQuestion->type=="Checkbox"){
+                    $question_array = (explode("|",$queryQuestion->answer));
+                    $answer_array = (explode("|",$value->answer));
+                    $result=array_diff($answer_array ,$question_array);
+                    if(count($result)==0){
+                        $correctAns++;
+                        $totalCorrectPoints+=$queryQuestion->points;
+                    }
+                }
+                $totalPoints+=$queryQuestion->points;
+
+            }
         }
-
-        $output = array("number_of_questions" => count($cntQuestion),"number_of_correct");
+        $avgPoints = ($totalCorrectPoints/$totalPoints) * 100;
+        $output = array("number_of_questions" => count($cntQuestion),"number_of_correct"=>$correctAns,"total_points"=>$totalPoints,"total_correct_points"=>$totalCorrectPoints,"avg"=>round($avgPoints,2)." %");
+		echo json_encode($output);
     }
 }
