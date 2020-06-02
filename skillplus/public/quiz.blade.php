@@ -1,15 +1,12 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Lesson','Edit']])
 @section('title')
-
+<a href="/admin/user_student/student_show_course/{{request()->route('lid')}}" class="btn btn-warning btn-sm">Back</a>
 <div class="row">
-    <div class="col-lg-4">
-        <a href="/admin/user_student/student_show_course/{{request()->route('lid')}}" class="btn btn-warning btn-sm">Back</a><br>
-    </div>
-    <div class="col-lg-4">
+    <div class="col-lg-6">
         <p id="titleQuiz"></p>
     </div>
-    <div class="col-lg-4">    
-        <div><h3 id="time"></span> </h3>
+    <div class="col-lg-6">    
+        <div><h3 id="time"></span> minutes!</h3>
     </div>
 </div>
 @endsection
@@ -497,7 +494,7 @@ var isskip = false;
                             ii++;
                             //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+ii+","+cnt+')" class="btn btn-primary">Next</button> ');  
                             $("#btns").append('<button type="button" id="skipBtn" onclick="skip('+ii+","+cnt+')" class="btn btn-danger">Skip</button> '); 
-                            $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+entry.id+')" class="btn btn-warning">Hint</button> ');  
+                            $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+gethint+')" class="btn btn-warning">Hint</button> ');  
                             $("#btns").append('<button type="button" btn="submitBtn" onclick="save('+ii+","+cnt+')" class="btn btn-success">Submit</button> ');  
                             getii = ii;
                             getcnt = cnt;
@@ -793,28 +790,18 @@ var isskip = false;
     }
 
     function setDone() {
-        $.ajax({
-            url: "{{ url('/admin/user_student/student_quiz_check_submit_answers') }}/"+id,
-            type: "get",
-            dataType: 'JSON',
-            success: function(data) {                
-                $("#f").empty();
+        
+        $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">No. of Questions: '+data.number_of_questions+'</label><br>'     +  
-                                        '<label class="col-md-6 control-label" for="">No. of Correct Answer: '+data.number_of_correct+'</label><br>'     +  
+                                        '<label class="col-md-6 control-label" for="">No. of Questions: 5</label><br>'     +  
+                                        '<label class="col-md-6 control-label" for="">No. of Correct Answer: 6</label><br>'     +  
                                         '<label class="col-md-6 control-label" for="">Marks:</label><ul>'     +  
-                                        '<li><label class="col-md-6 control-label" for="">Total: '+data.total_points+'</label></li>'     +  
-                                        '<li><label class="col-md-6 control-label" for="">Achieve: '+data.total_correct_points+'</label></li>'     +  
-                                        '<li><label class="col-md-6 control-label" for="">Total: '+data.avg+'</label></li></ul>'     +   
+                                        '<li><label class="col-md-6 control-label" for="">Total: 100</label></li>'     +  
+                                        '<li><label class="col-md-6 control-label" for="">Achieve: 80</label></li>'     +  
+                                        '<li><label class="col-md-6 control-label" for="">Total: 80%</label></li></ul>'     +   
                                     '</div>'                            
                                 );
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert('Error! Contact IT Department.');
-            }
-        });
-        
     }
 
     function loadQH() {
