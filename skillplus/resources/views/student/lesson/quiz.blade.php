@@ -387,7 +387,8 @@ var isskip = false;
                                 '</div>'); */
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +                                   
+                                        //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +     
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             g+
@@ -410,7 +411,8 @@ var isskip = false;
                                 '</div>'); */
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +                                   
+                                        //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
@@ -435,7 +437,8 @@ var isskip = false;
                                 '</div>'); */
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +                                   
+                                        //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             '<textarea name="paragraph" id="paragraph" class="form-control"></textarea>'+
