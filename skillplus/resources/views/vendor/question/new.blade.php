@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Report','Users']])
 @section('title')
-New Channel
+New Question
 @endsection
 
 @section('style')
@@ -106,8 +106,8 @@ New Channel
                 </div>
                 
                 <div class="form-group">
-                    <label class="control-label" for="inputDefault">Timer in Minutes</label>
-                    <input type="number" name="timer" id="timer" class="form-control">
+                    <label class="control-label" for="inputDefault">Points</label>
+                    <input type="number" name="points" id="points" class="form-control">
                 </div>  
                 <div class="form-group">
                     <button type="button" class="btn btn-success pull-left" onclick="save()">{{{ trans('main.save_changes') }}}</button>
@@ -177,7 +177,7 @@ New Channel
                 '<input type="text" class="form-control" placeholder="" name="option[]" id="option'+inputId+'">'+
                 '<div class="input-group-append">'+
                     '<span class="input-group-text">'+
-                       '<input type="radio" class="form-control" name="checkbox" id="checkbox_'+inputId+'" onclick="selectAnswer('+"'option"+inputId+"',"+inputId+')">'+
+                       '<input type="radio" class="" name="checkbox" id="checkbox_'+inputId+'" onclick="selectAnswer('+"'option"+inputId+"',"+inputId+')">'+
                    ' </span>'+
                         '<button class="btn btn-warning" type="button" onclick="removeOption('+"'opts_"+inputId+"'"+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+
                     '</div>'   +
@@ -192,7 +192,7 @@ New Channel
                 '<input type="text" class="form-control" placeholder="" name="optioncheck[]" id="optioncheck'+inputIdCheck+'">'+
                 '<div class="input-group-append">'+                    
                     '<span class="input-group-text">'+
-                       '<input type="checkbox" class="form-control btn-warning" name="checkboxcheck[]" id="checkboxcheck_'+inputIdCheck+'" onclick="selectAnswercheck('+"'optioncheck"+inputIdCheck+"',"+inputIdCheck+')" aria-label="...">'+
+                       '<input type="checkbox" class=" btn-warning" name="checkboxcheck[]" id="checkboxcheck_'+inputIdCheck+'" onclick="selectAnswercheck('+"'optioncheck"+inputIdCheck+"',"+inputIdCheck+')" aria-label="...">'+
                    ' </span>'+
                     '<button class="btn btn-warning" type="button" onclick="removeOptioncheck('+"'optscheck_"+inputIdCheck+"'"+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+
                 '</div>'   +

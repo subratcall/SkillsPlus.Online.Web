@@ -29,6 +29,7 @@ class Questions extends Model
         'correctremarks',
         'attachment',
         'timelimit',
+        'points'
     ];
 }
 

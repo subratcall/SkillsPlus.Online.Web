@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Report','Users']])
 @section('title')
-My Channels
+My Questions
 @endsection
 
 @section('style')

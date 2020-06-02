@@ -33,6 +33,7 @@ class QuestionController extends Controller
                 'correctremarks'=>$request->remarks,
                 'attachment'=>$request->file,
                 'timelimit'=>$request->timer,
+                'points'=>$request->points,
             ]);
         }
 
@@ -59,6 +60,7 @@ class QuestionController extends Controller
                 'correctremarks'=>$request->remarks,
                 'attachment'=>$request->file,
                 'timelimit'=>$request->timer,
+                'points'=>$request->points,
             ]);
         }
 
@@ -73,6 +75,7 @@ class QuestionController extends Controller
                 'correctremarks'=>$request->remarks,
                 'attachment'=>$request->file,
                 'timelimit'=>$request->timer,
+                'points'=>$request->points,
             ]);
         }
 
@@ -87,6 +90,7 @@ class QuestionController extends Controller
                 'correctremarks'=>$request->remarks,
                 'attachment'=>$request->file,
                 'timelimit'=>$request->timer,
+                'points'=>$request->points,
             ]);
         }
 
@@ -101,6 +105,7 @@ class QuestionController extends Controller
                 'correctremarks'=>$request->remarks,
                 'attachment'=>$request->file,
                 'timelimit'=>$request->timer,
+                'points'=>$request->points,
             ]);
         }
         echo true;
