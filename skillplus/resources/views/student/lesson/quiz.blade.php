@@ -1,7 +1,14 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Lesson','Edit']])
 @section('title')
 <a href="/admin/user_student/student_show_course/{{request()->route('lid')}}" class="btn btn-warning btn-sm">Back</a>
-Quiz
+<div class="row">
+    <div class="col-lg-6">
+        <p id="titleQuiz"></p>
+    </div>
+    <div class="col-lg-6">    
+        <div><h3 id="time"></span> minutes!</h3>
+    </div>
+</div>
 @endsection
 
 @section('style')
@@ -138,6 +145,7 @@ var isskip = false;
         $('.editor-te').jqte({format: false});
         loadData2();     
                                 /* $('#sw2').bootstrapToggle(); */
+                                loadQH();
     });
 
     function loadData() {
@@ -484,7 +492,7 @@ var isskip = false;
                                 cnt++;
                             }
                             ii++;
-                            $("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+ii+","+cnt+')" class="btn btn-primary">Next</button> ');  
+                            //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+ii+","+cnt+')" class="btn btn-primary">Next</button> ');  
                             $("#btns").append('<button type="button" id="skipBtn" onclick="skip('+ii+","+cnt+')" class="btn btn-danger">Skip</button> '); 
                             $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+gethint+')" class="btn btn-warning">Hint</button> ');  
                             $("#btns").append('<button type="button" btn="submitBtn" onclick="save('+ii+","+cnt+')" class="btn btn-success">Submit</button> ');  
@@ -649,8 +657,8 @@ var isskip = false;
                             }
 
                             if(origcnt<getData.length){
-                                $("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
-                               $("#btns").append('<button type="button" id="skipBtn" onclick="skip('+nxt_counter+","+nxt_cnt+')" class="btn btn-danger">Skip</button> ');  
+                                //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
+                                $("#btns").append('<button type="button" id="skipBtn" onclick="skip('+nxt_counter+","+nxt_cnt+')" class="btn btn-danger">Skip</button> ');  
                             }  
                             
                             $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+item.id+')" class="btn btn-warning">Hint</button> ');  
@@ -795,6 +803,41 @@ var isskip = false;
                                     '</div>'                            
                                 );
     }
+
+    function loadQH() {
+        $.ajax({
+            url: "{{ url('/admin/question/get_qh') }}/"+id,
+            type: "get",
+            dataType: 'JSON',
+            success: function(data) {                
+                $("#titleQuiz").text(data.title);
+
+                var fiveMinutes = 60 * data.timer,
+                    display = $('#time');
+                startTimer(fiveMinutes, display);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
+        });
+    }
+
+    function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.text(minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
 </script>
 
 
