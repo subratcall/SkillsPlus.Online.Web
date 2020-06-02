@@ -270,7 +270,7 @@ class VendorController extends Controller
                 'question_id'=>$value['qid'],
                 'lesson_id'=>$value['lid'],
                 'content_id'=>$value['cid'],
-                'qh_id'=>$value['qh_id'],
+                //'qh_id'=>$value['qh_id'],
             ]);
         }                      
         echo true;
