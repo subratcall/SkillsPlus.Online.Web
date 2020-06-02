@@ -222,7 +222,7 @@ New Channel
             data: data,
             dataType: 'JSON',
             success: function(data) {
-                //location = "/admin/question";                
+                location = "/admin/question";                
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
