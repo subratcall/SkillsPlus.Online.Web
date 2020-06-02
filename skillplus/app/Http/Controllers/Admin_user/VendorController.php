@@ -270,7 +270,6 @@ class VendorController extends Controller
                 'question_id'=>$value['qid'],
                 'lesson_id'=>$value['lid'],
                 'content_id'=>$value['cid'],
-                //'qh_id'=>$value['qh_id'],
             ]);
         }                      
         echo true;
@@ -582,9 +581,45 @@ class VendorController extends Controller
                         $totalCorrectPoints+=$queryQuestion->points;
                     }
                 }
-                $totalPoints+=$queryQuestion->points;
-
+                //$totalPoints+=$queryQuestion->points;
             }
+
+            if($queryQuestion){
+                if($queryQuestion->type=="Multiple Choice"){
+                    if($queryQuestion->answer==$value->answer){
+                        $correctAns++;
+                        $totalCorrectPoints+=$queryQuestion->points;
+                    }
+                }
+            }
+
+            if($queryQuestion){
+                if($queryQuestion->type=="Short Answer"){
+                    if($queryQuestion->answer==$value->answer){
+                        $correctAns++;
+                        $totalCorrectPoints+=$queryQuestion->points;
+                    }
+                }
+            }
+
+            if($queryQuestion){
+                if($queryQuestion->type=="Paragraph"){
+                    if($queryQuestion->answer==$value->answer){
+                        $correctAns++;
+                        $totalCorrectPoints+=$queryQuestion->points;
+                    }
+                }
+            }
+
+            if($queryQuestion){
+                if($queryQuestion->type=="Switch"){
+                    if($queryQuestion->answer==$value->answer){
+                        $correctAns++;
+                        $totalCorrectPoints+=$queryQuestion->points;
+                    }
+                }
+            }
+            $totalPoints+=$queryQuestion->points;
         }
         $avgPoints = ($totalCorrectPoints/$totalPoints) * 100;
         $output = array("number_of_questions" => count($cntQuestion),"number_of_correct"=>$correctAns,"total_points"=>$totalPoints,"total_correct_points"=>$totalCorrectPoints,"avg"=>round($avgPoints,2)." %");
