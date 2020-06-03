@@ -8,30 +8,47 @@ Course Content
 <link rel='stylesheet' href="{{ asset('assets/_plugins/jkanban.css') }}">
 
 
-    <link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css" />
-    
-	<link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" />
+<link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css" />
+
+<link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" />
 <style>
     #myKanban {
         overflow-x: auto;
         padding: 20px 0;
     }
+
     .success {
         background: #00B961;
         color: #fff
     }
+
     .info {
         background: #2A92BF;
         color: #fff
     }
+
     .warning {
         background: #F4CE46;
         color: #fff
     }
+
     .error {
         background: #FB7D44;
         color: #fff
     }
+
+    /* .modal-dialog {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .modal-content {
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+    } */
 </style>
 @endsection
 
@@ -41,15 +58,15 @@ Course Content
 
 <div class="row">
     <div class="col-xs-6 col-md-3 col-sm-6 text-center">
-    
-    </div>  
+
+    </div>
 </div>
 </div>
 <section class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12" id="content">
-                              
+
             </div>
             <div class="col-lg-12" id="content">
 
@@ -59,18 +76,18 @@ Course Content
                     Your browser does not support HTML5 video.
                 </video>
             </div>
-             
+
         </div>
     </div>
 </section>
 
 <section class="card">
-                    <div class="accordion" id="accordionExample">
-                        <div class="card"  id="secAc">
-                            
+    <div class="accordion" id="accordionExample">
+        <div class="card" id="secAc">
 
-                        </div>
-                    </div>
+
+        </div>
+    </div>
 </section>
 
 <!-- <section class="card">                    
@@ -95,16 +112,14 @@ Course Content
 
 @endsection
 
+@section('modals')
+@endsection
+
+
 @section('script')
-
-
-
-
 <script type="application/javascript" src="/assets/vendor/jquery-te/jquery-te-1.4.0.min.js"></script>
-
-
 <script>
-var isSave = 1;
+    var isSave = 1;
 var id = "{{request()->route('id')}}";
 var getvideo;
     $(document).ready(function() {
@@ -127,6 +142,7 @@ var getvideo;
                 }
             });  
     });
+
     
     function loadData() {
         if(id!=null||id!=""){

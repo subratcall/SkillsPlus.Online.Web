@@ -335,6 +335,7 @@
                 <div class="section">
                     <div class="section-header">
                         <h1>@yield('title', '')</h1>
+
                         @if(isset($breadcom) && count($breadcom))
                         <div class="section-header-breadcrumb">
                             @foreach($breadcom as $bread)
@@ -342,6 +343,7 @@
                             @endforeach
                         </div>
                         @endif
+                        
                     </div>
                     <div class="section-body">
                         @yield('page')

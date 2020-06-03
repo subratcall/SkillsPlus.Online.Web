@@ -25,6 +25,10 @@
         display: none;
     }
 
+    .display-inline {
+        display: inline;
+    }
+
     .margin-bottom {
         margin-bottom: 10px;
     }
