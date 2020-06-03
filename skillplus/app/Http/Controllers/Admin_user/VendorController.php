@@ -355,6 +355,7 @@ class VendorController extends Controller
                 $row['options'] = $checkRec->options;
                 $row['hint'] = strtoupper($checkRec->hint);
                 $row['remarks'] = strtoupper($checkRec->remarks);
+                $row['attachment'] = strtoupper($checkRec->attachment);
                 $row['id'] = $checkRec->id;   
                 $btn = ''; 
                 $btn = $btn.'<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_question('."'".$checkRec->id."'".')"><i class="fas fa-trash"></i></button>  ';

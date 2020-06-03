@@ -384,7 +384,8 @@ var isskip = false;
                                 })
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +     
+                                        '<img src='+entry.attachment+'>'+                                                          
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="checkbox_qid" value="'+entry.id+'">'+
                                         '<input type="hidden" name="type" value="CHECKBOX">'+
@@ -422,7 +423,8 @@ var isskip = false;
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +     
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +  
+                                        '<img src='+entry.attachment+'>'+                                                                                           
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             g+
@@ -446,7 +448,8 @@ var isskip = false;
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +   
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +   
+                                        '<img src='+entry.attachment+'>'+                                                                                          
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
@@ -472,7 +475,8 @@ var isskip = false;
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +   
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +     
+                                        '<img src='+entry.attachment+'>'+                                                                                        
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             '<textarea name="paragraph" id="paragraph" class="form-control"></textarea>'+
@@ -580,7 +584,8 @@ var isskip = false;
                                 }  
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
+                                        '<img src='+item.attachment+'>'+                            
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="cb_update_id" name="cb_update_id">'+
@@ -608,7 +613,8 @@ var isskip = false;
                                 }  
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
+                                        '<img src='+item.attachment+'><br>'+                                                                                  
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="mc_update_id" name="mc_update_id">'+
@@ -626,7 +632,8 @@ var isskip = false;
                                 $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +    
+                                        '<img src='+item.attachment+'><br>'+                                                                                         
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sa_update_id" name="sa_update_id">'+
@@ -644,7 +651,8 @@ var isskip = false;
                                 $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +     
+                                        '<img src='+item.attachment+'><br>'+                                                                                   
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="pr_update_id" name="pr_update_id">'+
@@ -662,7 +670,8 @@ var isskip = false;
                                    $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
+                                        '<img src='+item.attachment+'><br>'+                                                                                  
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sw_update_id" name="sw_update_id">'+
@@ -934,7 +943,8 @@ var isskip = false;
                                 }  
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +        
+                                        '<img src='+item.attachment+'>'+                                                            
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="cb_update_id" name="cb_update_id">'+
@@ -966,7 +976,8 @@ var isskip = false;
                                 }  
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
+                                        '<img src='+item.attachment+'>'+                                                             
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="mc_update_id" name="mc_update_id">'+
@@ -988,7 +999,8 @@ var isskip = false;
                                 $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
+                                        '<img src='+item.attachment+'>'+                                                              
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sa_update_id" name="sa_update_id">'+
@@ -1010,7 +1022,8 @@ var isskip = false;
                                 $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
+                                        '<img src='+item.attachment+'>'+                                                              
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="pr_update_id" name="pr_update_id">'+
@@ -1032,7 +1045,8 @@ var isskip = false;
                                    $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +         
+                                        '<img src='+item.attachment+'>'+                                                           
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sw_update_id" name="sw_update_id">'+
