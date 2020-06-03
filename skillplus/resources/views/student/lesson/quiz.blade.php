@@ -884,15 +884,19 @@ var isskip = false;
 
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
-        setInterval(function () {
+       var x = setInterval(function () {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
 
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            display.text(minutes + ":" + seconds);
+            if(timer==0){
+                clearInterval(x); 
+            }
 
+            display.text(minutes + ":" + seconds);
+            
             if (--timer < 0) {
                 timer = duration;
             }
@@ -1073,6 +1077,10 @@ var isskip = false;
                             if(origcnt<getData.length){
                                 $("#btns").append('<button type="button" id="nextBtn" disabled onclick="displayanswer('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
                             }  
+
+                            if(origcnt==getData.length){
+                                $("#btns").append('<button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success">View Score</button> ');
+                            }
 
     }
 
