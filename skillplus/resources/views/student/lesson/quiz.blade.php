@@ -74,13 +74,19 @@
             <div class="col-lg-12" id="div">
                 <form id="form" class="form-horizontal">
                     <div class="row" id="f">       
-                        <!-- <div class="col-md-12">
+                         {{-- <div class="col-md-12">
                                         <label class="col-md-6 control-label" for="">dsfgfdgfdgdfgfdg</label>                                
                                         <div class="col-md-6">
-                                       <input type="checkbox" checked id="sw2">
+                                            <input type="checkbox" checked id="sw2">
+                                            <input type="checkbox" checked id="sw1">
+                                            <input type="checkbox" checked id="sw3">
                                             
                                         </div>
-                                    </div>         -->                    
+                                        <div style="border:solid;width: 50%">
+                                            <p>Correct Answer:12</p>
+                                            <p>Remarks: safdsfsdfsdfsdfdfd</p>
+                                        </div>
+                                    </div> --}}                     
                     </div>
                     <br>
                     <div class="form-group form-horizontal" id="btns">
@@ -147,6 +153,7 @@ var isSave = 1;
 var id = "{{request()->route('id')}}";
 var lid = "{{request()->route('lid')}}";
 var getData;
+var getCorrectData;
 var cnt_sw = 0;
 var getsws;
 var isskip = false;
@@ -837,7 +844,9 @@ var isskip = false;
                                     '</div>'                            
                                 );
                                 
-                $("#btns").append('<button type="button" btn="summarytBtn" onclick="setDone()" class="btn btn-danger">View Summary</button> ');
+                $("#btns").append('<button type="button" btn="summarytBtn" onclick="displayanswer(0,1)" class="btn btn-danger">View Summary</button> ');
+                
+                     loadAnswers()
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
@@ -895,7 +904,8 @@ var isskip = false;
         $("#nextBtn").attr("disabled",true)
         $("#skipBtn").attr("disabled",false)
         var origcnt = cnt;
-            var item = getData[counter];//getData.find(item => item.id === counter);                
+            var item = getData[counter];              
+            var getCorrectAnswers = getCorrectData[counter];              
             var nxt_counter = counter+1;
             var prev_counter = counter-1;                  
             var nxt_cnt = cnt+1;
@@ -909,6 +919,7 @@ var isskip = false;
                             if(item.type=="CHECKBOX"){
                                 $("#f").empty();
                                 var res = item.options.split("|");
+                                var gc = getCorrectAnswers.answer.split("|");
                                 var g = '';
                                 res.forEach(function(a) {
                                 g+= '<div class="form-check">'+
@@ -930,6 +941,10 @@ var isskip = false;
                                         '<input type="hidden" name="type" value="CHECKBOX">'+
                                             g+
                                         '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
                                     '</div>'                            
                                 );   
                             } 
@@ -958,6 +973,10 @@ var isskip = false;
                                         '<input type="hidden" name="type" value="MULTIPLE CHOICE">'+
                                             g+
                                         '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
                                     '</div>'                            
                                 );
                             }
@@ -976,6 +995,10 @@ var isskip = false;
                                             '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
                                             '<input type="hidden" name="type" value="SHORT ANSWER">'+
                                         '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
                                     '</div>'                            
                                 );
                             }
@@ -994,6 +1017,10 @@ var isskip = false;
                                             '<textarea name="paragraph" id="paragraph" class="form-control"></textarea>'+
                                             '<input type="hidden" name="type" value="PARAGRAPH">'+
                                         '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
                                     '</div>'                            
                                 );
                             }
@@ -1012,6 +1039,10 @@ var isskip = false;
                                             ' <input type="checkbox"  id="sws_'+cnt+'"  name="sws_'+cnt+'" data-toggle="toggle" data-onstyle="primary" data-offstyle="danger">'+
                                             '<input type="hidden" name="type" value="SWITCH">'+
                                             '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
                                     '</div>'                           
                                 );
                                 $('#sws_'+cnt).bootstrapToggle();
@@ -1022,21 +1053,27 @@ var isskip = false;
                            
 
                             if(origcnt>1){
-                                $("#btns").append('<button type="button" id="prevBtn" onclick="next('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button> ');  
+                                $("#btns").append('<button type="button" id="prevBtn" onclick="displayanswer('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button> ');  
                             }
 
                             if(origcnt<getData.length){
-                                //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
-                                $("#btns").append('<button type="button" id="skipBtn" onclick="skip('+nxt_counter+","+nxt_cnt+')" class="btn btn-danger">Skip</button> ');  
+                                $("#btns").append('<button type="button" id="nextBtn" disabled onclick="displayanswer('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
                             }  
-                            
-                            $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+item.id+')" class="btn btn-warning">Hint</button> ');  
-                            $("#btns").append('<button type="button" id="submitBtn" onclick="save('+nxt_counter+","+nxt_cnt+')" class="btn btn-success">Submit</button> ');      
-                     
-                            /* if((counter+1)==getData.length){
-                                $("#btns").append('<button type="button" btn="donetBtn" onclick="setDone()" class="btn btn-success">Finish Quiz</button> ');
-                            } */ 
 
+    }
+
+    function loadAnswers() {
+        $.ajax({
+            url: "{{ url('/admin/user_student/student_quiz_get_answers') }}/"+id,
+            type: "get",
+            dataType: 'JSON',
+            success: function(data) {                
+                getCorrectData = data.data
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
+        });
     }
 </script>
 

@@ -625,4 +625,24 @@ class VendorController extends Controller
         $output = array("number_of_questions" => count($cntQuestion),"number_of_correct"=>$correctAns,"total_points"=>$totalPoints,"total_correct_points"=>$totalCorrectPoints,"avg"=>round($avgPoints,2)." %");
 		echo json_encode($output);
     }
+    
+    public function getAnswers($id)
+    {
+        $data = QuestionsLesson::where(['lesson_id'=>$id])->get();
+        $array = array();
+        foreach ($data as $value) {
+            $row = array();            
+            $f = Questions::where(['id'=>$value->question_id])->first();
+            $row['question'] = strtoupper($f->question);
+            $row['type'] = strtoupper($f->type);
+            $row['options'] = $f->options;
+            $row['hint'] = strtoupper($f->hint);
+            $row['remarks'] = strtoupper($f->correctremarks);
+            $row['answer'] = strtoupper($f->answer);
+            $row['id'] = $f->id;  
+            $array[] = $row; 
+        }
+        $output = array("data" => $array,"ff" => 123);
+		echo json_encode($output);
+    }
 }
