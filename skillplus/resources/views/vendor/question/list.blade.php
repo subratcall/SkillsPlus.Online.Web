@@ -44,7 +44,7 @@ My Questions
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <a href="/admin/question/new" class="btn btn-success btn-sm">Add</a>
+                <a href="/admin/question/new" class="btn btn-success btn-sm">Add Question</a>
                 <table id="tbl" class="table table-bordered table-striped mb-none display responsive nowrap"
                     cellspacing="0" width="100%">
                     <thead>

@@ -40,7 +40,7 @@ Courses
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-            <a href="/admin/user_vendor/vendor_course_new" class="btn btn-success btn-sm">Add</a>
+            <a href="/admin/user_vendor/vendor_course_new" class="btn btn-success btn-sm">Add Courses</a>
                 <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
                     width="100%">
                         <thead>

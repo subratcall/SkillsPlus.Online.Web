@@ -45,7 +45,10 @@ class UserController extends Controller
     }
 
     public function article() {
-        return view('admin_user.article');
+
+        $category = contentMenu();
+
+        return view('admin_user.article', compact('category'));
     }
 
     public function courses()
@@ -69,7 +72,7 @@ class UserController extends Controller
            $arr= array();
            $getContent = Content::where('id',$key->content_id)->first();
            $getUser = User::where('id',$key->user_id)->first();
-           $getTransaction = Transaction::where(['content_id'=>$getContent->id,'buyer_id'=>$key->buyer_id])->first();
+           $getTransaction = Transaction::where(['content_id'=> $getContent->id , 'buyer_id'=> $key->buyer_id])->first();
            $arr['content_title'] = $getContent->title;
            $arr['vendor'] = $getUser->name;
            $arr['date'] = date("F d, Y H:i:s", $key->create_at);
@@ -90,36 +93,36 @@ class UserController extends Controller
         
     }
 
-    public function list(Request $request) {
-        global $user;
-
-        $filter = $request->input('filter');
-        $sortRules = $request->input('sort');
-        $limit = $request->input('per_page');
-        list($field, $dir) = explode('|', $sortRules);
-
-         return Article::leftJoin('tbl_contents_category', function($join) {
-             $join->on('tbl_article.cat_id', '=', 'tbl_contents_category.id');
-         })
-            ->select('tbl_article.id', 'tbl_article.title', 'tbl_article.mode AS status', 'tbl_contents_category.title AS category')
-            ->where('tbl_article.title','LIKE','%'.$filter.'%')
-            ->where('tbl_article.user_id',$user['id'])
-            ->orderBy($field, $dir)
-            ->paginate($limit);
-    }
-
-    //    public function list(Request $request) {
+    // public function list(Request $request) {
     //     global $user;
 
-    //     $lists = Article::leftJoin('tbl_contents_category', function($join) {
-    //         $join->on('tbl_article.cat_id', '=', 'tbl_contents_category.id');
-    //     })
-    //        ->select('tbl_article.id', 'tbl_article.title', 'tbl_article.mode AS status', 'tbl_article.create_at AS date', 'tbl_contents_category.title AS category')
-    //        ->where('tbl_article.user_id',$user['id'])
-    //        ->get();
+    //     $filter = $request->input('filter');
+    //     $sortRules = $request->input('sort');
+    //     $limit = $request->input('per_page');
+    //     list($field, $dir) = explode('|', $sortRules);
 
-    //      return response()->json(["data" => $lists]);
+    //      return Article::leftJoin('tbl_contents_category', function($join) {
+    //          $join->on('tbl_article.cat_id', '=', 'tbl_contents_category.id');
+    //      })
+    //         ->select('tbl_article.id', 'tbl_article.title', 'tbl_article.mode AS status', 'tbl_contents_category.title AS category')
+    //         ->where('tbl_article.title','LIKE','%'.$filter.'%')
+    //         ->where('tbl_article.user_id',$user['id'])
+    //         ->orderBy($field, $dir)
+    //         ->paginate($limit);
     // }
+
+       public function list(Request $request) {
+        global $user;
+
+        $lists = Article::leftJoin('tbl_contents_category', function($join) {
+            $join->on('tbl_article.cat_id', '=', 'tbl_contents_category.id');
+        })
+           ->select('tbl_article.id', 'tbl_article.title', 'tbl_article.pre_text', 'tbl_article.text', 'tbl_article.mode AS status', 'tbl_article.create_at AS date', 'tbl_contents_category.title AS category', 'tbl_contents_category.id AS cat_id')
+           ->where('tbl_article.user_id',$user['id'])
+           ->get();
+
+         return response()->json(["data" => $lists]);
+    }
 
     public function getCourses()
     {
