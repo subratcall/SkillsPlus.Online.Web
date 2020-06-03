@@ -166,7 +166,8 @@ var getqh;
             dataType: 'JSON',
             success: function(data) {
                 tbl.ajax.reload();   
-                tbl2.ajax.reload();                
+                tbl2.ajax.reload();  
+                q = [];              
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');

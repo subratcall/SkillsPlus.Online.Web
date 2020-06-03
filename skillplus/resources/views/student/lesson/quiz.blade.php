@@ -2,14 +2,17 @@
 @section('title')
 
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-md-4">
         <a href="/admin/user_student/student_show_course/{{request()->route('lid')}}" class="btn btn-warning btn-sm">Back</a><br>
     </div>
-    <div class="col-lg-4">
+    <div class="col-md-4">
         <p id="titleQuiz"></p>
     </div>
-    <div class="col-lg-4">    
-        <div><h3 id="time"></span> </h3>
+    <div class="col-md-2">    
+        <div><span><h4 id="time"></span> </h4>
+    </div>
+    <div class="col-md-2">    
+        <button type="button" onclick="start()" class="btn btn-success btn-sm">Start</a><br>
     </div>
 </div>
 @endsection
@@ -45,6 +48,9 @@
         background: #FB7D44;
         color: #fff
     }
+    .hidden{
+        display: none;
+    }
 </style>
 @endsection
 
@@ -53,9 +59,9 @@
 <link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css" />
 
 <div id="headerStyle">
-    </div>
-<!-- <link href="/assets/toggle/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="/assets/toggle/bootstrap-toggle.min.js"></script> -->
+</div>
+    <!-- <link href="/assets/toggle/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="/assets/toggle/bootstrap-toggle.min.js"></script> -->
 <div class="row">
     <div class="col-xs-6 col-md-3 col-sm-6 text-center">
     
@@ -65,16 +71,22 @@
 <section class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" id="div">
                 <form id="form" class="form-horizontal">
                     <div class="row" id="f">       
-                        <!-- <div class="col-md-12">
+                         {{-- <div class="col-md-12">
                                         <label class="col-md-6 control-label" for="">dsfgfdgfdgdfgfdg</label>                                
                                         <div class="col-md-6">
-                                       <input type="checkbox" checked id="sw2">
+                                            <input type="checkbox" checked id="sw2">
+                                            <input type="checkbox" checked id="sw1">
+                                            <input type="checkbox" checked id="sw3">
                                             
                                         </div>
-                                    </div>         -->                    
+                                        <div style="border:solid;width: 50%">
+                                            <p>Correct Answer:12</p>
+                                            <p>Remarks: safdsfsdfsdfsdfdfd</p>
+                                        </div>
+                                    </div> --}}                     
                     </div>
                     <br>
                     <div class="form-group form-horizontal" id="btns">
@@ -141,14 +153,25 @@ var isSave = 1;
 var id = "{{request()->route('id')}}";
 var lid = "{{request()->route('lid')}}";
 var getData;
+var getCorrectData;
 var cnt_sw = 0;
 var getsws;
 var isskip = false;
     $(document).ready(function() {
         $('.editor-te').jqte({format: false});
         loadData2();     
-                                /* $('#sw2').bootstrapToggle(); */
-                                loadQH();
+        /* $('#sw2').bootstrapToggle(); */
+        //loadQH();
+       window.addEventListener('beforeunload', function(e) {
+        var myPageIsDirty = true; //you implement this logic...
+        if(myPageIsDirty) {
+            //following two lines will cause the browser to ask the user if they
+            //want to leave. The text of this dialog is controlled by the browser.
+            e.preventDefault(); //per the standard
+            e.returnValue = ''; //required for Chrome
+        }
+        //else: user is allowed to leave without a warning dialog
+        });
     });
 
     function loadData() {
@@ -361,7 +384,8 @@ var isskip = false;
                                 })
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +     
+                                        '<img src='+entry.attachment+'>'+                                                          
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="checkbox_qid" value="'+entry.id+'">'+
                                         '<input type="hidden" name="type" value="CHECKBOX">'+
@@ -399,7 +423,8 @@ var isskip = false;
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +     
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +  
+                                        '<img src='+entry.attachment+'>'+                                                                                           
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             g+
@@ -423,7 +448,8 @@ var isskip = false;
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +   
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +   
+                                        '<img src='+entry.attachment+'>'+                                                                                          
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
@@ -449,7 +475,8 @@ var isskip = false;
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +   
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +     
+                                        '<img src='+entry.attachment+'>'+                                                                                        
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             '<textarea name="paragraph" id="paragraph" class="form-control"></textarea>'+
@@ -496,9 +523,9 @@ var isskip = false;
                             }
                             ii++;
                             //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+ii+","+cnt+')" class="btn btn-primary">Next</button> ');  
-                            $("#btns").append('<button type="button" id="skipBtn" onclick="skip('+ii+","+cnt+')" class="btn btn-danger">Skip</button> '); 
-                            $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+entry.id+')" class="btn btn-warning">Hint</button> ');  
-                            $("#btns").append('<button type="button" btn="submitBtn" onclick="save('+ii+","+cnt+')" class="btn btn-success">Submit</button> ');  
+                            $("#btns").append('<button type="button" id="skipBtn" disabled onclick="skip('+ii+","+cnt+')" class="btn btn-danger">Skip</button> '); 
+                            $("#btns").append('<button type="button" id="hintBtn" disabled onclick="hint('+entry.id+')" class="btn btn-warning">Hint</button> ');  
+                            $("#btns").append('<button type="button" id="submitBtn" disabled onclick="save('+ii+","+cnt+')" class="btn btn-success">Submit</button> ');  
                             getii = ii;
                             getcnt = cnt;
                             gethint=entry.id;
@@ -557,7 +584,8 @@ var isskip = false;
                                 }  
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
+                                        '<img src='+item.attachment+'>'+                            
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="cb_update_id" name="cb_update_id">'+
@@ -585,7 +613,8 @@ var isskip = false;
                                 }  
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
+                                        '<img src='+item.attachment+'><br>'+                                                                                  
                                         '<div class="col-md-6">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="mc_update_id" name="mc_update_id">'+
@@ -603,7 +632,8 @@ var isskip = false;
                                 $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +    
+                                        '<img src='+item.attachment+'><br>'+                                                                                         
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sa_update_id" name="sa_update_id">'+
@@ -621,7 +651,8 @@ var isskip = false;
                                 $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +     
+                                        '<img src='+item.attachment+'><br>'+                                                                                   
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="pr_update_id" name="pr_update_id">'+
@@ -639,7 +670,8 @@ var isskip = false;
                                    $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +                                   
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
+                                        '<img src='+item.attachment+'><br>'+                                                                                  
                                         '<div class="col-md-6">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sw_update_id" name="sw_update_id">'+
@@ -665,14 +697,16 @@ var isskip = false;
                             }  
                             
                             $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+item.id+')" class="btn btn-warning">Hint</button> ');  
-                            $("#btns").append('<button type="button" btn="submitBtn" onclick="save('+nxt_counter+","+nxt_cnt+')" class="btn btn-success">Submit</button> ');      
+                            $("#btns").append('<button type="button" id="submitBtn" onclick="save('+nxt_counter+","+nxt_cnt+')" class="btn btn-success">Submit</button> ');      
                      
-                            if((counter+1)==getData.length){
+                            /* if((counter+1)==getData.length){
                                 $("#btns").append('<button type="button" btn="donetBtn" onclick="setDone()" class="btn btn-success">Finish Quiz</button> ');
-                            } 
+                            } */ 
 
-     }
+    }
 
+    
+    
     function save(counter,cnt) {
         var datas = $('#form').serializeArray();
         datas.push({
@@ -700,8 +734,12 @@ var isskip = false;
             success: function(data) {
               // location = "/admin/user_vendor/vendor_lesson_list/{{request()->route('cid')}}";
               isskip = false;
-              $("#nextBtn").attr("disabled",false)
-              $("#skipBtn").attr("disabled",true)
+              $("#nextBtn").attr("disabled",false);
+              $("#skipBtn").attr("disabled",true);
+
+              if(counter==getData.length){
+                $("#btns").append('<button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success">Finish Quiz</button> ');
+                }
               next(counter,cnt)
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -797,7 +835,12 @@ var isskip = false;
             url: "{{ url('/admin/user_student/student_quiz_check_submit_answers') }}/"+id,
             type: "get",
             dataType: 'JSON',
-            success: function(data) {                
+            success: function(data) {       
+                
+              $("#prevBtn").addClass("hidden");
+              $("#hintBtn").addClass("hidden");
+              $("#submitBtn").addClass("hidden");  
+              $("#donetBtn").addClass("hidden");  
                 $("#f").empty();
                                 $("#f").append(                                      
                                     '<div class="col-md-12">'+
@@ -809,6 +852,10 @@ var isskip = false;
                                         '<li><label class="col-md-6 control-label" for="">Total: '+data.avg+'</label></li></ul>'     +   
                                     '</div>'                            
                                 );
+                                
+                $("#btns").append('<button type="button" btn="summarytBtn" onclick="displayanswer(0,1)" class="btn btn-danger">View Summary</button> ');
+                
+                     loadAnswers()
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
@@ -836,21 +883,220 @@ var isskip = false;
     }
 
     function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
+        var timer = duration, minutes, seconds;
+       var x = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.text(minutes + ":" + seconds);
+            if(timer==0){
+                clearInterval(x); 
+            }
 
-        if (--timer < 0) {
-            timer = duration;
-        }
-    }, 1000);
-}
+            display.text(minutes + ":" + seconds);
+            
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+
+    function start(){
+        loadQH();
+        $("#skipBtn").attr("disabled",false)
+        $("#hintBtn").attr("disabled",false)
+        $("#submitBtn").attr("disabled",false)
+
+
+    }
+
+    function displayanswer(counter,cnt) {
+        
+        $("#nextBtn").attr("disabled",true)
+        $("#skipBtn").attr("disabled",false)
+        var origcnt = cnt;
+            var item = getData[counter];              
+            var getCorrectAnswers = getCorrectData[counter];              
+            var nxt_counter = counter+1;
+            var prev_counter = counter-1;                  
+            var nxt_cnt = cnt+1;
+            var prev_cnt = cnt-1; 
+            /* if(item.id){
+                showAnswer(item.id)
+            }   */  
+            console.log(counter)
+            console.log(counter+" prev counter")
+            console.log(item.type+" type")
+                            if(item.type=="CHECKBOX"){
+                                $("#f").empty();
+                                var res = item.options.split("|");
+                                var gc = getCorrectAnswers.answer.split("|");
+                                var g = '';
+                                res.forEach(function(a) {
+                                g+= '<div class="form-check">'+
+                                                        '<input class="form-check-input" type="checkbox" value="'+a+'" name="checkbox[]" id="checkbox_'+a+'">'+
+                                                        '<label class="form-check-label" for="">'+
+                                                            a+
+                                                        '</label>'+
+                                                    '</div>'
+                                })
+                                if(item.id){
+                                    showAnswer(item.id,res,"cb")
+                                }  
+                                $("#f").append(                                      
+                                    '<div class="col-md-12">'+
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +        
+                                        '<img src='+item.attachment+'>'+                                                            
+                                        '<div class="col-md-6">'+
+                                        '<input type="hidden" name="qid" value="'+item.id+'">'+
+                                        '<input type="hidden" id="cb_update_id" name="cb_update_id">'+
+                                        '<input type="hidden" name="type" value="CHECKBOX">'+
+                                            g+
+                                        '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
+                                    '</div>'                            
+                                );   
+                            } 
+
+                            if(item.type=="MULTIPLE CHOICE"){
+                                $("#f").empty();
+                                var res = item.options.split("|");
+                                var g = '';
+                                res.forEach(function(a) {
+                                     g+= '<div class="form-check">'+
+                                            '<input class="form-check-input" type="radio" value="'+a+'" name="mc" id="mc_'+a+'">'+
+                                            '<label class="form-check-label" for="">'+
+                                                a+
+                                            '</label>'+
+                                        '</div>'
+                                })
+                                if(item.id){
+                                    showAnswer(item.id,res,"mc")
+                                }  
+                                $("#f").append(                                      
+                                    '<div class="col-md-12">'+
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
+                                        '<img src='+item.attachment+'>'+                                                             
+                                        '<div class="col-md-6">'+
+                                        '<input type="hidden" name="qid" value="'+item.id+'">'+
+                                        '<input type="hidden" id="mc_update_id" name="mc_update_id">'+
+                                        '<input type="hidden" name="type" value="MULTIPLE CHOICE">'+
+                                            g+
+                                        '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
+                                    '</div>'                            
+                                );
+                            }
+
+                            if(item.type=="SHORT ANSWER"){
+                                if(item.id){
+                                    showAnswer(item.id,'',"sa")
+                                }  
+                                $("#f").empty();
+                                $("#f").append(                                      
+                                    '<div class="col-md-12">'+
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
+                                        '<img src='+item.attachment+'>'+                                                              
+                                        '<div class="col-md-6">'+
+                                            '<input type="hidden" name="qid" value="'+item.id+'">'+
+                                            '<input type="hidden" id="sa_update_id" name="sa_update_id">'+
+                                            '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
+                                            '<input type="hidden" name="type" value="SHORT ANSWER">'+
+                                        '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
+                                    '</div>'                            
+                                );
+                            }
+
+                            if(item.type=="PARAGRAPH"){
+                                if(item.id){
+                                    showAnswer(item.id,'',"pr")
+                                }  
+                                $("#f").empty();
+                                $("#f").append(                                      
+                                    '<div class="col-md-12">'+
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
+                                        '<img src='+item.attachment+'>'+                                                              
+                                        '<div class="col-md-6">'+
+                                            '<input type="hidden" name="qid" value="'+item.id+'">'+
+                                            '<input type="hidden" id="pr_update_id" name="pr_update_id">'+
+                                            '<textarea name="paragraph" id="paragraph" class="form-control"></textarea>'+
+                                            '<input type="hidden" name="type" value="PARAGRAPH">'+
+                                        '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
+                                    '</div>'                            
+                                );
+                            }
+
+                            if(item.type=="SWITCH"){
+                                if(item.id){
+                                    showAnswer(item.id,'',"sw")
+                                }  
+                                   $("#f").empty();
+                                $("#f").append(                                      
+                                    '<div class="col-md-12">'+
+                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +         
+                                        '<img src='+item.attachment+'>'+                                                           
+                                        '<div class="col-md-6">'+
+                                            '<input type="hidden" name="qid" value="'+item.id+'">'+
+                                            '<input type="hidden" id="sw_update_id" name="sw_update_id">'+
+                                            ' <input type="checkbox"  id="sws_'+cnt+'"  name="sws_'+cnt+'" data-toggle="toggle" data-onstyle="primary" data-offstyle="danger">'+
+                                            '<input type="hidden" name="type" value="SWITCH">'+
+                                            '</div>'+
+                                        '<div style="border:solid;width: 50%">'+
+                                            '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
+                                            '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
+                                       ' </div>'+
+                                    '</div>'                           
+                                );
+                                $('#sws_'+cnt).bootstrapToggle();
+                                getsws = "sws_"+cnt;
+                            }
+                            cnt++;
+                            $("#btns").empty();
+                           
+
+                            if(origcnt>1){
+                                $("#btns").append('<button type="button" id="prevBtn" onclick="displayanswer('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button> ');  
+                            }
+
+                            if(origcnt<getData.length){
+                                $("#btns").append('<button type="button" id="nextBtn" disabled onclick="displayanswer('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
+                            }  
+
+                            if(origcnt==getData.length){
+                                $("#btns").append('<button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success">View Score</button> ');
+                            }
+
+    }
+
+    function loadAnswers() {
+        $.ajax({
+            url: "{{ url('/admin/user_student/student_quiz_get_answers') }}/"+id,
+            type: "get",
+            dataType: 'JSON',
+            success: function(data) {                
+                getCorrectData = data.data
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
+        });
+    }
 </script>
 
 

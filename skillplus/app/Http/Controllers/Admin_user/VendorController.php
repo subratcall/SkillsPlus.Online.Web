@@ -271,7 +271,6 @@ class VendorController extends Controller
                 'question_id'=>$value['qid'],
                 'lesson_id'=>$value['lid'],
                 'content_id'=>$value['cid'],
-                //'qh_id'=>$value['qh_id'],
             ]);
         }                      
         echo true;
@@ -357,6 +356,7 @@ class VendorController extends Controller
                 $row['options'] = $checkRec->options;
                 $row['hint'] = strtoupper($checkRec->hint);
                 $row['remarks'] = strtoupper($checkRec->remarks);
+                $row['attachment'] = strtoupper($checkRec->attachment);
                 $row['id'] = $checkRec->id;   
                 $btn = ''; 
                 $btn = $btn.'<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_question('."'".$checkRec->id."'".')"><i class="fas fa-trash"></i></button>  ';
@@ -583,12 +583,68 @@ class VendorController extends Controller
                         $totalCorrectPoints+=$queryQuestion->points;
                     }
                 }
-                $totalPoints+=$queryQuestion->points;
-
+                //$totalPoints+=$queryQuestion->points;
             }
+
+            if($queryQuestion){
+                if($queryQuestion->type=="Multiple Choice"){
+                    if($queryQuestion->answer==$value->answer){
+                        $correctAns++;
+                        $totalCorrectPoints+=$queryQuestion->points;
+                    }
+                }
+            }
+
+            if($queryQuestion){
+                if($queryQuestion->type=="Short Answer"){
+                    if($queryQuestion->answer==$value->answer){
+                        $correctAns++;
+                        $totalCorrectPoints+=$queryQuestion->points;
+                    }
+                }
+            }
+
+            if($queryQuestion){
+                if($queryQuestion->type=="Paragraph"){
+                    if($queryQuestion->answer==$value->answer){
+                        $correctAns++;
+                        $totalCorrectPoints+=$queryQuestion->points;
+                    }
+                }
+            }
+
+            if($queryQuestion){
+                if($queryQuestion->type=="Switch"){
+                    if($queryQuestion->answer==$value->answer){
+                        $correctAns++;
+                        $totalCorrectPoints+=$queryQuestion->points;
+                    }
+                }
+            }
+            $totalPoints+=$queryQuestion->points;
         }
         $avgPoints = ($totalCorrectPoints/$totalPoints) * 100;
         $output = array("number_of_questions" => count($cntQuestion),"number_of_correct"=>$correctAns,"total_points"=>$totalPoints,"total_correct_points"=>$totalCorrectPoints,"avg"=>round($avgPoints,2)." %");
+		echo json_encode($output);
+    }
+    
+    public function getAnswers($id)
+    {
+        $data = QuestionsLesson::where(['lesson_id'=>$id])->get();
+        $array = array();
+        foreach ($data as $value) {
+            $row = array();            
+            $f = Questions::where(['id'=>$value->question_id])->first();
+            $row['question'] = strtoupper($f->question);
+            $row['type'] = strtoupper($f->type);
+            $row['options'] = $f->options;
+            $row['hint'] = strtoupper($f->hint);
+            $row['remarks'] = strtoupper($f->correctremarks);
+            $row['answer'] = strtoupper($f->answer);
+            $row['id'] = $f->id;  
+            $array[] = $row; 
+        }
+        $output = array("data" => $array,"ff" => 123);
 		echo json_encode($output);
     }
 }
