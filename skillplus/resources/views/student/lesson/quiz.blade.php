@@ -149,8 +149,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form id="form" class="form-horizontal">
-                            <div class="row" id="f"></div>
-                            {{-- <div class="col-md-12">
+
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-12 margin-top-lg">
+                                        <div class="row justify-content-center">
+                                            <div id="f" class="col-md-6"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                {{-- <div class="col-md-12">
                                             <label class="col-md-6 control-label" for="">dsfgfdgfdgdfgfdg</label>                                
                                             <div class="col-md-6">
                                                 <input type="checkbox" checked id="sw2">
@@ -164,8 +174,14 @@
                                             </div>
                                         </div> --}}
 
-                            <br>
-                            <div class="form-group form-horizontal margin-top-lg" id="btns"></div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-12 text-right">
+                                        <div class="form-group form-horizontal margin-top-lg" id="btns"></div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -373,6 +389,7 @@ $("#start-quiz").modal('show');
 
     });
 
+    /***@not being used*/
     function loadData() {
         if(id!=null||id!=""){
             $.ajax({
@@ -399,15 +416,15 @@ $("#start-quiz").modal('show');
                                                     '</label>'+
                                                 '</div>'
                             })
-                            $("#f").append(                                      
-                                '<div class="col-md-6">'+
-                                    '<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +                                   
-                                    '<div class="col-md-6">'+
+                            $("#f").append(    
+                                    '<div class="col-md-12">'+
+                                        '<label class="control-label" for="">'+i+'. '+entry.question+'</label>'     +   
+                                    '</div>'+                                
+                                    '<div class="col-md-12 margin-bottom">'+
                                     '<input type="hidden" name="checkbox_qid[]" value="'+entry.id+'">'+
                                     '<input type="hidden" name="type[]" value="ckb">'+
                                         g+
-                                    '</div>'+
-                                '</div>'                            
+                                    '</div>'
                             );
                             cnt++;
                         }
@@ -451,15 +468,15 @@ $("#start-quiz").modal('show');
                                     '</div>'+
                                 '</div>'+
                             '</div>'); */
-                            $("#f").append(                                      
-                                '<div class="col-md-6">'+
-                                    '<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +                                   
-                                    '<div class="col-md-6">'+
+                            $("#f").append(            
+                                    '<div class="col-md-12">'+                       
+                                    '<label class="control-label" for="">'+i+'. '+entry.question+'</label>'     +
+                                    '</div>'+                       
+                                    '<div class="col-md-12 margin-bottom">'+
                                     '<input type="hidden" name="mc_qid_'+entry.id+'" value="'+entry.id+'">'+
                                     '<input type="hidden" name="type[]" value="rd">'+
                                         g+
-                                    '</div>'+
-                                '</div>'                            
+                                    '</div>'                         
                             );
                             cnt++;
                         }
@@ -475,15 +492,15 @@ $("#start-quiz").modal('show');
                                     '</div>'+
                                 '</div>'+
                             '</div>'); */
-                            $("#f").append(                                      
-                                '<div class="col-md-6">'+
-                                    '<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +                                   
-                                    '<div class="col-md-6">'+
+                            $("#f").append(             
+                                    '<div class="col-md-12">'+                         
+                                        '<label class="control-label" for="">'+i+'. '+entry.question+'</label>'     +   
+                                    '</div>'+                                
+                                    '<div class="col-md-12 margin-bottom">'+
                                         '<input type="hidden" name="sa_qid_'+entry.id+'" value="'+entry.id+'">'+
                                         '<input type="text" name="sa_'+entry.id+'" id="sa_'+entry.id+'" class="form-control">'+
                                     '<input type="hidden" name="type[]" value="sa">'+
-                                    '</div>'+
-                                '</div>'                            
+                                    '</div>'                    
                             );
                         cnt++;
                         }
@@ -500,14 +517,14 @@ $("#start-quiz").modal('show');
                                 '</div>'+
                             '</div>'); */
                             $("#f").append(                                      
-                                '<div class="col-md-6">'+
-                                    '<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +                                   
-                                    '<div class="col-md-6">'+
+                                    '<div class="col-md-12">'+
+                                        '<label class="control-label" for="">'+i+'. '+entry.question+'</label>'     +     
+                                    '</div>'+
+                                    '<div class="col-md-12 margin-bottom">'+
                                         '<input type="hidden" name="pr_qid_'+entry.id+'" value="'+entry.id+'">'+
                                         '<textarea name="pr_'+entry.id+'" id="pr_'+entry.id+'" class="form-control"></textarea>'+
                                     '<input type="hidden" name="type[]" value="pr">'+
-                                    '</div>'+
-                                '</div>'                            
+                                    '</div>'                          
                             );
                         cnt++;
                         }
@@ -523,17 +540,17 @@ $("#start-quiz").modal('show');
                                     '</div>'+
                                 '</div>'+
                             '</div>'); */
-                            $("#f").append(                                      
-                                '<div class="col-md-6">'+
-                                    '<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +                                   
-                                    '<div class="col-md-6">'+
+                            $("#f").append(                                 
+                                    '<div class="col-md-12">'+
+                                    '<label class="control-label" for="">'+i+'. '+entry.question+'</label>'     +      
+                                    '</div>'+            
+                                    '<div class="col-md-12 margin-bottom">'+
                                         //'<textarea name="sw_'+i+'" id="sw_'+i+'" class="form-control"></textarea>'+
                                         '<input type="hidden" name="swopt_qid_'+entry.id+'" value="'+entry.id+'">'+
                                         '<input type="checkbox" checked  id="sws_'+cnt_sw+'"  name="sws_'+cnt_sw+'" data-toggle="toggle"'+
                                         '<input type="hidden" name="type[]" value="sw">'+
                                         ' data-on="True" data-off="False" data-onstyle="primary" data-offstyle="danger">'+
-                                    '</div>'+
-                                '</div>'                           
+                                    '</div>'                  
                             );
                             cnt_sw++;
                         cnt++;
@@ -581,17 +598,18 @@ $("#start-quiz").modal('show');
                                                         '</label>'+
                                                     '</div>'
                                 })
-                                $("#f").append(                                      
-                                    '<div class="col-md-12">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +     
-                                        '<img src='+entry.attachment+'>'+                                                          
-                                        '<div class="col-md-6">'+
+                                $("#f").append(                                    
+                                        `
+                                        <div class="col-md-12 margin-bottom">
+                                            <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        </div>
+                                        `+                                                       
+                                        '<div class="col-md-12 margin-bottom">'+
                                         '<input type="hidden" name="checkbox_qid" value="'+entry.id+'">'+
                                         '<input type="hidden" name="type" value="CHECKBOX">'+
                                         '<input type="hidden" name="qid" value="'+entry.id+'">'+
                                             g+
-                                        '</div>'+
-                                    '</div>'                            
+                                        '</div>'                          
                                 );   
                                 cnt++;
                             } 
@@ -620,15 +638,16 @@ $("#start-quiz").modal('show');
                                     '</div>'+
                                 '</div>'); */
                                 $("#f").append(                                      
-                                    '<div class="col-md-12">'+
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +     
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +  
-                                        '<img src='+entry.attachment+'>'+                                                                                           
-                                        '<div class="col-md-6">'+
+                                        `
+                                        <div class="col-md-12 margin-bottom">
+                                        <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        </div>
+                                        `+                                                                                      
+                                        '<div class="col-md-12">'+
                                         '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             g+
-                                        '</div>'+
-                                    '</div>'                            
+                                        '</div>'                          
                                 );
                                 cnt++;
                             }
@@ -644,18 +663,19 @@ $("#start-quiz").modal('show');
                                         '</div>'+
                                     '</div>'+
                                 '</div>'); */
-                                $("#f").append(                                      
-                                    '<div class="col-md-12">'+
-                                        //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +   
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +   
-                                        '<img src='+entry.attachment+'>'+                                                                                          
-                                        '<div class="col-md-6">'+
+                                $("#f").append(                        
+                                        //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +    
+                                        `
+                                        <div class="col-md-12 margin-bottom">
+                                        <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        </div>
+                                        `+                                                                                         
+                                        '<div class="col-md-12">'+
                                             '<input type="hidden" name="qid'+entry.id+'" value="'+entry.id+'">'+
                                             '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
                                             '<input type="hidden" name="type" value="SHORT ANSWER">'+
                                             '<input type="hidden" name="qid" value="'+entry.id+'">'+
-                                        '</div>'+
-                                    '</div>'                            
+                                        '</div>'                         
                                 );
                                 cnt++;
                             }
@@ -676,33 +696,19 @@ $("#start-quiz").modal('show');
 
                                 $("#f").append(                                      
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +   
-
                                     `
                                     <input type="hidden" name="qid${entry.id}" value="${entry.id}">
                                     <input type="hidden" name="type" value="PARAGRAPH">                                         
                                     <input type="hidden" name="qid" value="${entry.id}">
-
-                                    <div class="col-md-12 margin-top-lg">
-                                        <div class="row justify-content-center">  
                                             <div class="col-md-12">
-                                                <div class="row justify-content-center">
-                                                    <div class="col-md-6">
-                                                        <p class="control-label" for="">${cnt} . ${entry.question}</p>
-                                                    </div>
-                                                </div>
+                                                <p class="control-label" for="">${cnt} . ${entry.question}</p>
                                             </div>                                                                          
-                                            <div class="col-md-12">
-                                                <div class="row justify-content-center">
-                                                    <div class="col-md-6">
-                                                        <img src="${(entry.attachment == true)? entry.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>      
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-12 margin-bottom">
+                                                <img src="${(entry.attachment == true)? entry.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>      
                                             </div>
-                                            <div class="col-md-6 margin-top">
+                                            <div class="col-md-12 margin-top">
                                                 <textarea name="paragraph" id="paragraph" class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>`                           
+                                            </div>`                           
                                 );
                                 cnt++;
                             }
@@ -727,19 +733,14 @@ $("#start-quiz").modal('show');
                                 cnt_sw++; */
                                 $("#f").empty();
                                 $("#f").append(      
-
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<div class="row justify-content-center">'+       
-                                            '<div class="col-md-12">'+
-                                                '<label class="col-md-6 control-label" for="">'+cnt+'. '+entry.question+'</label>'     +                                   
-                                                '<div class="col-md-6">'+
+                                                '<div class="col-md-12">'+
+                                                    '<label class="control-label" for="">'+cnt+'. '+entry.question+'</label>'     +
+                                                '</div>'+                                
+                                                '<div class="col-md-12 margin-bottom">'+
                                                 ' <input type="checkbox"  id="sws_'+cnt+'"  name="sws_'+cnt+'" checked data-toggle="toggle" data-onstyle="primary" data-offstyle="danger">'+
                                                 '<input type="hidden" name="type" value="SWITCH">'+                                        
                                                 '<input type="hidden" name="qid" value="'+entry.id+'">'+
-                                                '</div>'+
-                                            '</div>'+
-                                        '</div>'+
-                                    '</div>'                
+                                                '</div>'            
                                 );
                                 getsws = "sws_"+cnt;                                
                                // $('#sws_'+cnt).bootstrapToggle();
@@ -748,15 +749,9 @@ $("#start-quiz").modal('show');
                             ii++;
                             //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+ii+","+cnt+')" class="btn btn-primary">Next</button> ');  
                             $("#btns").append(`
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-12 text-right">
                                             <button type="button" id="skipBtn" disabled onclick="skip(${ii}, ${cnt})" class="btn btn-danger btn-lg">Skip</button>
                                             <button type="button" id="hintBtn" disabled onclick="hint(${entry.id})" class="btn btn-warning btn-lg">Hint</button>
                                             <button type="button" id="submitBtn" disabled onclick="save(${ii}, ${cnt})" class="btn btn-success btn-lg">Submit</button>
-                                        </div>
-                                    </div> 
-                                </div>
                             `); 
                             getii = ii;
                             getcnt = cnt;
@@ -814,17 +809,20 @@ $("#start-quiz").modal('show');
                                 if(item.id){
                                     showAnswer(item.id,res,"cb")
                                 }  
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
-                                        '<img src='+item.attachment+'>'+                            
-                                        '<div class="col-md-6">'+
+                                $("#f").append( 
+                                                                           
+                                        '<div class="col-md-12">'+
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
+                                        '</div>'+
+                                        '<div class="col-md-12 margin-bottom">'+
+                                            `<img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>`+    
+                                        '</div>'+                           
+                                        '<div class="col-md-12">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="cb_update_id" name="cb_update_id">'+
                                         '<input type="hidden" name="type" value="CHECKBOX">'+
                                             g+
-                                        '</div>'+
-                                    '</div>'                            
+                                        '</div>'                           
                                 );   
                             } 
 
@@ -843,17 +841,19 @@ $("#start-quiz").modal('show');
                                 if(item.id){
                                     showAnswer(item.id,res,"mc")
                                 }  
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
-                                        '<img src='+item.attachment+'><br>'+                                                                                  
-                                        '<div class="col-md-6">'+
+                                $("#f").append(            
+                                        '<div class="col-md-12">'+
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
+                                        '</div>'+    
+                                        '<div class="col-md-12 margin-bottom">'+
+                                            `<img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>`+    
+                                        '</div>'+                                                                         
+                                        '<div class="col-md-12">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="mc_update_id" name="mc_update_id">'+
                                         '<input type="hidden" name="type" value="MULTIPLE CHOICE">'+
                                             g+
-                                        '</div>'+
-                                    '</div>'                            
+                                        '</div>'
                                 );
                             }
 
@@ -862,17 +862,19 @@ $("#start-quiz").modal('show');
                                     showAnswer(item.id,'',"sa")
                                 }  
                                 $("#f").empty();
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +    
-                                        '<img src='+item.attachment+'><br>'+                                                                                         
-                                        '<div class="col-md-6">'+
+                                $("#f").append(                
+                                     '<div class="col-md-12">'+
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
+                                        '</div>'+  
+                                        '<div class="col-md-12 margin-bottom">'+
+                                            `<img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>`+    
+                                        '</div>'+                                                                      
+                                        '<div class="col-md-12">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sa_update_id" name="sa_update_id">'+
                                             '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
                                             '<input type="hidden" name="type" value="SHORT ANSWER">'+
-                                        '</div>'+
-                                    '</div>'                            
+                                        '</div>'                        
                                 );
                             }
 
@@ -881,17 +883,19 @@ $("#start-quiz").modal('show');
                                     showAnswer(item.id,'',"pr")
                                 }  
                                 $("#f").empty();
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +     
-                                        '<img src='+item.attachment+'><br>'+                                                                                   
-                                        '<div class="col-md-6">'+
+                                $("#f").append(               
+                                        '<div class="col-md-12 margin-bottom">'+
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
+                                        '</div>'+  
+                                        '<div class="col-md-12 margin-bottom">'+
+                                            `<img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>`+    
+                                        '</div>'+                                                                  
+                                        '<div class="col-md-12">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="pr_update_id" name="pr_update_id">'+
                                             '<textarea name="paragraph" id="paragraph" class="form-control"></textarea>'+
                                             '<input type="hidden" name="type" value="PARAGRAPH">'+
-                                        '</div>'+
-                                    '</div>'                            
+                                        '</div>'                  
                                 );
                             }
 
@@ -900,17 +904,19 @@ $("#start-quiz").modal('show');
                                     showAnswer(item.id,'',"sw")
                                 }  
                                    $("#f").empty();
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
-                                        '<img src='+item.attachment+'><br>'+                                                                                  
-                                        '<div class="col-md-6">'+
+                                $("#f").append(         
+                                        '<div class="col-md-12 margin-bottom">'+
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
+                                        '</div>'+    
+                                        '<div class="col-md-12 margin-bottom">'+
+                                            `<img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>`+    
+                                        '</div>'+                                                                      
+                                        '<div class="col-md-12 margin-bottom">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sw_update_id" name="sw_update_id">'+
                                             ' <input type="checkbox"  id="sws_'+cnt+'"  name="sws_'+cnt+'" data-toggle="toggle" data-onstyle="primary" data-offstyle="danger">'+
                                             '<input type="hidden" name="type" value="SWITCH">'+
-                                            '</div>'+
-                                    '</div>'                           
+                                            '</div>'                         
                                 );
                                 $('#sws_'+cnt).bootstrapToggle();
                                 getsws = "sws_"+cnt;
@@ -919,30 +925,24 @@ $("#start-quiz").modal('show');
                             $("#btns").empty();
                             
 
-                            var btns;
-
-                            btns = ` <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-12 text-right">`
+                            var btns ="";
 
                             if(origcnt>1){
                                 // $("#btns").append('<button type="button" id="prevBtn" onclick="next('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button> ');  
 
-                                btns += `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg">Prev</button>`;
+                                btns += `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg" style="margin-right:5px">Prev</button>`;
                             }
 
                             if(origcnt<getData.length){
                                 //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
-                               btns += `<button type="button" id="skipBtn" onclick="skip(${nxt_counter}, ${nxt_cnt})" class="btn btn-danger btn-lg">Skip</button>`;
+                               btns += `<button type="button" id="skipBtn" onclick="skip(${nxt_counter}, ${nxt_cnt})" class="btn btn-danger btn-lg" style="margin-right:5px">Skip</button>`;
                             }  
                             
                             // $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+item.id+')" class="btn btn-warning">Hint</button> ');  
                             // $("#btns").append('<button type="button" id="submitBtn" onclick="save('+nxt_counter+","+nxt_cnt+')" class="btn btn-success">Submit</button> '); 
 
-                            btns += `<button type="button" id="hintBtn" onclick="hint(${item.id})" class="btn btn-warning btn-lg">Hint</button>`;
-                            btns += `<button type="button" id="submitBtn" onclick="save(${nxt_counter}, ${nxt_cnt})" class="btn btn-success btn-lg">Submit</button>`;
-
-                            btns += `</div></div></div>`;
+                            btns += `<button type="button" id="hintBtn" onclick="hint(${item.id})" class="btn btn-warning btn-lg" style="margin-right:5px">Hint</button>`;
+                            btns += `<button type="button" id="submitBtn" onclick="save(${nxt_counter}, ${nxt_cnt})" class="btn btn-success btn-lg" style="margin-right:5px">Submit</button>`;
 
                             $("#btns").append(btns);
                      
@@ -958,6 +958,7 @@ $("#start-quiz").modal('show');
     
     function save(counter,cnt) {
         var datas = $('#form').serializeArray();
+
         datas.push({
             name: "swopt",
             value: $("#"+getsws).prop("checked") == true?true:false,
@@ -987,7 +988,7 @@ $("#start-quiz").modal('show');
               $("#skipBtn").attr("disabled",true);
 
               if(counter==getData.length){
-                $("#btns").append(`
+                $("#btns").html(`
                     <button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success btn-lg">Finish Quiz</button>
                 `);
                 }
@@ -1093,15 +1094,13 @@ $("#start-quiz").modal('show');
               $("#submitBtn").addClass("hidden");  
               $("#donetBtn").addClass("hidden");  
                 $("#f").empty();
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">No. of Questions: '+data.number_of_questions+'</label><br>'     +  
-                                        '<label class="col-md-6 control-label" for="">No. of Correct Answer: '+data.number_of_correct+'</label><br>'     +  
-                                        '<label class="col-md-6 control-label" for="">Marks:</label><ul>'     +  
-                                        '<li><label class="col-md-6 control-label" for="">Total: '+data.total_points+'</label></li>'     +  
-                                        '<li><label class="col-md-6 control-label" for="">Achieve: '+data.total_correct_points+'</label></li>'     +  
-                                        '<li><label class="col-md-6 control-label" for="">Total: '+data.avg+'</label></li></ul>'     +   
-                                    '</div>'                            
+                                $("#f").append(     
+                                        '<label class="control-label" for="">No. of Questions: '+data.number_of_questions+'</label><br>'     +  
+                                        '<label class="control-label" for="">No. of Correct Answer: '+data.number_of_correct+'</label><br>'     +  
+                                        '<label class="control-label" for="">Marks:</label><ul>'     +  
+                                        '<li><label class="control-label" for="">Total: '+data.total_points+'</label></li>'     +  
+                                        '<li><label class="control-label" for="">Achieve: '+data.total_correct_points+'</label></li>'     +  
+                                        '<li><label class="control-label" for="">Total: '+data.avg+'</label></li></ul>'                          
                                 );
                                 
                 $("#btns").append('<button type="button" btn="summarytBtn" onclick="displayanswer(0,1)" class="btn btn-danger">View Summary</button> ');
@@ -1197,10 +1196,15 @@ $("#start-quiz").modal('show');
                                     showAnswer(item.id,res,"cb")
                                 }  
                                 $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +        
-                                        '<img src='+item.attachment+'>'+                                                            
-                                        '<div class="col-md-6">'+
+                                        '<div class="col-md-12">'+                    
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'+
+                                        '</div>'+
+                                        `
+                                        <div class="col-md-12 margin-bottom">
+                                         <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        </div>
+                                        `+                                         
+                                        '<div class="col-md-12 margin-bottom">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="cb_update_id" name="cb_update_id">'+
                                         '<input type="hidden" name="type" value="CHECKBOX">'+
@@ -1209,8 +1213,7 @@ $("#start-quiz").modal('show');
                                         '<div style="border:solid;width: 50%">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
-                                       ' </div>'+
-                                    '</div>'                            
+                                       ' </div>'                         
                                 );   
                             } 
 
@@ -1229,11 +1232,16 @@ $("#start-quiz").modal('show');
                                 if(item.id){
                                     showAnswer(item.id,res,"mc")
                                 }  
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +       
-                                        '<img src='+item.attachment+'>'+                                                             
-                                        '<div class="col-md-6">'+
+                                $("#f").append(                                
+                                        '<div class="col-md-12">'+                    
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'+
+                                        '</div>'+     
+                                        `
+                                        <div class="col-md-12 margin-bottom">
+                                         <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        </div>
+                                        `+                                                                 
+                                        '<div class="col-md-12 margin-bottom">'+
                                         '<input type="hidden" name="qid" value="'+item.id+'">'+
                                         '<input type="hidden" id="mc_update_id" name="mc_update_id">'+
                                         '<input type="hidden" name="type" value="MULTIPLE CHOICE">'+
@@ -1242,8 +1250,7 @@ $("#start-quiz").modal('show');
                                         '<div style="border:solid;width: 50%">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
-                                       ' </div>'+
-                                    '</div>'                            
+                                       ' </div>'                         
                                 );
                             }
 
@@ -1252,11 +1259,16 @@ $("#start-quiz").modal('show');
                                     showAnswer(item.id,'',"sa")
                                 }  
                                 $("#f").empty();
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
-                                        '<img src='+item.attachment+'>'+                                                              
-                                        '<div class="col-md-6">'+
+                                $("#f").append(                                    
+                                        '<div class="col-md-12">'+                    
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'+
+                                        '</div>'+
+                                        `
+                                        <div class="col-md-12 margin-bottom">
+                                         <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        </div>
+                                        `+                                                                  
+                                        '<div class="col-md-12 margin-bottom">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sa_update_id" name="sa_update_id">'+
                                             '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
@@ -1265,8 +1277,7 @@ $("#start-quiz").modal('show');
                                         '<div style="border:solid;width: 50%">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
-                                       ' </div>'+
-                                    '</div>'                            
+                                       ' </div>'                          
                                 );
                             }
 
@@ -1275,11 +1286,16 @@ $("#start-quiz").modal('show');
                                     showAnswer(item.id,'',"pr")
                                 }  
                                 $("#f").empty();
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +      
-                                        '<img src='+item.attachment+'>'+                                                              
-                                        '<div class="col-md-6">'+
+                                $("#f").append(                                       
+                                        '<div class="col-md-12">'+                    
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'+
+                                        '</div>'+  
+                                        `
+                                        <div class="col-md-12 margin-bottom">
+                                         <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        </div>
+                                        `+                                                              
+                                        '<div class="col-md-12 margin-bottom">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="pr_update_id" name="pr_update_id">'+
                                             '<textarea name="paragraph" id="paragraph" class="form-control"></textarea>'+
@@ -1288,8 +1304,7 @@ $("#start-quiz").modal('show');
                                         '<div style="border:solid;width: 50%">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
-                                       ' </div>'+
-                                    '</div>'                            
+                                       ' </div>'                
                                 );
                             }
 
@@ -1298,11 +1313,16 @@ $("#start-quiz").modal('show');
                                     showAnswer(item.id,'',"sw")
                                 }  
                                    $("#f").empty();
-                                $("#f").append(                                      
-                                    '<div class="col-md-12 margin-top-lg">'+
-                                        '<label class="col-md-6 control-label" for="">'+cnt+'. '+item.question+'</label>'     +         
-                                        '<img src='+item.attachment+'>'+                                                           
-                                        '<div class="col-md-6">'+
+                                $("#f").append(          
+                                        '<div class="col-md-12">'+                    
+                                            '<label class="control-label" for="">'+cnt+'. '+item.question+'</label>'+
+                                        '</div>'+
+                                        `
+                                        <div class="col-md-12 margin-bottom">
+                                         <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        </div>
+                                        `+                                                             
+                                        '<div class="col-md-12 margin-bottom">'+
                                             '<input type="hidden" name="qid" value="'+item.id+'">'+
                                             '<input type="hidden" id="sw_update_id" name="sw_update_id">'+
                                             ' <input type="checkbox"  id="sws_'+cnt+'"  name="sws_'+cnt+'" data-toggle="toggle" data-onstyle="primary" data-offstyle="danger">'+
@@ -1311,8 +1331,7 @@ $("#start-quiz").modal('show');
                                         '<div style="border:solid;width: 50%">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
-                                       ' </div>'+
-                                    '</div>'                           
+                                       ' </div>'                       
                                 );
                                 $('#sws_'+cnt).bootstrapToggle();
                                 getsws = "sws_"+cnt;
@@ -1321,10 +1340,10 @@ $("#start-quiz").modal('show');
                             $("#btns").empty();
 
 
-                            var btns;
+                            var btns = "";
 
                             if(origcnt>1){
-                                btns = `<button type="button" id="prevBtn" onclick="displayanswer($${prev_counter}, ${prev_cnt})" class="btn btn-primary">Prev</button>`
+                                btns += `<button type="button" id="prevBtn" onclick="displayanswer(${prev_counter}, ${prev_cnt})" class="btn btn-primary">Prev</button>`
                             }
 
                             if(origcnt<getData.length){

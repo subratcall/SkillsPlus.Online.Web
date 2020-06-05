@@ -42,6 +42,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::group(['prefix'=>'request'],function(){
                 Route::get('article','Admin_user\UserController@list');
                 Route::post('article/store','Admin_user\UserController@store');
+                Route::post('article/{id}/update','Admin_user\UserController@editStore');
                 Route::get('category','Admin_user\UserController@category');
             });
 
