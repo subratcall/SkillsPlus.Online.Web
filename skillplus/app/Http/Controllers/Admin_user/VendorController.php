@@ -372,7 +372,7 @@ class VendorController extends Controller
 
     public function submitAnswers(Request $request)
     {
-        $checkAns = CourseLog::where(['question_id'=>$request->qid])->first();
+        $checkAns = CourseLog::where(['question_id'=>$request->qid,'lesson_id'=>$request->lid])->first();
             if($checkAns)
             {                
                 if($request->type=="CHECKBOX"){
@@ -554,9 +554,9 @@ class VendorController extends Controller
         
     }
 
-    public function viewSubmittedAnswer($id)
+    public function viewSubmittedAnswer($qid,$lid)
     {
-        $data = CourseLog::where(['question_id'=>$id])->first();
+        $data = CourseLog::where(['question_id'=>$qid,'lesson_id'=>$lid])->first();
         $output = array("data" => $data);
 		echo json_encode($output);
     }
@@ -623,7 +623,7 @@ class VendorController extends Controller
             }
             $totalPoints+=$queryQuestion->points;
         }
-        $avgPoints = ($totalCorrectPoints/$totalPoints) * 100;
+        $avgPoints = $totalPoints!=0?($totalCorrectPoints/$totalPoints) * 100:0;
         $output = array("number_of_questions" => count($cntQuestion),"number_of_correct"=>$correctAns,"total_points"=>$totalPoints,"total_correct_points"=>$totalCorrectPoints,"avg"=>round($avgPoints,2)." %");
 		echo json_encode($output);
     }

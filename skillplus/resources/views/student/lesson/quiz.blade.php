@@ -301,6 +301,7 @@ var getCorrectData;
 var cnt_sw = 0;
 var getsws;
 var isskip = false;
+var isSubmit = false;
 
 // default
 $("#time").text("00:00");
@@ -1018,7 +1019,8 @@ $("#start-quiz").modal('show');
     function showAnswer(thisLid,val,type) {
         console.log(val)
         $.ajax({
-            url: "{{ url('/admin/user_student/student_quiz_show_submit_answers') }}/"+thisLid,
+            //url: "{{ url('/admin/user_student/student_quiz_show_submit_answers') }}/"+thisLid,            
+            url: "{{ url('/admin/user_student/student_quiz_show_submit_answers') }}/"+thisLid+"/"+id,
             type: "get",
             dataType: 'JSON',
             success: function(data) {
@@ -1106,6 +1108,7 @@ $("#start-quiz").modal('show');
                 $("#btns").append('<button type="button" btn="summarytBtn" onclick="displayanswer(0,1)" class="btn btn-danger">View Summary</button> ');
                 
                      loadAnswers()
+                     isSubmit = true;
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
@@ -1141,7 +1144,7 @@ $("#start-quiz").modal('show');
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            if(timer==0){
+            if(timer==0 || isSubmit){
                 clearInterval(x); 
             }
 
