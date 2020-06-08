@@ -1,7 +1,7 @@
 @extends('admin.newlayout.layout-vue',['breadcom'=>['Lesson','Edit']])
 @section('title')
-<a href="/admin/user_dashboard/courses" class="btn btn-warning btn-sm">Back</a>
-Course Content
+<!-- <a href="/admin/user_dashboard/courses" class="btn btn-warning btn-sm">Back</a>
+Course Content -->
 @endsection
 
 @section('style')
@@ -37,6 +37,29 @@ Course Content
         color: #fff
     }
 
+    .raty-text {
+        color: #e6d816 !important;
+        /* font-size: 1.7em;
+        font-weight: bold;
+        display: inline-block;
+        padding-right: 2px;
+        position: relative;
+        top: -6px; */
+    }
+    
+    .raty {
+        color: #e6d816 !important;
+        /* font-size: 1.7em;
+        font-weight: bold;
+        display: inline-block;
+        padding-right: 2px;
+        position: relative;
+        top: -6px; */
+    }
+	/* font-size: 1.2em;
+	padding-top: 5px;
+	display: inline-block; */
+
     /* .modal-dialog {
         width: 100%;
         height: 100%;
@@ -57,7 +80,7 @@ Course Content
 <link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css" />
 
 <div class="row">
-    <div class="col-xs-6 col-md-3 col-sm-6 text-center">
+    {{-- <div class="col-xs-6 col-md-3 col-sm-6 text-center">
         <course-component></course-component>
     </div>
 </div>
@@ -76,14 +99,94 @@ Course Content
                 <div class="custom-card">
                     <video id="video" class="w-100 h-a" controls>
                         {{-- <source src="http://192.168.110.16:8080/bin/admin/file_example_MP4_480_1_5MG.mp4" type="video/mp4"> --}}
-                        <source type="video/mp4">
+                        {{-- <source type="video/mp4">
                         Your browser does not support HTML5 video.
                     </video>
                 </div>
             </div>
         </div>
+    <div class="col-xs-6 col-md-3 col-sm-6 text-center"></div> --}}
+</div>
+<section class="card">
+    <div class="card-body">
+        <br />
+        <div class="text-center">
+            <h4 id="titleData"></h4>
+            <h6 id="subtitleData"></h6>
+            <div class="col-xs-6 text-center">
+                <div class="raty-product-section">
+                    <div class="raty"></div>
+                    <span class="raty-text">3 ratings</span>
+                    <span class="">10 studens / vendors purchased this book</span>
+                </div>
+            </div>
+            <div class="col-xs-12 text-center">
+                <div class="raty-product-section">
+                    <span class="">Vendor: John Carlo C. Lucasan</span>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <legend>What you'll learn</legend>
+        <div class="row">
+            <div class="col-lg-6">
+                <ul class="list-group">
+                    <li class="list-group-item disabled">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <ul class="list-group">
+                    <li class="list-group-item disabled">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+            </div>
+
+            <!-- <div class="col-lg-12" id="content"></div>
+            <div class="col-lg-12" id="content">
+                <video id="video" class="w-100 h-a" controls>
+                    {{--
+                    <source src="http://192.168.110.16:8080/bin/admin/file_example_MP4_480_1_5MG.mp4" type="video/mp4" />
+                    --}}
+                    <source type="video/mp4" />
+                    Your browser does not support HTML5 video.
+                </video>
+            </div> -->
+        </div>
+
+        <hr>
+        <legend>Prerequisite</legend>
+        <ul>
+            <li>Lorem ipsum dolor sit .</li>
+            <li>Lorem ipsum dolor sit amet consectetur.</li>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+        </ul>
+
+        <hr>
+        <legend>List of Lessons:</legend>
+        <div class="accordion" id="accordionExample">
+            <div class="card" id="secAc"></div>
+        </div>
     </div>
 </section>
+
+<!-- <section class="card">
+    <div class="accordion" id="accordionExample">
+        <div class="card" id="secAc"></div>
+    </div>
+</section> -->
+
 
 <!-- <section class="card">                    
     <div class="card-body">
@@ -112,7 +215,10 @@ Course Content
 
 
 @section('script')
+
 <script type="application/javascript" src="/assets/vendor/jquery-te/jquery-te-1.4.0.min.js"></script>
+<link rel="stylesheet" href="/assets/vendor/raty/jquery.raty.css"/>
+<script type="application/javascript" src="/assets/vendor/raty/jquery.raty.js"></script>
 <script>
 
     var isSave = 1;
@@ -136,7 +242,11 @@ Course Content
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert('Error! Contact IT Department.');
                 }
-            });  
+        });  
+
+        $('.raty').raty({ starType: 'i',score:3,click:function (rate) {
+            window.location = window.location.href+'/rate/'+rate;
+        }});
     });
 
     
@@ -150,8 +260,8 @@ Course Content
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-
-                    console.log(data);
+                   $("#titleData").text(data.title)
+                   $("#subtitleData").text(data.subTitle)
                    $("#content").append(data.content)
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -225,22 +335,6 @@ Course Content
     }
 
     function list() {
-        /* tbl = $('#tbl').dtcustom({
-                    "ajax": {
-                        "type": "GET",
-                        "url": "{{ url('/admin/user_student/student_lesson_get_list') }}/"+id,
-                        "dataSrc": function(json) {
-                            return json.data;
-                        }
-                    },
-                    "columns": [{
-                            "data": "title"
-                        }
-                        ,{
-                            "data": "action"
-                        },
-                    ],
-                });  */
 
                 $.ajax({
                     url: "{{ url('/admin/user_student/student_lesson_get_list') }}/"+id,
@@ -256,7 +350,7 @@ Course Content
                                 '<div class="card-header" id="heading_"'+i+'>'+
                                    ' <h2 class="mb-0">'+
                                        ' <button class="btn btn-link" type="button" data-toggle="collapse"'+
-                                           ' data-target="#col_'+i+'" aria-expanded="true" aria-controls="col_'+i+'">'+
+                                           ' data-target="#col_'+i+'" aria-expanded="true" aria-controls="col_'+i+'"> <i class="fas fa-plus"></i> '+
                                             a.title+
                                        ' </button>'+
                                    ' </h2>'+
@@ -265,11 +359,18 @@ Course Content
                                ' <div id="col_'+i+'" class="collapse" aria-labelledby="heading_'+i+'"'+
                                    ' data-parent="#accordionExample">'+
                                     '<div class="card-body"><ul>'+
-                                        '<li>Duration: '+dr+'</li>'+
+                                       /*  '<li>Duration: '+dr+'</li>'+
                                         '<li>Size: '+size+'</li>'+
                                         '</ul>'+
                                         '<a href="/admin/user_student/student_lesson_quiz/'+a.id+'/'+id+'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>'+
-                                        ' <a href="/admin/user_student/student_show_lesson/'+a.id+'/'+id+'" type="button" class="btn btn-primary">View Full Lesson</a>'+
+                                        ' <a href="/admin/user_student/student_show_lesson/'+a.id+'/'+id+'" type="button" class="btn btn-primary">View Full Lesson</a>'+ */
+                                        '<div class="row">'+
+                                            '<div class="col-md-6">Sample Description 1'+
+                                            '</div>'+
+                                            '<div class="col-md-6">'+
+                                            '<a href="/admin/user_student/student_lesson_quiz/'+a.id+'/'+id+'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>'+
+                                            '</div>'+
+                                        '</div>'+
                                    ' </div>'+
                               '  </div>'
                             );
