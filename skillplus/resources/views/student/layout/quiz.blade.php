@@ -30,6 +30,68 @@
             position: relative;
             top: 4px;
         }
+
+        section.card div.card-body {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+
+        #form .error {
+            border-color: red;
+        }
+
+        #form label.error {
+            color: red;
+        }
+
+        .dataTables_filter,
+        .dataTables_length {
+            display: none;
+        }
+
+        .display-inline {
+            display: inline;
+        }
+
+        .margin-bottom {
+            margin-bottom: 10px;
+        }
+
+        .margin-left {
+            margin-left: 10px;
+        }
+
+        .margin-right {
+            margin-right: 10px;
+        }
+
+        .margin-top {
+            margin-top: 10px;
+        }
+
+        .padding-top {
+            padding-top: 10px;
+        }
+
+        .padding-bottom {
+            padding-bottom: 10px;
+        }
+
+        .padding-left {
+            padding-left: 10px;
+        }
+
+        .padding-right {
+            padding-right: 10px;
+        }
+
+        .float-r {
+            float: right;
+        }
+
+        .float-l {
+            float: left;
+        }
     </style>
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
@@ -46,7 +108,6 @@
 
     @yield('style')
 
-    @include('_revise.style')
 </head>
 
 <body>
@@ -60,8 +121,6 @@
     </div>
     <!-- General JS Scripts -->
     <script src="/assets/admin/modules/jquery.min.js"></script>
-    <script src="/assets/admin/modules/popper.js"></script>
-    <script src="/assets/admin/modules/tooltip.js"></script>
     <script src="/assets/admin/modules/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/admin/modules/nicescroll/jquery.nicescroll.min.js"></script>
     <script src="/assets/admin/modules/moment.min.js"></script>

@@ -130,37 +130,36 @@
     </div>
 </div>
 </div>
-<section class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-12" id="div">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h1>Quiz title: <div class="display-inline" id="titleQuiz"></div>
-                        </h1>
-                    </div>
-
-                    <div class="col-md-6 text-right">
-                        <h4 class="padding-top">Timer: <div class="display-inline" id="time"></div>
-                        </h4>
-                    </div>
+<div class="row">
+    <div class="col-12 card" id="div">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Quiz title: <div class="display-inline" id="titleQuiz"></div>
+                    </h1>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <form id="form" class="form-horizontal">
+                <div class="col-md-6 text-right">
+                    <h4 class="padding-top">Timer: <div class="display-inline" id="time"></div>
+                    </h4>
+                </div>
+            </div>
 
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-md-12 margin-top-lg">
-                                        <div class="row justify-content-center">
-                                            <div id="f" class="col-md-6"></div>
-                                        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form id="form" class="form-horizontal">
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-md-12 margin-top-lg">
+                                    <div class="row justify-content-center">
+                                        <div id="f" class="col-md-6"></div>
                                     </div>
                                 </div>
+                            </div>
 
 
-                                {{-- <div class="col-md-12">
+                            {{-- <div class="col-md-12">
                                             <label class="col-md-6 control-label" for="">dsfgfdgfdgdfgfdg</label>                                
                                             <div class="col-md-6">
                                                 <input type="checkbox" checked id="sw2">
@@ -174,23 +173,28 @@
                                             </div>
                                         </div> --}}
 
-                                <br>
-                                <div class="row">
-                                    <div class="col-12 text-right">
-                                        <div class="form-group form-horizontal margin-top-lg" id="btns"></div>
-                                    </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    <div class="form-group form-horizontal margin-top-lg" id="btns"></div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row justify-content-md-center">
+                                <div class="hint-border">
+                                    <p id="hint"></p>
+                                </div>
+                            </div>
+                        </div>
 
-                        </form>
-                    </div>
+                    </form>
                 </div>
-
-                <!-- <button type="button" onclick="save()" class="btn btn-success">Submit</button> -->
             </div>
         </div>
+        <!-- <button type="button" onclick="save()" class="btn btn-success">Submit</button> -->
     </div>
-</section>
+</div>
 
 @endsection
 
@@ -245,7 +249,7 @@
     </div>
 </div>
 
-<div class="modal fade" role="dialog" id="hintModal">
+{{-- <div class="modal fade" role="dialog" id="hintModal">
     <div class="modal-dialog" style="z-index: 1050">
         <div class="modal-content">
             <div class="modal-header">
@@ -258,10 +262,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">{{{ trans('admin.close') }}}</button>
-            </div>
-        </div>
-    </div>
 </div>
+</div>
+</div>
+</div> --}}
 
 <div class="modal fade" role="dialog" id="msgModal">
     <div class="modal-dialog" style="z-index: 1050">
@@ -779,7 +783,8 @@ $("#start-quiz").modal('show');
     }
 
     function next(counter,cnt) {
-        
+        $("#hint").text('', '');
+
         $("#nextBtn").attr("disabled",true)
         $("#skipBtn").attr("disabled",false)
         var origcnt = cnt;
@@ -957,6 +962,8 @@ $("#start-quiz").modal('show');
     
     
     function save(counter,cnt) {
+        $("#hint").text('', '');
+    
         var datas = $('#form').serializeArray();
 
         datas.push({
@@ -1001,6 +1008,8 @@ $("#start-quiz").modal('show');
     }
 
     function skip(i,cnt){
+        $("#hint").text('', '');
+
         isskip = true;
         var result = confirm("Want to skip?");
         if (result) {

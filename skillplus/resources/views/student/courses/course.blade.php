@@ -1,4 +1,4 @@
-@extends('admin.newlayout.layout',['breadcom'=>['Lesson','Edit']])
+@extends('admin.newlayout.layout-vue',['breadcom'=>['Lesson','Edit']])
 @section('title')
 <a href="/admin/user_dashboard/courses" class="btn btn-warning btn-sm">Back</a>
 Course Content
@@ -58,34 +58,29 @@ Course Content
 
 <div class="row">
     <div class="col-xs-6 col-md-3 col-sm-6 text-center">
-
+        <course-component></course-component>
     </div>
 </div>
 </div>
-<section class="card">
-    <div class="card-body">
+<section>
+    <div class="col-12">
         <div class="row">
-            <div class="col-lg-12" id="content">
-
+            <div class="col-8">
+                <div class="custom-card">
+                    <div class="accordion" id="accordionExample">
+                        <div id="secAc"></div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-12" id="content">
-
-                <video id="video" class="w-100 h-a" controls>
-                    {{-- <source src="http://192.168.110.16:8080/bin/admin/file_example_MP4_480_1_5MG.mp4" type="video/mp4"> --}}
-                    <source type="video/mp4">
-                    Your browser does not support HTML5 video.
-                </video>
+            <div class="col-4 custom-card" id="content">
+                <div class="custom-card">
+                    <video id="video" class="w-100 h-a" controls>
+                        {{-- <source src="http://192.168.110.16:8080/bin/admin/file_example_MP4_480_1_5MG.mp4" type="video/mp4"> --}}
+                        <source type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
             </div>
-
-        </div>
-    </div>
-</section>
-
-<section class="card">
-    <div class="accordion" id="accordionExample">
-        <div class="card" id="secAc">
-
-
         </div>
     </div>
 </section>
@@ -119,9 +114,10 @@ Course Content
 @section('script')
 <script type="application/javascript" src="/assets/vendor/jquery-te/jquery-te-1.4.0.min.js"></script>
 <script>
+
     var isSave = 1;
-var id = "{{request()->route('id')}}";
-var getvideo;
+    var id = "{{request()->route('id')}}";
+    var getvideo;
     $(document).ready(function() {
         $('.editor-te').jqte({format: false});
         loadMetaData();
@@ -154,6 +150,8 @@ var getvideo;
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
+
+                    console.log(data);
                    $("#content").append(data.content)
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -253,6 +251,7 @@ var getvideo;
                         data.data.forEach(function(a,i) {
                             dr = a.duration?a.duartion:'N/A';
                             size = a.size?a.size:'N/A';
+                            
                             $("#secAc").append(
                                 '<div class="card-header" id="heading_"'+i+'>'+
                                    ' <h2 class="mb-0">'+
@@ -284,6 +283,7 @@ var getvideo;
                         alert('Error! Contact IT Department.');
                     }
                 });
+
     }
 </script>
 @endsection

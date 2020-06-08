@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Panel - @yield('title', '')</title>
 
     <!-- General CSS Files -->
@@ -16,6 +15,8 @@
     <link rel="stylesheet" href="/assets/admin/modules/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/assets/admin/modules/jquery-selectric/selectric.css">
     <link rel="stylesheet" href="/assets/admin/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+
+
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="/assets/admin/css/style.css">
@@ -34,19 +35,22 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
+    
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-94034622-3');
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-94034622-3');
-
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]); !!}
+            window.Laravel = {!! json_encode([
+                'csrfToken' => csrf_token(),
+            ]) !!};
     </script>
     <!-- /END GA -->
-    <link href="{{ asset('css/app.css') }}">
+
+    @yield('style')
+
+    <link href="{!! asset('css/app.css') !!}">
 </head>
 
 <body>
@@ -465,9 +469,12 @@
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- General JS Scripts -->
+    <script src="/assets/admin/modules/jquery.min.js"></script>
     <script src="/assets/admin/modules/popper.js"></script>
     <script src="/assets/admin/modules/tooltip.js"></script>
     <script src="/assets/admin/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/admin/modules/nicescroll/jquery.nicescroll.min.js"></script>
     <script src="/assets/admin/modules/moment.min.js"></script>
     <script src="/assets/admin/js/stisla.js"></script>
     <script src="/assets/admin/modules/cleave-js/dist/cleave.min.js"></script>
@@ -484,6 +491,9 @@
     <script src="/assets/admin/modules/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="/assets/admin/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
     <script src="/assets/admin/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script>
+    <script src="/assets/admin/modules/datatables/datatables.min.js"></script>
+    <script src="/assets/admin/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
     <script src="/assets/admin/modules/jquery-ui/jquery-ui.min.js"></script>
     <script src="/assets/admin/modules/summernote/summernote-bs4.js"></script>
     <script src="/assets/admin/modules/jquery-selectric/jquery.selectric.min.js"></script>
@@ -493,6 +503,29 @@
     <script src="/assets/admin/modules/jquery-selectric/jquery.selectric.min.js"></script>
     <script src="/assets/admin/js/scripts.js"></script>
     <script src="/assets/admin/js/custom.js"></script>
+    <div id="footerScript">
+    </div>
+    <script>
+        @if(isset($menu))
+        $(function() {
+            $('#{!! $menu !!}').addClass('active');
+        });
+        @endif
+        @if(isset($url))
+        $(function() {
+            $('.nav-link').each(function() {
+                if ('{!! url(' / ') !!}' + $(this).attr('href') == '{!! $url !!}') {
+                    $(this).parent().addClass('active');
+                }
+            })
+        });
+        @endif
+        
+    </script>
+    @section('scripts')
+    @show
+
+    @yield('script')
 </body>
 
 </html>

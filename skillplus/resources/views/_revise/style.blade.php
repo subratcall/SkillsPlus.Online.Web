@@ -1,5 +1,5 @@
 <link href="{{ asset('assets/js/dataTables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-<link href="{{ asset('assets/_plugins/responsive.dataTable.css') }}" rel="stylesheet"> 
+<link href="{{ asset('assets/_plugins/responsive.dataTable.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/_plugins/jquery.scrolling-tabs.min.css') }}" rel="stylesheet">
 <script src="{{ asset('assets/_plugins/datatable.js') }}"></script>
 <script>
@@ -13,7 +13,7 @@
         padding-bottom: 0px !important;
     }
 
-    #form .error{
+    #form .error {
         border-color: red;
     }
 
@@ -21,7 +21,8 @@
         color: red;
     }
 
-    .dataTables_filter, .dataTables_length {
+    .dataTables_filter,
+    .dataTables_length {
         display: none;
     }
 
@@ -40,7 +41,7 @@
     .margin-right {
         margin-right: 10px;
     }
-    
+
     .margin-top {
         margin-top: 10px;
     }
@@ -69,6 +70,15 @@
         float: left;
     }
 
+    .custom-card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+        background-color: #fff;
+        border-radius: 3px;
+        border: none;
+        position: relative;
+        margin-bottom: 30px;
+    }
+
     .card-body {
         padding-left: 15px !important;
         padding-right: 15px !important;
@@ -86,8 +96,8 @@
         }
     }
 
-    .select2 {
-        
+    .select2 {}
     }
-}​
+
+    ​
 </style>
