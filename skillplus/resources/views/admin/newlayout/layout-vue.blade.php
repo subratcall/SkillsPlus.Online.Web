@@ -51,6 +51,8 @@
     @yield('style')
 
     <link href="{!! asset('css/app.css') !!}">
+
+    @include('_revise.style-vue')
 </head>
 
 <body>
