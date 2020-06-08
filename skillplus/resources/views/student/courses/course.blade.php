@@ -197,7 +197,9 @@ Course Content -->
                         <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4 />
                         <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
                     </video>
-                    <div class="video-details" id="video-details"></div>
+                    <h1>
+                        <div class="video-details" id="video-details"></div>
+                    </h1>
                 </div>
             </div>
         </div>
