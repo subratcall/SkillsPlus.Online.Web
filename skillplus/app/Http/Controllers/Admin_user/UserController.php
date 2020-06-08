@@ -72,6 +72,13 @@ class UserController extends Controller
         return response()->json(($article) ? 'success' : 'not');
     }
 
+    public function delete($id){
+        global $user;
+        $article = Article::where('user_id',$user['id'])->find($id);
+        $article->update(['mode'=>'delete']);
+        return response()->json(($article) ? 'success' : 'not');
+    }
+
     public function getContentById()
     {
         $datas = Sell::where('buyer_id',Session::get('user_id'))->get();

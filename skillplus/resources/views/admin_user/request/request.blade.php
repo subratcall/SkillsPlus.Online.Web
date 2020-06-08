@@ -43,7 +43,7 @@ New Request
 <section class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-md-6">
 
                 <form id="form" class="form-horizontal form-bordered" method="post">
 
@@ -74,7 +74,7 @@ New Request
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-primary pull-left" onclick="save()" type="button">save</button>
+                                <button class="btn btn-primary pull-left" onclick="save()" type="button">Save</button>
                             </div>
                         </div>
                     </div>

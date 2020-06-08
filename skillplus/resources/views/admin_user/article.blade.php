@@ -217,16 +217,66 @@ Article
                 $('#tbl').DataTable().ajax.reload();
                 console.log(res);
             });
+
+            $.notify({
+                    message: 'Update successfully.'
+                },{
+                    type: 'success',
+                    allow_dismiss: false,
+                    z_index: '99999999',
+                    placement: {
+                        from: "bottom",
+                        align: "right"
+                    },
+                    position:'fixed'
+            });
+
             
         } else {
-            $.post('/admin/user_dashboard/request/article/store', data).then(function(res) {
+
+            $.post(`/admin/user_dashboard/request/article/store`, data).then(function(res) {
                 $("#switch-list").trigger("click");
                 $('#tbl').DataTable().ajax.reload();
                 console.log(res);
             });
+
+            $.notify({
+                    message: 'Save successfully.'
+                },{
+                    type: 'success',
+                    allow_dismiss: false,
+                    z_index: '99999999',
+                    placement: {
+                        from: "bottom",
+                        align: "right"
+                    },
+                    position:'fixed'
+            });
         }
 
     });
+
+        function destroy(article_id) {
+
+            $.get(`/admin/user_dashboard/request/article/${article_id}/delete`).then(function(res) {
+                $("#switch-list").trigger("click");
+                $('#tbl').DataTable().ajax.reload();
+                console.log(res);
+            });
+
+            $.notify({
+                    message: 'Unpublish request done.'
+                },{
+                    type: 'danger',
+                    allow_dismiss: false,
+                    z_index: '99999999',
+                    placement: {
+                        from: "bottom",
+                        align: "right"
+                    },
+                    position:'fixed'
+            });
+        }
 
 
         function list() {
@@ -284,7 +334,6 @@ Article
                             responsivePriority: 1,
                             data: null,
                             defaultContent: `
-                                <button class="btn btn-default">View</button>
                                 <button class="btn btn-primary" id="edit">Edit</button>
                                 <button class="btn btn-danger" id="delete">Delete</button>
                             `,
@@ -312,6 +361,13 @@ Article
                         
                         $("#actionType").val(1);
 
+                     });
+
+
+                     $('#tbl tbody').on('click', '#delete', function () {
+                        var data = tbl.row($(this).parents('tr')).data();
+
+                        destroy(data.id);
                      });
                     
         }

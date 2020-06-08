@@ -250,7 +250,9 @@ Course Content -->
     var isSave = 1;
     var id = "{{request()->route('id')}}";
     var getvideo;
+
     $(document).ready(function() {
+
         $('.editor-te').jqte({format: false});
         loadMetaData();
         loadData();
