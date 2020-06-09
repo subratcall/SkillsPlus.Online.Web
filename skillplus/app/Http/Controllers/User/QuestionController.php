@@ -119,8 +119,12 @@ class QuestionController extends Controller
 			$row = array();
 			$row['question'] = $myList->question;
 			$row['type'] = $myList->type;
-			$row['id'] = $myList->id;
-			$row['action'] = '';
+            $row['id'] = $myList->id;
+            $btn = '';
+            $btn = $btn.'<a href="/admin/question/edit_question/'.$myList->id.'" class="btn  btn-warning btn-xs" title="Edit">Edit</a>  ';
+            //$btn .= ' <a type="button" onclick="delete_question('."'".$myList->id."'".')" class="btn btn-danger">Delete</a>';
+            //$btn .= ' <a href="/admin/user_student/student_show_lesson/'.$myList->id.'/'.$id.'" class="btn btn-primary">View Lesson</a>';
+			$row['action'] = $btn;
 			$data[] = $row;
 		}
         $output = array("data" => $data);
@@ -133,6 +137,11 @@ class QuestionController extends Controller
     }
 
     public function new()
+    {    
+        return view('vendor.question.new');
+    }
+
+    public function edit($id)
     {    
         return view('vendor.question.new');
     }
@@ -163,5 +172,11 @@ class QuestionController extends Controller
     {
         $checkAns = QuestionHeader::where(['lesson_id'=>$id])->first();
         echo json_encode($checkAns);
+    }
+
+    public function getQuestionDetail($id)
+    {
+        $getData = Questions::where(['id'=>$id])->first();
+        return $getData;
     }
 }

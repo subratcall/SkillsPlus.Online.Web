@@ -6,6 +6,7 @@ Route::group(['prefix' => 'admin'],function (){
         Route::group(['prefix'=>'question'],function (){
             Route::get('','User\QuestionController@main');
             Route::get('new','User\QuestionController@new');
+            Route::get('edit_question/{id}','User\QuestionController@edit');
             Route::get('edit/{id}','User\RequestController@edit');
             Route::get('delete/{id}','User\RequestController@delete');
             Route::post('store','User\QuestionController@store');
@@ -14,7 +15,8 @@ Route::group(['prefix' => 'admin'],function (){
             Route::post('admit','User\RequestController@admit');       
             Route::post('save_qh','User\QuestionController@saveQuestionHeader');       
             Route::post('update_qh','User\QuestionController@updateQuestionHeader');     
-            Route::get('get_qh/{id}','User\QuestionController@getQuestionHeader');
+            Route::get('get_qh/{id}','User\QuestionController@getQuestionHeader');  
+            Route::get('get_question_detail/{id}','User\QuestionController@getQuestionDetail');
         });
 
         Route::get('profile','Admin\SettingController@profile');
@@ -113,6 +115,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('student_quiz_show_submit_answers/{qid}/{lid}','Admin_user\VendorController@viewSubmittedAnswer'); 
             Route::get('student_quiz_check_submit_answers/{lid}','Admin_user\VendorController@getScoreDetails'); 
             Route::get('student_quiz_get_answers/{lid}','Admin_user\VendorController@getAnswers');
+            Route::get('student_quiz_get_submit_answers/{lid}','Admin_user\VendorController@checkSubmittedAnswers'); 
             
         });
 

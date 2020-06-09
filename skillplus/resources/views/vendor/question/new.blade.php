@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Report','Users']])
 @section('title')
-New Question
+<p id="titleHeader">New Question</p>
 @endsection
 
 @section('style')
@@ -131,8 +131,12 @@ New Question
     var selecetdMultipleAnswer = '';
     tbl = '';
     $(document).ready(function() {
-        
+        if(id){
+            $("#titleHeader").text("Edit Question");
+            loadData();
+        }
     });
+
     function selectType(){
         if($("#type").val()=="Multiple Choice"){
             $("#multipleDiv").removeClass("hidden");
@@ -236,6 +240,43 @@ New Question
 
     function selectAnswercheck(e,i){
         $("#checkboxcheck_"+i).val($("#"+e).val())
+    }
+
+    function loadData(){
+        $.ajax({
+            url: "{{ url('/admin/question/get_question_detail') }}/"+id,
+            type: "get",
+            dataType: 'JSON',
+            success: function(data) { 
+                $("#type").val(data.type);
+                $("#question").val(data.question);
+                $("#hint").val(data.hint);
+                $("#remarks").val(data.correctremarks);
+                $("#points").val(data.points);
+                selectType()
+                var o = data.options.split("|");
+                o.forEach(function(a) {
+                    console.log(a)
+                    console.log(data.answer)
+                    var b = a==data.answer?'checked':'';
+                    $("#checkDiv").append(
+                        '<div class="input-group" id="optscheck_'+inputIdCheck+'">'+
+                            '<input type="text" class="form-control" placeholder="" name="optioncheck[]" value="'+a+'" id="optioncheck'+inputIdCheck+'">'+
+                            '<div class="input-group-append">'+                    
+                                '<span class="input-group-text">'+
+                                '<input type="checkbox" class=" btn-warning" '+b+' name="checkboxcheck[]" id="checkboxcheck_'+inputIdCheck+'" onclick="selectAnswercheck('+"'optioncheck"+inputIdCheck+"',"+inputIdCheck+')" aria-label="...">'+
+                            ' </span>'+
+                                '<button class="btn btn-warning" type="button" onclick="removeOptioncheck('+"'optscheck_"+inputIdCheck+"'"+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+
+                            '</div>'   +
+                        '</div>'            
+                    );
+                    inputIdCheck++;
+                })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
+        });
     }
     
 </script>

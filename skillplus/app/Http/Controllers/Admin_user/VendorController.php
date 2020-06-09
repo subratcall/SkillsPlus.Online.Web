@@ -412,7 +412,7 @@ class VendorController extends Controller
             $btn = ''; 
             $btn = $btn.'<a href="/admin/user_student/student_lesson_quiz/'.$myList->id.'/'.$id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
             //$btn = $btn.'<a href="/admin/user_student/student_lesson_take_quiz/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
-            $btn .= ' <a href="/admin/user_student/student_show_lesson/'.$myList->id.'/'.$id.'" type="button" class="btn btn-primary">View Lesson</a>';
+            $btn .= ' <a href="/admin/user_student/student_show_lesson/'.$myList->id.'/'.$id.'" class="btn btn-primary">View Lesson</a>';
             $row['action'] = $btn;
 			$data[] = $row;
 		}
@@ -733,6 +733,27 @@ class VendorController extends Controller
             $array[] = $row; 
         }
         $output = array("data" => $array,"ff" => 123);
+		echo json_encode($output);
+    }
+
+    public function checkSubmittedAnswers($lid)
+    {
+        $data = CourseLog::where(['lesson_id'=>$lid])->get();
+        $array = array();
+        foreach ($data as $value) {
+            $row = array();            
+            $f = Questions::where(['id'=>$value->question_id])->first();
+            $row['question'] = strtoupper($f->question);
+            $row['type'] = strtoupper($f->type);
+            $row['options'] = $f->options;
+            $row['hint'] = strtoupper($f->hint);
+            $row['remarks'] = strtoupper($f->correctremarks);
+            $row['answer'] = strtoupper($f->answer);
+            $row['id'] = $value->question_id;  
+            $row['status'] = $value->status;  
+            $array[] = $row; 
+        }
+        $output = array("data" => $array);
 		echo json_encode($output);
     }
 }

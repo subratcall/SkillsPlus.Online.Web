@@ -364,6 +364,7 @@ var isskip = false;
 var isSubmit = false;
 var listLis='';
 var quizIndex = "";
+var pager = '';
 
 // default
 $("#time").text("00:00");
@@ -890,7 +891,6 @@ $("#start-quiz").modal('show');
         }
     }
     function next(counter,cnt) {
-                        console.log(listLis)
         $("#hint").text('', '');
 
         $("#nextBtn").attr("disabled",true)
@@ -1063,6 +1063,12 @@ $("#start-quiz").modal('show');
 
 
 
+                                pager = '<nav aria-label="Page navigation" class="">'+
+                                    ' <ul class="pagination">'+
+                                            listLis +
+                                    '  </ul>'+
+                                '   </nav> ';
+
                             if(origcnt<getData.length){
                                 //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
                                btns += `<button type="button" id="skipBtn" onclick="skip(${nxt_counter}, ${nxt_cnt})" class="btn btn-danger btn-lg" style="margin-right:5px">Skip</button>`;
@@ -1076,7 +1082,7 @@ $("#start-quiz").modal('show');
                             btns += `<button type="button" id="submitBtn" onclick="save(${nxt_counter}, ${nxt_cnt})" class="btn btn-success btn-lg" style="margin-right:5px">Submit</button>`;
 
                             $("#btns").append(btns);
-                     
+                            changeColor()
                             /* if((counter+1)==getData.length){
                                 $("#btns").append('<button type="button" btn="donetBtn" onclick="setDone()" class="btn btn-success">Finish Quiz</button> ');
                             } */ 
@@ -1115,18 +1121,21 @@ $("#start-quiz").modal('show');
             data: datas,
             dataType: 'JSON',
             success: function(data) {
-                        $("#pager_4").addClass("btn-success")
               // location = "/admin/user_vendor/vendor_lesson_list/{{request()->route('cid')}}";
               isskip = false;
               $("#nextBtn").attr("disabled",false);
               $("#skipBtn").attr("disabled",true);
                        // alert(1)
-
-              if(counter==getData.length){
-                $("#btns").html(`
+                       changeColor()
+               if(counter==getData.length){
+                $("#btns").html(
+                    pager+`
                     <button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success btn-lg">Finish Quiz</button>
                 `);
-                }
+                /* $("#btns").append(`
+                    <button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success btn-lg">Finish Quiz</button>
+                `); */
+                } 
               next(counter,cnt)
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -1236,6 +1245,26 @@ $("#start-quiz").modal('show');
         });
     }
 
+    function changeColor() {
+        $.ajax({
+            url: "{{ url('/admin/user_student/student_quiz_get_submit_answers') }}/"+id,
+            type: "get",
+            dataType: 'JSON',
+            success: function(data) {             
+                data.data.forEach(function(a) {
+                    if(a.status=="Done"){
+                        $(".pager_"+a.id).addClass("btn-success")
+                    }else if(a.status=="Skipped"){
+                        $(".pager_"+a.id).addClass("btn-danger")
+                    }
+                })
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
+        });
+    }
+
     function setDone() {
         $.ajax({
             url: "{{ url('/admin/user_student/student_quiz_check_submit_answers') }}/"+id,
@@ -1248,6 +1277,7 @@ $("#start-quiz").modal('show');
               $("#submitBtn").addClass("hidden");  
               $("#donetBtn").addClass("hidden");  
                 $("#f").empty();
+                $("#btns").empty();
                                 $("#f").append(
                                     `
                                     <div class="quiz-wrapper">
@@ -1269,6 +1299,7 @@ $("#start-quiz").modal('show');
                                 );
                                 
                 $("#btns").append('<button type="button" btn="summarytBtn" onclick="displayanswer(0,1)" class="btn btn-danger">View Summary</button> ');
+                $("#btns").append('<a href="/admin/user_dashboard/user" class="btn btn-success">Return to Dashboard</a> ');
                 
                      loadAnswers()
                      isSubmit = true;
