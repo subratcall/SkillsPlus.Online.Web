@@ -268,7 +268,7 @@
     </div>
 </div>
 
-{{-- <div class="modal fade" role="dialog" id="hintModal">
+<div class="modal fade" role="dialog" id="hintModal">
     <div class="modal-dialog" style="z-index: 1050">
         <div class="modal-content">
             <div class="modal-header">
@@ -284,7 +284,7 @@
 </div>
 </div>
 </div>
-</div> --}}
+</div>
 
 <div class="modal fade" role="dialog" id="msgModal">
     <div class="modal-dialog" style="z-index: 1050">
@@ -295,7 +295,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p id="hint">Answer Submitted!</p>
+                <p id="hint2"> </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">{{{ trans('admin.close') }}}</button>
@@ -612,7 +612,7 @@ $("#start-quiz").modal('show');
                         //console.log(ii);
                         //i++;
                         var cnt = 1;
-                        listLis+= ' <li class="page-item"><a class="page-link" href="#" onclick="next('+ii+','+cnt2+')">'+cnt2+'</a></li>' ;
+                        listLis+= ' <li class="page-item"><a class="page-link" id="pager_'+entry.id+'" href="#" onclick="next('+ii+','+cnt2+')">'+cnt2+'</a></li>' ;
                         cnt2++;
                         if(ii==0){
                             if(entry.type=="CHECKBOX"){
@@ -820,9 +820,7 @@ $("#start-quiz").modal('show');
             var prev_counter = counter-1;                  
             var nxt_cnt = cnt+1;
             var prev_cnt = cnt-1; 
-            /* if(item.id){
-                showAnswer(item.id)
-            }   */  
+            
             console.log(counter)
             console.log(counter+" prev counter")
             console.log(item.type+" type")
@@ -958,18 +956,18 @@ $("#start-quiz").modal('show');
                             
 
                             var btns ="";
-                            var b1;
+                            var b1='';
                             if(origcnt>1){
                                 // $("#btns").append('<button type="button" id="prevBtn" onclick="next('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button> ');  
                                 b1 = `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg" style="margin-right:5px">Prev</button>`;
-                                btns += `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg" style="margin-right:5px">Prev</button>`;
+                                //btns += `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg" style="margin-right:5px">Prev</button>`;
                             }
 
-                            btns+=  '<nav aria-label="Page navigation example  " class="pull-left">'+
+                            btns+=  '<nav aria-label="Page navigation" class="">'+
                                     ' <ul class="pagination">'+
-                                        '  <li class="page-item">'+b1+'</li>'+
+                                       // '  <li class="page-item">'+b1+'</li>'+
                                             listLis +
-                                        '  <li class="page-item"><a class="page-link" href="#">Next</a></li>'+
+                                       // '  <li class="page-item"><a class="page-link" href="#">Next</a></li>'+
                                     '  </ul>'+
                                 '   </nav> ';
 
@@ -977,6 +975,7 @@ $("#start-quiz").modal('show');
                                 //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
                                btns += `<button type="button" id="skipBtn" onclick="skip(${nxt_counter}, ${nxt_cnt})" class="btn btn-danger btn-lg" style="margin-right:5px">Skip</button>`;
                             }  
+           
                             
                             // $("#btns").append('<button type="button" id="hintBtn" onclick="hint('+item.id+')" class="btn btn-warning">Hint</button> ');  
                             // $("#btns").append('<button type="button" id="submitBtn" onclick="save('+nxt_counter+","+nxt_cnt+')" class="btn btn-success">Submit</button> '); 
@@ -1024,10 +1023,12 @@ $("#start-quiz").modal('show');
             data: datas,
             dataType: 'JSON',
             success: function(data) {
+                        $("#pager_4").addClass("btn-success")
               // location = "/admin/user_vendor/vendor_lesson_list/{{request()->route('cid')}}";
               isskip = false;
               $("#nextBtn").attr("disabled",false);
               $("#skipBtn").attr("disabled",true);
+                       // alert(1)
 
               if(counter==getData.length){
                 $("#btns").html(`
@@ -1054,9 +1055,9 @@ $("#start-quiz").modal('show');
     }
 
     function hint(id){
-        $("#hintModal").modal('show');
+        $("#msgModal").modal('show');
         i = getData.find(item => item.id === id);     
-        $("#hint").text(i.hint) 
+        $("#hint2").text(i.hint) 
     }
 
     function showAnswer(thisLid,val,type) {
@@ -1085,6 +1086,9 @@ $("#start-quiz").modal('show');
                             }
                         })                  
                     })
+                    /* if(val){
+                        $("#pager_4").addClass("btn-success")
+                    } */
                 }
 
                 if(type=="mc")
@@ -1096,18 +1100,28 @@ $("#start-quiz").modal('show');
                             $("#mc_"+a).prop("checked", true);
                         }             
                     });
+                    /* if(val){
+                        $("#pager_"+thisLid).addClass("btn-success")
+                    } */
                 }
 
                 if(type=="sa")
                 {
                     $("#sa_update_id").val(data.data.id);
                     $("#shortanswer").val(data.data.answer);
+                    
+                    /* if(data.data.answer){
+                        $("#pager_"+thisLid).addClass("btn-success")
+                    } */
                 }
 
                 if(type=="pr")
                 {
                     $("#pr_update_id").val(data.data.id);
                     $("#paragraph").val(data.data.answer);
+                    /* if(data.data.answer){
+                        $("#pager_"+thisLid).addClass("btn-success")
+                    } */
                 }
 
                 if(type=="sw")
@@ -1117,7 +1131,10 @@ $("#start-quiz").modal('show');
                         $("#"+getsws).bootstrapToggle('on')
                     }else{
                         $("#"+getsws).bootstrapToggle('off')
-                    }                
+                    }   
+                    /* if(data.data.answer){
+                        $("#pager_"+thisLid).addClass("btn-success")
+                    }  */            
                 }
 
             },
@@ -1230,9 +1247,7 @@ $("#start-quiz").modal('show');
             var prev_counter = counter-1;                  
             var nxt_cnt = cnt+1;
             var prev_cnt = cnt-1; 
-            /* if(item.id){
-                showAnswer(item.id)
-            }   */  
+            
             console.log(counter)
             console.log(counter+" prev counter")
             console.log(item.type+" type")
