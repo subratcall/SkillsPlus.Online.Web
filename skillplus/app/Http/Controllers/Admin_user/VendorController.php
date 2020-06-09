@@ -735,4 +735,25 @@ class VendorController extends Controller
         $output = array("data" => $array,"ff" => 123);
 		echo json_encode($output);
     }
+
+    public function checkSubmittedAnswers($lid)
+    {
+        $data = CourseLog::where(['lesson_id'=>$lid])->get();
+        $array = array();
+        foreach ($data as $value) {
+            $row = array();            
+            $f = Questions::where(['id'=>$value->question_id])->first();
+            $row['question'] = strtoupper($f->question);
+            $row['type'] = strtoupper($f->type);
+            $row['options'] = $f->options;
+            $row['hint'] = strtoupper($f->hint);
+            $row['remarks'] = strtoupper($f->correctremarks);
+            $row['answer'] = strtoupper($f->answer);
+            $row['id'] = $value->question_id;  
+            $row['status'] = $value->status;  
+            $array[] = $row; 
+        }
+        $output = array("data" => $array);
+		echo json_encode($output);
+    }
 }

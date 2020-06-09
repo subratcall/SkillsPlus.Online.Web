@@ -790,7 +790,6 @@ $("#start-quiz").modal('show');
         }
     }
     function next(counter,cnt) {
-                        console.log(listLis)
         $("#hint").text('', '');
 
         $("#nextBtn").attr("disabled",true)
@@ -965,7 +964,7 @@ $("#start-quiz").modal('show');
                             btns += `<button type="button" id="submitBtn" onclick="save(${nxt_counter}, ${nxt_cnt})" class="btn btn-success btn-lg" style="margin-right:5px">Submit</button>`;
 
                             $("#btns").append(btns);
-                     
+                            changeColor()
                             /* if((counter+1)==getData.length){
                                 $("#btns").append('<button type="button" btn="donetBtn" onclick="setDone()" class="btn btn-success">Finish Quiz</button> ');
                             } */ 
@@ -1004,18 +1003,19 @@ $("#start-quiz").modal('show');
             data: datas,
             dataType: 'JSON',
             success: function(data) {
-                        $("#pager_4").addClass("btn-success")
               // location = "/admin/user_vendor/vendor_lesson_list/{{request()->route('cid')}}";
               isskip = false;
               $("#nextBtn").attr("disabled",false);
               $("#skipBtn").attr("disabled",true);
                        // alert(1)
-
-              if(counter==getData.length){
-                $("#btns").html(`
+               if(counter==getData.length){
+                /* $("#btns").html(`
+                    <button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success btn-lg">Finish Quiz</button>
+                `); */
+                $("#btns").append(`
                     <button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success btn-lg">Finish Quiz</button>
                 `);
-                }
+                } 
               next(counter,cnt)
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -1118,6 +1118,26 @@ $("#start-quiz").modal('show');
                     }  */            
                 }
 
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
+        });
+    }
+
+    function changeColor() {
+        $.ajax({
+            url: "{{ url('/admin/user_student/student_quiz_get_submit_answers') }}/"+id,
+            type: "get",
+            dataType: 'JSON',
+            success: function(data) {             
+                data.data.forEach(function(a) {
+                    if(a.status=="Done"){
+                        $("#pager_"+a.id).addClass("btn-success")
+                    }else if(a.status=="Skipped"){
+                        $("#pager_"+a.id).addClass("btn-danger")
+                    }
+                })
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
