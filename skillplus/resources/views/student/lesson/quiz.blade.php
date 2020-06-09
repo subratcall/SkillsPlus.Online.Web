@@ -219,7 +219,7 @@
                     <div id="quiz-name"></div>
                 </h1>
             </div>
-            <div class="modal-footer-full-width  modal-footer">
+            <div class="modal-footer-full-width  modal-footer">            
                 <button type="button" class="btn btn-primary btn-md btn-rounded" onclick="start()"
                     data-dismiss="modal">Start</button>
                 <a type="button" class="btn btn-danger btn-md btn-rounded"
@@ -306,6 +306,7 @@ var cnt_sw = 0;
 var getsws;
 var isskip = false;
 var isSubmit = false;
+var listLis='';
 
 // default
 $("#time").text("00:00");
@@ -587,10 +588,13 @@ $("#start-quiz").modal('show');
                     var getii = 0;
                     var getcnt = 0;
                     var gethint = '';
+                        var cnt2 = 1;
                     data.data.forEach(function(entry,ii) {
                         //console.log(ii);
                         //i++;
                         var cnt = 1;
+                        listLis+= ' <li class="page-item"><a class="page-link" href="#" onclick="next('+ii+','+cnt2+')">'+cnt2+'</a></li>' ;
+                        cnt2++;
                         if(ii==0){
                             if(entry.type=="CHECKBOX"){
                                 var res = entry.options.split("|");
@@ -606,7 +610,7 @@ $("#start-quiz").modal('show');
                                 $("#f").append(                                    
                                         `
                                         <div class="col-md-12 margin-bottom">
-                                            <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                            <img src="${(entry.attachment == true)? entry.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
                                         </div>
                                         `+                                                       
                                         '<div class="col-md-12 margin-bottom">'+
@@ -646,7 +650,7 @@ $("#start-quiz").modal('show');
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +     
                                         `
                                         <div class="col-md-12 margin-bottom">
-                                        <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        <img src="${(entry.attachment == true)? entry.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
                                         </div>
                                         `+                                                                                      
                                         '<div class="col-md-12">'+
@@ -672,7 +676,7 @@ $("#start-quiz").modal('show');
                                         //'<label class="col-md-6 control-label" for="">'+i+'. '+entry.question+'</label>'     +    
                                         `
                                         <div class="col-md-12 margin-bottom">
-                                        <img src="${(item.attachment == true)? item.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
+                                        <img src="${(entry.attachment == true)? entry.attachment:'https://bostonparkingspaces.com/wp-content/themes/classiera/images/nothumb/nothumb370x300.png'}"'>
                                         </div>
                                         `+                                                                                         
                                         '<div class="col-md-12">'+
@@ -753,11 +757,14 @@ $("#start-quiz").modal('show');
                             }
                             ii++;
                             //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+ii+","+cnt+')" class="btn btn-primary">Next</button> ');  
-                            $("#btns").append(`
+                            $("#btns").append(
+                                `
                                             <button type="button" id="skipBtn" disabled onclick="skip(${ii}, ${cnt})" class="btn btn-danger btn-lg">Skip</button>
                                             <button type="button" id="hintBtn" disabled onclick="hint(${entry.id})" class="btn btn-warning btn-lg">Hint</button>
                                             <button type="button" id="submitBtn" disabled onclick="save(${ii}, ${cnt})" class="btn btn-success btn-lg">Submit</button>
-                            `); 
+                            `
+                   
+                            ); 
                             getii = ii;
                             getcnt = cnt;
                             gethint=entry.id;
@@ -782,8 +789,8 @@ $("#start-quiz").modal('show');
             });
         }
     }
-
     function next(counter,cnt) {
+                        console.log(listLis)
         $("#hint").text('', '');
 
         $("#nextBtn").attr("disabled",true)
@@ -932,12 +939,20 @@ $("#start-quiz").modal('show');
                             
 
                             var btns ="";
-
+                            var b1;
                             if(origcnt>1){
                                 // $("#btns").append('<button type="button" id="prevBtn" onclick="next('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button> ');  
-
+                                b1 = `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg" style="margin-right:5px">Prev</button>`;
                                 btns += `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg" style="margin-right:5px">Prev</button>`;
                             }
+
+                            btns+=  '<nav aria-label="Page navigation example  " class="pull-left">'+
+                                    ' <ul class="pagination">'+
+                                        '  <li class="page-item">'+b1+'</li>'+
+                                            listLis +
+                                        '  <li class="page-item"><a class="page-link" href="#">Next</a></li>'+
+                                    '  </ul>'+
+                                '   </nav> ';
 
                             if(origcnt<getData.length){
                                 //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 

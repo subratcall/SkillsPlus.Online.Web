@@ -10,6 +10,9 @@ use App\Models\ContentMeta;
 use App\Models\Questions;
 use App\Models\QuestionsLesson;
 use App\Models\CourseLog;
+use App\Models\Sell;
+use App\Models\ContentRate;
+use App\Models\ContentLearn;
 use DB;
 use Session;
 
@@ -62,6 +65,7 @@ class VendorController extends Controller
 			$row['content'] = strtoupper($myList->content);
 			$row['mode'] = strtoupper($myList->mode);
 			$row['type'] = strtoupper($myList->type);
+			$row['subtitle'] = strtoupper($myList->subTitle);
             $row['id'] = $myList->id;            
             $btn = ''; 
             $btn = $btn.'<a href="/admin/user_vendor/vendor_lesson_list/'.$myList->id.'" class="btn  btn-warning btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
@@ -94,6 +98,7 @@ class VendorController extends Controller
                 'type'=>$request->type,
                 'mode'=>'draft',
                 'private'=>$request->private,
+                'subtitle'=>$request->subtitle,
             ]);
         }else if($request->mode=="Update"){
             Content::where(['id'=>$request->id])->update([
@@ -101,10 +106,10 @@ class VendorController extends Controller
                     'content'=>$request->content,
                     'type'=>$request->type,
                     'private'=>$request->private,
+                    'subtitle'=>$request->subtitle,
                 ]
             );
-        }    
-
+        }
         echo true;
     }
 
@@ -117,6 +122,42 @@ class VendorController extends Controller
     {
         $getData = Content::where(['id'=>$id])->first();
         return $getData;
+    }
+
+    public function getRatings($id)
+    {
+        $getData = ContentRate::where(['content_id'=>$id])->get();
+        $data = array();
+        $cnt = 0;
+        foreach ($getData as $myList)
+		{
+            $cnt+=$myList->rate;
+        }
+		echo json_encode($cnt);
+    }
+
+    public function getPrecourse($id)
+    {
+        $getData = ContentMeta::where(['content_id'=>$id,'option'=>'precourse'])->first();
+        $pieces = explode(",", $getData->value);
+        $data = array();
+        foreach ($pieces as $myList)
+		{
+            if($myList!=''){
+                $row = array();
+                $getMeta = Content::where(['id'=>$myList])->first();
+                $row['title'] = $getMeta->title;
+                $data[] = $row;
+            }
+		}
+        $output = array("data" => $data,"getData" => $getData);
+		echo json_encode($output);
+    }
+
+    public function countCoursePurchased($id)
+    {
+        $datas = Sell::where('content_id',$id)->get();
+		echo json_encode(count($datas));
     }
 
     public function showCourseMeta($id)
@@ -155,6 +196,53 @@ class VendorController extends Controller
             }            
 		}
         $output = array("data" => $cnt);
+		echo json_encode($output);
+    }    
+    
+    public function saveCourseLearn(Request $request){
+        if($request->mode=="Save"){
+            ContentLearn::create([
+                'content_id'=>$request->title,
+                'description'=>$request->content,
+            ]);
+        }else if($request->mode=="Update"){
+            ContentLearn::where(['id'=>$request->id])->update([
+                'content_id'=>$request->title,
+                'description'=>$request->content,
+                ]
+            );
+        }
+        echo true;
+    }
+
+    public function getCourseLearn($id)
+    {
+        $data = ContentLearn::where('id',$id)->first();
+		echo json_encode($data);
+    }
+
+    public function destroyCourseLarn($id){        
+        ContentLearn::where('id',$id)->delete();
+        echo true;
+    }
+
+    public function getAllCourseLearn($id)
+    {
+        $getData = ContentLearn::where(['content_id'=>$id])->get();
+        $data = array();
+        foreach ($getData as $myList)
+		{
+            if($myList!=''){
+                $row = array();
+                $row['des'] = $myList->description;
+                $btn = '';
+                $btn = $btn.'<button type="button" class="btn  btn-primary btn-xs" title="Edit" onclick="edit_cl('."'".$myList->id."'".')"><i class="far fa-save"></i></button>  ';
+                $btn = $btn.'<button type="button" class="btn  btn-danger btn-xs" title="Delete" onclick="delete_cl('."'".$myList->id."'".')"><i class="fas fa-trash"></i></button>  ';
+                $row['action'] = $btn;
+                $data[] = $row;
+            }
+		}
+        $output = array("data" => $data);
 		echo json_encode($output);
     }
 

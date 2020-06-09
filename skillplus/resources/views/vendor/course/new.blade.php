@@ -53,7 +53,7 @@
 
                     <div class="row">
 
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="control-label tab-con" for="inputDefault">Course Type</label>
                             <div class="tab-con">
                                 <select name="type" id="type" class="form-control font-s">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="control-label tab-con"
                                 for="inputDefault">{{{ trans('main.publish_type') }}}</label>
                             <div class="tab-con">
@@ -74,11 +74,18 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             <label class="control-label" for="inputDefault">Course Title</label>
                             <div class="">
                                 <input type="hidden" name="id" id="id" class="form-control">
                                 <input type="text" name="title" id="title" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label class="control-label" for="inputDefault">Sub Title</label>
+                            <div class="">
+                                <input type="text" name="subtitle" id="subtitle" class="form-control">
                             </div>
                         </div>
 
@@ -116,6 +123,25 @@
     </div>
 </section>
 
+<section class="card">                 
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <br>
+                <legend>List to learn</legend>      
+                <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
+                    width="100%">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 
 @endsection
 
@@ -149,7 +175,23 @@ var id = "{{request()->route('id')}}";
                     $("#type").val(data.type);
                     $(".jqte_editor").html(data.content)
                     $("#private").val(data.private);
-                    $("#id").val(data.id);                    
+                    $("#subtitle").val(data.subTitle);
+                    $("#id").val(data.id);   
+
+                    $('#tbl').dtcustom({
+                        "ajax": {
+                                "type": "GET",
+                                "url": "{{ url('/admin/user_vendor/vendor_course_get_all_cl') }}/"+id,
+                                "dataSrc": function(json) {
+                                    return json.data;
+                                }
+                            },
+                        "columns": [{
+                            "data": "des"
+                            },{
+                            "data": "action"
+                            }]
+                    });                 
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert('Error! Contact IT Department.');
