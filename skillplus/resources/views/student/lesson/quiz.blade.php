@@ -326,6 +326,7 @@ var getsws;
 var isskip = false;
 var isSubmit = false;
 var listLis='';
+var pager = '';
 
 // default
 $("#time").text("00:00");
@@ -612,7 +613,7 @@ $("#start-quiz").modal('show');
                         //console.log(ii);
                         //i++;
                         var cnt = 1;
-                        listLis+= ' <li class="page-item"><a class="page-link" id="pager_'+entry.id+'" href="#" onclick="next('+ii+','+cnt2+')">'+cnt2+'</a></li>' ;
+                        listLis+= ' <li class="page-item"><a class="page-link pager_'+entry.id+'" id="" href="#" onclick="next('+ii+','+cnt2+')">'+cnt2+'</a></li>' ;
                         cnt2++;
                         if(ii==0){
                             if(entry.type=="CHECKBOX"){
@@ -970,6 +971,12 @@ $("#start-quiz").modal('show');
                                     '  </ul>'+
                                 '   </nav> ';
 
+                                pager = '<nav aria-label="Page navigation" class="">'+
+                                    ' <ul class="pagination">'+
+                                            listLis +
+                                    '  </ul>'+
+                                '   </nav> ';
+
                             if(origcnt<getData.length){
                                 //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
                                btns += `<button type="button" id="skipBtn" onclick="skip(${nxt_counter}, ${nxt_cnt})" class="btn btn-danger btn-lg" style="margin-right:5px">Skip</button>`;
@@ -1027,13 +1034,15 @@ $("#start-quiz").modal('show');
               $("#nextBtn").attr("disabled",false);
               $("#skipBtn").attr("disabled",true);
                        // alert(1)
+                       changeColor()
                if(counter==getData.length){
-                /* $("#btns").html(`
-                    <button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success btn-lg">Finish Quiz</button>
-                `); */
-                $("#btns").append(`
+                $("#btns").html(
+                    pager+`
                     <button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success btn-lg">Finish Quiz</button>
                 `);
+                /* $("#btns").append(`
+                    <button type="button" id="donetBtn" onclick="setDone()" class="btn btn-success btn-lg">Finish Quiz</button>
+                `); */
                 } 
               next(counter,cnt)
             },
@@ -1152,9 +1161,9 @@ $("#start-quiz").modal('show');
             success: function(data) {             
                 data.data.forEach(function(a) {
                     if(a.status=="Done"){
-                        $("#pager_"+a.id).addClass("btn-success")
+                        $(".pager_"+a.id).addClass("btn-success")
                     }else if(a.status=="Skipped"){
-                        $("#pager_"+a.id).addClass("btn-danger")
+                        $(".pager_"+a.id).addClass("btn-danger")
                     }
                 })
             },
@@ -1176,6 +1185,7 @@ $("#start-quiz").modal('show');
               $("#submitBtn").addClass("hidden");  
               $("#donetBtn").addClass("hidden");  
                 $("#f").empty();
+                $("#btns").empty();
                                 $("#f").append(
                                     `
                                     <div class="quiz-wrapper">
@@ -1197,6 +1207,7 @@ $("#start-quiz").modal('show');
                                 );
                                 
                 $("#btns").append('<button type="button" btn="summarytBtn" onclick="displayanswer(0,1)" class="btn btn-danger">View Summary</button> ');
+                $("#btns").append('<a href="/admin/user_dashboard/user" class="btn btn-success">Return to Dashboard</a> ');
                 
                      loadAnswers()
                      isSubmit = true;

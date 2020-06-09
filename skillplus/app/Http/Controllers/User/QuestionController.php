@@ -119,8 +119,11 @@ class QuestionController extends Controller
 			$row = array();
 			$row['question'] = $myList->question;
 			$row['type'] = $myList->type;
-			$row['id'] = $myList->id;
-			$row['action'] = '';
+            $row['id'] = $myList->id;
+            $btn = '';
+            $btn = $btn.'<button type="button" onclick="delete_question('."'".$myList->id."'".')" class="btn  btn-warning btn-xs" title="Edit">Edit</button>  ';
+            $btn .= ' <button type="button" onclick="delete_question('."'".$myList->id."'".')" class="btn btn-danger">Delete</button>';
+			$row['action'] = $btn;
 			$data[] = $row;
 		}
         $output = array("data" => $data);
