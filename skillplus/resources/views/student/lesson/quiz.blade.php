@@ -68,6 +68,10 @@
         display: none;
     }
 
+    .visible {
+        display: inline;
+    }
+
     .card {
         margin-left: 20px;
         margin-right: 20px;
@@ -132,6 +136,21 @@
         background: #6777EF;
         color: #fff;
     }
+
+    .display-answer {
+        border: solid 1px black;
+    }
+
+    .quiz-btn-sidebar {
+        position: absolute;
+        z-index: 1;
+        right: 1px;
+        top: 5%;
+    }
+
+    .quiz-sidebar {
+        margin-top: 200px;
+    }
 </style>
 @endsection
 
@@ -150,35 +169,36 @@
 </div>
 </div>
 <div class="row">
-    <div class="col-12 card" id="div">
-        <div class="col-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1>Quiz title: <div class="display-inline" id="titleQuiz"></div>
-                    </h1>
+    <div class="quiz-view" id="div">
+        <div class="card">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>Quiz title: <div class="display-inline" id="titleQuiz"></div>
+                        </h1>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        <h4 class="padding-top">Timer: <div class="display-inline" id="time"></div>
+                        </h4>
+                    </div>
                 </div>
 
-                <div class="col-md-6 text-right">
-                    <h4 class="padding-top">Timer: <div class="display-inline" id="time"></div>
-                    </h4>
-                </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="form" class="form-horizontal">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <form id="form" class="form-horizontal">
-
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-md-12 margin-top-lg">
-                                    <div class="row justify-content-center">
-                                        <div id="f" class="col-md-6"></div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-12 margin-top-lg">
+                                        <div class="row justify-content-center">
+                                            <div id="f" class="col-md-6"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
 
-                            {{-- <div class="col-md-12">
+                                {{-- <div class="col-md-12">
                                             <label class="col-md-6 control-label" for="">dsfgfdgfdgdfgfdg</label>                                
                                             <div class="col-md-6">
                                                 <input type="checkbox" checked id="sw2">
@@ -192,27 +212,44 @@
                                             </div>
                                         </div> --}}
 
-                            <br>
-                            <div class="row">
-                                <div class="col-12 text-right">
-                                    <div class="form-group form-horizontal margin-top-lg" id="btns"></div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-12 text-right">
+                                        <div class="form-group form-horizontal margin-top-lg" id="btns"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="row justify-content-md-center">
-                                <div class="hint-border">
-                                    <p id="hint"></p>
+                            <div class="col-12">
+                                <div class="row justify-content-md-center">
+                                    <div class="hint-border">
+                                        <p id="hint"></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </form>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- <button type="button" onclick="save()" class="btn btn-success">Submit</button> -->
+        </div>
+    </div>
+    <div class="quiz-sidebar">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div id="quiz-pagination"></div>
                 </div>
             </div>
         </div>
-        <!-- <button type="button" onclick="save()" class="btn btn-success">Submit</button> -->
     </div>
+
+    <div class="quiz-btn-sidebar">
+        <button class="btn btn-xs btn-primary" id="sidebar-btn-toggle">
+            <div id="sidebar-toggle-button-text"></div>
+        </button>
+    </div>
+
 </div>
 
 @endsection
@@ -281,9 +318,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">{{{ trans('admin.close') }}}</button>
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" role="dialog" id="msgModal">
@@ -326,6 +363,7 @@ var getsws;
 var isskip = false;
 var isSubmit = false;
 var listLis='';
+var quizIndex = "";
 
 // default
 $("#time").text("00:00");
@@ -352,7 +390,43 @@ $("#start-quiz").modal('show');
     // }
 
 
+    
+
+    // var sidebartoggle = $("#sidebar-toggle-button-text"); 
+
+    var sbtoggle = false;
+    // sidebartoggle.text("close");
+
+    $(".quiz-view").addClass("col-12");
+    $(".quiz-sidebar").addClass("hidden");
+    $("#sidebar-toggle-button-text").text("open");
+    $(".quiz-btn-sidebar").addClass('visible');
+
+
+    $("#sidebar-btn-toggle").click(function() {
+        sbtoggle = !sbtoggle;
+
+        if (sbtoggle == true) {
+            $("#sidebar-toggle-button-text").text("close");
+
+            $(".quiz-view").removeClass("col-12");
+            $(".quiz-view").addClass("col-10");
+
+            $(".quiz-sidebar").addClass("visible col-2");
+        } 
+        else if (sbtoggle == false) {
+            $("#sidebar-toggle-button-text").text("open");
+            $(".quiz-view").removeClass("col-10");
+            $(".quiz-view").addClass("col-12");
+            
+            $(".quiz-sidebar").removeClass("visible col-2");
+            $(".quiz-sidebar").addClass("hidden col-2");
+        }
+    });
+
+
     $(document).ready(function() {
+
 
         $.ajax({
             url: "{{ url('/admin/user_vendor/vendor_course_show') }}/"+lid,
@@ -613,6 +687,13 @@ $("#start-quiz").modal('show');
                         //i++;
                         var cnt = 1;
                         listLis+= ' <li class="page-item"><a class="page-link" id="pager_'+entry.id+'" href="#" onclick="next('+ii+','+cnt2+')">'+cnt2+'</a></li>' ;
+
+                        quizIndex += `
+                            <div class="col-6 margin-top">
+                                <button type="button" id="pager_${entry.id}" class="btn btn-lg btn-default" onclick="next(${ii},${cnt2})">${cnt2}</button>
+                            </div>
+                            `;
+
                         cnt2++;
                         if(ii==0){
                             if(entry.type=="CHECKBOX"){
@@ -960,16 +1041,27 @@ $("#start-quiz").modal('show');
                             if(origcnt>1){
                                 // $("#btns").append('<button type="button" id="prevBtn" onclick="next('+prev_counter+","+prev_cnt+')" class="btn btn-primary">Prev</button> ');  
                                 b1 = `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg" style="margin-right:5px">Prev</button>`;
-                                //btns += `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg" style="margin-right:5px">Prev</button>`;
+                                btns += `<button type="button" id="prevBtn" onclick="next(${prev_counter}, ${prev_cnt})" class="btn btn-primary btn-lg" style="margin-right:5px">Prev</button>`;
                             }
 
-                            btns+=  '<nav aria-label="Page navigation" class="">'+
-                                    ' <ul class="pagination">'+
-                                       // '  <li class="page-item">'+b1+'</li>'+
-                                            listLis +
-                                       // '  <li class="page-item"><a class="page-link" href="#">Next</a></li>'+
-                                    '  </ul>'+
-                                '   </nav> ';
+                            // btns+=  '<nav aria-label="Page navigation" class="">'+
+                            //         ' <ul class="pagination">'+
+                            //            // '  <li class="page-item">'+b1+'</li>'+
+                            //                 listLis +
+                            //            // '  <li class="page-item"><a class="page-link" href="#">Next</a></li>'+
+                            //         '  </ul>'+
+                            //     '   </nav> ';
+
+                                
+                            $("#quiz-pagination").html(`
+
+                                <div class="row">
+                                        ${quizIndex}
+                                </div>
+
+                            `);
+
+
 
                             if(origcnt<getData.length){
                                 //$("#btns").append('<button type="button" id="nextBtn" disabled onclick="next('+nxt_counter+","+nxt_cnt+')" class="btn btn-primary">Next</button> '); 
@@ -1282,7 +1374,7 @@ $("#start-quiz").modal('show');
                                         '<input type="hidden" name="type" value="CHECKBOX">'+
                                             g+
                                         '</div>'+
-                                        '<div style="border:solid;width: 50%">'+
+                                        '<div class="col-md-12 margin-bottom padding">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
                                        ' </div>'                         
@@ -1319,7 +1411,7 @@ $("#start-quiz").modal('show');
                                         '<input type="hidden" name="type" value="MULTIPLE CHOICE">'+
                                             g+
                                         '</div>'+
-                                        '<div style="border:solid;width: 50%">'+
+                                        '<div class="col-md-12 margin-bottom padding display-answer">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
                                        ' </div>'                         
@@ -1346,7 +1438,7 @@ $("#start-quiz").modal('show');
                                             '<input type="text" name="shortanswer" id="shortanswer" class="form-control">'+
                                             '<input type="hidden" name="type" value="SHORT ANSWER">'+
                                         '</div>'+
-                                        '<div style="border:solid;width: 50%">'+
+                                        '<div class="col-md-12 margin-bottom padding display-answer">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
                                        ' </div>'                          
@@ -1373,7 +1465,7 @@ $("#start-quiz").modal('show');
                                             '<textarea name="paragraph" id="paragraph" class="form-control"></textarea>'+
                                             '<input type="hidden" name="type" value="PARAGRAPH">'+
                                         '</div>'+
-                                        '<div style="border:solid;width: 50%">'+
+                                        '<div class="col-md-12 margin-bottom padding display-answer">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
                                        ' </div>'                
@@ -1400,7 +1492,7 @@ $("#start-quiz").modal('show');
                                             ' <input type="checkbox"  id="sws_'+cnt+'"  name="sws_'+cnt+'" data-toggle="toggle" data-onstyle="primary" data-offstyle="danger">'+
                                             '<input type="hidden" name="type" value="SWITCH">'+
                                             '</div>'+
-                                        '<div style="border:solid;width: 50%">'+
+                                            '<div class="col-md-12 margin-bottom padding display-answer">'+
                                             '<p>Correct Answer: '+getCorrectAnswers.answer+'</p>'+
                                             '<p>Remarks: '+getCorrectAnswers.remarks+'</p>'+
                                        ' </div>'                       
