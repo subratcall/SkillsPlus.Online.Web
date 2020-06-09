@@ -254,6 +254,22 @@
                 $("#remarks").val(data.correctremarks);
                 $("#points").val(data.points);
                 selectType()
+                var o = data.options.split("|");
+                o.forEach(function(a) {
+                    console.log(a)
+                    $("#checkDiv").append(
+                        '<div class="input-group" id="optscheck_'+inputIdCheck+'">'+
+                            '<input type="text" class="form-control" placeholder="" name="optioncheck[]" value="'+a+'" id="optioncheck'+inputIdCheck+'">'+
+                            '<div class="input-group-append">'+                    
+                                '<span class="input-group-text">'+
+                                '<input type="checkbox" class=" btn-warning" '+a==data.answer?"checked":""+' name="checkboxcheck[]" id="checkboxcheck_'+inputIdCheck+'" onclick="selectAnswercheck('+"'optioncheck"+inputIdCheck+"',"+inputIdCheck+')" aria-label="...">'+
+                            ' </span>'+
+                                '<button class="btn btn-warning" type="button" onclick="removeOptioncheck('+"'optscheck_"+inputIdCheck+"'"+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+
+                            '</div>'   +
+                        '</div>'            
+                    );
+                    inputIdCheck++;
+                })
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
