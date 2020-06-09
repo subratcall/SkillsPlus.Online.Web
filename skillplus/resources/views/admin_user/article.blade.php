@@ -222,11 +222,11 @@ Article
                     message: 'Update successfully.'
                 },{
                     type: 'success',
-                    allow_dismiss: false,
+                    allow_dismiss: true,
                     z_index: '99999999',
                     placement: {
-                        from: "bottom",
-                        align: "right"
+                        from: "top",
+                        align: "center"
                     },
                     position:'fixed'
             });
@@ -244,11 +244,11 @@ Article
                     message: 'Save successfully.'
                 },{
                     type: 'success',
-                    allow_dismiss: false,
+                    allow_dismiss: true,
                     z_index: '99999999',
                     placement: {
-                        from: "bottom",
-                        align: "right"
+                        from: "top",
+                        align: "center"
                     },
                     position:'fixed'
             });
@@ -268,11 +268,11 @@ Article
                     message: 'Unpublish request done.'
                 },{
                     type: 'danger',
-                    allow_dismiss: false,
+                    allow_dismiss: true,
                     z_index: '99999999',
                     placement: {
-                        from: "bottom",
-                        align: "right"
+                        from: "top",
+                        align: "center"
                     },
                     position:'fixed'
             });
