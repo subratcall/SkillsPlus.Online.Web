@@ -113,6 +113,25 @@
     .modal-footer-full-width {
         border-top: 1px solid #9ea2a2 !important;
     }
+
+    .quiz-wrapper {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.644);
+        background-color: #fff;
+        border-radius: 3px;
+        border: none;
+        position: relative;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .quiz-content {
+        font-size: 18px;
+    }
+
+    .quiz-header {
+        background: #6777EF;
+        color: #fff;
+    }
 </style>
 @endsection
 
@@ -219,7 +238,7 @@
                     <div id="quiz-name"></div>
                 </h1>
             </div>
-            <div class="modal-footer-full-width  modal-footer">            
+            <div class="modal-footer-full-width  modal-footer">
                 <button type="button" class="btn btn-primary btn-md btn-rounded" onclick="start()"
                     data-dismiss="modal">Start</button>
                 <a type="button" class="btn btn-danger btn-md btn-rounded"
@@ -1157,13 +1176,24 @@ $("#start-quiz").modal('show');
               $("#submitBtn").addClass("hidden");  
               $("#donetBtn").addClass("hidden");  
                 $("#f").empty();
-                                $("#f").append(     
-                                        '<label class="control-label" for="">No. of Questions: '+data.number_of_questions+'</label><br>'     +  
-                                        '<label class="control-label" for="">No. of Correct Answer: '+data.number_of_correct+'</label><br>'     +  
-                                        '<label class="control-label" for="">Marks:</label><ul>'     +  
-                                        '<li><label class="control-label" for="">Total: '+data.total_points+'</label></li>'     +  
-                                        '<li><label class="control-label" for="">Achieve: '+data.total_correct_points+'</label></li>'     +  
-                                        '<li><label class="control-label" for="">Total: '+data.avg+'</label></li></ul>'                          
+                                $("#f").append(
+                                    `
+                                    <div class="quiz-wrapper">
+                                        <div class="quiz-container">
+                                            <div class="quiz-header">
+                                                <h1>Quiz Result:</h1>
+                                            </div>
+                                            <div class="quiz-content">
+                                                <label class="control-label" for="">No. of Questions: ${data.number_of_questions}</label><br>
+                                                <label class="control-label" for="">No. of Correct Answer: ${data.number_of_correct}</label><br>
+                                                <label class="control-label" for="">Marks:</label></br>
+                                                <label class="control-label" for="">Total: ${data.total_points}</label></br>
+                                                <label class="control-label" for="">Achieve: ${data.total_correct_points}</label></br>
+                                                <label class="control-label" for="">Total: ${data.avg}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `                    
                                 );
                                 
                 $("#btns").append('<button type="button" btn="summarytBtn" onclick="displayanswer(0,1)" class="btn btn-danger">View Summary</button> ');

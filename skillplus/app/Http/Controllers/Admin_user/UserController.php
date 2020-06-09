@@ -60,7 +60,17 @@ class UserController extends Controller
         global $user;
         $request->request->add(['user_id'=>$user['id'],'create_at'=>time()]);
         $article = Article::create($request->toArray());
-        return response()->json(($article) ? 'success' : 'not');
+        
+        if ($article) {
+            $arr = Array(
+                "status" => "success",
+                "lastid" => $article->id
+            );
+
+            return response()->json($arr);
+        } else {
+            return reponse()->json(["status" => "failed"]);
+        }
     }
 
     public function editStore(Request $request,$id){
