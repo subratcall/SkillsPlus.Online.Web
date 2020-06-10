@@ -86,6 +86,26 @@ My Questions
                     ],
                 }); 
 
+    function delete_question(id){
+        var result = confirm("Want to delete?");
+        if (result) {
+            $.ajax({
+                url: "{{url('/admin/question/deleteq')}}/" + id,
+                type: 'get',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    tbl.ajax.reload();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error get data from ajax');
+                }
+            });
+        }        
+    }
+
 
 
     // $(document).ready(function() {

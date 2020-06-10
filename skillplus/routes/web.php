@@ -10,6 +10,8 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('edit/{id}','User\RequestController@edit');
             Route::get('delete/{id}','User\RequestController@delete');
             Route::post('store','User\QuestionController@store');
+            Route::post('update','User\QuestionController@update');
+            Route::get('deleteq/{id}','User\QuestionController@destroyq');
             Route::get('list','User\QuestionController@getAllQuestionById');
             Route::post('edit/store/{id}','User\RequestController@editStore');
             Route::post('admit','User\RequestController@admit');       
