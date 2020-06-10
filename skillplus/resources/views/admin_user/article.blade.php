@@ -36,6 +36,7 @@ Article
                                     cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Title</th>
                                             <th>Category</th>
                                             <th>Date</th>
@@ -182,8 +183,10 @@ Article
     var mode = $("select[name=mode]");
     var pre_text = $("textarea[name=pre_text]");
     var text = $("textarea[name=text]");
+    var lasttr;
 
     $(document).ready(function() {
+
         list();
     });
 
@@ -212,70 +215,134 @@ Article
         var actionType = $("#actionType").val();
 
         if (actionType == "1") {
-            $.post(`/admin/user_dashboard/request/article/${article_id}/update`, data).then(function(res) {
-                $("#switch-list").trigger("click");
-                $('#tbl').DataTable().ajax.reload();
-                console.log(res);
-            });
 
-            $.notify({
+            $.ajax({
+                url: `/admin/user_dashboard/request/article/${article_id}/update`,
+                type: "POST",
+                data: data,
+                dataType: 'json',
+                success: function(res) {
+                    $("#switch-list").trigger("click");
+                    
+                    $('#tbl').DataTable().ajax.reload(null, false)  
+
+                    $.notify({
                     message: 'Update successfully.'
-                },{
-                    type: 'success',
-                    allow_dismiss: true,
-                    z_index: '99999999',
-                    placement: {
-                        from: "top",
-                        align: "center"
-                    },
-                    position:'fixed'
+                    },{
+                        type: 'success',
+                        allow_dismiss: true,
+                        z_index: '99999999',
+                        placement: {
+                            from: "top",
+                            align: "center"
+                        },
+                        position:'fixed'
+                    });
+
+                },
+                error: function(error) {
+                    $.notify({
+                    message: 'Failed.'
+                    },{
+                        type: 'danger',
+                        allow_dismiss: true,
+                        z_index: '99999999',
+                        placement: {
+                            from: "top",
+                            align: "center"
+                        },
+                        position:'fixed'
+                    });
+                }
             });
 
             
         } else {
 
-            $.post(`/admin/user_dashboard/request/article/store`, data).then(function(res) {
-                $("#switch-list").trigger("click");
-                $('#tbl').DataTable().ajax.reload();
-                console.log(res);
+            $.ajax({
+                url: `/admin/user_dashboard/request/article/store`,
+                type: "POST",
+                data: data,
+                dataType: 'json',
+                success: function(res) {
+                    $("#switch-list").trigger("click");
+                    $('#tbl').DataTable().ajax.reload(null, false);
+                    console.log(res);
+
+                    $.notify({
+                        message: 'Save successfully.'
+                    },{
+                        type: 'success',
+                        allow_dismiss: true,
+                        z_index: '99999999',
+                        placement: {
+                            from: "top",
+                            align: "center"
+                    },
+                        position:'fixed'
+                    });
+                },
+                error: function(error) {
+                    $.notify({
+                        message: 'Failed.'
+                    },{
+                        type: 'danger',
+                        allow_dismiss: true,
+                        z_index: '99999999',
+                        placement: {
+                            from: "top",
+                            align: "center"
+                    },
+                        position:'fixed'
+                    });
+                }
             });
 
-            $.notify({
-                    message: 'Save successfully.'
-                },{
-                    type: 'success',
-                    allow_dismiss: true,
-                    z_index: '99999999',
-                    placement: {
-                        from: "top",
-                        align: "center"
-                    },
-                    position:'fixed'
-            });
+           
         }
 
     });
 
         function destroy(article_id) {
 
-            $.get(`/admin/user_dashboard/request/article/${article_id}/delete`).then(function(res) {
-                $("#switch-list").trigger("click");
-                $('#tbl').DataTable().ajax.reload();
-                console.log(res);
+            $.ajax({
+                url: `/admin/user_dashboard/request/article/${article_id}/delete`,
+                type: "GET",
+                dataType: 'json',
+                success: function(res) {
+                    $("#switch-list").trigger("click");
+                    $('#tbl').DataTable().ajax.reload(null, false);
+
+                    $.notify({
+                    message: 'Unpublish request done.'
+                    },{
+                            type: 'success',
+                            allow_dismiss: true,
+                            z_index: '99999999',
+                            placement: {
+                                from: "top",
+                                align: "center"
+                            },
+                            position:'fixed'
+                    });
+
+                },
+                error: function(error) {
+                    $.notify({
+                    message: 'Unpublish request done.'
+                    },{
+                            type: 'danger',
+                            allow_dismiss: true,
+                            z_index: '99999999',
+                            placement: {
+                                from: "top",
+                                align: "center"
+                            },
+                            position:'fixed'
+                    });
+                }
             });
 
-            $.notify({
-                    message: 'Unpublish request done.'
-                },{
-                    type: 'danger',
-                    allow_dismiss: true,
-                    z_index: '99999999',
-                    placement: {
-                        from: "top",
-                        align: "center"
-                    },
-                    position:'fixed'
-            });
         }
 
 
@@ -289,6 +356,8 @@ Article
                             }
                         },
                         "columns": [{
+                                "data": "#",
+                            },{
                                 "data": "title"
                             },{
                                 "data": "category"
@@ -301,15 +370,19 @@ Article
                             },
                         ],
                         columnDefs: [
-                            { responsivePriority: 1, targets: 0 },
-                            {
+                            { 
+                            responsivePriority: 1,
+                            targets: 0,
+                            render: function ( data, type, row, meta ) {
+                                return meta.row + 1;
+                            }
+                            }, {
                                 render: function ( data, type, row ) {
                                 return moment(data).format('LL');
                                 },
                                 
-                                targets: 2
-                            },
-                            {
+                                targets: 3
+                            }, {
                                 render: function ( data, type, row ) {
                                 
                                     if (data == 'publish') {
@@ -328,7 +401,7 @@ Article
                                     }
                                 },
 
-                                targets: 3
+                                targets: 4
                             },
                             {
                             responsivePriority: 1,
@@ -341,6 +414,7 @@ Article
                             }
                         ],
                     }); 
+                
 
                     $('#tbl tbody').on('click', '#edit', function () {
                         var data = tbl.row($(this).parents('tr')).data();
@@ -361,6 +435,9 @@ Article
                         
                         $("#actionType").val(1);
 
+                        // lastid = $(this).parents('tr td').siblings(":first").text();
+
+                        lasttr = $(this).parents("tr");
                      });
 
 
@@ -368,7 +445,10 @@ Article
                         var data = tbl.row($(this).parents('tr')).data();
 
                         destroy(data.id);
+
+                        lasttr = $(this).parents("tr");
                      });
+
                     
         }
 
