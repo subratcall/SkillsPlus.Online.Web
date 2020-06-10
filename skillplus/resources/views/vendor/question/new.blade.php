@@ -220,8 +220,12 @@
             name: 'swtich',
             value: $("#switchOpt").prop("checked") == true?true:false
         });
+        data.push({
+            name: 'id',
+            value: id
+        });
         $.ajax({
-            url: "{{ url('/admin/question/store') }}",
+            url: id!=null?"{{ url('/admin/question/update') }}":"{{ url('/admin/question/store') }}",
             type: "post",
             data: data,
             dataType: 'JSON',
@@ -254,24 +258,67 @@
                 $("#remarks").val(data.correctremarks);
                 $("#points").val(data.points);
                 selectType()
-                var o = data.options.split("|");
-                o.forEach(function(a) {
-                    console.log(a)
-                    console.log(data.answer)
-                    var b = a==data.answer?'checked':'';
-                    $("#checkDiv").append(
-                        '<div class="input-group" id="optscheck_'+inputIdCheck+'">'+
-                            '<input type="text" class="form-control" placeholder="" name="optioncheck[]" value="'+a+'" id="optioncheck'+inputIdCheck+'">'+
-                            '<div class="input-group-append">'+                    
-                                '<span class="input-group-text">'+
-                                '<input type="checkbox" class=" btn-warning" '+b+' name="checkboxcheck[]" id="checkboxcheck_'+inputIdCheck+'" onclick="selectAnswercheck('+"'optioncheck"+inputIdCheck+"',"+inputIdCheck+')" aria-label="...">'+
-                            ' </span>'+
-                                '<button class="btn btn-warning" type="button" onclick="removeOptioncheck('+"'optscheck_"+inputIdCheck+"'"+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+
-                            '</div>'   +
-                        '</div>'            
-                    );
-                    inputIdCheck++;
-                })
+                if(data.type=="Checkbox"){
+                    var o = data.options.split("|");
+                    var ans = data.answer.split("|");
+                    console.log(ans)
+                    o.forEach(function(a) {
+                        var b = ans.indexOf(a);   
+                        var d = -Math.abs(1);
+                        var c =  b>d?'checked':'';
+                        console.log(a) 
+                        console.log(b) 
+                        $("#checkDiv").append(
+                            '<div class="input-group" id="optscheck_'+inputIdCheck+'">'+
+                                '<input type="text" class="form-control" placeholder="" name="optioncheck[]" value="'+a+'" id="optioncheck'+inputIdCheck+'">'+
+                                '<div class="input-group-append">'+                    
+                                    '<span class="input-group-text">'+
+                                    '<input type="checkbox" class=" btn-warning" '+c+' name="checkboxcheck[]" value="'+a+'" id="checkboxcheck_'+inputIdCheck+'" onclick="selectAnswercheck('+"'optioncheck"+inputIdCheck+"',"+inputIdCheck+')" aria-label="...">'+
+                                ' </span>'+
+                                    '<button class="btn btn-warning" type="button" onclick="removeOptioncheck('+"'optscheck_"+inputIdCheck+"'"+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+
+                                '</div>'   +
+                            '</div>'            
+                        );
+                        inputIdCheck++;
+                    })
+                }
+                
+                if(data.type=="Multiple Choice"){
+                    var o = data.options.split("|");
+                    o.forEach(function(a) {
+                        var b = a==data.answer?'checked':'';
+                        $("#multipleDiv").append(
+                            '<div class="input-group" id="opts_'+inputId+'">'+
+                                '<input type="text" class="form-control" placeholder="" value="'+a+'" name="option[]" id="option'+inputId+'">'+
+                                '<div class="input-group-append">'+
+                                    '<span class="input-group-text">'+
+                                    '<input type="radio" class="" name="checkbox" '+b+' id="checkbox_'+inputId+'" onclick="selectAnswer('+"'option"+inputId+"',"+inputId+')">'+
+                                ' </span>'+
+                                        '<button class="btn btn-warning" type="button" onclick="removeOption('+"'opts_"+inputId+"'"+')"><i class="fa fa-trash" aria-hidden="true"></i></button>'+
+                                    '</div>'   +
+                            '</div>'            
+                        );
+                        inputId++;
+                    })                    
+                }
+
+                if(data.type=="Short Answer"){
+                    $("#short_ans").val(data.answer);
+                }
+
+                if(data.type=="Paragraph"){
+                    $("#paragraph").val(data.answer);
+                }
+
+                if(data.type=="Switch"){
+                    if(data.answer=="true"){
+                        $("#switchOpt").bootstrapToggle('on')
+                    }else{
+                        $("#switchOpt").bootstrapToggle('off')
+                    }
+                }
+                
+                
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');

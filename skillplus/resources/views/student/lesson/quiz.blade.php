@@ -687,11 +687,11 @@ $("#start-quiz").modal('show');
                         //console.log(ii);
                         //i++;
                         var cnt = 1;
-                        listLis+= ' <li class="page-item"><a class="page-link" id="pager_'+entry.id+'" href="#" onclick="next('+ii+','+cnt2+')">'+cnt2+'</a></li>' ;
+                        listLis+= ' <li class="page-item"><a class="page-link pager_'+entry.id+'" id="" href="#" onclick="next('+ii+','+cnt2+')">'+cnt2+'</a></li>' ;
 
                         quizIndex += `
                             <div class="col-6 margin-top">
-                                <button type="button" id="pager_${entry.id}" class="btn btn-lg btn-default" onclick="next(${ii},${cnt2})">${cnt2}</button>
+                                <button type="button" id="" class="btn btn-lg btn-default pager_${entry.id}" onclick="next(${ii},${cnt2})">${cnt2}</button>
                             </div>
                             `;
 
