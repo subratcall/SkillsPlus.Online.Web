@@ -60,17 +60,9 @@ class UserController extends Controller
         global $user;
         $request->request->add(['user_id'=>$user['id'],'create_at'=>time()]);
         $article = Article::create($request->toArray());
-        
-        if ($article) {
-            $arr = Array(
-                "status" => "success",
-                "lastid" => $article->id
-            );
-
-            return response()->json($arr);
-        } else {
-            return reponse()->json(["status" => "failed"]);
-        }
+        if (!$article)
+            return abort(404);
+        return response()->json("success");
     }
 
     public function editStore(Request $request,$id){
@@ -79,14 +71,16 @@ class UserController extends Controller
         if(!$article)
             return abort(404);
         $article->update($request->toArray());
-        return response()->json(($article) ? 'success' : 'not');
+        return response()->json("success");
     }
 
     public function delete($id){
         global $user;
         $article = Article::where('user_id',$user['id'])->find($id);
         $article->update(['mode'=>'delete']);
-        return response()->json(($article) ? 'success' : 'not');
+        if (!$article)
+            return abort(404);
+        return response()->json("success");
     }
 
     public function getContentById()
