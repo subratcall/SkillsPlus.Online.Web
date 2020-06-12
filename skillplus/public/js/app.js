@@ -35783,6 +35783,7 @@ window.axios.defaults.headers.common = {
 /***/ (function(module, exports, __webpack_require__) {
 
 Vue.component('course-component', __webpack_require__(274));
+Vue.component('quiz-component', __webpack_require__(304));
 Vue.component('my-vuetable', __webpack_require__(273));
 
 /***/ }),
@@ -70417,6 +70418,377 @@ var e=Object.freeze({});function t(e){return null==e}function n(e){return null!=
 __webpack_require__(187);
 module.exports = __webpack_require__(188);
 
+
+/***/ }),
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+Vue.component("modal", __webpack_require__(308));
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    id: Number,
+    lid: Number
+  },
+  data: function data() {
+    return {
+      showModal: false,
+      displayTitle: {
+        course: "",
+        quiz: ""
+      }
+    };
+  },
+
+  methods: {
+    getTitle: function getTitle() {
+      var _this = this;
+
+      axios({
+        url: "/admin/user_vendor/vendor_course_show/" + this.lid,
+        type: "get",
+        dataType: "JSON"
+      }).then(function (data) {
+        _this.displayTitle.course = data.data.content;
+      }).catch(function (error) {
+        console.log(error);
+      });
+
+      axios({
+        url: "/admin/question/get_qh/" + this.id,
+        type: "get",
+        dataType: "JSON"
+      }).then(function (data) {
+        _this.displayTitle.quiz = data.data.title;
+
+        console.log(data.data);
+      });
+    },
+    start: function start() {}
+  },
+  mounted: function mounted() {
+    this.getTitle();
+  }
+});
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)();
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+/***/ }),
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(306)
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(302),
+  /* template */
+  __webpack_require__(305),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\scarfaceshing\\Desktop\\project\\htdocs\\SkillsPlus.Online.Web\\skillplus\\resources\\assets\\skillsready\\student\\quiz.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] quiz.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-65b21d92", Component.options)
+  } else {
+    hotAPI.reload("data-v-65b21d92", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-6"
+  }, [_c('h1', [_vm._v("Course: " + _vm._s(_vm.displayTitle.course))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-6"
+  }, [_c('h1', [_vm._v("Quiz: " + _vm._s(_vm.displayTitle.quiz))])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('h1', [_vm._v("Instruction:")]), _vm._v(" "), _c('p', {
+    staticClass: "text-center"
+  }, [_vm._v("\n            Tests & Quizzes: Example Instructions\n            When writing test or quiz instructions, there are several items you may want to consider including, depending on the structure of your quiz. Some of the information below may not apply:\n            Focus and Purpose of the Test/Quiz - Provide students context by letting them know what content is being focused on for the quiz and the learning goals the quiz is measuring.\n            Number and Type of Questions - Letting students know how many questions and whether the questions include multiple-choice, true-false, fill-in-the-blank, or essay will let them know what to expect and an idea of how long it will take them to complete the quiz.\n            Whether Students Can Expect Feedback - Including question feedback is recommended, as it helps students better learn from the test experience. This is especially important for practice quizzes. Let students know if they will be receiving feedback so they know what to expect.\n            Navigation Instructions - In an online environment, letting students know what to expect with the quiz navigation is important. Will all the questions be on one screen? Or, will they need to click \"Next\" to see the next question? What buttons do they click to start or submit a quiz?\n            Whether Students Get Multiple Attempts - You can set up a test or quiz so students can take it as many times as you indicate with either their last attempt or highest score for their grade. Let students know what to expect if you set up your test or quiz in this way.\n            If the Test/Quiz is Timed - If a test or quiz is timed, emphasize this to students letting them know when the time starts and the importance of completing the test in one sitting.\n            Weighting - If you weight your tests or quizzes in the course, let students know what that is and the impact this may have on their final grade.\n            Course or University Policy Regarding Cheating - If you are worried about cheating, you may want to include the course expectations or university policy regarding cheating to emphasize this information.\n          ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row text-right"
+  }, [_c('div', {
+    staticClass: "col-12"
+  }, [_c('button', {
+    staticClass: "btn btn-primary btn-lg",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Start")]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-default btn-lg",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Go Back")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-65b21d92", module.exports)
+  }
+}
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(303);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(11)("75dc52cf", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-65b21d92!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./quiz.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-65b21d92!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./quiz.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 307 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(311)
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(307),
+  /* template */
+  __webpack_require__(309),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\scarfaceshing\\Desktop\\project\\htdocs\\SkillsPlus.Online.Web\\skillplus\\resources\\assets\\skillsready\\components\\Modal.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Modal.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f1a9f53c", Component.options)
+  } else {
+    hotAPI.reload("data-v-f1a9f53c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 309 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('transition', {
+    attrs: {
+      "name": "modal"
+    }
+  }, [_c('div', {
+    staticClass: "modal-mask"
+  }, [_c('div', {
+    staticClass: "modal-wrapper"
+  }, [_c('div', {
+    staticClass: "modal-container"
+  }, [_c('div', {
+    staticClass: "modal-header"
+  }, [_vm._t("header", [_vm._v("default header")])], 2), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_vm._t("body", [_vm._v("default body")])], 2), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  }, [_vm._t("footer", [_vm._v("\n            default footer\n            "), _c('button', {
+    staticClass: "modal-default-button",
+    on: {
+      "click": function($event) {
+        return _vm.$emit('close')
+      }
+    }
+  }, [_vm._v("OK")])])], 2)])])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-f1a9f53c", module.exports)
+  }
+}
+
+/***/ }),
+/* 310 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)();
+exports.push([module.i, "\n.modal-mask {\r\n  position: fixed;\r\n  z-index: 9998;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0, 0, 0, 0.5);\r\n  display: table;\r\n  transition: opacity 0.3s ease;\n}\n.modal-wrapper {\r\n  display: table-cell;\r\n  vertical-align: middle;\n}\n.modal-container {\r\n  width: 300px;\r\n  margin: 0px auto;\r\n  padding: 20px 30px;\r\n  background-color: #fff;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\r\n  transition: all 0.3s ease;\r\n  font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\r\n  margin-top: 0;\r\n  color: #42b983;\n}\n.modal-body {\r\n  margin: 20px 0;\n}\n.modal-default-button {\r\n  float: right;\n}\r\n\r\n/*\r\n * The following styles are auto-applied to elements with\r\n * transition=\"modal\" when their visibility is toggled\r\n * by Vue.js.\r\n *\r\n * You can easily play with the modal transition by editing\r\n * these styles.\r\n */\n.modal-enter {\r\n  opacity: 0;\n}\n.modal-leave-active {\r\n  opacity: 0;\n}\n.modal-enter .modal-container,\r\n.modal-leave-active .modal-container {\r\n  transform: scale(1.1);\n}\r\n", ""]);
+
+/***/ }),
+/* 311 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(310);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(11)("673cecdc", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-f1a9f53c!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Modal.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-f1a9f53c!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Modal.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);
