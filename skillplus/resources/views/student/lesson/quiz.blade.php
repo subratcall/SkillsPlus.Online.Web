@@ -507,6 +507,7 @@ $("#start-quiz").modal('show');
                         if(entry.type=="CHECKBOX"){
                             var res = entry.options.split("|");
                             var g = '';
+                            
                             res.forEach(function(a) {
                                // g+='<div class="checkbox"><input type="checkbox" value='+a+' name="checkbox_'+i+'" id="checkbox_'+i+'" class=""><label>'+a+'</label></div>'
                                g+= '<div class="form-check">'+
