@@ -709,6 +709,7 @@ $("#start-quiz").modal('show');
                                                         '</label>'+
                                                     '</div>'
                                 })
+                                
                                 $("#f").append(                                    
                                         `
                                         <div class="col-md-12 margin-bottom">

@@ -1,20 +1,26 @@
 <template>
-  <div>
-    <div class="row">
-      <h1 class="col-md-6">Quiz title - {{ quizTitle }}</h1>
-      <h1 class="col-md-6 text-right">Timer - {{ timer }}</h1>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="quiz-content">
-          <quiz-content :id="id" :page="pageState"></quiz-content>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <h1 class="col-md-6">Quiz title - {{ quizTitle }}</h1>
+        <h1 class="col-md-6 text-right">Timer - {{ timer }}</h1>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <button type="button" class="btn btn-default" @click="back">Back</button>
-        <button type="button" class="btn btn-primary" @click="skip">Skip</button>
+      <div class="row">
+        <div v-bind:class="[content]">
+          <div class="quiz-content">
+            <quiz-content :id="id" :page="pageState"></quiz-content>
+          </div>
+        </div>
+
+
+        <div v-bind:class="[sidebar]">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-default" @click="back">Back</button>
+            <button type="button" class="btn btn-primary" @click="skip">Skip</button>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>
@@ -33,7 +39,10 @@ export default {
       quizTitle: "",
       data: "",
       pageState: 0,
-      pageLimit: 0
+      pageLimit: 0,
+      sidebarToggle: false,
+      content: 'col-md-6',
+      sidebar: 'col-md-6'
     };
   },
   components: {
