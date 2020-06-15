@@ -9,7 +9,9 @@
     <meta name="description" content="{!! get_option('site_description','') !!}">
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap-3.2.rtl.css"/>
-    <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css"/>
+   {{--  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css"/> --}}
+    <link rel="stylesheet" href="    https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
     <link rel="stylesheet" href="/assets/vendor/owlcarousel/dist/assets/owl.carousel.min.css"/>
     <link rel="stylesheet" href="/assets/vendor/raty/jquery.raty.css"/>
     <link rel="stylesheet" href="/assets/view/fluid-player-master/fluidplayer.min.css"/>

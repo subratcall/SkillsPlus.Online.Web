@@ -80,6 +80,8 @@
 @endif
 <script type="application/javascript" src="/assets/vendor/jquery-ui/js/jquery-1.10.2.js"></script>
 <script type="application/javascript" src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+{{-- <script type="application/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> --}}
+
 <script type="application/javascript" src="/assets/vendor/justgage/raphael-2.1.4.min.js"></script>
 <script type="application/javascript" src="/assets/vendor/justgage/justgage.js"></script>
 <script type="application/javascript" src="/assets/vendor/simplepagination/jquery.simplePagination.js"></script>
