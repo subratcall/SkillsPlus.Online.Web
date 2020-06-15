@@ -28,6 +28,12 @@ export default {};
 </script>
 
 <style scope>
+@media only screen and (max-width: 700px) {
+  .content {
+    padding: 0 8%;
+  }
+}
+
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -58,7 +64,7 @@ export default {};
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
+  color: #000000;
 }
 
 .modal-body {

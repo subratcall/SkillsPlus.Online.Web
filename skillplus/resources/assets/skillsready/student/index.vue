@@ -13,6 +13,12 @@
 .content {
   padding: 0 5%;
 }
+
+@media only screen and (max-width: 700px) {
+  .content {
+    padding: 0 8%;
+  }
+}
 </style>
 
 <script>
@@ -47,9 +53,7 @@ export default {
         .then(data => {
           this.displayTitle.course = data.data.content;
         })
-        .catch(function(error) {
-
-        });
+        .catch(function(error) {});
 
       axios({
         url: `/admin/question/get_qh/${this.id}`,
@@ -62,7 +66,7 @@ export default {
     quizStart() {
       this.view = "2";
 
-      this.$events.fire('start');
+      this.$events.fire("start");
     }
   },
   events: {

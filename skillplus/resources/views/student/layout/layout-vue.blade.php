@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" ref="app">
         @yield('page')
     </div>
 
