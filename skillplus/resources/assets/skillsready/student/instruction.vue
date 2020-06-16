@@ -36,6 +36,7 @@
 <script>
 export default {
   props: {
+    lid: Number,
     course: String,
     quiz: String
   },

@@ -20,6 +20,8 @@ use App\Models\TicketsCategory;
 use App\Models\Tickets;
 use App\Models\ContentPart;
 
+use App\SaveAnswer;
+
 class VendorController extends Controller
 {
 
@@ -756,5 +758,21 @@ class VendorController extends Controller
         }
         $output = array("data" => $array);
 		echo json_encode($output);
+    }
+
+
+    public function saveAnswers(Request $request, $lid, $id) {
+        
+        $content_id = $id;
+        $lesson_id = $lid;
+        
+        // SaveAnswer::create([
+        //     "content_id" => $content_id,
+        //     "lesson_id" => $lesson_id, 
+        // ]);
+
+
+
+        return response()->json($request->all());
     }
 }

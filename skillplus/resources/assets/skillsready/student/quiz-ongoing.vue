@@ -3,10 +3,10 @@
     <modal v-if="showModal" @close="showModal = false" class="visible-xs">
       <h3 slot="header">Hint</h3>
       <div slot="body">
-        <textarea class="form-control" rows="5" :disabled="true">Test</textarea>
+        <textarea class="form-control" rows="5" :disabled="true" :value="hintText"></textarea>
       </div>
       <div slot="footer">
-        <button class="modal-default-button" @click="showModal = false">Close</button>
+        <button class="modal-default-button" @click="showModal = false; hint = false">Close</button>
       </div>
     </modal>
 
@@ -17,113 +17,119 @@
       </div>
 
       <div class="row">
-        <div v-bind:class="[content]">
-          <div class="row">
-            <div class="quiz-content">
-              <div class="row">
-                <div class="col-md-12 text-right hidden-xs">
-                  <button type="button" class="btn btn-primary" @click="sidebarToggle">
-                    <span v-bind:class="[sidebarIcon]"></span>
-                  </button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div
-                    class="col-sm-8 col-md-5 col-lg-8 col-lg-offset-2"
-                    v-bind:class="{'col-sm-offset-2 col-md-offset-4': !sidebar, 'col-md-offset-3': sidebar}"
-                  >
-                    <quiz-content :id="id" :page="pageState"></quiz-content>
+        <div class="col-12">
+          <div v-bind:class="[content]">
+            <div class="row">
+              <div class="quiz-content">
+                <div class="row">
+                  <div class="col-md-12 text-right hidden-xs">
+                    <button type="button" class="btn btn-primary" @click="sidebarToggle">
+                      <span v-bind:class="[sidebarIcon]"></span>
+                    </button>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 text-right padding-top" style="border-top:solid 1px #555555">
-              <button type="button" class="btn btn-default" @click="back">Back</button>
-              <button type="button" class="btn btn-primary" @click="skip">Skip</button>
-              <button
-                type="button"
-                class="btn btn-warning"
-                @click="hint = !hint; showModal = !showModal"
-              >Hint</button>
-            </div>
-          </div>
-        </div>
-
-        <div v-show="sidebar" class="col-md-2 col-sm-4 sidebar hidden-xs">
-          <div class="row">
-            <div class="col-md-12 col-sm-12">
-              <div
-                class="col-sm-3 col-md-5 col-lg-4 margin-top"
-                v-for="(item, index) in pageLimit"
-                :key="index"
-              >
-                <button
-                  ref="indexes"
-                  type="button"
-                  class="btn btn-lg btn-default"
-                  @click="pageSkip($event)"
-                >{{ item }}</button>
-              </div>
-            </div>
-
-            <div class="col-md-12 col-sm-12 margin-top text-center">
-              <button type="button" class="btn btn-success" @click="submitAnswer($event)">Submit</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="visible-xs">
-          <div class="sidebar-button-small">
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="sidebarToggle"
-              v-show="sidebar == false"
-            >
-              <span v-bind:class="[sidebarIcon]"></span>
-            </button>
-          </div>
-          <div class="sidebar-small" v-show="sidebar">
-            <div class="col-xs-12">
-              <div class="row">
-                <div class="col-xs-2">
-                  <div class="row">
-                    <div class="col-xs-12 margin-top text-right visible-xs">
-                      <button type="button" class="btn btn-primary" @click="sidebarToggle">
-                        <span v-bind:class="[sidebarIcon]"></span>
-                      </button>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div
+                      class="col-sm-8 col-md-6 col-lg-8 col-lg-offset-2"
+                      v-bind:class="{'col-sm-offset-2 col-md-offset-4': !sidebar, 'col-md-offset-3': sidebar}"
+                    >
+                      <quiz-content :id="id" :lid="lid" :page="pageState"></quiz-content>
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-10">
-                  <div class="col-xs-3 margin-top" v-for="(item, index) in pageLimit" :key="index">
-                    <button
-                      ref="indexes_xs"
-                      type="button"
-                      class="btn btn-lg btn-default"
-                      @click="pageSkip($event)"
-                    >{{ item }}</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-right padding-top" style="border-top:solid 1px #555555">
+                <button type="button" class="btn btn-default" @click="back">Back</button>
+                <button type="button" class="btn btn-primary" @click="skip">Skip</button>
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  @click="hint = !hint; showModal = !showModal"
+                >Hint</button>
+              </div>
+            </div>
+          </div>
+
+          <div v-show="sidebar" class="col-md-2 col-sm-4 sidebar hidden-xs">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <div
+                  class="col-sm-3 col-md-5 col-lg-4 margin-top"
+                  v-for="(item, index) in pageLimit"
+                  :key="index"
+                >
+                  <button
+                    ref="indexes"
+                    type="button"
+                    class="btn btn-lg btn-default"
+                    @click="pageSkip($event)"
+                  >{{ item }}</button>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 margin-top text-center">
+                <button type="button" class="btn btn-primary" @click="submitAnswer($event)">Submit</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="visible-xs">
+            <div class="sidebar-button-small">
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="sidebarToggle"
+                v-show="sidebar == false"
+              >
+                <span v-bind:class="[sidebarIcon]"></span>
+              </button>
+            </div>
+            <div class="sidebar-small" v-show="sidebar">
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="col-xs-2">
+                    <div class="row">
+                      <div class="col-xs-12 margin-top text-right visible-xs">
+                        <button type="button" class="btn btn-primary" @click="sidebarToggle">
+                          <span v-bind:class="[sidebarIcon]"></span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-xs-12 margin-top text-right">
-                    <button
-                      type="button"
-                      class="btn btn-success"
-                      @click="submitAnswer($event)"
-                    >Submit</button>
+                  <div class="col-xs-10">
+                    <div
+                      class="col-xs-3 margin-top"
+                      v-for="(item, index) in pageLimit"
+                      :key="index"
+                    >
+                      <button
+                        ref="indexes_xs"
+                        type="button"
+                        class="btn btn-lg btn-default"
+                        @click="pageSkip($event)"
+                      >{{ item }}</button>
+                    </div>
+                    <div class="col-xs-12 margin-top text-right">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        @click="submitAnswer($event)"
+                      >Submit</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div v-show="hint" class="col-md-12 hidden-xs margin-to">
-          <div class="col-md-6 col-md-offset-3">
-            <h3>Hint:</h3>
-            <textarea class="form-control" rows="5" :disabled="true">test</textarea>
+          <div v-show="hint" class="col-md-12 hidden-xs">
+            <div class="col-md-6 col-md-offset-3">
+              <h3>Hint:</h3>
+              <textarea class="form-control" rows="5" :disabled="true" :value="hintText"></textarea>
+            </div>
           </div>
         </div>
       </div>
@@ -133,11 +139,12 @@
 
 <style scoped>
 .quiz-content {
-  min-height: 600px;
+  min-height: 100px;
+  margin-bottom: 20px;
 }
 .sidebar {
   min-height: 600px;
-  background-color: #0000009f;
+  /* background-color: #0000009f; */
 }
 
 .sidebar-small {
@@ -161,12 +168,13 @@ import Modal from "../components/Modal.vue";
 
 export default {
   props: {
-    id: Number
+    id: Number,
+    lid: Number
   },
   data() {
     return {
       width: 0,
-      showModal: true,
+      showModal: false,
       timer: "00:00",
       quizTitle: "",
       data: "",
@@ -176,6 +184,7 @@ export default {
       hint: false,
       content: "col-md-12 col-sm-12",
       sidebarIcon: "glyphicon glyphicon-arrow-left",
+      hintText: "",
       doubleClickOptions: {
         result: [],
         delay: 300,
@@ -189,25 +198,6 @@ export default {
     modal: Modal
   },
   methods: {
-    hintDetail(id) {
-      let vm = this;
-
-      if (vm.id != null || vm.id != "") {
-        axios({
-          url: `/admin/user_student/student_lesson_take_quiz/${vm.id}`,
-          method: "get",
-          dataType: "JSON"
-        })
-          .then(data => {
-            vm.data = data.data.data;
-          })
-          .catch(err => {
-            alert("Error! Contact IT Department.");
-          });
-      }
-
-      return id;
-    },
     sidebarToggle() {
       this.sidebar = !this.sidebar;
       this.content =
@@ -223,30 +213,38 @@ export default {
       }
     },
     back() {
-      if (this.pageState > 0) {
+      if (this.pageState >= 0) {
         this.pageState = this.pageState - 1;
       }
     },
     submitAnswer(event) {
-      let index = this.pageState;
-      let element = this.$refs["indexes"][index];
-      let markColor = this.$refs["indexes"][index].classList[2];
+      this.$events.fire("submit-answer");
+      // let index = this.pageState;
+      // let element = this.$refs["indexes"][index];
+      // let markColor = this.$refs["indexes"][index].classList[2];
 
-      if (markColor == "btn-default" || markColor == "btn-danger") {
-        element.classList.remove("btn-default");
-        element.classList.remove("btn-danger");
-        element.classList.add("btn-success");
-      }
+      // if (markColor == "btn-default" || markColor == "btn-danger") {
+      //   element.classList.remove("btn-default");
+      //   element.classList.remove("btn-danger");
+      //   element.classList.add("btn-success");
+      // }
+    },
+
+    firstHint(index) {
+      this.$events.fire("get-hints", index);
     },
 
     pageSkip(event) {
-      // console.log(event.target.textContent);
       var self = this;
       let index = event.target.textContent - 1;
       let element = this.$refs["indexes"][index];
       let element_xs = this.$refs["indexes_xs"][index];
       let markColor = this.$refs["indexes"][index].classList[2];
       let markColor_xs = this.$refs["indexes_xs"][index].classList[2];
+
+      self.pageState = index;
+
+      this.firstHint(index);
 
       this.doubleClickOptions.clicks++;
       if (this.doubleClickOptions.clicks === 1) {
@@ -259,7 +257,7 @@ export default {
         this.doubleClickOptions.clicks = 0;
 
         if (markColor != "btn-success") {
-          if (markColor == "btn-default") {
+          if (markColor == "btn-default" || markColor != "btn-success") {
             element.classList.remove("btn-default");
             element.classList.add("btn-danger");
           } else if (markColor == "btn-danger") {
@@ -280,9 +278,6 @@ export default {
       }
     },
 
-    oneClick: function(event) {},
-
-    submit() {},
     startTimer(duration) {
       let vm = this;
 
@@ -329,7 +324,9 @@ export default {
     }
   },
   events: {
-    "hint-details"() {},
+    "display-hint"(data) {
+      this.hintText = data;
+    },
     "page-length"(pageLength) {
       this.pageLimit = pageLength;
     },
@@ -348,13 +345,13 @@ export default {
 
       if (markColor == "btn-default" || markColor == "btn-danger") {
         element.classList.remove("btn-default");
-        element.classList.remove("btn-default");
+        element.classList.remove("btn-danger");
         element.classList.add("btn-success");
       }
 
       if (markColor_xs == "btn-default" || markColor_xs == "btn-danger") {
         element_xs.classList.remove("btn-default");
-        element_xs.classList.remove("btn-default");
+        element_xs.classList.remove("btn-danger");
         element_xs.classList.add("btn-success");
       }
     },

@@ -119,6 +119,9 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('student_quiz_get_answers/{lid}','Admin_user\VendorController@getAnswers');
             Route::get('student_quiz_get_submit_answers/{lid}','Admin_user\VendorController@checkSubmittedAnswers'); 
             
+            
+            Route::post('student_quiz_save_answers/{lid}/{id}','Admin_user\VendorController@saveAnswers');
+
         });
 
         Route::group(['prefix'=>'user_settings'],function(){

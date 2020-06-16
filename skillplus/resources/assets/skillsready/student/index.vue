@@ -1,10 +1,10 @@
 <template>
   <div class="content">
     <div v-show="view == '1'">
-      <instruction-component :course="displayTitle.course" :quiz="displayTitle.quiz"></instruction-component>
+      <instruction-component :course="displayTitle.course" :quiz="displayTitle.quiz" :lid="lid"></instruction-component>
     </div>
     <div v-show="view == '2'">
-      <quiz-ongoing :id="id"></quiz-ongoing>
+      <quiz-ongoing :id="id" :lid="lid"></quiz-ongoing>
     </div>
   </div>
 </template>
