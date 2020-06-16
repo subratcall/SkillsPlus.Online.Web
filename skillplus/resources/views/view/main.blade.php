@@ -16,6 +16,7 @@
     @if(isset($setting['site']['main_page_vip_container']) && $setting['site']['main_page_vip_container'] == 1)
         @include('view.parts.vip')
     @endif
+    @include('view.parts.banner-two')
     @include('view.parts.news')
 
 @endsection
