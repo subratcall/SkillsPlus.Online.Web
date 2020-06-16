@@ -65,7 +65,7 @@
           <img class="d-block w-100"  alt="First slide [800x400]" src="/bin/admin/files/cover(7).jpg" data-holder-rendered="true">
 
           <div class="carousel-caption">
-            <h3>Los Angeles</h3>
+            <h3>Get personal learning recommendations</h3>
             <p>LA is always so much fun!</p>
           </div>
         </div>
@@ -73,7 +73,7 @@
         <div class="item">
          <img class="d-block w-100"  alt="First slide [800x400]" src="/bin/admin/files/cover(6).jpg" data-holder-rendered="true">
           <div class="carousel-caption">
-            <h3>Chicago</h3>
+            <h3>Transform your life through education</h3>
             <p>Thank you, Chicago!</p>
           </div>
         </div>

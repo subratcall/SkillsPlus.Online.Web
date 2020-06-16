@@ -51,7 +51,7 @@
     h2, .h2 {
         font-size: 1.75rem;
     } */
-    #myCarousel .thumbnail {
+    #myCarousel .thumbnail animated fadeInRight {
 	margin-bottom: 0;
 }
 .cc.left, .cc.right {
@@ -171,6 +171,46 @@
     font-weight: bold !important;
 }
 
+/**
+ * Change animation duration
+ */
+ .animated {
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100px, 0, 0);
+    transform: translate3d(100px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100px, 0, 0);
+    transform: translate3d(100px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInRight {
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
 </style>
 <div class="container-fluid newest-container pro-content">
     
@@ -201,7 +241,7 @@
                             <?php $meta = arrayToList($new->metas,'option','value'); ?>
                             <div class="owl-car-s" dir="rtl">
                                 <a href="/product/{{{ $new->id or '' }}}" title="{{{ $new->title or '' }}}" class="content-box">
-                                    <img src="{{{ $meta['thumbnail'] or '' }}}"/>
+                                    <img src="{{{ $meta['thumbnail animated fadeInRight'] or '' }}}"/>
 									<h3>{!! str_limit($new->title,30,'...') !!}</h3>
                                     <div class="footer">
                                         <span class="avatar" title="{{{ $new->user->name or '' }}}" onclick="window.location.href = '/profile/{{{ $new->user->id or 0 }}}'"><img src="{{{ get_user_meta($new->user_id,'avatar',get_option('default_user_avatar','')) }}}"></span>
@@ -514,40 +554,40 @@
                                 <div class="item active">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide11">
                                               <div class="caption">
-                                                <h3>Product label 1</h3>
+                                                <h3 class="">Product label 1</h3>
                                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                                 <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                               </div>
                                             </div>        
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide12">
                                               <div class="caption">
-                                                <h3>Product label 2</h3>
+                                                <h3 class="">Product label 2</h3>
                                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                                 <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                               </div>
                                             </div> 
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide13">
                                               <div class="caption">
-                                                <h3>Product label 3</h3>
+                                                <h3 class="">Product label 3</h3>
                                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                                 <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                               </div>
                                             </div> 
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide14">
                                               <div class="caption">
-                                                <h3>Product label 4</h3>
+                                                <h3 class="">Product label 4</h3>
                                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                                 <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                               </div>
@@ -558,40 +598,40 @@
                                 <div class="item">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide21">
                                               <div class="caption">
-                                                <h3>Product label 5</h3>
+                                                <h3 class="">Product label 5</h3>
                                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                                 <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                               </div>
                                             </div>        
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide22">
                                               <div class="caption">
-                                                <h3>Product label 6</h3>
+                                                <h3 class="">Product label 6</h3>
                                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                                 <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                               </div>
                                             </div> 
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide23">
                                               <div class="caption">
-                                                <h3>Product label</h3>
+                                                <h3 class="">Product label</h3>
                                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                                 <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                               </div>
                                             </div> 
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide24">
                                               <div class="caption">
-                                                <h3>Product label</h3>
+                                                <h3 class="">Product label</h3>
                                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                                 <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                               </div>
@@ -602,7 +642,7 @@
                                 <div class="item">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide31">
                                               <div class="caption">
                                                 <h3>Product label</h3>
@@ -612,7 +652,7 @@
                                             </div>        
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide32">
                                               <div class="caption">
                                                 <h3>Product label</h3>
@@ -622,7 +662,7 @@
                                             </div> 
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide33">
                                               <div class="caption">
                                                 <h3>Product label</h3>
@@ -632,7 +672,7 @@
                                             </div> 
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="thumbnail">
+                                            <div class="thumbnail animated fadeInRight">
                                               <img src="http://placehold.it/300x200/" alt="Slide34">
                                               <div class="caption">
                                                 <h3>Product label</h3>
@@ -664,8 +704,8 @@
                 
                   <div class="fullwidth-banner" style="background-image: url('{{asset("")}}/bin/admin/images/douro_river_porto_portugal-wallpaper-5120x2880.jpg') ">
                     <div class="parallax-banner-text">
-                        <h2>test texst</h2>
-                        <h4>dsfdsfdsf dsf dsfdsfsdf</h4>
+                        <h2>Learn on your schedule</h2>
+                        <h4>Anywhere, anytime. Start learning today!</h4>
                         {{-- <div class="hover-link\">
                             <a href="/shop\" class="btn btn-secondary swipe-to-top\" data-toggle="tooltip\" data-placement="bottom\" title="\" data-original-title="View All">
                         </div> --}}
