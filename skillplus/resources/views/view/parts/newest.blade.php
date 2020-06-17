@@ -211,6 +211,51 @@
   -webkit-animation-name: fadeInRight;
   animation-name: fadeInRight;
 }
+
+
+.pro-content .tabs-main .nav {
+    display: flex;
+    justify-content: center;
+}
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+
+.pro-content .tabs-main a.nav-link.active {
+    color: #fff;
+    background-color: #b7853f !important;
+}
+.pro-content .tabs-main .nav-link {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat-Bold", sans-serif;
+    background-color: #ced4da;
+    border: 1px solid #dee2e6;
+        border-top-width: 1px;
+        border-right-width: 1px;
+        border-bottom-width: 1px;
+        border-left-width: 1px;
+    color: #212529;
+    text-transform: uppercase;
+    width: 140px;
+    height: 45px;
+    margin-right: 30px;
+    margin-bottom: 0;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    text-align: center;
+    padding: 8px;
+    box-shadow: none;
+}
 </style>
 <div class="container-fluid newest-container pro-content">
     
@@ -536,7 +581,7 @@
                 </div>
  --}}
                 
-        <div class="row">
+      {{--   <div class="row">
             <div class="col-md-12 p-0 text-center w-25 p-3">
                 <div class="nav" role="tablist" id="tabCarousel">
                     <button type="button" class="btn btn-success featured_course">TOP COURSE</button>
@@ -545,6 +590,33 @@
                 </div>            
             </div>         
         </div> 
+ --}}
+     {{--    <div class="nav" role="tablist" id="tabCarousel">
+               
+            <a class="nav-link btn  active show" data-toggle="tab" href="#featured" role="tab"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Top Sales">Top Sales</span></a>
+                             <a class="nav-link btn" data-toggle="tab" href="#special" role="tab" aria-controls="special" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Special">Special</span></a> 
+                            <a class="nav-link btn" data-toggle="tab" href="#liked" role="tab" aria-controls="liked" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Most Liked">Most Liked</span></a> 
+
+</div> --}}
+
+
+
+
+<div class="tabs-main">
+    <div class="container">
+       <div class="row">
+          <div class="col-md-12 p-0">
+             <div class="nav" role="tablist" id="tabCarousel">
+                <a class="nav-link btn  active show" data-toggle="tab" href="#featured" role="tab"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Top Sales">Top Sales</span></a>
+                <a class="nav-link btn" data-toggle="tab" href="#special" role="tab" aria-controls="special" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Special">Special</span></a> 
+                <a class="nav-link btn" data-toggle="tab" href="#liked" role="tab" aria-controls="liked" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Most Liked">Most Liked</span></a> 
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ 
+ 
 
                 <br>
                 <div class="row">
