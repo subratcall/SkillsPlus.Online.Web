@@ -6,6 +6,7 @@
 
     @include('view.parts.slider')
     @include('view.parts.container')
+    @include('view.parts.adds')
     @if(isset($setting['site']['main_page_newest_container']) && $setting['site']['main_page_newest_container'] == 1)
         @include('view.parts.newest')
     @endif
