@@ -1,8 +1,13 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <form method="post" id="form">
+      <form
+        method="post"
+        id="form"
+        :action="'/admin/user_student/student_quiz_save_answers/'+id+'/'+lid"
+      >
         <div class="row" v-for="(value_a, index_a) in questions" :key="index_a">
+          <input type="hidden" name="question_id" :value="value_a.id" />
           <div v-show="page == index_a">
             <div class="col-md-12 question-and-answer">
               <div class="row">
@@ -27,11 +32,12 @@
                     <h2 class="control-label">Question No. {{ index_a + 1 }}</h2>
                     <p class="title-question">{{ value_a.question }}</p>
                   </div>
+                  
 
                   <div v-if="value_a.type == 'CHECKBOX'">
                     <div
                       class="col-xs-12"
-                      v-for="(value_b, index_b) in qsplit(value_a.options)"
+                      v-for="(value_b, index_b) in qsplit(value_a.options)" @click="answer($event)"
                       :key="index_b"
                     >
                       <div class="col-xs-2">
@@ -42,14 +48,16 @@
                           type="checkbox"
                           id="checkbox"
                           :value="value_b"
-                          :name="'input['+index_a+']['+index_b+']'"
+                          name="input[]"
                         />
+                        
                       </div>
                       <div class="col-xs-10">
                         <label class="form-check-label" for="defaultCheck1">{{ value_b }}</label>
                       </div>
                     </div>
                   </div>
+
 
                   <div v-if="value_a.type == 'MULTIPLE CHOICE'">
                     <div v-for="(value_b, index_b) in qsplit(value_a.options)" :key="index_b">
@@ -59,7 +67,7 @@
                         class="form-check-input"
                         type="radio"
                         :value="value_b"
-                        :name="'input['+index_a+']['+0+']'"
+                        name="input[]"
                       />
                       <label class="form-check-label" :for="value_a">{{ value_b }}</label>
                     </div>
@@ -71,7 +79,7 @@
                       @keyup="answer($event)"
                       type="text"
                       class="form-control"
-                      :name="'input['+index_a+']['+0+']'"
+                      name="input[]"
                     />
                   </div>
 
@@ -82,22 +90,20 @@
                       type="textarea"
                       class="form-control margin-top"
                       rows="4"
-                      :name="'input['+index_a+']['+0+']'"
+                      :name="'input[]'"
                     ></textarea>
                   </div>
 
                   <div v-if="value_a.type == 'SWITCH'">
                     <label class="switch">
                       <input
+                        ref="element"
                         type="checkbox"
                         class="input-sw"
-                        @change="btnToggle = !btnToggle, answer($event)"
-                        :name="'input['+index_a+']['+0+']'"
+                        name="input[]"
+                        @change="answer($event)"
                       />
-                      <span
-                        class="button"
-                        :class="{'button-primary': btnToggle, 'button-danger': !btnToggle}"
-                      >{{ btnToggle }}</span>
+                      <span class="button button-primary" @click="switchEffect($event)">True</span>
                     </label>
 
                     <!-- <input type="checkbox" class="switch" v-model="data[index_a][0]" /> -->
@@ -194,6 +200,19 @@ export default {
     page: 0
   },
   methods: {
+    switchEffect(event) {
+      let element = event.target;
+
+      if (element.classList[1] == "button-primary") {
+        element.classList.remove("button-primary");
+        element.classList.add("button-danger");
+        element.textContent = "False";
+      } else if (element.classList[1] == "button-danger") {
+        element.classList.remove("button-danger");
+        element.classList.add("button-primary");
+        element.textContent = "True";
+      }
+    },
     passHintBack(hint) {
       this.$events.fire("display-hint", hint);
     },
@@ -246,17 +265,12 @@ export default {
         }
       }
 
-      if (element.type == "checkbox") {
-        if (element.classList == "input-sw" && element.checked == true) {
-          self.$events.fire("answered", this.page);
-        } else if (element.id == "checkbox") {
-          if (element.checked == true) {
-            self.$events.fire("answered", this.page);
-          } else {
-            self.$events.fire("no-answered", this.page);
-          }
-        }
+      if (element.classList[0] == "input-sw" && element.checked == true) {
+        self.$events.fire("answered", this.page);
       }
+
+      /*checkbox not available*/
+  
 
       if (element.type == "radio") {
         if (element.checked == true) {
@@ -307,13 +321,7 @@ export default {
     }
   },
   mounted() {
-
-    // Error in event handler for "get-hints": "TypeError: 
-    setTimeout(() => {
-      this.$events.fire("get-hints", 0);
-    }, 2000);
-
-
+    // Error in event handler for "get-hints": "TypeError:
   }
 };
 </script>

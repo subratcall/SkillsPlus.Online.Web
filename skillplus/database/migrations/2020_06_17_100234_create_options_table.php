@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSaveAnswersTable extends Migration
+class CreateOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSaveAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('save_answers', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('question_id');
-            $table->integer('description');
+            $table->string('description');
+            $table->boolean('is_correct');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateSaveAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('save_answers');
+        Schema::dropIfExists('options');
     }
 }

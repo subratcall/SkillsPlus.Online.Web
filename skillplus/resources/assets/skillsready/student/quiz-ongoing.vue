@@ -260,17 +260,19 @@ export default {
           if (markColor == "btn-default" || markColor != "btn-success") {
             element.classList.remove("btn-default");
             element.classList.add("btn-danger");
-          } else if (markColor == "btn-danger") {
+          }
+          if (markColor == "btn-danger") {
             element.classList.remove("btn-danger");
             element.classList.add("btn-default");
           }
         }
 
         if (markColor_xs != "btn-success") {
-          if (markColor_xs == "btn-default") {
+          if (markColor_xs == "btn-default" || markColor != "btn-success") {
             element_xs.classList.remove("btn-default");
             element_xs.classList.add("btn-danger");
-          } else if (markColor_xs == "btn-danger") {
+          }
+          if (markColor_xs == "btn-danger") {
             element_xs.classList.remove("btn-danger");
             element_xs.classList.add("btn-default");
           }

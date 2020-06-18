@@ -765,14 +765,8 @@ class VendorController extends Controller
         
         $content_id = $id;
         $lesson_id = $lid;
-        
-        // SaveAnswer::create([
-        //     "content_id" => $content_id,
-        //     "lesson_id" => $lesson_id, 
-        // ]);
+    
 
-
-
-        return response()->json($request->all());
+        return dd($request->all());
     }
 }
