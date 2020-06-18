@@ -1,9 +1,13 @@
+<style>
+    .newest-container .header span {
+    position: inherit;
+}
+</style>
 <div class="container-fluid newest-container">
         <div class="container">
             <div class="row">
                 <div class="header">
-                <span class="popular pull-left header-s">{{{ trans('main.most_popular') }}}</span>
-                <a href="/category?order=popular" class="pull-right more-link">{{{ trans('main.load_more') }}}</a>
+                <span class="popular ">Top Jobs</span>
             </div>
                 <div class="body body-s-r">
                     <span class="nav-right"></span>

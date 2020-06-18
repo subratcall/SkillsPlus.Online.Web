@@ -1,9 +1,31 @@
+<div class="tri-banners-content pro-content">   
+              
+                
+    <div class="fullwidth-banner" style="background-image: url('https://fiverr-res.cloudinary.com/w_iw_div_2.0,q_100,f_auto/general_assets/pro_experience/assets/images/f1/Banner_Curated.png') ">
+      <div class="parallax-banner-text">
+          <h2>Come for the job… stay for the challenge</h2>
+          <h4>You can actually invent things here!</h4>
+          {{-- <div class="hover-link\">
+              <a href="/shop\" class="btn btn-secondary swipe-to-top\" data-toggle="tooltip\" data-placement="bottom\" title="\" data-original-title="View All">
+          </div> --}}
+          <button type="button swipe-to-top" class="btn btn-success">Explore Services</button>
+          {{-- <div class="hover-link">
+              <button type="button swipe-to-top" class="btn btn-success">BUY NOW</button>
+              <a href="/shop" class="btn btn-secondary swipe-to-top" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View All">
+          </div> --}}
+      </div>
+    </div> 
+
+      
+</div>
+
+<br>
+
 <div class="container-fluid newest-container">
         <div class="container">
             <div class="row">
                 <div class="header">
-                    <span class="pull-left">{{{ trans('main.most_sold_products') }}}</span>
-                    <a href="/category?order=sell" class="more-link pull-right">{{{ trans('main.load_more') }}}</a>
+                    <span class="pull-left">Services</span>
                 </div>
                 <div class="body body-s-r"  dir="ltr">
                     <span class="nav-right"></span>
