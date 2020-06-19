@@ -1077,14 +1077,14 @@
             <div class="tri-banners-content pro-content">   
               
                 
-                  <div class="fullwidth-banner" style="background-image: url('{{asset("")}}/bin/admin/images/douro_river_porto_portugal-wallpaper-5120x2880.jpg') ">
+                  <div class="fullwidth-banner" style="background-image: url('https://fiverr-res.cloudinary.com/q_auto,f_auto,w_1400,dpr_1.0/general_assets/logged_out_homepage/assets/pro/pro_banner_1400px-2x.jpg') ">
                     <div class="parallax-banner-text">
-                        <h2>Learn on your schedule</h2>
-                        <h4>Anywhere, anytime. Start learning today!</h4>
+                        <h2>People “just like you” work here.</h2>
+                        <h4>Build your dream job here!</h4>
                         {{-- <div class="hover-link\">
                             <a href="/shop\" class="btn btn-secondary swipe-to-top\" data-toggle="tooltip\" data-placement="bottom\" title="\" data-original-title="View All">
                         </div> --}}
-                        <button type="button swipe-to-top" class="btn btn-success">BUY NOW</button>
+                        <button type="button swipe-to-top" class="btn btn-success">Explore Jobs</button>
                         {{-- <div class="hover-link">
                             <button type="button swipe-to-top" class="btn btn-success">BUY NOW</button>
                             <a href="/shop" class="btn btn-secondary swipe-to-top" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View All">

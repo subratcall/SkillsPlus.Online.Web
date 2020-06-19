@@ -7,6 +7,8 @@
     @include('view.parts.slider')
    {{--  @include('view.parts.container') --}}
     @include('view.parts.adds')
+    @include('view.parts.banner-two')
+    @include('view.parts.flashsale')
     @if(isset($setting['site']['main_page_newest_container']) && $setting['site']['main_page_newest_container'] == 1)
         @include('view.parts.newest')
     @endif
@@ -15,9 +17,9 @@
         @include('view.parts.most_sell')
     @endif
     @if(isset($setting['site']['main_page_vip_container']) && $setting['site']['main_page_vip_container'] == 1)
-        @include('view.parts.vip')
+      {{--   @include('view.parts.vip') --}}
     @endif
-    @include('view.parts.banner-two')
-    @include('view.parts.news')
+    {{-- @include('view.parts.news') --}}
+    @include('view.parts.newsevents')
 
 @endsection
