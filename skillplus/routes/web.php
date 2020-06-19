@@ -578,6 +578,7 @@ Route::group(['prefix'=>'user'],function (){
 
         Route::get('become','User\UserController@becomeVendor');
 
+        
         ###################
         #### Trip Mode ####
         ###################
@@ -922,6 +923,8 @@ Route::group(['prefix'=>'api'],function (){
     Route::group(['prefix'=>'content'],function (){
         Route::get('last/{last?}','Api\ApiController@contents');
     });
+    Route::get('ParentCategories','CourseController@getParentCategory');
+
 });
 
 ## Usage

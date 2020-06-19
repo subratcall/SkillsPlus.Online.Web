@@ -7,10 +7,11 @@
     <div class="container-fluid">
         <div class="row product-header">
             <div class="container">
-                <div class="col-xs-12 col-md-8 tab-con">
+                <div class="col-xs-12 col-md-10 tab-con">
                     <h2>{{{ $product->title or '' }}}</h2>
-                </div>
-                <div class="col-xs-12 col-md-4 text-left">
+                    <p>{{{ $product->subTitle or '' }}}</p>
+                    {{-- </div>
+                    <div class="col-xs-12 col-md-4 text-left"> --}}
                     <div class="raty-product-section">
                         <div class="raty"></div>
                         <span class="raty-text">({{{ count($product->rates) }}} {{{ trans('main.votes') }}})</span>
@@ -210,88 +211,7 @@
     <div class="container-fluid">
         <div class="row product-body">
             <div class="container">
-                <div class="col-md-4 col-xs-12 course_details">
-                    <div class="product-details-box">
-                        <span class="proicon mdi mdi-apps"></span><span class="pn-category">{{{ $product->category->title or '' }}}</span>
-                    </div>
-                    @if(isset($meta['duration']))
-                    <div class="product-details-box">
-                        <span class="proicon mdi mdi-alarm"></span><span>{{{ convertToHoursMins($meta['duration'],'%01d hour %02d min') }}}</span>
-                    </div>
-                    @endif
-                    <div class="product-details-box">
-                        <span class="proicon mdi mdi-calendar-month"></span><span>{{{ date('d F Y',$product->create_at) }}}</span>
-                    </div>
-                    <div class="product-details-box">
-                        <span class="proicon mdi mdi-database"></span><span>
-                            @php $MB = 0; @endphp
-                            @foreach($parts as $part)
-                                @php $MB = $MB + $part['size']; @endphp
-                            @endforeach
-                            {{{ $MB or '0' }}}
-                            {{{ trans('main.mb') }}}
-                        </span>
-                    </div>
-                    <div class="product-details-box">
-						<span class="proicon mdi mdi-headset"></span>
-                        <span>
-                            @if($product->support == 1)
-                                {{{ 'Vendor supports this course' }}}
-                            @else
-                                {{{ 'Vendor doesnt support this course' }}}
-                            @endif
-                        </span>
-                    </div>
-                    <div class="product-price-box">
-						<span class="proicon mdi mdi-wallet"></span>
-                        @if(isset($meta['price']) && $product->price != 0)
-                            <span  id="buy-price">{{{ currencySign() }}}{{{ price($product->id,$product->category_id,$meta['price'])['price']  }}}</span>
-                        @else
-                            <span  id="buy-price">{{{ trans('main.free') }}}</span>
-                        @endif
-                    </div>
-                    <div class="h-10"></div>
-                    <div class="product-buy-selection">
-                        <form>
-                            @if(isset($user) && $product->user_id == $user['id'])
-                                <a class="btn btn-orange product-btn-buy sbox3" id="buy-btn" href="/user/content/edit/{{{ $product->id or 0 }}}">{{{ trans('main.edit_course') }}}</a>
-                                <a class="btn btn-blue product-btn-buy sbox3" id="buy-btn" href="/user/content/part/list/{{{ $product->id or 0 }}}">{{{ trans('main.add_video') }}}</a>
-                            @else
-                            @if(!$buy)
-                                    @if($product->price != 0)
-                                        <div class="radio">
-                                            <input type="radio" id="radio-2" name="buy_mode" data-mode="download" value="{{{ price($product->id,$product->category_id,$meta['price'])['price'] }}}" checked>
-                                            <label class="radio-label" for="radio-2">{{{ trans('main.purchase_download') }}}</label>
-                                        </div>
-                                    @endif
-                                @if($product->post == 1 && userMeta($product->user_id,'trip_mode') == 0)
-                                    @if($product->price != 0)
-                                        <div class="radio">
-                                            <input type="radio" id="radio-1" data-mode="post" value="{{{ price($product->id,$product->category_id,$meta['post_price'])['price'] }}}" name="buy_mode">
-                                            <label class="radio-label" for="radio-1">{{{ trans('main.postal_purchase') }}}</label>
-                                        </div>
-                                    @endif
-                                @endif
-
-                                @if($product->price != 0)<a class="btn btn-orange product-btn-buy sbox3" id="buy-btn" data-toggle="modal" data-target="#buyModal" href="">{{{ trans('main.pay') }}}</a>@endif
-                            @else
-                                @if($product->price != 0)<a class="btn btn-orange product-btn-buy sbox3" href="javascript:void(0);">{{{ trans('main.purchased_item') }}}</a>@endif
-                            @endif
-                            @endif
-
-                        </form>
-                    </div>
-                    <div class="h-10 visible-xs"></div>
-                    @if(userMeta($product->user_id,'trip_mode') == 1 && userMeta($product->user_id,'trip_mode_date')>0)
-                    <div class="h-20"></div>
-                    <div class="trip_mode_alert">
-                        <span class="mdi mdi-shield-airplane"></span>
-                            <span> {{{ trans('main.vendor_vac') }}}
-                             {{{ date('Y-m-d', userMeta($product->user_id,'trip_mode_date')) }}}
-                             {{{ trans('main.vendor_vac_2') }}} </span>
-                    </div>
-                    @endif
-                </div>
+                
                 <div id="buyModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
@@ -470,7 +390,7 @@
                 </div>
                 <div class="col-md-8 col-xs-12 video-details">
                     {{{ $meta['video'] }}}
-                    vvvv{{{ $partVideoxx }}}
+                    {{{ $partVideoxx }}}
                     <video id="myDiv" controls>
                         <source src="{{{$partVideo or $meta['video']}}}" type="video/mp4"/> 
                      {{--    <source src="{{{ $meta['video']  }}}" type="video/mp4"/>  --}}

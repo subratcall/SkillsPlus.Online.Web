@@ -86,9 +86,9 @@ img {
       
       </div>
     </div>
-   <div class="row">
+   <div class="row" id="catDiv">
                         
-          <div class="col-12 col-md-6 col-lg-3 cat-banner">
+        {{--   <div class="col-12 col-md-6 col-lg-3 cat-banner">
             
             <figure class="categories-image">
               <a href="http://192.168.110.16:9091/shop?category=men-s">
@@ -194,12 +194,50 @@ img {
               </a>
             </figure>
 
-          </div>
+          </div> --}}
 
     </div>
 
   </section>
 <br>
+<script type="text/javascript">
+
+  $(document).ready(function() { 
+    course_categories();
+
+  }); 
+
+  function course_categories(){
+        $.ajax({
+            url: "{{url('/api/ParentCategories')}}/",
+            type: 'get',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: 'JSON',
+            success: function(data) {
+              for (let index = 0; index < data.data.length; index++) {
+                  $("#catDiv").append(
+                    '<div class="col-12 col-md-6 col-lg-3 cat-banner">'   +         
+                      '<figure class="categories-image">'+
+                        '<a href="/category/'+data.data[index].category+'">'+
+                          '<img class="img-fluid" src="'+data.data[index].image+'" alt="Mens">'+
+                            '<div class="categories-title">'+
+                              '<h4>'+data.data[index].category+'</h4>'+
+                            '</div>'+
+                        '</a>'+
+                      '</figure>'+
+                    '</div>'
+                  )
+                
+              }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+  }
+</script>
 {{-- 
 </div>
 </div> --}}
