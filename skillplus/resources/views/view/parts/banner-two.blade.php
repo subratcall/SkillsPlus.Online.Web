@@ -71,8 +71,8 @@ img {
     -o-transform: translateX(0px);
 }
 </style>
-{{-- <div class="container-fluid">
-    <div class="container news-container"> --}}
+<div class="container-fluid">
+    <div class="container news-container">
 <section class="categories-content pro-content" style="display: block !important;">
     <div class="container">
       <div class="products-area">
@@ -199,6 +199,8 @@ img {
     </div>
 
   </section>
+</div>
+</div>
 <br>
 <script type="text/javascript">
 

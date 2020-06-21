@@ -905,7 +905,8 @@
             </div> -->
             
 
-
+            
+            
 
             <div class="tabs-main">
                 <div class="container">
@@ -925,7 +926,159 @@
                 <div class="well">
                    <div id="myCarousel2" class="carousel slide">
                       <div class="carousel-inner">
-                         <div class="item active">
+                        <?php 
+                        
+                          $arrayLen = count($new_content);
+                          
+                          $arrayDiv = array();
+                          foreach($new_content as $k => $new)
+                            if ($k % 4 == 0) {
+                             // echo $k;
+                              $arrayDiv[] = $k;
+                          }
+                         // dd($new_content);
+                        ?>
+                        @for ($i = 0; $i < sizeof($arrayDiv); $i++)      
+                        {{-- {{$arrayDiv[$i]}} --}}
+                          @if ($i == 0)      
+                          {{-- {{$i.' only'}} --}}
+                            <div class="item active">
+                              <div class="row">                                
+                                <?php 
+                                  $arrSize =  $arrayDiv[0]+3;//get the very start
+                                ?>
+                                @for ($j = $arrayDiv[$i]; $j <= 3; $j++)
+                                  <div class="col-md-3">
+                                    <div class="thumbnail animated fadeInRight">
+                                      <img src="http://placehold.it/300x200/" alt="Slide11">
+                                      <div class="caption">
+                                          <h3 class="">{!! str_limit($new_content[$j]->title,30,'...') !!}</h3>
+                                          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                                          <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                @endfor                                
+                              </div>
+                            </div>  
+                            @endif
+                            @if ($i > 0)  
+                            {{-- {{$i.' test'}} --}}
+                            <div class="item">
+                              <div class="row">                                 
+                                <?php 
+                                  $arrSize =  $arrayDiv[$i]+3;
+                                  //echo 'array size '. $arrSize;
+                                  $startArray = $arrSize-2;
+                                  $getLastArray = count($new_content)-1;//end($arrayDiv);
+                                  //echo ' end '.$getLastArray;
+                                ?>
+                                @for ($k = $arrayDiv[$i]; $k <= $arrSize ; $k++)
+                              {{--   {{"sdadsfdsfsdf ".$arrSize."<=".$getLastArray}} --}}
+                                @if($arrSize<=$getLastArray)
+                                    <div class="col-md-3">
+                                      <div class="thumbnail animated fadeInRight">
+                                        <img src="http://placehold.it/300x200/" alt="Slide11">
+                                        <div class="caption">
+                                          <h3 class="">{!! str_limit($new_content[$k]->title,30,'...') !!}</h3>
+                                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  @else
+                                  <?php $kk = $k-2;?>
+                                  {{-- {{"xxxxxxxxx ".$k."<=".$getLastArray}} --}}
+                                  @if($k<=$getLastArray)
+                                    <div class="col-md-3">
+                                      <div class="thumbnail animated fadeInRight">
+                                        <img src="http://placehold.it/300x200/" alt="Slide11">
+                                        <div class="caption">
+                                          <h3 class="">{!! str_limit($new_content[$k]->title,30,'...') !!}</h3>
+                                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    @endif
+
+                                  @endif
+                                @endfor                                
+                              </div>
+                            </div> 
+                          @endif
+                        @endfor
+                        {{-- @foreach($new_content as $k => $new)
+                          @if ($k % 4 == 0) 
+                              @if($k==0)
+                                <div class="item active">
+                                  <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="thumbnail animated fadeInRight">
+                                          <img src="http://placehold.it/300x200/" alt="Slide11">
+                                          <div class="caption">
+                                              <h3 class="">Product label {{$new->id}} a</h3>
+                                              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                                              <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                          </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>   
+                              @endif
+
+                            @else  
+                            <div class="item ">
+                              <div class="row">
+                                <div class="row">
+                                  <div class="col-md-3">
+                                      <div class="thumbnail animated fadeInRight">
+                                        <img src="http://placehold.it/300x200/" alt="Slide11">
+                                        <div class="caption">
+                                            <h3 class="">Product label 1</h3>
+                                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <div class="thumbnail animated fadeInRight">
+                                        <img src="http://placehold.it/300x200/" alt="Slide11">
+                                        <div class="caption">
+                                            <h3 class="">Product label 1</h3>
+                                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <div class="thumbnail animated fadeInRight">
+                                        <img src="http://placehold.it/300x200/" alt="Slide11">
+                                        <div class="caption">
+                                            <h3 class="">Product label 1</h3>
+                                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <div class="thumbnail animated fadeInRight">
+                                        <img src="http://placehold.it/300x200/" alt="Slide11">
+                                        <div class="caption">
+                                            <h3 class="">Product label 1</h3>
+                                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                        </div>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>  
+                          @endif
+                        
+
+                        @endforeach --}}
+                         {{-- <div class="item active">
                             <div class="row">
                                <div class="col-md-3">
                                   <div class="thumbnail animated fadeInRight">
@@ -995,7 +1148,7 @@
                                   <div class="thumbnail animated fadeInRight">
                                      <img src="http://placehold.it/300x200/" alt="Slide23">
                                      <div class="caption">
-                                        <h3 class="">Product label</h3>
+                                        <h3 class="">Product label 7</h3>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                         <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                      </div>
@@ -1005,7 +1158,7 @@
                                   <div class="thumbnail animated fadeInRight">
                                      <img src="http://placehold.it/300x200/" alt="Slide24">
                                      <div class="caption">
-                                        <h3 class="">Product label</h3>
+                                        <h3 class="">Product label 8</h3>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                         <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                      </div>
@@ -1019,7 +1172,7 @@
                                   <div class="thumbnail animated fadeInRight">
                                      <img src="http://placehold.it/300x200/" alt="Slide31">
                                      <div class="caption">
-                                        <h3>Product label</h3>
+                                        <h3>Product label 9</h3>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                         <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                      </div>
@@ -1029,7 +1182,7 @@
                                   <div class="thumbnail animated fadeInRight">
                                      <img src="http://placehold.it/300x200/" alt="Slide32">
                                      <div class="caption">
-                                        <h3>Product label</h3>
+                                        <h3>Product label 10</h3>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                         <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                      </div>
@@ -1039,7 +1192,7 @@
                                   <div class="thumbnail animated fadeInRight">
                                      <img src="http://placehold.it/300x200/" alt="Slide33">
                                      <div class="caption">
-                                        <h3>Product label</h3>
+                                        <h3>Product label 11</h3>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                         <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                      </div>
@@ -1049,21 +1202,25 @@
                                   <div class="thumbnail animated fadeInRight">
                                      <img src="http://placehold.it/300x200/" alt="Slide34">
                                      <div class="caption">
-                                        <h3>Product label</h3>
+                                        <h3>Product label 12</h3>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
                                         <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                      </div>
                                   </div>
                                </div>
                             </div>
-                         </div>
+                         </div> --}}
                       </div>
                       <a class="left carousel-control cc" href="#myCarousel2" data-slide="prev"><i class="fa fa-chevron-left fa-2x"></i></a>
                       <a class="right carousel-control cc" href="#myCarousel2" data-slide="next"><i class="fa fa-chevron-right fa-2x"></i></a>
                       <ol class="carousel-indicators">
-                         <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
-                         <li data-target="#myCarousel2" data-slide-to="1"></li>
-                         <li data-target="#myCarousel2" data-slide-to="2"></li>
+                        @for ($l = 0; $l < sizeof($arrayDiv); $l++)
+                          @if($l==0)                        
+                            <li data-target="#myCarousel2" data-slide-to="{{$l}}" class="active"></li>
+                            @else
+                            <li data-target="#myCarousel2" data-slide-to="{{$l}}"></li>
+                          @endif
+                         @endfor
                       </ol>
                    </div>
                 </div>
