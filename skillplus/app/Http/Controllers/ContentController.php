@@ -60,7 +60,7 @@ class ContentController extends Controller
     ## Main Section ##
     public function main(){
 
-        $new_content = Content::with('metas','user')->where('mode','publish')->limit(10)->orderBy('id','DESC')->get();
+        $new_content = Content::with('metas','user')->where('mode','publish')->limit(12)->orderBy('id','DESC')->get();
         $popular_content = Content::with('metas','user')->where('mode','publish')->limit(10)->orderBy('view','DESC')->get();
         $sell_content = Content::with('metas','user')->withCount('sells')->where('mode','publish')->limit(10)->orderBy('sells_count','DESC')->get();
         $vip_content = ContentVip::with('content.user')->where('mode','publish')->where('first_date','<',time())->where('last_date','>',time())->get();

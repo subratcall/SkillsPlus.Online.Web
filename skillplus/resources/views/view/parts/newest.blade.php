@@ -948,13 +948,14 @@
                                   $arrSize =  $arrayDiv[0]+3;//get the very start
                                 ?>
                                 @for ($j = $arrayDiv[$i]; $j <= 3; $j++)
+                                <?php $meta = arrayToList($new_content[$j]->metas,'option','value'); ?>
                                   <div class="col-md-3">
                                     <div class="thumbnail animated fadeInRight">
                                       <img src="http://placehold.it/300x200/" alt="Slide11">
                                       <div class="caption">
                                           <h3 class="">{!! str_limit($new_content[$j]->title,30,'...') !!}</h3>
-                                          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-                                          <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                          <p>{{$new_content[$k]->subTitle}}</p>
+                                          <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                       </div>
                                     </div>
                                   </div>
@@ -981,8 +982,8 @@
                                         <img src="http://placehold.it/300x200/" alt="Slide11">
                                         <div class="caption">
                                           <h3 class="">{!! str_limit($new_content[$k]->title,30,'...') !!}</h3>
-                                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-                                            <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                          <p>{{$new_content[$k]->subTitle}}</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                         </div>
                                       </div>
                                     </div>
@@ -995,8 +996,8 @@
                                         <img src="http://placehold.it/300x200/" alt="Slide11">
                                         <div class="caption">
                                           <h3 class="">{!! str_limit($new_content[$k]->title,30,'...') !!}</h3>
-                                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-                                            <p><a href="#" class="btn btn-primary" role="button">12,99 €</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                            <p>{{$new_content[$k]->subTitle}}</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
                                         </div>
                                       </div>
                                     </div>
