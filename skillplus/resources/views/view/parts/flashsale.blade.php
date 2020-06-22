@@ -414,7 +414,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     <div class="general-product">
        <div class="container  p-0">
           <div class="popular-carousel-js" >
-                   <div class="">
+                   {{-- <div class="">
                       <div class="product">
                          <article>
                             <div class="flash-p">
@@ -448,8 +448,62 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             </div>
                          </article>
                       </div>
-                   </div>
-                   <div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" style="width: 600px;" tabindex="-1">
+                   </div> --}}
+
+                   @foreach($new_content as $new)
+                            <?php $meta = arrayToList($new->metas,'option','value'); ?>
+                            <div class="slick-slide " data-slick-index="-1" aria-hidden="true" style="width: 600px;" tabindex="-1">
+                              <div class="product">
+                                 <article>
+                                    <div class="flash-p">
+                                       <div class="pro-description">
+                                          <div class="pro-info blink">
+                                             {!! str_limit($new->title,30,'...') !!}                   
+                                          </div>
+                                          <span class="tag">
+                                             {!! str_limit($new->subTitle,30,'...') !!}                              
+                                          </span>
+                                          {{-- <h4 class="pro-title">
+                                             <span>Printed Rose Petal Shirt </span>                           
+                                          </h4> --}}
+                                          <div class="price">            
+                                             @if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif
+                                            {{--  <span>$92</span> --}}
+                                          </div>
+                                          {{-- <div class="countdown pro-timer" id="" data-placement="bottom" title="Countdown Timer">                               
+                                             <span class="days">0<small>Days </small></span>
+                                             <span class="hours">0<small>Hours</small></span>
+                                             <span class="mintues">0<small>Min</small></span>
+                                             <span class="seconds">0<small>Sec</small></span>
+                                          </div> --}}
+                                       </div>
+                                       <div class="pro-thumb">
+                                          <div class="product-flash-hover">   
+                                             <a class="btn btn-block btn-secondary swipe-to-top" href="http://estore.skillsready.online/product-detail/printed-rose-petal-shirt" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Detail" tabindex="-1">View Detail</a>
+                                          </div>
+                                          <img class="img-fluid" src="{{{ $meta['thumbnail'] }}}" alt="Printed Rose Petal Shirt">  
+                                       </div>
+                                    </div>
+                                 </article>
+                              </div>
+                           </div>
+
+                            {{-- <div class="owl-car-s" dir="rtl">
+                                <a href="/product/{{{ $new->id or '' }}}" title="{{{ $new->title or '' }}}" class="content-box">
+                                    <img src="{{{ $meta['thumbnail'] or $meta['cover'] or $meta['video'] or $meta['document'] or '' }}}"/>
+									<h3>{!! str_limit($new->title,30,'...') !!}</h3>
+                                    <div class="footer">
+                                        <span class="avatar" title="{{{ $new->user->name or '' }}}" onclick="window.location.href = '/profile/{{{ $new->user->id or 0 }}}'"><img src="{{{ get_user_meta($new->user_id,'avatar',get_option('default_user_avatar','')) }}}"></span>
+                                        <label class="pull-right content-clock">@if(isset($meta['duration'])){{{ convertToHoursMins($meta['duration']) }}}@else {{{ trans('main.not_defined') }}} @endif </label>
+										<span class="boxicon mdi mdi-clock pull-right"></span>
+										<span class="boxicon mdi mdi-wallet pull-left"></span>
+                                        <label class="pull-left">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</label>
+                                    </div>
+                                </a>
+                            </div> --}}
+                     @endforeach
+
+                   {{-- <div class="slick-slide " data-slick-index="-1" aria-hidden="true" style="width: 600px;" tabindex="-1">
                       <div class="product">
                          <article>
                             <div class="flash-p">
@@ -604,7 +658,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                          </article>
                       </div>
                    </div>
-                   <div class="slick-slide slick-cloned" data-slick-index="4" aria-hidden="true" style="width: 600px;" tabindex="-1">
+                   <div class="slick-slide" data-slick-index="4" aria-hidden="true" style="width: 600px;" tabindex="-1">
                       <div class="product">
                          <article>
                             <div class="flash-p">
@@ -639,7 +693,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                          </article>
                       </div>
                    </div>
-                   <div class="slick-slide slick-cloned" data-slick-index="5" aria-hidden="true" style="width: 600px;" tabindex="-1">
+                   <div class="slick-slide " data-slick-index="5" aria-hidden="true" style="width: 600px;" tabindex="-1">
                       <div class="product">
                          <article>
                             <div class="flash-p">
@@ -674,7 +728,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                          </article>
                       </div>
                    </div>
-                   <div class="slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" style="width: 600px;" tabindex="-1">
+                   <div class="slick-slide " data-slick-index="6" aria-hidden="true" style="width: 600px;" tabindex="-1">
                       <div class="product">
                          <article>
                             <div class="flash-p">
@@ -709,7 +763,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                          </article>
                       </div>
                    </div>
-                   <div class="slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" style="width: 600px;" tabindex="-1">
+                   <div class="slick-slide " data-slick-index="7" aria-hidden="true" style="width: 600px;" tabindex="-1">
                       <div class="product">
                          <article>
                             <div class="flash-p">
@@ -743,7 +797,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             </div>
                          </article>
                       </div>
-                   </div>
+                   </div> --}}
                    
           </div>
        </div>
@@ -832,7 +886,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
           }]
       });
 
-}); 
-  </script>
+   }); 
+</script>
 @endsection
 

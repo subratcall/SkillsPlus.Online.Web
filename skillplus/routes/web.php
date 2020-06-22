@@ -796,6 +796,12 @@ Route::group(['middleware'=>'notification'],function (){
     Route::get('search','ContentController@search');
     Route::get('jsonsearch','ContentController@jsonSearch');
 
+    #custom web routes
+    Route::get('cl/{id}','ContentController@contentLearn');
+    Route::get('cr/{id}','ContentController@contentRequirements');
+    Route::get('cp/{id}','ContentController@contentLessons');
+    
+
 
     ## Blog Section ##
     Route::group(['prefix'=>'blog'],function (){
