@@ -9,8 +9,8 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('edit_question/{id}','User\QuestionController@edit');
             Route::get('edit/{id}','User\RequestController@edit');
             Route::get('delete/{id}','User\RequestController@delete');
-            Route::post('store','User\QuestionController@store');
-            Route::post('update','User\QuestionController@update');
+            Route::post('store','User\QuestionController@store')->name('question');
+            Route::post('update/{id}','User\QuestionController@update')->name("question");
             Route::get('deleteq/{id}','User\QuestionController@destroyq');
             Route::get('list','User\QuestionController@getAllQuestionById');
             Route::post('edit/store/{id}','User\RequestController@editStore');
@@ -19,6 +19,8 @@ Route::group(['prefix' => 'admin'],function (){
             Route::post('update_qh','User\QuestionController@updateQuestionHeader');     
             Route::get('get_qh/{id}','User\QuestionController@getQuestionHeader');  
             Route::get('get_question_detail/{id}','User\QuestionController@getQuestionDetail');
+
+            Route::get('get_option_detail/{id}','User\QuestionController@getOptionDetail');
         });
 
         Route::get('profile','Admin\SettingController@profile');
@@ -98,7 +100,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor_lesson_show/{id}','Admin_user\VendorController@showLesson');
             Route::post('vendor_lesson_saveLesson','Admin_user\VendorController@saveLesson');
             /**Question */
-            Route::get('vendor_question_add/{id}/{cid}','Admin_user\VendorController@vendorQuestionList');
+            Route::get('vendor_question_add/{id}/{cid}','Admin_user\VendorController@vendorQuestionList')->name("question_add");
             Route::get('vendor_question_list/{id}','Admin_user\VendorController@vendorQuestion');            
             Route::post('vendor_question_add_question','Admin_user\VendorController@addQuestion');
             Route::get('vendor_selected_question_list/{id}','Admin_user\VendorController@vendorSelectedQuestion');      

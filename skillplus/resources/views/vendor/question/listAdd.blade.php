@@ -79,7 +79,7 @@ Add Question
                     <div class="row">
                         <div class="col-lg-12">
                         <button type="button" id="btnAdd" disabled class="btn btn-success btn-sm" onclick="getcb()">Add</button>
-                            <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
+                            <table id="tbl" class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
                                 width="100%">
                                     <thead>
                                         <tr>

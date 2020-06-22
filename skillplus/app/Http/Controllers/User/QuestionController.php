@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 use App\Models\Questions;
 use App\Models\QuestionHeader;
 use App\Http\Controllers\Controller;
+use App\Models\Options;
 
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Auth;
@@ -15,204 +16,366 @@ class QuestionController extends Controller
 {
 
     public function store(Request $request){
+     
+     $answer_id = $request->answer_id;
 
-        if($request->type=="Multiple Choice"){
-            $storeValue = '';
-            foreach ($request->option as $value) {
-                $storeValue .=$value.'|';
-            }
-            $storeValue = substr_replace($storeValue ,"",-1);
-            Questions::create([
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'options'=>$storeValue,
-                'answer'=>$request->checkbox,
-                'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s"),
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-            ]);
+     $question = Questions::create([
+       'question'=>$request->question,
+       'type'=> $request->type ,
+       'options'=> '',
+       'answer'=> '',
+       'created_by'=>Session::get('user_id'),
+       'created_dt'=>date("Y-m-d H:i:s"),
+       'hint'=>$request->hint,
+       'correctremarks'=>$request->remarks,
+       'attachment'=>$request->file,
+       'timelimit'=>$request->timer,
+       'points'=>$request->points,
+      ]);
+  
+   $lastid = $question->id;
+     
+     if($request->type=="Multiple Choice"){
+
+       foreach ($request->option as $key => $value) {
+         $option = new Options;
+         $option->question_id = $lastid;
+         $option->description = $value;
+         $option->is_correct = ($key == $answer_id) ? TRUE : FALSE;
+         $option->save();
+       }
+     }
+
+
+
+
+
+     if ($request->type=="Checkbox") {
+
+      $answer_id = $request->answer_id;
+      $answer_id = explode("-", $answer_id);
+
+      foreach ($request->optioncheck as $keya => $valuea) {
+       $option = new Options;
+       $option->question_id = $lastid;
+       $option->description = $valuea;
+
+       foreach($answer_id as $keyb => $valueb) {
+        if ($keya == $valueb) {
+         $option->is_correct = TRUE;
         }
+       }
 
-        if($request->type=="Checkbox"){
-            $storeValue = '';
-            $storeAnswer = '';
-            foreach ($request->optioncheck as $value) {
-                $storeValue .=$value.'|';
-            }
-            foreach ($request->checkboxcheck as $value) {
-                $storeAnswer .=$value.'|';
-            }
-            $storeValue = substr_replace($storeValue ,"",-1);
-            $storeAnswer = substr_replace($storeAnswer ,"",-1);
+
+       $option->save();
+      }
+
+     }
+
+
+     if ($request->type=="Short Answer" || $request->type=="Paragraph") {
+      $option = new Options;
+      $option->question_id = $lastid;
+      $option->description = $request->short_ans;
+      $option->is_correct = TRUE;
+      $option->save();
+     }
+
+     if ($request->type=="Switch") {
+
+      $option = new Options;
+      $option->question_id = $lastid;
+      $option->description = ($request->switchOpt == "on") ? "TRUE": "FALSE";
+      $option->is_correct = ($request->switchOpt == "on") ? TRUE: FALSE;
+      $option->save();
+
+     }
+
+
+     return response()->json(["success"]);
+
+     /*--------------------------------------------------------------*/
+        // if($request->type=="Multiple Choice"){
+        //     $storeValue = '';
+        //     foreach ($request->option as $value) {
+        //         $storeValue .=$value.'|';
+        //     }
+        //     $storeValue = substr_replace($storeValue ,"",-1);
+        //     Questions::create([
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'options'=>$storeValue,
+        //         'answer'=>$request->checkbox,
+        //         'created_by'=>Session::get('user_id'),
+        //         'created_dt'=>date("Y-m-d H:i:s"),
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //     ]);
+        // }
+
+        // if($request->type=="Checkbox"){
+        //     $storeValue = '';
+        //     $storeAnswer = '';
+        //     foreach ($request->optioncheck as $value) {
+        //         $storeValue .=$value.'|';
+        //     }
+        //     foreach ($request->checkboxcheck as $value) {
+        //         $storeAnswer .=$value.'|';
+        //     }
+        //     $storeValue = substr_replace($storeValue ,"",-1);
+        //     $storeAnswer = substr_replace($storeAnswer ,"",-1);
             
-            Questions::create([
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'options'=>$storeValue,
-                'answer'=>$storeAnswer,
-                'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s"),
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-            ]);
-        }
+        //     Questions::create([
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'options'=>$storeValue,
+        //         'answer'=>$storeAnswer,
+        //         'created_by'=>Session::get('user_id'),
+        //         'created_dt'=>date("Y-m-d H:i:s"),
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //     ]);
+        // }
 
-        if($request->type=="Short Answer"){            
-            Questions::create([
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'answer'=>$request->short_ans,
-                'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s"),
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-            ]);
-        }
+        // if($request->type=="Short Answer"){            
+        //     Questions::create([
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'answer'=>$request->short_ans,
+        //         'created_by'=>Session::get('user_id'),
+        //         'created_dt'=>date("Y-m-d H:i:s"),
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //     ]);
+        // }
 
-        if($request->type=="Paragraph"){
-            Questions::create([
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'answer'=>$request->paragraph,
-                'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s"),
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-            ]);
-        }
+        // if($request->type=="Paragraph"){
+        //     Questions::create([
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'answer'=>$request->paragraph,
+        //         'created_by'=>Session::get('user_id'),
+        //         'created_dt'=>date("Y-m-d H:i:s"),
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //     ]);
+        // }
 
-        if($request->type=="Switch"){
-            Questions::create([
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'answer'=>$request->swtich,
-                'created_by'=>Session::get('user_id'),
-                'created_dt'=>date("Y-m-d H:i:s"),
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-            ]);
-        }
-        echo true;
+        // if($request->type=="Switch"){
+        //     Questions::create([
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'answer'=>$request->swtich,
+        //         'created_by'=>Session::get('user_id'),
+        //         'created_dt'=>date("Y-m-d H:i:s"),
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //     ]);
+        // }
+        // echo true;
     }
     
-    public function update(Request $request){
+    public function update(Request $request, $id){
 
-        if($request->type=="Multiple Choice"){
-            $storeValue = '';
-            foreach ($request->option as $value) {
-                $storeValue .=$value.'|';
-            }
-            $storeValue = substr_replace($storeValue ,"",-1);
-            Questions::where(['id'=>$request->id])->update([
-                'updated_by'=>Session::get('user_id'),
-                'updated_dt'=>date("Y-m-d H:i:s"),
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'options'=>$storeValue,
-                'answer'=>$request->checkbox,
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-                ]
-            );
-        }
+     $answer_id = $request->answer_id;
 
-        if($request->type=="Checkbox"){
-            $storeValue = '';
-            $storeAnswer = '';
-            foreach ($request->optioncheck as $value) {
-                $storeValue .=$value.'|';
-            }
-            foreach ($request->checkboxcheck as $value) {
-                $storeAnswer .=$value.'|';
-            }
-            $storeValue = substr_replace($storeValue ,"",-1);
-            $storeAnswer = substr_replace($storeAnswer ,"",-1);
-            Questions::where(['id'=>$request->id])->update([
-                'updated_by'=>Session::get('user_id'),
-                'updated_dt'=>date("Y-m-d H:i:s"),
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'options'=>$storeValue,
-                'answer'=>$storeAnswer,
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-                ]
-            );
-        }
+     $question =  Questions::where(['id'=>$id])->update([
+       'question'=>$request->question,
+       'type'=> $request->type ,
+       'options'=> '',
+       'answer'=> '',
+       'created_by'=>Session::get('user_id'),
+       'created_dt'=>date("Y-m-d H:i:s"),
+       'hint'=>$request->hint,
+       'correctremarks'=>$request->remarks,
+       'attachment'=>$request->file,
+       'timelimit'=>$request->timer,
+       'points'=>$request->points,
+      ]);
+  
+      $lastid = $id;
 
-        if($request->type=="Short Answer"){      
-            Questions::where(['id'=>$request->id])->update([
-                'updated_by'=>Session::get('user_id'),
-                'updated_dt'=>date("Y-m-d H:i:s"),
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'answer'=>$request->short_ans,
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-                ]
-            );
-        }
+      Options::where(["question_id" => $lastid])->delete();
 
-        if($request->type=="Paragraph"){
-            Questions::where(['id'=>$request->id])->update([
-                'updated_by'=>Session::get('user_id'),
-                'updated_dt'=>date("Y-m-d H:i:s"),
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'answer'=>$request->paragraph,
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-                ]
-            );
-        }
+     if($request->type=="Multiple Choice"){
+       foreach ($request->option as $key => $value) {
+         $option = new Options;
+         $option->question_id = $lastid;
+         $option->description = $value;
+         $option->is_correct = ($key == $answer_id) ? TRUE : FALSE;
+         $option->save();
+       }
+     }
 
-        if($request->type=="Switch"){
-            Questions::where(['id'=>$request->id])->update([
-                'updated_by'=>Session::get('user_id'),
-                'updated_dt'=>date("Y-m-d H:i:s"),
-                'question'=>$request->question,
-                'type'=> $request->type ,
-                'answer'=>$request->swtich,
-                'hint'=>$request->hint,
-                'correctremarks'=>$request->remarks,
-                'attachment'=>$request->file,
-                'timelimit'=>$request->timer,
-                'points'=>$request->points,
-                ]
-            );
+
+     if ($request->type=="Checkbox") {
+
+      $answer_id = $request->answer_id;
+      $answer_id = explode("-", $answer_id);
+
+      foreach ($request->optioncheck as $keya => $valuea) {
+       $option = new Options;
+       $option->question_id = $lastid;
+       $option->description = $valuea;
+
+       foreach($answer_id as $keyb => $valueb) {
+        if ($keya == $valueb) {
+         $option->is_correct = TRUE;
         }
-        echo true;
+       }
+
+
+       $option->save();
+      }
+
+     }
+
+
+     if ($request->type=="Short Answer" || $request->type=="Paragraph") {
+      $option = new Options;
+      $option->question_id = $lastid;
+      $option->description = $request->short_ans;
+      $option->is_correct = TRUE;
+      $option->save();
+     }
+
+     if ($request->type=="Switch") {
+
+      $option = new Options;
+      $option->question_id = $lastid;
+      $option->description = $request->short_ans;
+      $option->is_correct = ($request->switchOpt == "on") ? TRUE: FALSE;
+      $option->save();
+
+     }
+
+     return response()->json(["success"]);
+
+     /*----------------------------------------------------------------------*/
+
+        // if($request->type=="Multiple Choice"){
+        //     $storeValue = '';
+        //     foreach ($request->option as $value) {
+        //         $storeValue .=$value.'|';
+        //     }
+            
+        //     $storeValue = substr_replace($storeValue ,"",-1);
+        //     Questions::where(['id'=>$request->id])->update([
+        //         'updated_by'=>Session::get('user_id'),
+        //         'updated_dt'=>date("Y-m-d H:i:s"),
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'options'=>$storeValue,
+        //         'answer'=>$request->checkbox,
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //         ]
+        //     );
+        // }
+
+        // if($request->type=="Checkbox"){
+        //     $storeValue = '';
+        //     $storeAnswer = '';
+        //     foreach ($request->optioncheck as $value) {
+        //         $storeValue .=$value.'|';
+        //     }
+        //     foreach ($request->checkboxcheck as $value) {
+        //         $storeAnswer .=$value.'|';
+        //     }
+        //     $storeValue = substr_replace($storeValue ,"",-1);
+        //     $storeAnswer = substr_replace($storeAnswer ,"",-1);
+        //     Questions::where(['id'=>$request->id])->update([
+        //         'updated_by'=>Session::get('user_id'),
+        //         'updated_dt'=>date("Y-m-d H:i:s"),
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'options'=>$storeValue,
+        //         'answer'=>$storeAnswer,
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //         ]
+        //     );
+        // }
+
+        // if($request->type=="Short Answer"){      
+        //     Questions::where(['id'=>$request->id])->update([
+        //         'updated_by'=>Session::get('user_id'),
+        //         'updated_dt'=>date("Y-m-d H:i:s"),
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'answer'=>$request->short_ans,
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //         ]
+        //     );
+        // }
+
+        // if($request->type=="Paragraph"){
+        //     Questions::where(['id'=>$request->id])->update([
+        //         'updated_by'=>Session::get('user_id'),
+        //         'updated_dt'=>date("Y-m-d H:i:s"),
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'answer'=>$request->paragraph,
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //         ]
+        //     );
+        // }
+
+        // if($request->type=="Switch"){
+        //     Questions::where(['id'=>$request->id])->update([
+        //         'updated_by'=>Session::get('user_id'),
+        //         'updated_dt'=>date("Y-m-d H:i:s"),
+        //         'question'=>$request->question,
+        //         'type'=> $request->type ,
+        //         'answer'=>$request->swtich,
+        //         'hint'=>$request->hint,
+        //         'correctremarks'=>$request->remarks,
+        //         'attachment'=>$request->file,
+        //         'timelimit'=>$request->timer,
+        //         'points'=>$request->points,
+        //         ]
+        //     );
+        // }
+        // echo true;
     }
 
+
     function getAllQuestionById(){
+        $q = Questions::where('created_by',Session::get('user_id'))->get();
+
+        return response()->json($q);
+     }
+
+/*     function getAllQuestionById(){
         $q = Questions::where('created_by',Session::get('user_id'))->get();
         $data = array();
         foreach ($q as $myList)
@@ -230,7 +393,7 @@ class QuestionController extends Controller
 		}
         $output = array("data" => $data);
 		echo json_encode($output);
-    }
+    } */
 
     public function destroyq($id){        
         Questions::where('id',$id)->delete();
@@ -249,10 +412,11 @@ class QuestionController extends Controller
 
     public function edit($id)
     {    
+
+     
         return view('vendor.question.new');
     }
 
-    function list(){}
 
     public function saveQuestionHeader(Request $request)
     {
@@ -284,5 +448,12 @@ class QuestionController extends Controller
     {
         $getData = Questions::where(['id'=>$id])->first();
         return $getData;
+    }
+
+    public function getOptionDetail($id) {
+
+      $getData = Options::where("question_id", "=", $id)->get();
+
+      return response()->json($getData);
     }
 }
