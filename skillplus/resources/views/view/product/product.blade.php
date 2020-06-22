@@ -691,12 +691,8 @@
                             <div class=" margin-top-next">
                                 <div class="section-1">
                                     <legend>WHAT WILL I LEARN?</legend>
-                                    <ul>
-                                        <li>Have the skills to start making money on the side, as a casual freelancer, or full time as a
-                                            work-from-home freelancer</li>
-                                        <li>Convert any static HTML & CSS website into a Custom WordPress Theme</li>
-                                        <li>Feel comfortable with the process of turning static websites into dynamic WordPress websites
-                                        </li>
+                                    <ul id="wwil">
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -707,7 +703,7 @@
                         <div class="col-lg-12">
                             <div class="">
                                 <div class="section-2">
-                                   <legend> Curriculum for this course <p style="display:inline; font-size:14px">17 Lessons 23:47:22 Hours</p></legend>
+                                   <legend> Lessons for this course {{-- <p style="display:inline; font-size:14px">17 Lessons 23:47:22 Hours</p> --}}</legend>
                                 </div>
                             </div>
                         </div>
@@ -715,8 +711,9 @@
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="panel-group" id="accordion">
-                                <div class="panel panel-default">
+                            <div class="panel-group" id="accordionx">
+
+                                {{-- <div class="panel panel-default">
                                   <div class="panel-heading">
                                     <h4 class="panel-title">
                                       <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
@@ -730,6 +727,7 @@
                                     commodo consequat.</div>
                                   </div>
                                 </div>
+
                                 <div class="panel panel-default">
                                   <div class="panel-heading">
                                     <h4 class="panel-title">
@@ -744,6 +742,7 @@
                                     commodo consequat.</div>
                                   </div>
                                 </div>
+
                                 <div class="panel panel-default">
                                   <div class="panel-heading">
                                     <h4 class="panel-title">
@@ -757,7 +756,8 @@
                                     minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                                     commodo consequat.</div>
                                   </div>
-                                </div>
+                                </div> --}}
+
                               </div> 
                         </div>
                     </div>
@@ -768,14 +768,7 @@
                                 <div class=" section-4">
                                     <p class="section-4-header">Requirements</p>
                 
-                                    <ul>
-                                        <li>Have a basic understanding of HTML, CSS and PHP (all courses I offer)</li>
-                                        <li>Have access to a code editor, free or otherwise. I suggest Coda 2, as that's the editor I
-                                            use exclusively.</li>
-                                        <li>An Internet connection is required.</li>
-                                        <li>A fresh copy of Bootstrap and WordPress (we will go over this in the beginning of the
-                                            course).</li>
-                                        <li>Download & Install MAMP (or alternatives — we cover this in the course)</li>
+                                    <ul id="req">
                                     </ul>
                                 </div>
                             </div>
@@ -1276,6 +1269,87 @@
 @endsection
 @section('script')
     <script type="application/javascript" src="/assets/view/fluid-player-master/fluidplayer.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {    
+            $.ajax({
+                url: "{{url('/cl')}}/"+"{{ Request::route('id') }}",
+                type: 'get',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    for (let index = 0; index < data.data.length; index++) {
+                        $("#wwil").append(
+                            '<li>'   + 
+                                data.data[index].desc+
+                            '</li>'
+                        )
+                        
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error get data from ajax');
+                }
+            });
+
+            $.ajax({
+                url: "{{url('/cp')}}/"+"{{ Request::route('id') }}",
+                type: 'get',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    for (let index = 0; index < data.data.length; index++) {
+                        $("#accordionx").append(
+                            '<div class="panel panel-default">'+
+                                '<div class="panel-heading">'+
+                                    '<h4 class="panel-title">'+
+                                    '<a data-toggle="collapse" data-parent="#accordionx" href="#collapse'+index+'">  '+data.data[index].title+'</a> </h4>'+
+                                '</div>'+
+                                '<div id="collapse'+index+'" class="panel-collapse collapse in">'+
+                                    '<div class="panel-body">'+
+                                        data.data[index].desc+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'
+                        )
+                        
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error get data from ajax');
+                }
+            });
+
+            $.ajax({
+                url: "{{url('/cr')}}/"+"{{ Request::route('id') }}",
+                type: 'get',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    for (let index = 0; index < data.data.length; index++) {
+                        $("#req").append(
+                            '<li>'+
+                                data.data[index].req+
+                            '</li>'
+                        )
+                        
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error get data from ajax');
+                }
+            });
+            
+            
+
+       });  
+    </script>
+
     <script>
         $(function () {
             fluidPlayer("myDiv",{

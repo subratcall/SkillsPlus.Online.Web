@@ -887,7 +887,7 @@
                             <?php $meta = arrayToList($new->metas,'option','value'); ?>
                             <div class="owl-car-s" dir="rtl">
                                 <a href="/product/{{{ $new->id or '' }}}" title="{{{ $new->title or '' }}}" class="content-box">
-                                    <img src="{{{ $meta['thumbnail animated fadeInRight'] or '' }}}"/>
+                                    <img src="{{{ $meta['thumbnail'] or $meta['cover'] or $meta['video'] or $meta['document'] or '' }}}"/>
 									<h3>{!! str_limit($new->title,30,'...') !!}</h3>
                                     <div class="footer">
                                         <span class="avatar" title="{{{ $new->user->name or '' }}}" onclick="window.location.href = '/profile/{{{ $new->user->id or 0 }}}'"><img src="{{{ get_user_meta($new->user_id,'avatar',get_option('default_user_avatar','')) }}}"></span>
@@ -913,8 +913,8 @@
                    <div class="row">
                       <div class="col-md-12 p-0">
                          <div class="nav" role="tablist" id="tabCarousel">
-                            <a class="nav-link btn  active show" data-toggle="tab" href="#featured" role="tab"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Top Sales">Top Sales</span></a>
-                            <a class="nav-link btn" data-toggle="tab" href="#special" role="tab" aria-controls="special" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Special">Special</span></a> 
+                            <a class="nav-link btn  " data-toggle="tab" href="#featured" role="tab"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Top Sales">Top Sales</span></a>
+                            <a class="nav-link btn active show" data-toggle="tab" href="#special" role="tab" aria-controls="special" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Special">Special</span></a> 
                             <a class="nav-link btn" data-toggle="tab" href="#liked" role="tab" aria-controls="liked" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Most Liked">Most Liked</span></a> 
                          </div>
                       </div>
@@ -936,9 +936,10 @@
                              // echo $k;
                               $arrayDiv[] = $k;
                           }
-                         // dd($new_content);
+                        // dd($new_content);
                         ?>
-                        @for ($i = 0; $i < sizeof($arrayDiv); $i++)      
+                        @for ($i = 0; $i < sizeof($arrayDiv); $i++)    
+                     
                         {{-- {{$arrayDiv[$i]}} --}}
                           @if ($i == 0)      
                           {{-- {{$i.' only'}} --}}
@@ -951,11 +952,11 @@
                                 <?php $meta = arrayToList($new_content[$j]->metas,'option','value'); ?>
                                   <div class="col-md-3">
                                     <div class="thumbnail animated fadeInRight">
-                                      <img src="http://placehold.it/300x200/" alt="Slide11">
+                                      <img src="{{{ $meta['thumbnail'] }}}" alt="Slide11">
                                       <div class="caption">
                                           <h3 class="">{!! str_limit($new_content[$j]->title,30,'...') !!}</h3>
                                           <p>{{$new_content[$k]->subTitle}}</p>
-                                          <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                          <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> {{-- <a href="#" class="btn btn-default" role="button"><i class="fas fa-clock"></i> Wishlist</a> --}}</p>
                                       </div>
                                     </div>
                                   </div>
@@ -975,15 +976,16 @@
                                   //echo ' end '.$getLastArray;
                                 ?>
                                 @for ($k = $arrayDiv[$i]; $k <= $arrSize ; $k++)
+                                <?php $meta = arrayToList($new_content[$k]->metas,'option','value'); ?>
                               {{--   {{"sdadsfdsfsdf ".$arrSize."<=".$getLastArray}} --}}
                                 @if($arrSize<=$getLastArray)
                                     <div class="col-md-3">
                                       <div class="thumbnail animated fadeInRight">
-                                        <img src="http://placehold.it/300x200/" alt="Slide11">
+                                        <img src="{{{ $meta['thumbnail'] }}}" alt="Slide11">
                                         <div class="caption">
                                           <h3 class="">{!! str_limit($new_content[$k]->title,30,'...') !!}</h3>
                                           <p>{{$new_content[$k]->subTitle}}</p>
-                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> {{-- <a href="#" class="btn btn-default" role="button">Wishlist</a> --}}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -993,11 +995,11 @@
                                   @if($k<=$getLastArray)
                                     <div class="col-md-3">
                                       <div class="thumbnail animated fadeInRight">
-                                        <img src="http://placehold.it/300x200/" alt="Slide11">
+                                        <img src="{{{ $meta['thumbnail'] }}}" alt="Slide11">
                                         <div class="caption">
                                           <h3 class="">{!! str_limit($new_content[$k]->title,30,'...') !!}</h3>
                                             <p>{{$new_content[$k]->subTitle}}</p>
-                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> <a href="#" class="btn btn-default" role="button">Wishlist</a></p>
+                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> {{-- <a href="#" class="btn btn-default" role="button">Wishlist</a> --}}</p>
                                         </div>
                                       </div>
                                     </div>

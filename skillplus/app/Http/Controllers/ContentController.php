@@ -43,6 +43,9 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\PaymentExecution;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use App\Models\ContentLearn;
+use App\Models\ContentRequirements;
+use App\Models\ContentPart;
 use SoapClient;
 
 class ContentController extends Controller
@@ -1157,6 +1160,52 @@ class ContentController extends Controller
             'updated_at_sh' => time()
         ]);
         return $New;
+    }
+
+    #public content learn
+    function contentLearn($id){
+        $cl = ContentLearn::where('content_id',$id)->get();      
+        $data = array();
+        foreach ($cl as $myList)
+		{
+			$row = array();
+            $row['desc'] = $myList->description;
+			$data[] = $row;
+		}
+        $output = array("data" => $data);
+		echo json_encode($output);
+    }
+
+    #public content requirements
+    function contentRequirements($id){
+        $cl = ContentRequirements::where('content_id',$id)->get();      
+        $data = array();
+        foreach ($cl as $myList)
+		{
+			$row = array();
+            $row['req'] = $myList->requirement;
+			$data[] = $row;
+		}
+        $output = array("data" => $data);
+		echo json_encode($output);
+    }
+
+
+    #public content lessons
+    function contentLessons($id){
+        $cl = ContentPart::where('content_id',$id)->get();      
+        $data = array();
+        foreach ($cl as $myList)
+		{
+			$row = array();
+            $row['title'] = $myList->title;
+            $row['desc'] = $myList->description;
+            $row['img'] = $myList->upload_image;
+            $row['vid'] = $myList->upload_video;
+			$data[] = $row;
+		}
+        $output = array("data" => $data);
+		echo json_encode($output);
     }
 
 }
