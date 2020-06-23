@@ -33,17 +33,198 @@
     @endif
     <script type="application/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>
     <title>@yield('title')</title>
+
 </head>
 <body>
+    
+
+    <style>
+
+.header-area .alert {
+    background-color: #fff;
+    position: relative;
+    z-index: 8;
+    min-height: 50px;
+    padding: 13px 35px 12px;
+    margin-bottom: 0;
+    border: none;
+}
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.alert-dismissible {
+    padding-right: 3.8125rem;
+}
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0;
+}
+ .fades {
+    transition: opacity 0.15s linear;
+}
+
+.header-area .alert .pro-description {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.header-area .alert .pro-description .pro-info {
+    font-size: 20px;
+    color: #212529;
+    line-height: 25px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    padding: 0 30px;
+}
+
+.header-area .alert .pro-description {
+    text-align: center;
+}
+
+.header-area .alert .pro-description .pro-info .pro-link-dropdown.js-toppanel-link-dropdown {
+    display: inline-block;
+    z-index: 8;
+}
+
+.header-area .alert .pro-description .pro-info {
+    font-size: 20px;
+    color: #212529;
+    line-height: 25px;
+    white-space: normal;
+}
+
+.header-area .alert .pro-description .pro-info {
+    font-size: 20px;
+    color: #212529;
+    line-height: 25px;
+    white-space: normal;
+}
+
+.header-area .alert .pro-description {
+    text-align: center;
+}
+
+.header-area .alert .pro-description {
+    text-align: center;
+}
+
+.header-area .alert .pro-description .pro-info .pro-link-dropdown.js-toppanel-link-dropdown .pro-dropdown-toggle {
+    display: inline-block;
+    position: relative;
+    background: 0 0;
+    border: none;
+    font-family: "Montserrat-Bold", sans-serif;
+    color: #212529;
+    text-decoration: underline;
+    padding: 0;
+    outline: 0;
+    cursor: help;
+}
+
+.header-ten .header-mini {
+    min-height: 26px;
+}
+.header-ten .bg-top-bar {
+    background-color: #f5f5f5;
+}
+
+.header-ten .header-mini .navbar {
+    padding: 0;
+}
+.align-items-center {
+    align-items: center !important;
+}
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+}
+.header-ten .header-mini .navbar-lang .country-flag {
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+.header-ten .header-mini .navbar-lang .country-flag h4 {
+    padding-right: 12px;
+}
+.header-ten .header-mini .navbar-lang .country-flag ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#accordion .no-child {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.header-login-button span {
+    left: 13%;
+}
+
+.middle-header .header-login-button {
+    font-size: 15px;
+}
+
+@media only screen and (max-width: 767px) {
+  .header-area .alert {
+    padding: 13px 5px 12px;
+  }
+
+  .header-area .alert .pro-description .pro-info {
+    padding: 0 5px;
+    display: block;
+  }
+
+}
+            </style>
+ 
     <div class="container-fluid">
         <div class="row line-header"></div>
+        
+        
+        <div class="header-area">
+            <div class="alert alert-warning alert-dismissible fades show" role="alert">
+               <div class="container">
+                  <div class="pro-description">
+                     <div class="pro-info">
+                        Get<strong> UPTO 40% OFF </strong>on your 1st order
+                        <div class="pro-link-dropdown js-toppanel-link-dropdown">
+                           <a href="/shop" class="pro-dropdown-toggle">
+                           PURCHASE NOW
+                           </a>
+                        </div>
+                     </div>
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                     <span aria-hidden="true">×</span>
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
         <div class="col-md-10 col-md-offset-1">
             <div class="row middle-header">
                 <div class="col-md-3 col-xs-12 tab-con">
                     <div class="row">
                         <a href="/">
-                            <img src="{{{ get_option('site_logo') }}}" alt="{{{ get_option('site_title') }}}" class="logo-icon" />
-                            <img src="{{{ get_option('site_logo_type') }}}" alt="{{{ get_option('site_title') }}}" class="logo-type"/>
+                            {{-- <img src="{{{ get_option('site_logo') }}}" alt="{{{ get_option('site_title') }}}" class="logo-icon" /> --}}
+                            <img src="{{{ get_option('site_logo_type') }}}" style="width: 50%" alt="{{{ get_option('site_title') }}}" class="logo-type"/>
                         </a>
                     </div>
                 </div>
@@ -105,7 +286,7 @@
                                 </div>
                             </a>
                         @else
-                            <a href="/user?redirect={{ Request::path() }}" class="header-login-button"><span class="headericon mdi mdi-account"></span>{{{ trans('main.login_signup') }}}</a>
+                            <a href="/user?redirect={{ Request::path() }}" class="header-login-button"><span class="headericon mdi mdi-account"></span> {{{ trans('main.login_signup') }}}</a>
                         @endif
                     </div>
                 </div>
@@ -121,7 +302,12 @@
                         </div>
                         <div class="col-md-10 col-xs-12 tab-con">
                             <ul id="accordion" class="cat-filters-li accordion accordion-s">
-                                @foreach($setting['category'] as $mainCategory)
+                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Home</a></li>
+                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Courses</a></li>
+                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">News</a></li>
+                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Info Pages</a></li>
+                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Contact Us</a></li>
+                                {{-- @foreach($setting['category'] as $mainCategory)
                                     @if(count($mainCategory->childs)>0)
                                         <li class="has-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="javascript:void(0);"><img src="{{{$mainCategory->image or ''}}}" />{{{$mainCategory->title or ''}}}</a>
                                             <ul>
@@ -133,7 +319,7 @@
                                     @else
                                         <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/category/{{{ $mainCategory->class }}}"><img src="{{{$mainCategory->image or ''}}}" />{{{$mainCategory->title or ''}}}</a></li>
                                     @endif
-                                @endforeach
+                                @endforeach --}}
                             </ul>
                         </div>
 
@@ -161,13 +347,19 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><b>{{{ trans('main.category') }}}</b></a>
+                       {{--  <a class="navbar-brand" href="#"><b>{{{ trans('main.category') }}}</b></a> --}}
+                       &nbsp; &nbsp; &nbsp;
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            @foreach($setting['category'] as $mainCategory)
+                            <li><a href="">Home</a></li>
+                            <li><a href="">Courses</a></li>
+                            <li><a href="">News</a></li>
+                            <li><a href="">Info Pages</a></li>
+                            <li><a href="">Contact Us</a></li>
+                            {{-- @foreach($setting['category'] as $mainCategory)
                             @if(count($mainCategory->childs)>0)
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{{$mainCategory->title or ''}}}<span class="caret"></span></a>
@@ -180,7 +372,7 @@
                             @else
                                 <li><a href="/category/{{{ $mainCategory->class }}}">{{{$mainCategory->title or ''}}}</a></li>
                             @endif
-                        @endforeach
+                        @endforeach --}}
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->

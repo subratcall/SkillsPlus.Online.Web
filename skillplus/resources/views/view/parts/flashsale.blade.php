@@ -479,7 +479,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                        </div>
                                        <div class="pro-thumb">
                                           <div class="product-flash-hover">   
-                                             <a class="btn btn-block btn-secondary swipe-to-top" href="http://estore.skillsready.online/product-detail/printed-rose-petal-shirt" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Detail" tabindex="-1">View Detail</a>
+                                          <a class="btn btn-block btn-secondary swipe-to-top" href="/product/{{$new->id}}" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="View Detail" tabindex="-1">View Detail</a>
                                           </div>
                                           <img class="img-fluid" src="{{{ $meta['thumbnail'] }}}" alt="Printed Rose Petal Shirt">  
                                        </div>
