@@ -222,7 +222,7 @@ img {
                   $("#catDiv").append(
                     '<div class="col-12 col-md-6 col-lg-3 cat-banner">'   +         
                       '<figure class="categories-image">'+
-                        '<a href="/category/'+data.data[index].category+'">'+
+                        '<a href="/subcategory/'+data.data[index].category+'">'+
                           '<img class="img-fluid" src="'+data.data[index].image+'" alt="Mens">'+
                             '<div class="categories-title">'+
                               '<h4>'+data.data[index].category+'</h4>'+

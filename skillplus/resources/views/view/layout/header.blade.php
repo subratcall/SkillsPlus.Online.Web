@@ -303,10 +303,10 @@
                         <div class="col-md-10 col-xs-12 tab-con">
                             <ul id="accordion" class="cat-filters-li accordion accordion-s">
                                 <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Home</a></li>
-                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Courses</a></li>
-                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">News</a></li>
+                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/courses">Courses</a></li>
+                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/news">News</a></li>
                                 <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Info Pages</a></li>
-                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Contact Us</a></li>
+                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/contactus">Contact Us</a></li>
                                 {{-- @foreach($setting['category'] as $mainCategory)
                                     @if(count($mainCategory->childs)>0)
                                         <li class="has-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="javascript:void(0);"><img src="{{{$mainCategory->image or ''}}}" />{{{$mainCategory->title or ''}}}</a>
@@ -358,7 +358,7 @@
                             <li><a href="">Courses</a></li>
                             <li><a href="">News</a></li>
                             <li><a href="">Info Pages</a></li>
-                            <li><a href="">Contact Us</a></li>
+                            <li><a href="/contactus">Contact Us</a></li>
                             {{-- @foreach($setting['category'] as $mainCategory)
                             @if(count($mainCategory->childs)>0)
                                 <li class="dropdown">

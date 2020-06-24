@@ -3,7 +3,79 @@
     {{{ get_option('site_title','') }}} - {{{ $category->title or 'Categories' }}}
 @endsection
 @section('page')
+<style>
+    .categories-content {
+    overflow: hidden;
+}
+.pro-content {
+    overflow: hidden;
+    padding-top: 100px;
+}
+.justify-content-center {
+    justify-content: center !important;
+}
+.cat-banner {
+    margin-top: 30px;
+}
+.cat-banner .categories-image {
+    overflow: hidden;
+    margin-bottom: 0;
+    height: 100%;
+    position: relative;
+}
+figure {
+    margin: 0 0 1rem;
+        margin-bottom: 1rem;
+}
+.cat-banner .categories-image a {
+    display: block;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+}
+.cat-banner .categories-image a img {
+    width: 100%;
+}
+.animation-s5 ..categories-image img {
+    opacity: 1;
+    transition: 0.3s ease-in-out;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
 
+cat-banner .categories-image a .categories-title:hover {
+    opacity: 1;
+}
+.cat-banner .categories-image a .categories-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #28B293;
+    opacity: 0.8;
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+    transition: 0.2s;
+    overflow: hidden;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -ms-transition: 0.2s;
+    -o-transition: 0.2s;
+    -moz-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -o-transform: translateX(0px);
+}
+
+</style>
     <div class="container-fluid">
         <div class="row cat-search-section" style="background: url('{{{ $category->background or '' }}}');">
             <div class="container">
@@ -14,7 +86,7 @@
                 <div class="col-md-2 tab-con">
                     <div class="h-10"></div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <{{-- div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="box box-s">
                         <div class="container-2">
                             <form>
@@ -23,13 +95,13 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                   
             </div>
         </div>
     </div>
     <div class="container-fluid">
-        <div class="row cat-tag-section">
+        {{-- <div class="row cat-tag-section">
             <div class="container">
                 <div class="col-md-2 col-xs-12 tab-con">
                     <div class="btn-group" data-toggle="buttons">
@@ -91,14 +163,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 <div class="h-20"></div>
 <div class="container-fluid">
     <div class="row">
         <div class="container">
-            <div class="col-md-3 col-xs-12 tab-con">
+            {{-- <div class="col-md-3 col-xs-12 tab-con">
                 @if(isset($category->id) && count($category->filters)>0)
                     <div class="ucp-section-box sbox3">
                     <div class="header back-orange header-new"><span>{{{ trans('main.filters') }}}</span></div>
@@ -132,8 +204,8 @@
                             @endforeach
                         @endif
                     </div>
-            </div>
-            <div class="col-md-9 col-xs-12">
+            </div> --}}
+            <div class="col-md-12 col-xs-12">
                 <div class="newest-container newest-container-s">
                     <div class="row body body-target body-target-s">
                         <?php $vipIds[] = 0; ?>
@@ -142,64 +214,35 @@
                                 @if(isset($content->content->id))
                                     <?php $vipIds[] = $content->content->id; ?>
                                     <?php $meta = arrayToList($content->content->metas,'option','value'); ?>
-                                    <div class="col-md-4 col-sm-6 col-xs-12 pagi-content vip-content tab-con">
-                                        <a href="/product/{{{ $content->content->id or '' }}}" title="{{{ $content->content->title or '' }}}" class="content-box pagi-content-box">
-                                            <div class="img-container">
-                                                <img src="{{{ $meta['thumbnail'] or '' }}}"/>
-                                                <span class="off-badge vip-badge">
-                                                    <label class="text-center">{{{ trans('main.vip_badge') }}}</label>
-                                                </span>
+                                   
+                                    <div class="col-12 col-md-6 col-lg-3 cat-banner">
+            
+                                        <figure class="categories-image">
+                                          <a href="/product/{{{ $content['id'] or '' }}}">
+                                            <img class="img-fluid" src="{{{ $content['metas']['thumbnail'] or '' }}}" alt="Women's">
+                                            <div class="categories-title">
+                                              <h5>{!! str_limit($content['title'],35,'...') !!}</h5>
                                             </div>
-											<h3>{!! str_limit($content->content->title,35,'...') !!}</h3>
-                                            <div class="footer">
-                                                <span class="avatar" title="{{{ $content->user->name or '' }}}" onclick="window.location.href = '/profile/{{{ $content->user->id or 0 }}}'"><img src="{{{ get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar','')) }}}"></span>
-                                                @if(isset($metas['duration']))
-                                                    <label class="pull-right content-clock">{{{ convertToHoursMins($meta['duration']) }}}</label>
-													<span class="boxicon mdi mdi-clock pull-right"></span>
-                                                @else
-                                                    <label class="pull-right content-clock">{{{ trans('main.not_defined') }}}</label>
-													<span class="boxicon mdi mdi-clock pull-right"></span>
-                                                @endif
-												<span class="boxicon mdi mdi-wallet pull-left"></span>
-												<span class="boxicon mdi mdi-wallet pull-left"></span>
-                                                <label class="pull-left">{{{ price($content->id,$content->category_id,$meta['price'])['price_txt'] }}}</label>
-                                            </div>
-                                        </a>
-                                    </div>
+                                          </a>
+                                        </figure>
+                            
+                                      </div>
                                 @endif
                             @endforeach
                         @else
                             <?php $vipIds[] = 0; ?>
                         @endif
-                        @foreach($contents as $content)
-                            @if(!in_array($content['id'],$vipIds))
-                                <div class="col-md-4 col-sm-6 col-xs-12 pagi-content tab-con">
-                            <a href="/product/{{{ $content['id'] or '' }}}" title="{{{ $content['title'] or '' }}}" class="content-box pagi-content-box">
-                                
-                                <div class="img-container">
-                                    <img src="{{{ $content['metas']['thumbnail'] or '' }}}"/>
-                                    @if($content['discount'] != null)
-                                        <span class="off-badge">
-                                            <label class="text-center">%{{{ $content['discount']['off'] or 0 }}}<br><span>{{{ trans('main.discount') }}}</span></label>
-                                        </span>
-                                    @endif
+                        @foreach($subcat as $content)
+                            <div class="col-12 col-md-6 col-lg-3 cat-banner">            
+                            <figure class="categories-image">
+                              <a href="/category/{{{ $content['title'] or '' }}}">
+                                <img class="img-fluid" src="{{{ $content['image'] or '' }}}" alt="Women's">
+                                <div class="categories-title">
+                                  <h5>{!! str_limit($content['title'],35,'...') !!}</h5>
                                 </div>
-								<h3>{!! str_limit($content['title'],35,'...') !!}</h3>
-                                <div class="footer">
-                                    <span class="avatar" title="{{{ $content['user']['name'] or '' }}}" onclick="window.location.href = '/profile/{{{ $content['user']['id'] or 0 }}}'"><img src="{{{ get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar','')) }}}"></span>
-                                    @if(isset($content['metas']['duration']))
-                                        <label class="pull-right content-clock">{{{ convertToHoursMins($content['metas']['duration']) }}}</label>
-										<span class="boxicon mdi mdi-clock pull-right"></span>
-                                    @else
-                                        <label class="pull-right content-clock">{{{ trans('main.not_defined') }}}</label>
-										<span class="boxicon mdi mdi-clock pull-right"></span>
-                                    @endif
-									<span class="boxicon mdi mdi-wallet pull-left"></span>
-                                    <label class="pull-left">{{{ price($content['id'],$content['category_id'],$content['metas']['price'])['price_txt'] }}}</label>
-                                </div>
-                            </a>
-                        </div>
-                            @endif
+                              </a>
+                            </figure>                    
+                          </div>
                         @endforeach
                     </div>
                     <div class="h-10"></div>

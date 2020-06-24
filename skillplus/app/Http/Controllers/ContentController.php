@@ -320,6 +320,256 @@ class ContentController extends Controller
         else
             return view('view.category.category_base',['category'=>$Category,'contents'=>$content,'vip'=>$vipContent,'order'=>$order,'pricing'=>$price,'course'=>$course,'off'=>$off,'filters'=>$filters,'mostSell'=>$mostSellContent]);
     }
+
+    
+    public function subcategory($id = null)
+    {
+        $order = Input::get('order');
+        $price = Input::get('price');
+        $course = Input::get('course');
+        $off = Input::get('off');
+        if(Input::get('filter')!=null) {
+            $filters = array_unique(Input::get('filter'));
+        }else{
+            $filters = null;
+        }
+        $q = Input::get('q');
+        $post_sell = Input::get('post-sell');
+        $support = Input::get('support');
+
+        $Category = ContentCategory::with(array('filters'=>function($q){$q->with('tags');}))->where('class',$id)->first();
+        $subCategory = ContentCategory::where("parent_id",$Category->id)->get();
+        if($Category) {
+            $vipContent = ContentVip::with(['content' => function ($q) {
+                $q->with(['metas', 'sells', 'discount'])->where('mode', 'publish');
+            }])
+                ->where('first_date', '<', time())
+                ->where('last_date', '>', time())
+                ->where('type', 'category')
+                ->where('mode', 'publish')
+                ->where('category_id', $Category->id)
+                ->orderBy('id', 'DESC')
+                ->get();
+        }else{
+            $vipContent = [];
+        }
+
+        if(!$Category)
+            $content = Content::with(['metas','sells','discount','user'])->withCount('parts')->where('mode','publish');
+        else
+            $content = Content::with(['metas','sells','discount','user'])->withCount('parts')->where('category_id',$Category->id)->where('mode','publish');
+
+        if(isset($q) && $q!='')
+            $content->where('title','LIKE','%'.$q.'%');
+
+        if(isset($post_sell) && $post_sell == 1)
+            $content->where('post','1');
+
+        if(isset($support) && $support == 1)
+            $content->where('support','1');
+
+        if(isset($order) && $order == 'old')
+            $content->orderBy('id');
+
+        if(isset($order) && $order == 'new')
+            $content->orderBy('id','DESC');
+
+        ## Set For Course
+        switch ($course){
+            case 'one':
+                $content->where('type','single');
+                break;
+            case 'multi':
+                $content->where('type','course');
+                break;
+            case 'all':
+                break;
+            default:
+                break;
+        }
+
+        $content = $content->get()->toArray();
+        foreach ($content as $index=>$c){
+            $content[$index]['metas'] = arrayToList($c['metas'],'option','value');
+        }
+
+        ## Most Sell
+        $mostSellContent = $content;
+        usort($mostSellContent,array($this,'orderSell'));
+        $mostSellContent = array_slice($mostSellContent,0,3);
+
+
+        ## Set For OrderBy
+        switch($order){
+            case 'price':
+                usort($content,array($this,'orderPrice'));
+                break;
+            case 'cheap':
+                usort($content,array($this,'orderCheap'));
+                break;
+            case 'sell':
+                usort($content,array($this,'orderSell'));
+                break;
+            case 'popular':
+                usort($content,array($this,'orderView'));
+                break;
+            default:
+                break;
+        }
+
+        ## Set For Pricing
+        switch ($price){
+            case 'all':
+                break;
+            case 'free':
+                $content = $this->pricing($content,'free');
+                break;
+            case 'price':
+                $content = $this->pricing($content,'price');
+                break;
+            default:
+                break;
+        }
+
+        ## Set For Off
+        if($off == 1){
+            $content = $this->off($content);
+        }
+
+        ## Set For Filters
+        if($filters!=''){
+            $content = $this->filters($content,$filters);
+        }
+
+     
+        return view('view.category.sub_cat',['subcat'=>$subCategory,'category'=>$Category,'contents'=>$content,'vip'=>$vipContent,'order'=>$order,'pricing'=>$price,'course'=>$course,'off'=>$off,'filters'=>$filters,'mostSell'=>$mostSellContent]);
+    }
+
+    
+    public function courses(Request $request)
+    {
+        $order = Input::get('order');
+        $price = Input::get('price');
+        $course = Input::get('course');
+        $off = Input::get('off');
+        if(Input::get('filter')!=null) {
+            $filters = array_unique(Input::get('filter'));
+        }else{
+            $filters = null;
+        }
+        $q = Input::get('q');
+        $post_sell = Input::get('post-sell');
+        $support = Input::get('support');
+
+        $Category = ContentCategory::with(array('filters'=>function($q){$q->with('tags');}))->where('class',"D")->first();//->orWhere('class', 'like', '%' . 'Design' . '%')->first();
+        if($Category) {
+            $vipContent = ContentVip::with(['content' => function ($q) {
+                $q->with(['metas', 'sells', 'discount'])->where('mode', 'publish');
+            }])
+                ->where('first_date', '<', time())
+                ->where('last_date', '>', time())
+                ->where('type', 'category')
+                ->where('mode', 'publish')
+                ->where('category_id', $Category->id)
+                ->orderBy('id', 'DESC')
+                ->get();
+        }else{
+            $vipContent = [];
+        }
+
+        $content = Content::with(['metas','sells','discount','user'])->withCount('parts')->where('mode','publish');
+        /* if(!$Category)
+            $content = Content::with(['metas','sells','discount','user'])->withCount('parts')->where('mode','publish');
+        else
+            $content = Content::with(['metas','sells','discount','user'])->withCount('parts')->where('category_id',$Category->id)->where('mode','publish'); */
+
+        if(isset($q) && $q!='')
+            $content->where('title','LIKE','%'.$q.'%');
+
+        if(isset($post_sell) && $post_sell == 1)
+            $content->where('post','1');
+
+        if(isset($support) && $support == 1)
+            $content->where('support','1');
+
+        if(isset($order) && $order == 'old')
+            $content->orderBy('id');
+
+        if(isset($order) && $order == 'new')
+            $content->orderBy('id','DESC');
+
+        ## Set For Course
+        switch ($course){
+            case 'one':
+                $content->where('type','single');
+                break;
+            case 'multi':
+                $content->where('type','course');
+                break;
+            case 'all':
+                break;
+            default:
+                break;
+        }
+
+        $content = $content->get()->toArray();
+        foreach ($content as $index=>$c){
+            $content[$index]['metas'] = arrayToList($c['metas'],'option','value');
+        }
+
+        ## Most Sell
+        $mostSellContent = $content;
+        usort($mostSellContent,array($this,'orderSell'));
+        $mostSellContent = array_slice($mostSellContent,0,3);
+
+
+        ## Set For OrderBy
+        switch($order){
+            case 'price':
+                usort($content,array($this,'orderPrice'));
+                break;
+            case 'cheap':
+                usort($content,array($this,'orderCheap'));
+                break;
+            case 'sell':
+                usort($content,array($this,'orderSell'));
+                break;
+            case 'popular':
+                usort($content,array($this,'orderView'));
+                break;
+            default:
+                break;
+        }
+
+        ## Set For Pricing
+        switch ($price){
+            case 'all':
+                break;
+            case 'free':
+                $content = $this->pricing($content,'free');
+                break;
+            case 'price':
+                $content = $this->pricing($content,'price');
+                break;
+            default:
+                break;
+        }
+
+        ## Set For Off
+        if($off == 1){
+            $content = $this->off($content);
+        }
+
+        ## Set For Filters
+        if($filters!=''){
+            $content = $this->filters($content,$filters);
+        }
+
+        /* if($id != null)
+            return view('view.category.category',['category'=>$Category,'contents'=>$content,'vip'=>$vipContent,'order'=>$order,'pricing'=>$price,'course'=>$course,'off'=>$off,'filters'=>$filters,'mostSell'=>$mostSellContent]);
+        else */
+            return view('view.courses',['category'=>$Category,'contents'=>$content,'vip'=>$vipContent,'order'=>$order,'pricing'=>$price,'course'=>$course,'off'=>$off,'filters'=>$filters,'mostSell'=>$mostSellContent]);
+    }
     ######################
 
     ## Search Section ##

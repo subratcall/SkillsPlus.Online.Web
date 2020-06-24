@@ -1303,19 +1303,36 @@
                 dataType: 'JSON',
                 success: function(data) {
                     for (let index = 0; index < data.data.length; index++) {
-                        $("#accordionx").append(
-                            '<div class="panel panel-default">'+
-                                '<div class="panel-heading">'+
-                                    '<h4 class="panel-title">'+
-                                    '<a data-toggle="collapse" data-parent="#accordionx" href="#collapse'+index+'">  '+data.data[index].title+'</a> </h4>'+
-                                '</div>'+
-                                '<div id="collapse'+index+'" class="panel-collapse collapse in">'+
-                                    '<div class="panel-body">'+
-                                        data.data[index].desc+
+                        if(index==0){
+                            $("#accordionx").append(
+                                '<div class="panel panel-default">'+
+                                    '<div class="panel-heading">'+
+                                        '<h4 class="panel-title">'+
+                                        '<a data-toggle="collapse" data-parent="#accordionx" href="#collapse'+index+'">  '+data.data[index].title+'</a> </h4>'+
                                     '</div>'+
-                                '</div>'+
-                            '</div>'
-                        )
+                                    '<div id="collapse'+index+'" class="panel-collapse collapse in">'+
+                                        '<div class="panel-body">'+
+                                            data.data[index].desc+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'
+                            )
+                        }else{
+                            $("#accordionx").append(
+                                '<div class="panel panel-default">'+
+                                    '<div class="panel-heading">'+
+                                        '<h4 class="panel-title">'+
+                                        '<a data-toggle="collapse" data-parent="#accordionx" href="#collapse'+index+'">  '+data.data[index].title+'</a> </h4>'+
+                                    '</div>'+
+                                    '<div id="collapse'+index+'" class="panel-collapse collapse">'+
+                                        '<div class="panel-body">'+
+                                            data.data[index].desc+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'
+                            )
+                        }
+                        
                         
                     }
                 },
