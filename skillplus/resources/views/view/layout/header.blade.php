@@ -171,6 +171,10 @@
     font-size: 17px;
     font-weight: bold;
 }
+#accordion .has-child {
+    font-size: 17px;
+    font-weight: bold;
+}
 
 .header-login-button span {
     left: 13%;
@@ -305,7 +309,12 @@
                                 <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Home</a></li>
                                 <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/courses">Courses</a></li>
                                 <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/news">News</a></li>
-                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Info Pages</a></li>
+                                <li class="has-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Info Pages</a>
+                                    <ul>                                      
+                                        <li onmouseover="this.style.borderColor='{{{ $child->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/category/">About Us</a></li>
+                                        <li onmouseover="this.style.borderColor='{{{ $child->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/category/">Privacy Policy</a></li>
+                                    </ul>
+                                </li>
                                 <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/contactus">Contact Us</a></li>
                                 {{-- @foreach($setting['category'] as $mainCategory)
                                     @if(count($mainCategory->childs)>0)
@@ -357,7 +366,12 @@
                             <li><a href="">Home</a></li>
                             <li><a href="">Courses</a></li>
                             <li><a href="">News</a></li>
-                            <li><a href="">Info Pages</a></li>
+                            <li><a href=""  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Info Pages</a>
+                                <ul class="dropdown-menu">                                   
+                                    <li><a href="/category/">About Us</a></li> 
+                                    <li><a href="/category/">Privacy Policy</a></li>
+                                </ul>
+                            </li>
                             <li><a href="/contactus">Contact Us</a></li>
                             {{-- @foreach($setting['category'] as $mainCategory)
                             @if(count($mainCategory->childs)>0)

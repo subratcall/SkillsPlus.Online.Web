@@ -104,11 +104,35 @@
                     <div class="header back-orange header-new"><span>{{{ trans('main.filters') }}}</span></div>
                     <div class="body">
                         <ul id="accordion" class="cat-filters-li accordion">
-                        
+                           {{--  @foreach($category->filters as $filter) --}}
+                                {{-- <li id="filter{{{ $filter->id or 0 }}}">
+                                    <div class="link">{{{ $filter->filter or '' }}}<i class="mdi mdi-chevron-down"></i></div>
+                                    @if(count($filter->tags)>0)
+                                        <ul class="submenu">
+                                            @foreach($filter->tags as $tag)
+                                                <li><input type="checkbox" id="filter{{{ $tag->id or '' }}}" name="filters" value="{{{ $tag->id or '' }}}" @if(!is_null($filters) && in_array($tag->id,$filters)) checked @endif/><label for="filter{{{ $tag->id or '' }}}"><span></span>{{{ $tag->tag or '' }}}</label></li>
+                                                @if(!is_null($filters) && in_array($tag->id,$filters)) <script>$(document).ready(function(){$('#filter{{{ $filter->id or 0 }}}').addClass('open');$('#filter{{{ $filter->id or 0 }}} .submenu').css('display','block');});</script> @endif
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li> --}}
+
                                 <li id="filter">
-                                   
+                                    <div class="link">Ratings<i class="mdi mdi-chevron-down"></i></div>
+                                    
+                                        <ul class="submenu">
+                                                <li>
+                                                    <input type="checkbox" checked/>
+                                                    <label for="filter">fdsfsfdsfds<span></span></label>
+                                                </li>
+                                                {{-- @if(!is_null($filters) && in_array($tag->id,$filters)) <script>$(document).ready(function(){$('#filter{{{ $filter->id or 0 }}}').addClass('open');$('#filter{{{ $filter->id or 0 }}} .submenu').css('display','block');});</script> @endif --}}
+                                          
+                                        </ul>
+                                  
                                 </li>
-                          
+
+
+                           {{--  @endforeach --}}
                         </ul>
                     </div>
                 </div>
