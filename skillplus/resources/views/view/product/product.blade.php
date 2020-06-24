@@ -284,7 +284,7 @@
                         <span class="raty-text">({{{ count($product->rates) }}} {{{ trans('main.votes') }}})</span><br>                        
                         {{-- <span class="raty-text">3 ratings</span><br> --}}
                         <span class="">10 studens / vendors purchased this book</span><br>
-                        <span class="">Vendor: John Carlo C. Lucasan</span>
+                        <span class="">Vendor: {{{ $product->user->name or '' }}}</span>
                     </div>
                 </div>
             </div>
@@ -780,8 +780,8 @@
                             <div class="">
                                 <div class=" section-5">
                                     <p class="section-5-header">Description</p>
-                
-                                    <p><strong>Do you want to supercharge your HTML, CSS & PHP knowledge and learn how to turn them into
+                                    {!! $product->courseDescription !!}
+                                    {{-- <p><strong>Do you want to supercharge your HTML, CSS & PHP knowledge and learn how to turn them into
                                             a
                                             real business that can make you more money as a freelancer?</strong></p>
                 
@@ -808,7 +808,7 @@
                                         WordPress developers have options. Many developers make a generous living off of creating custom
                                         WordPress themes and selling them on websites like ThemeForest. Freelance designers and
                                         developers can also take on WordPress projects and make an extra $1,000 - $5,000+ per month.
-                                    </p>
+                                    </p> --}}
                                 </div>
                             </div>
                         </div>
@@ -1069,6 +1069,7 @@
                                 </ul>
                             </div>
                             <div class="tab-pane fade" id="tab2">
+                                vcbvcbcb
                                 <span>{!! $product->content or '' !!}</span>
                             </div>
                             <div class="tab-pane fade in tab-body" id="tab3">

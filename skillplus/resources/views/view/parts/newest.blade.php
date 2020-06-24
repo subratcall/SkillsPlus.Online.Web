@@ -913,9 +913,9 @@
                    <div class="row">
                       <div class="col-md-12 p-0">
                          <div class="nav" role="tablist" id="tabCarousel">
-                            <a class="nav-link btn  " data-toggle="tab" href="#featured" role="tab"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Top Sales">Top Sales</span></a>
-                            <a class="nav-link btn active show" data-toggle="tab" href="#special" role="tab" aria-controls="special" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Special">Special</span></a> 
-                            <a class="nav-link btn" data-toggle="tab" href="#liked" role="tab" aria-controls="liked" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Most Liked">Most Liked</span></a> 
+                            {{-- <a class="nav-link btn  " data-toggle="tab" href="#featured" role="tab"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Top Sales">Top Sales</span></a>
+                            <a class="nav-link btn active show" data-toggle="tab" href="#special" role="tab" aria-controls="special" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Special">Special</span></a>  --}}
+                            <a class="nav-link btn active show" data-toggle="tab" href="#liked" role="tab" aria-controls="liked" aria-selected="true"><span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Most Liked">Most Liked</span></a> 
                          </div>
                       </div>
                    </div>
@@ -928,10 +928,10 @@
                       <div class="carousel-inner">
                         <?php 
                         
-                          $arrayLen = count($new_content);
+                          $arrayLen = count($popular_content);
                           
                           $arrayDiv = array();
-                          foreach($new_content as $k => $new)
+                          foreach($popular_content as $k => $new)
                             if ($k % 4 == 0) {
                              // echo $k;
                               $arrayDiv[] = $k;
@@ -949,14 +949,14 @@
                                   $arrSize =  $arrayDiv[0]+3;//get the very start
                                 ?>
                                 @for ($j = $arrayDiv[$i]; $j <= 3; $j++)
-                                <?php $meta = arrayToList($new_content[$j]->metas,'option','value'); ?>
+                                <?php $meta = arrayToList($popular_content[$j]->metas,'option','value'); ?>
                                   <div class="col-md-3">
                                     <div class="thumbnail animated fadeInRight">
                                       <img src="{{{ $meta['thumbnail'] }}}" alt="Slide11">
                                       <div class="caption">
-                                          <h3 class="">{!! str_limit($new_content[$j]->title,30,'...') !!}</h3>
-                                          <p>{{$new_content[$k]->subTitle}}</p>
-                                          <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> {{-- <a href="#" class="btn btn-default" role="button"><i class="fas fa-clock"></i> Wishlist</a> --}}</p>
+                                          <h3 class="">{!! str_limit($popular_content[$j]->title,30,'...') !!}</h3>
+                                          <p>{{$popular_content[$k]->subTitle}}</p>
+                                          <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> <a href="/product/{{$new->id}}" class="btn btn-default" role="button"><i class="fas fa-clock"></i> View</a></p>
                                       </div>
                                     </div>
                                   </div>
@@ -972,20 +972,20 @@
                                   $arrSize =  $arrayDiv[$i]+3;
                                   //echo 'array size '. $arrSize;
                                   $startArray = $arrSize-2;
-                                  $getLastArray = count($new_content)-1;//end($arrayDiv);
+                                  $getLastArray = count($popular_content)-1;//end($arrayDiv);
                                   //echo ' end '.$getLastArray;
                                 ?>
                                 @for ($k = $arrayDiv[$i]; $k <= $arrSize ; $k++)
-                                <?php $meta = arrayToList($new_content[$k]->metas,'option','value'); ?>
+                                <?php $meta = arrayToList($popular_content[$k]->metas,'option','value'); ?>
                               {{--   {{"sdadsfdsfsdf ".$arrSize."<=".$getLastArray}} --}}
                                 @if($arrSize<=$getLastArray)
                                     <div class="col-md-3">
                                       <div class="thumbnail animated fadeInRight">
                                         <img src="{{{ $meta['thumbnail'] }}}" alt="Slide11">
                                         <div class="caption">
-                                          <h3 class="">{!! str_limit($new_content[$k]->title,30,'...') !!}</h3>
-                                          <p>{{$new_content[$k]->subTitle}}</p>
-                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> {{-- <a href="#" class="btn btn-default" role="button">Wishlist</a> --}}</p>
+                                          <h3 class="">{!! str_limit($popular_content[$k]->title,30,'...') !!}</h3>
+                                          <p>{{$popular_content[$k]->subTitle}}</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> <a href="/product/{{$new->id}}" class="btn btn-default" role="button">View</a></p>
                                         </div>
                                       </div>
                                     </div>
@@ -997,9 +997,9 @@
                                       <div class="thumbnail animated fadeInRight">
                                         <img src="{{{ $meta['thumbnail'] }}}" alt="Slide11">
                                         <div class="caption">
-                                          <h3 class="">{!! str_limit($new_content[$k]->title,30,'...') !!}</h3>
-                                            <p>{{$new_content[$k]->subTitle}}</p>
-                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> {{-- <a href="#" class="btn btn-default" role="button">Wishlist</a> --}}</p>
+                                          <h3 class="">{!! str_limit($popular_content[$k]->title,30,'...') !!}</h3>
+                                            <p>{{$popular_content[$k]->subTitle}}</p>
+                                            <p><a href="#" class="btn btn-primary" role="button">@if(isset($meta['price']) && $meta['price']>0) {{{currencySign()}}}{{{ price($new->id,$new->category_id,$meta['price'])['price'] }}} @else {{{ trans('main.free') }}} @endif</a> <a href="/product/{{$new->id}}" class="btn btn-default" role="button">View</a></p>
                                         </div>
                                       </div>
                                     </div>
