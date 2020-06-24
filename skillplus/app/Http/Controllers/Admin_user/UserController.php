@@ -205,7 +205,8 @@ class UserController extends Controller
 
     public function viewCourses()
     {    
-        return view('student.courses.course');
+        // return view('student.courses.course');
+        return view('student.courses.course-vue');
     }
 
     public function viewLesson()
