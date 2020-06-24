@@ -92,6 +92,15 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor_course_show_meta/{id}','Admin_user\VendorController@showCourseMeta');
             Route::get('vendor_course_destroy/{id}','Admin_user\VendorController@destroyCourse');
             Route::post('vendor_course_saveCourse','Admin_user\VendorController@saveCourse');
+            Route::get('vendor_course_rate/{id}','Admin_user\VendorController@getRatings');
+            Route::get('vendor_course_sold/{id}','Admin_user\VendorController@countCoursePurchased');
+            Route::get('vendor_course_vendor/{id}','Admin_user\VendorController@getVendor');
+            Route::get('vendor_count_courses/{id}','Admin_user\VendorController@getVendorCountCourses');
+            Route::get('vendor_course_comment/{id}','Admin_user\VendorController@getVendorCourseComment');
+            Route::get('vendor_course_related/{id}','Admin_user\VendorController@getVendorRelatedCourse');
+
+            /* http://localhost:8000/admin/user_vendor/vendor_course_related/116 */
+
             /***Lessons */
             Route::get('vendor_lesson_list/{id}','Admin_user\VendorController@vendorLessonsList');
             Route::get('vendor_lesson_getList/{id}','Admin_user\VendorController@vendorLessons');
@@ -113,7 +122,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('student_lesson_list/{cid}','Admin_user\VendorController@studentLessonsList');     
             Route::get('student_lesson_quiz/{id}/{lid}','Admin_user\VendorController@studentTakeQuiz');          
             Route::get('student_lesson_take_quiz/{id}','Admin_user\VendorController@studentLoadQuiz');          
-            Route::get('student_show_course/{id}','Admin_user\UserController@viewCourses');          
+            Route::get('student_show_course/{id}','Admin_user\UserController@viewCourses')->name("student_show_course");          
             Route::get('student_show_lesson/{id}/{lid}','Admin_user\UserController@viewLesson');
             Route::post('student_quiz_submit_answers','Admin_user\VendorController@submitAnswers');        
             Route::get('student_quiz_show_submit_answers/{qid}/{lid}','Admin_user\VendorController@viewSubmittedAnswer'); 

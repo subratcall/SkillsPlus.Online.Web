@@ -806,6 +806,7 @@ Course Content -->
 
 @section('script')
 
+
 <script type="application/javascript" src="/assets/vendor/jquery-te/jquery-te-1.4.0.min.js"></script>
 <link rel="stylesheet" href="/assets/vendor/raty/jquery.raty.css" />
 <script type="application/javascript" src="/assets/vendor/raty/jquery.raty.js"></script>
@@ -851,7 +852,7 @@ Course Content -->
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                  console.log(data);
+                  // console.log(data);
                    $("#titleData").text(data.title)
                    $("#subtitleData").text(data.subTitle)
                    $("#video-details").append(data.content)

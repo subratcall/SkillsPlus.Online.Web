@@ -21,6 +21,8 @@ use App\Models\Tickets;
 use App\Models\ContentPart;
 
 use App\SaveAnswer;
+use App\Models\User;
+use App\CourseReview;
 
 class VendorController extends Controller
 {
@@ -128,15 +130,25 @@ class VendorController extends Controller
 
     public function getRatings($id)
     {
-        $getData = ContentRate::where(['content_id'=>$id])->get();
-        $data = array();
-        $cnt = 0;
-        foreach ($getData as $myList)
-		{
-            $cnt+=$myList->rate;
-        }
-		echo json_encode($cnt);
+
+     $getData = ContentRate::where(['content_id'=>$id])->get();
+        
+     return response()->json($getData);
+
+  //       $getData = ContentRate::where(['content_id'=>$id])->get();
+  //       $data = array();
+  //       $cnt = 0;
+  //       foreach ($getData as $myList)
+		// {
+  //           $cnt+=$myList->rate;
+  //       }
+  // echo json_encode($cnt);
+  
     }
+
+
+
+
 
     public function getPrecourse($id)
     {
@@ -158,8 +170,11 @@ class VendorController extends Controller
 
     public function countCoursePurchased($id)
     {
-        $datas = Sell::where('content_id',$id)->get();
-		echo json_encode(count($datas));
+  //       $datas = Sell::where('content_id',$id)->get();
+  // echo json_encode(count($datas));
+  
+      $datas = Sell::where('content_id',$id)->get();
+      return response()->json(count($datas));
     }
 
     public function showCourseMeta($id)
@@ -418,8 +433,10 @@ class VendorController extends Controller
             $row['action'] = $btn;
 			$data[] = $row;
 		}
-        $output = array("data" => $data);
-		echo json_encode($output);
+        // $output = array("data" => $data);
+  // echo json_encode($output);
+  
+  return response()->json($data);
     }
 
     public function studentLessonsList()
@@ -768,5 +785,31 @@ class VendorController extends Controller
     
 
         return dd($request->all());
+    }
+
+    public function getVendor($id) {
+
+     $user = User::where(["id" => $id])->get();
+
+     return response()->json($user);
+    }
+
+    public function getVendorCountCourses($id) {
+     $user = Content::where(["user_id" => $id])->get();
+
+     return response()->json(count($user));
+    }
+
+    public function getVendorCourseComment($id) {
+     $data = CourseReview::where(["tbl_contents_id" => $id])->get();
+
+     return response()->json($data);
+    }
+
+    public function getVendorRelatedCourse($id) {
+
+     $data = Content::where(["tag" => $id])->get();
+
+     return response()->json($data);
     }
 }
