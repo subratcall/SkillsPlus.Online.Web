@@ -803,6 +803,8 @@ Route::group(['middleware'=>'notification'],function (){
 
     Route::get('/','ContentController@main');
     Route::get('category/{id}','ContentController@category');
+    Route::get('subcategory/{id}','ContentController@subcategory');
+    Route::get('courses','ContentController@courses');
     Route::get('category','ContentController@category');
     Route::get('search','ContentController@search');
     Route::get('jsonsearch','ContentController@jsonSearch');
@@ -812,6 +814,14 @@ Route::group(['middleware'=>'notification'],function (){
     Route::get('cr/{id}','ContentController@contentRequirements');
     Route::get('cp/{id}','ContentController@contentLessons');
     
+    Route::get('/contactus', function () {
+        return view('view.contactus');
+    });
+    Route::get('/news', function () {
+        return view('view.news');
+    });
+
+
 
 
     ## Blog Section ##
