@@ -101,38 +101,46 @@
             <div class="col-md-3 col-xs-12 tab-con">
             
                     <div class="ucp-section-box sbox3">
-                    <div class="header back-orange header-new"><span>{{{ trans('main.filters') }}}</span></div>
-                    <div class="body">
+                    <div class="header back-orange header-new"><span>{{{ trans('main.filters') }}}</span><input type="checkbox"  name="hh" id="hh"></div>
+                    <div class="body">                              
                         <ul id="accordion" class="cat-filters-li accordion">
-                           {{--  @foreach($category->filters as $filter) --}}
-                                {{-- <li id="filter{{{ $filter->id or 0 }}}">
-                                    <div class="link">{{{ $filter->filter or '' }}}<i class="mdi mdi-chevron-down"></i></div>
-                                    @if(count($filter->tags)>0)
-                                        <ul class="submenu">
-                                            @foreach($filter->tags as $tag)
-                                                <li><input type="checkbox" id="filter{{{ $tag->id or '' }}}" name="filters" value="{{{ $tag->id or '' }}}" @if(!is_null($filters) && in_array($tag->id,$filters)) checked @endif/><label for="filter{{{ $tag->id or '' }}}"><span></span>{{{ $tag->tag or '' }}}</label></li>
-                                                @if(!is_null($filters) && in_array($tag->id,$filters)) <script>$(document).ready(function(){$('#filter{{{ $filter->id or 0 }}}').addClass('open');$('#filter{{{ $filter->id or 0 }}} .submenu').css('display','block');});</script> @endif
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li> --}}
-
-                                <li id="filter">
-                                    <div class="link">Ratings<i class="mdi mdi-chevron-down"></i></div>
-                                    
-                                        <ul class="submenu">
-                                                <li>
-                                                    <input type="checkbox" checked/>
-                                                    <label for="filter">fdsfsfdsfds<span></span></label>
-                                                </li>
-                                                {{-- @if(!is_null($filters) && in_array($tag->id,$filters)) <script>$(document).ready(function(){$('#filter{{{ $filter->id or 0 }}}').addClass('open');$('#filter{{{ $filter->id or 0 }}} .submenu').css('display','block');});</script> @endif --}}
-                                          
-                                        </ul>
-                                  
-                                </li>
-
-
-                           {{--  @endforeach --}}
+                            <li id="filter">
+                                <div class="link">Level<i class="mdi mdi-chevron-down"></i></div>                                    
+                                <ul class="submenu" style="display: block;">
+                                    <li>
+                                        <input type="checkbox" id="filter552" name="filters" value="Advance">
+                                        <label for="filter552"><span></span>Advance {{-- <i class="fa fa-star" ></i> --}}</label>
+                                        <input type="checkbox" id="filter553" name="filters" value="Moderate">
+                                        <label for="filter553"><span></span>Moderate</label>
+                                        <input type="checkbox" id="filter554" name="filters" value="Easy">
+                                        <label for="filter554"><span></span>Easy</label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="filter">
+                                <div class="link">Price<i class="mdi mdi-chevron-down"></i></div>                                    
+                                <ul class="submenu" style="display: block;">
+                                    <li>
+                                        <input type="checkbox" id="filter555" name="filters" value="555">
+                                        <label for="filter555"><span></span>Free </label>
+                                        <input type="checkbox" id="filter556" name="filters" value="556">
+                                        <label for="filter556"><span></span>Paid</label>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="filter">
+                                <div class="link">Language<i class="mdi mdi-chevron-down"></i></div>                                    
+                                <ul class="submenu" style="display: block;">
+                                    <li>
+                                        <input type="checkbox" id="filter555" name="filters" value="555">
+                                        <label for="filter555"><span></span>English </label>
+                                        <input type="checkbox" id="filter556" name="filters" value="556">
+                                        <label for="filter556"><span></span>Spanish</label>
+                                        <input type="checkbox" id="filter556" name="filters" value="556">
+                                        <label for="filter556"><span></span>Japanese</label>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -820,6 +820,12 @@ Route::group(['middleware'=>'notification'],function (){
     Route::get('/news', function () {
         return view('view.news');
     });
+    Route::get('/aboutus', function () {
+        return view('view.aboutus');
+    });
+    Route::get('/privacy', function () {
+        return view('view.privacy');
+    });
 
 
 

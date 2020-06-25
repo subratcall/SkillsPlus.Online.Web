@@ -9,7 +9,7 @@
     <meta name="description" content="{!! get_option('site_description','') !!}">
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap-3.2.rtl.css"/>
-   {{--  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css"/> --}}
+    <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="    https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
     <link rel="stylesheet" href="/assets/vendor/owlcarousel/dist/assets/owl.carousel.min.css"/>
@@ -77,7 +77,7 @@
 .header-area .alert .pro-description .pro-info {
     font-size: 20px;
     color: #212529;
-    line-height: 25px;
+    line-height: 25px;a
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -311,8 +311,8 @@
                                 <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/news">News</a></li>
                                 <li class="has-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Info Pages</a>
                                     <ul>                                      
-                                        <li onmouseover="this.style.borderColor='{{{ $child->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/category/">About Us</a></li>
-                                        <li onmouseover="this.style.borderColor='{{{ $child->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/category/">Privacy Policy</a></li>
+                                        <li onmouseover="this.style.borderColor='{{{ $child->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/aboutus/">About Us</a></li>
+                                        <li onmouseover="this.style.borderColor='{{{ $child->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/privacy/">Privacy Policy</a></li>
                                     </ul>
                                 </li>
                                 <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/contactus">Contact Us</a></li>
@@ -368,8 +368,8 @@
                             <li><a href="">News</a></li>
                             <li><a href=""  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Info Pages</a>
                                 <ul class="dropdown-menu">                                   
-                                    <li><a href="/category/">About Us</a></li> 
-                                    <li><a href="/category/">Privacy Policy</a></li>
+                                    <li><a href="/aboutus">About Us</a></li> 
+                                    <li><a href="/privacy/">Privacy Policy</a></li>
                                 </ul>
                             </li>
                             <li><a href="/contactus">Contact Us</a></li>

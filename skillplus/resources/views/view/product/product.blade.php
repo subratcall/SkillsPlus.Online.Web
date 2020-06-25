@@ -267,6 +267,13 @@
         padding: 0;
     }
 
+
+
+    
+    .product-header {
+    background: #29303b/*linear-gradient(to left, #0f8e6c, #13ce9c);*/
+};
+
     /* font-size: 1.2em;
 	padding-top: 5px;
 	display: inline-block; */
