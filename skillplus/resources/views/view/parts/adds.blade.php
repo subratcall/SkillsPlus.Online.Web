@@ -62,8 +62,8 @@ figure {
            <figure class="banner-image " style="margin-top: 30px;">
             <a href="/"><img class="img-fluid" src="https://img-a.udemycdn.com/course/240x135/648826_f0e5_4.jpg" alt="Banner Image"></a>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
            <div class="carousel-caption">
-              <h3>Logo</h3>
-              <p>Design Modeern Logo</p>
+              <h3>
+               The Ultimate MySQL Bootcamp: Go from SQL Beginner to Expert </h3>
             </div>
            </figure>
         </div>

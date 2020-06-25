@@ -93,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
     <div class="container">
        <div class="heading">
           <h2>
-             About Us      
+            <strong> About Us   </strong>   
           </h2>
           <hr style="margin-bottom: 10;">
        </div>

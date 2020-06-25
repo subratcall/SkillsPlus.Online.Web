@@ -190,7 +190,44 @@ p {
     margin-bottom: 30px;
     font-family: "Montserrat-Bold", sans-serif;
 }
+nav[aria-label="breadcrumb"] {
+    background-color: #dbdbdb;
+}
+nav[aria-label="breadcrumb"] .breadcrumb {
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: transparent;
+}
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #e9ecef;
+    border-radius: 0;
+}
+.breadcrumb-item.active {
+    color: #6c757d;
+}
+.breadcrumb-item + .breadcrumb-item {
+    padding-left: 0.5rem;
+}
 </style>
+<div class="container-fuild">
+    <nav aria-label="breadcrumb">
+        <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">News</li>
+
+        </ol>
+        </div>
+    </nav>
+</div>
 <section class="pro-content">
 	<div class="container">
 	  <div class="page-heading-title">
