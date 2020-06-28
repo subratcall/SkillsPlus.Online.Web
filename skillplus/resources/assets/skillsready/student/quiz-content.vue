@@ -10,7 +10,6 @@
      <input type="hidden" name="question_id" :value="value_a.id" />
 
      <div v-show="page == index_a">
-
       <div class="col-md-12 question-and-answer">
        <div class="row">
         <div class="col-lg-6">
@@ -36,15 +35,18 @@
          </div>
 
          <div v-if="value_a.type == 'CHECKBOX'">
-           {{ getOptions(value_a.id) }}
-           
+          <div v-for="(value_b, index_b) in value_a.answer" :key="index_b">
+           <ul>
+            <li>{{ value_b.description }}</li>
+           </ul>
+          </div>
+
           <div
            class="col-xs-12"
            v-for="(value_b, index_b) in options"
            @click="answer($event)"
            :key="index_b"
           >
-
            <!-- <div class="col-xs-2">
             <input
              ref="element"
@@ -60,9 +62,7 @@
 
            <div class="col-xs-10">
             <label class="form-check-label" for="defaultCheck1">{{ value_b }}</label>
-           </div> -->
-
-
+           </div>-->
           </div>
          </div>
 
@@ -226,42 +226,6 @@
     this.$events.fire("display-hint", hint);
    },
 
-   getOptions(id) {
-    // var vm = this;
-
-    // axios({
-    //  url: `/admin/question/get_option_detail/${id}`,
-    //  type: "get"
-    // })
-    //  .then(res => {
-    //    vm.options = res.data;
-    //  })
-    //  .catch(err => {
-    //   console.log(err);
-    //  });
-
-
-   },
-
-   qsplit(data) {
-
-   /*  var result;
-
-    axios({
-     url: `/admin/question/get_option_detail/${data}`,
-     type: "get"
-    })
-     .then(res => {
-      result = res.data;
-
-      console.log(result);
-     })
-     .catch(err => {
-      console.log(err);
-     });
-
- return result; */
-   },
    save() {
     let form = document.getElementById("form");
     let input = new FormData(form);
@@ -277,22 +241,6 @@
      .catch(err => {
       console.log(err);
      });
-
-    // console.log(this.id, this.lid);
-    // console.log(this.input);
-    // let datas = {
-    //   lesson_id: this.id,
-    //   content_id: this.lid
-    // };
-    // axios({
-    //       url: "/admin/user_student/student_quiz_submit_answers",
-    //       type: "post",
-    //       data: datas,
-    //       dataType: 'JSON',
-    //   }).then((res) => {
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   });
    },
    answer(event) {
     let self = this;

@@ -208,12 +208,12 @@ export default {
           : "glyphicon glyphicon-arrow-left";
     },
     skip() {
-      if (this.pageState < this.pageLimit) {
+      if (this.pageState + 1 < this.pageLimit) {
         this.pageState = this.pageState + 1;
       }
     },
     back() {
-      if (this.pageState >= 0) {
+      if (this.pageState > 0) {
         this.pageState = this.pageState - 1;
       }
     },

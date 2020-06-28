@@ -36125,38 +36125,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     passHintBack: function passHintBack(hint) {
       this.$events.fire("display-hint", hint);
     },
-    getOptions: function getOptions(id) {
-      // var vm = this;
-
-      // axios({
-      //  url: `/admin/question/get_option_detail/${id}`,
-      //  type: "get"
-      // })
-      //  .then(res => {
-      //    vm.options = res.data;
-      //  })
-      //  .catch(err => {
-      //   console.log(err);
-      //  });
-
-
-    },
-    qsplit: function qsplit(data) {
-
-      /*  var result;
-        axios({
-        url: `/admin/question/get_option_detail/${data}`,
-        type: "get"
-       })
-        .then(res => {
-         result = res.data;
-          console.log(result);
-        })
-        .catch(err => {
-         console.log(err);
-        });
-      return result; */
-    },
     save: function save() {
       var form = document.getElementById("form");
       var input = new FormData(form);
@@ -36170,22 +36138,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (err) {
         console.log(err);
       });
-
-      // console.log(this.id, this.lid);
-      // console.log(this.input);
-      // let datas = {
-      //   lesson_id: this.id,
-      //   content_id: this.lid
-      // };
-      // axios({
-      //       url: "/admin/user_student/student_quiz_submit_answers",
-      //       type: "post",
-      //       data: datas,
-      //       dataType: 'JSON',
-      //   }).then((res) => {
-      //   }).catch((err) => {
-      //     console.log(err);
-      //   });
     },
     answer: function answer(event) {
       var self = this;
@@ -36475,12 +36427,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.sidebarIcon = this.sidebar == true ? "glyphicon glyphicon-arrow-right" : "glyphicon glyphicon-arrow-left";
     },
     skip: function skip() {
-      if (this.pageState < this.pageLimit) {
+      if (this.pageState + 1 < this.pageLimit) {
         this.pageState = this.pageState + 1;
       }
     },
     back: function back() {
-      if (this.pageState >= 0) {
+      if (this.pageState > 0) {
         this.pageState = this.pageState - 1;
       }
     },
@@ -40799,7 +40751,7 @@ exports.push([module.i, "\n@import https://gitcdn.github.io/bootstrap-toggle/2.2
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 271 */
@@ -60983,7 +60935,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "control-label"
     }, [_vm._v("Question No. " + _vm._s(index_a + 1) + " " + _vm._s(value_a.id))]), _vm._v(" "), _c('p', {
       staticClass: "title-question"
-    }, [_vm._v(_vm._s(value_a.question))])]), _vm._v(" "), (value_a.type == 'CHECKBOX') ? _c('div', [_vm._v("\n          " + _vm._s(_vm.getOptions(value_a.id)) + "\n          \n         "), _vm._l((_vm.options), function(value_b, index_b) {
+    }, [_vm._v(_vm._s(value_a.question))])]), _vm._v(" "), (value_a.type == 'CHECKBOX') ? _c('div', [_vm._l((value_a.answer), function(value_b, index_b) {
+      return _c('div', {
+        key: index_b
+      }, [_c('ul', [_c('li', [_vm._v(_vm._s(value_b.description))])])])
+    }), _vm._v(" "), _vm._l((_vm.options), function(value_b, index_b) {
       return _c('div', {
         key: index_b,
         staticClass: "col-xs-12",

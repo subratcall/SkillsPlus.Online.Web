@@ -13,6 +13,7 @@ use App\Models\CourseLog;
 use App\Models\Sell;
 use App\Models\ContentRate;
 use App\Models\ContentLearn;
+use App\Models\Options;
 use DB;
 use Session;
 
@@ -452,7 +453,7 @@ class VendorController extends Controller
         return view('student.lesson.quiz-vue');
     }
 
-    function studentLoadQuiz($id){
+    /* function studentLoadQuiz($id){
         $content = QuestionsLesson::where(['lesson_id'=>$id])->get();
         $data = array();
         $cbid = 1;
@@ -476,7 +477,33 @@ class VendorController extends Controller
 		}
         $output = array("data" => $data);
 		echo json_encode($output);
-    }
+    } */
+
+    function studentLoadQuiz($id){
+     $content = QuestionsLesson::where(['lesson_id'=>$id])->get();
+     $data = array();
+     $cbid = 1;
+     foreach ($content as $myList) {
+         $row = array();            
+         $checkRec = Questions::where(['id'=>$myList->question_id])->first();
+         $options = Options::select("question_id", "description", "is_correct")->where(['question_id'=>$myList->question_id])->get();
+         
+         if($checkRec!=null){
+             $row['question'] = strtoupper($checkRec->question);
+             $row['type'] = strtoupper($checkRec->type);
+             $row['options'] = $checkRec->options;
+             $row['hint'] = strtoupper($checkRec->hint);
+             $row['remarks'] = strtoupper($checkRec->remarks);
+             $row['attachment'] = strtoupper($checkRec->attachment);
+             $row['id'] = $checkRec->id; 
+             $row["answer"] = $options;
+
+             $data[] = $row;
+         }
+       }
+     $output = array("data" => $data);
+echo json_encode($output);
+ }
 
     /**Answers */
 
