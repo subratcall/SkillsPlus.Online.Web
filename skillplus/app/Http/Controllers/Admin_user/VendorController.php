@@ -414,29 +414,31 @@ class VendorController extends Controller
 
     function studentLessons($id){
         $content = ContentPart::where(['content_id'=>$id])->get();
-        $data = array();
-        $cbid = 1;
-        foreach ($content as $myList)
-		{
-			$row = array();
-			$row['title'] = strtoupper($myList->title);
-			$row['desc'] = strtoupper($myList->description);
-			$row['duartion'] = strtoupper($myList->duartion);
-			$row['size'] = strtoupper($myList->size);
-			$row['sort'] = strtoupper($myList->sort);
-            $row['id'] = $myList->id;   
-            $row['cb'] ='<input type="checkbox" value="'.$myList->id.'" name="cb" id="cb_'.$cbid.'" >';            
-            $btn = ''; 
-            $btn = $btn.'<a href="/admin/user_student/student_lesson_quiz/'.$myList->id.'/'.$id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
-            //$btn = $btn.'<a href="/admin/user_student/student_lesson_take_quiz/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
-            $btn .= ' <a href="/admin/user_student/student_show_lesson/'.$myList->id.'/'.$id.'" class="btn btn-primary">View Lesson</a>';
-            $row['action'] = $btn;
-			$data[] = $row;
-		}
+
+        return response()->json($content);
+  //       $data = array();
+  //       $cbid = 1;
+  //       foreach ($content as $myList)
+		// {
+		// 	$row = array();
+		// 	$row['title'] = strtoupper($myList->title);
+		// 	$row['desc'] = strtoupper($myList->description);
+		// 	$row['duration'] = strtoupper($myList->duration);
+		// 	$row['size'] = strtoupper($myList->size);
+		// 	$row['sort'] = strtoupper($myList->sort);
+  //           $row['id'] = $myList->id;   
+  //           $row['cb'] ='<input type="checkbox" value="'.$myList->id.'" name="cb" id="cb_'.$cbid.'" >';            
+  //           $btn = ''; 
+  //           $btn = $btn.'<a href="/admin/user_student/student_lesson_quiz/'.$myList->id.'/'.$id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
+  //           //$btn = $btn.'<a href="/admin/user_student/student_lesson_take_quiz/'.$myList->id.'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>  ';
+  //           $btn .= ' <a href="/admin/user_student/student_show_lesson/'.$myList->id.'/'.$id.'" class="btn btn-primary">View Lesson</a>';
+  //           $row['action'] = $btn;
+		// 	$data[] = $row;
+		// }
         // $output = array("data" => $data);
   // echo json_encode($output);
   
-  return response()->json($data);
+  // return response()->json($data);
     }
 
     public function studentLessonsList()
@@ -801,14 +803,28 @@ class VendorController extends Controller
     }
 
     public function getVendorCourseComment($id) {
-     $data = CourseReview::where(["tbl_contents_id" => $id])->get();
+     
+     // $data= CourseReview::leftJoin("tbl_content_rate", function($join) {
+     //  $join->on("tbl_content_rate.user_id", "=", "content_reviews.tbl_user_id");
+     // })->select("content_reviews.comments", "tbl_content_rate.rate", "content_reviews.tbl_user_id")->get();
+
+     $data = ContentRate::where(["content_id" => $id])->get();
+
+     // SELECT content_reviews.`comments`, tbl_content_rate.rate, content_reviews.tbl_user_id
+     // FROM content_reviews
+     // LEFT JOIN tbl_content_rate
+     // ON tbl_content_rate.user_id = content_reviews.tbl_user_id
 
      return response()->json($data);
     }
 
     public function getVendorRelatedCourse($id) {
 
-     $data = Content::where(["tag" => $id])->get();
+     // $data = Content::where(["tag" => $id])->select("id as content_id")->get();
+
+     $data = Content::leftJoin("tbl_contents_part as contents_part", function($join) {
+      $join->on('contents_part.content_id', '=', 'tbl_contents.id');
+    })->select("contents_part.title", "contents_part.create_at", "contents_part.duration", "contents_part.price", "contents_part.free")->where(["tag" => $id])->limit(5)->get();
 
      return response()->json($data);
     }

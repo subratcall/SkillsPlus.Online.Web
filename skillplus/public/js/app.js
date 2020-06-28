@@ -36654,6 +36654,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 //
 //
 //
@@ -37065,66 +37067,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -37134,27 +37078,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       courseUnrate: 0,
       countCourseSold: 0,
       courseWhatWillLearn: [],
-      vendorName: '',
+      vendorName: "",
       quizList: [],
       requirements: [],
-      urlid: '',
-      description: '',
+      urlid: "",
+      description: "",
       vendorCountCourses: 0,
-      userAbout: '',
+      userAbout: "",
       courseReview: [],
-      commentName: ''
+      commentName: "",
+      courseRelatedList: [],
+      studentRate: {
+        onestar: 0,
+        twostar: 0,
+        threestar: 0,
+        fourstar: 0,
+        fivestar: 0
+      }
     };
   },
 
   methods: {
     takeQuiz: function takeQuiz(id) {
+      window.location.href = "/admin/user_student/student_lesson_quiz/" + id + "/" + this.urlid;
+    },
+    formatDate: function formatDate(value) {
+      var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "D MMM YYYY";
 
-      window.location.href = '/admin/user_student/student_lesson_quiz/' + id + '/' + this.urlid;
+      value = new Date(value);
+      return value == null ? "" : __WEBPACK_IMPORTED_MODULE_0_moment___default()(value, "YYYY-MM-DD").format(fmt);
     },
     getAbout: function getAbout(id) {
       var _this = this;
 
-      axios.get('/admin/user_vendor/vendor_course_vendor/' + id).then(function (res) {
+      axios.get("/admin/user_vendor/vendor_course_vendor/" + id).then(function (res) {
         _this.vendorName = res.data[0].name;
         _this.userAbout = res.data[0].about;
         _this.commentName = res.data[0].name;
@@ -37163,8 +37120,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         alert("Error! Contact IT Department.");
       });
     },
-    get: function get() {
+    getCourseTag: function getCourseTag(data) {
       var _this2 = this;
+
+      /* get course tag */
+      axios.get("/admin/user_vendor/vendor_course_related/" + data).then(function (res) {
+        _this2.courseRelatedList = res.data;
+      }).catch(function (err) {
+        console.error(err);
+        alert("Error! Contact IT Department.");
+      });
+    },
+    get: function get() {
+      var _this3 = this;
 
       var self = this;
 
@@ -37173,16 +37141,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       /* get course_content */
 
-      axios.get('/admin/user_vendor/vendor_course_show/' + id).then(function (res) {
+      axios.get("/admin/user_vendor/vendor_course_show/" + id).then(function (res) {
         self.course = res.data;
         self.vendor_id = res.data.user_id;
-
-        var whatWillLearn = res.data.what_will_learn;
-
-        self.courseWhatWillLearn = whatWillLearn.split("|");
         self.requirements = res.data.requirements.split("|");
-        self.description = res.data.description;
         self.getAbout(res.data.user_id);
+        self.getCourseTag(res.data.tag);
+      }).catch(function (err) {
+        console.log(err);
+        alert("Error! Contact IT Department.");
+      });
+
+      /* get product */
+
+      axios.get("/admin/user_vendor/product/" + id).then(function (res) {
+        self.description = res.data.product.courseDescription;
+      }).catch(function (err) {
+        console.log(err);
+        alert("Error! Contact IT Department.");
+      });
+
+      /* get what will learn */
+
+      axios.get("/admin/user_vendor/cl/" + id).then(function (res) {
+        self.courseWhatWillLearn = res.data.data;
       }).catch(function (err) {
         console.log(err);
         alert("Error! Contact IT Department.");
@@ -37190,7 +37172,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       /* get course rate */
 
-      axios.get('/admin/user_vendor/vendor_course_rate/' + id).then(function (res) {
+      axios.get("/admin/user_vendor/vendor_course_rate/" + id).then(function (res) {
         var average = 0;
 
         for (var i = 0; i < res.data.length; i++) {
@@ -37198,8 +37180,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
 
         average = average / res.data.length;
-        _this2.courseRate = Math.ceil(average);
-        _this2.courseUnrate = Math.abs(Math.ceil(average) - 5);
+        _this3.courseRate = Math.ceil(average);
+        _this3.courseUnrate = Math.abs(Math.ceil(average) - 5);
       }).catch(function (err) {
         console.error(err);
         alert("Error! Contact IT Department.");
@@ -37207,19 +37189,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       /* get course count sold */
 
-      axios.get('/admin/user_vendor/vendor_course_sold/' + id).then(function (res) {
-        _this2.countCourseSold = res.data;
+      axios.get("/admin/user_vendor/vendor_course_sold/" + id).then(function (res) {
+        _this3.countCourseSold = res.data;
       }).catch(function (err) {
         console.error(err);
         alert("Error! Contact IT Department.");
       });
 
-      /*  get vendor details */
-
       /* get course quiz list  */
 
-      axios.get('/admin/user_student/student_lesson_get_list/' + id).then(function (res) {
-        _this2.quizList = res.data;
+      axios.get("/admin/user_student/student_lesson_get_list/" + id).then(function (res) {
+        _this3.quizList = res.data;
       }).catch(function (err) {
         console.error(err);
         alert("Error! Contact IT Department.");
@@ -37227,8 +37207,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       /* get vendor count courses */
 
-      axios.get('/admin/user_vendor/vendor_count_courses/' + id).then(function (res) {
-        _this2.vendorCountCourses = res.data;
+      axios.get("/admin/user_vendor/vendor_count_courses/" + id).then(function (res) {
+        _this3.vendorCountCourses = res.data;
       }).catch(function (err) {
         console.error(err);
         alert("Error! Contact IT Department.");
@@ -37236,12 +37216,69 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       /* get course comment */
 
-      axios.get('/admin/user_vendor/vendor_course_comment/' + id).then(function (res) {
-        _this2.courseReview = res.data;
-        getAbout(res.data.tbl_user_id);
+      axios.get("/admin/user_vendor/vendor_course_comment/135/116").then(function (res) {
+        console.log(res);
+        _this3.courseReview = res.data;
       }).catch(function (err) {
         console.error(err);
         alert("Error! Contact IT Department.");
+      });
+
+      /* get course requirement */
+
+      axios.get("/admin/user_vendor/cr/" + id).then(function (res) {
+        _this3.requirements = res.data.data;
+      }).catch(function (err) {
+        console.error(err);
+        alert("Error! Contact IT Department.");
+      });
+
+      /* get individual rating */
+
+      axios.get("/admin/user_vendor/ir/" + id).then(function (res) {
+
+        var data = res.data;
+        var onestar = 0;
+        var twostar = 0;
+        var threestar = 0;
+        var fourstar = 0;
+        var fivestar = 0;
+
+        data.forEach(function (item) {
+
+          if (item.rate == 1) {
+            onestar += item.rate;
+          } else if (item.rate == 2) {
+            twostar += item.rate;
+          } else if (item.rate == 3) {
+            threestar += item.rate;
+          } else if (item.rate == 4) {
+            fourstar += item.rate;
+          } else if (item.rate == 5) {
+            fivestar += item.rate;
+          }
+        });
+
+        onestar = onestar / 5;
+        onestar = onestar / 5 * 100;
+
+        twostar = twostar / 5;
+        twostar = twostar / 5 * 100;
+
+        threestar = threestar / 5;
+        threestar = threestar / 5 * 100;
+
+        fourstar = fourstar / 5;
+        fourstar = fourstar / 5 * 100;
+
+        fivestar = fivestar / 5;
+        fivestar = fivestar / 5 * 100;
+
+        self.studentRate.onestar = onestar;
+        self.studentRate.twostar = twostar;
+        self.studentRate.threestar = threestar;
+        self.studentRate.fourstar = fourstar;
+        self.studentRate.fivestar = fivestar;
       });
     }
   },
@@ -40684,7 +40721,7 @@ exports.push([module.i, "\n.filter-bar {\r\n  padding: 10px;\n}\r\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n.custom-card[data-v-0ba6557f] {\n box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);\n background-color: #fff;\n border-radius: 3px;\n border: none;\n position: relative;\n margin-bottom: 30px;\n}\n#myKanban[data-v-0ba6557f] {\n overflow-x: auto;\n padding: 20px 0;\n}\n.success[data-v-0ba6557f] {\n background: #00b961;\n color: #fff;\n}\n.info[data-v-0ba6557f] {\n background: #2a92bf;\n color: #fff;\n}\n.warning[data-v-0ba6557f] {\n background: #f4ce46;\n color: #fff;\n}\n.error[data-v-0ba6557f] {\n background: #fb7d44;\n color: #fff;\n}\n.raty-text[data-v-0ba6557f] {\n color: #e6d816 !important;\n}\n.raty[data-v-0ba6557f] {\n color: #e6d816 !important;\n}\n.course[data-v-0ba6557f] {\n font-family: \"Open Sans\", sans-serif;\n}\n.course a[data-v-0ba6557f] {\n color: #007791;\n}\n.course .course-header[data-v-0ba6557f] {\n margin-left: 100px;\n margin-top: 50px;\n margin-bottom: 50px;\n padding: 0px;\n min-width: 1980px;\n}\n.course-header .title[data-v-0ba6557f] {\n width: 600px;\n}\n.section.section-header[data-v-0ba6557f] {\n margin-top: -15px;\n}\n.wrap-header[data-v-0ba6557f] {\n background-color: #29303b;\n color: white;\n}\n.no-padding[data-v-0ba6557f] {\n padding: 0px;\n}\n.no-margin[data-v-0ba6557f] {\n margin: 0px;\n}\n.main-content.header[data-v-0ba6557f] {\n margin-top: 15px;\n}\n.margin-top-next[data-v-0ba6557f] {\n margin-top: 40px;\n}\n.header-custom-border[data-v-0ba6557f] {\n border-top: #dedfe0 solid 1px;\n border-left: #dedfe0 solid 1px;\n border-right: #dedfe0 solid 1px;\n border-bottom: #dedfe0 solid 1px;\n padding: 10px 0px;\n}\n.list-custom-border[data-v-0ba6557f] {\n border-bottom: #dedfe0 solid 1px;\n border-left: #dedfe0 solid 1px;\n border-right: #dedfe0 solid 1px;\n font: 15px;\n color: #007791;\n padding-top: 10px;\n padding-left: 40px;\n padding-right: 5px;\n padding-bottom: 10px;\n text-indent: -0.8em;\n}\n.list-custom-border > i[data-v-0ba6557f] {\n opacity: 0.5;\n padding-right: 10px;\n}\n.section-1[data-v-0ba6557f] {\n border: #dedfe0 solid 1px;\n color: #29303b;\n padding: 30px;\n}\n.section-1 ul[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-7 ul[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-7[data-v-0ba6557f] {\n color: #29303b;\n}\n.section-7 .vendor-profile img[data-v-0ba6557f] {\n margin-bottom: 10px;\n width: 96px;\n height: 96px;\n}\n.section-7 ul li i[data-v-0ba6557f] {\n padding-right: 10px;\n}\n.section-1 ul > li[data-v-0ba6557f] {\n padding-left: 1.3em;\n}\n.section-1 li[data-v-0ba6557f]:before {\n content: \"\\f00c\";\n font-family: FontAwesome;\n display: inline-block;\n margin-left: -1.3em;\n width: 1.3em;\n color: #a1a7b3;\n}\n.section-2[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-3[data-v-0ba6557f] {\n padding: 2.5px 0px;\n}\n.section-4-header[data-v-0ba6557f] {\n font-size: 22px !important;\n padding-top: 10px !important;\n color: #29303b !important;\n}\n.section-4 ul > li[data-v-0ba6557f] {\n font-size: 15px;\n color: #29303b;\n}\n.section-4 p[data-v-0ba6557f] {\n font-size: 14px;\n color: #29303b;\n}\n.section-5-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-6-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-6 .item-price[data-v-0ba6557f] {\n font-size: 18px;\n}\n.section-7-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8 .average-rating[data-v-0ba6557f] {\n font-size: 72px;\n padding: 0px;\n margin-top: -20px;\n}\n.section-9-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8 .individual-rating ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0px;\n}\n.section-9 ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0px;\n}\n.section-5[data-v-0ba6557f] {\n color: #29303b;\n}\n.video-tutorials[data-v-0ba6557f] {\n position: absolute;\n z-index: 1;\n right: 200px;\n top: 50px;\n background: white;\n border: 1px solid white;\n box-shadow: 0.5px 1px 5px 0.5px #00000080;\n border-radius: 2px;\n height: 700px;\n}\n.video-tutorials video[data-v-0ba6557f] {\n width: 400px;\n height: 300px;\n border: 10px solid white;\n}\n.video-tutorials.video-details[data-v-0ba6557f] {\n font-size: 16px;\n}\n.video-details[data-v-0ba6557f] {\n padding: 10px;\n padding-left: 20px;\n text-align: center;\n}\n.video-details-header[data-v-0ba6557f] {\n font-size: 24px;\n font-weight: bold;\n text-align: left;\n padding-left: 40px;\n}\n.video-details p[data-v-0ba6557f] {\n font-size: 32px;\n}\n.button[data-v-0ba6557f] {\n border-style: none;\n padding: 15px;\n width: 300px;\n}\n.add-to-cart[data-v-0ba6557f] {\n margin-top: 10px;\n border: black 1px solid;\n background-color: #ffffff;\n font-weight: bold;\n color: #686f7a;\n}\n.buy-now[data-v-0ba6557f] {\n background-color: #ec5252;\n color: #ffffff;\n font-weight: bold;\n}\n.video-descriptions[data-v-0ba6557f] {\n color: #686f7a;\n text-align: left;\n padding-left: 1;\n}\n.video-descriptions p[data-v-0ba6557f] {\n font-size: 14px;\n padding-left: 40px;\n font-weight: bold;\n padding-top: 10px;\n}\n.video-descriptions ul[data-v-0ba6557f] {\n padding-left: 60px;\n}\n.video-descriptions ul li[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-6 ul li[data-v-0ba6557f] {\n border-bottom: 2px solid #dedfe0;\n padding: 20px 0px;\n}\n.section-6 ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0;\n border-bottom: 2px solid #dedfe0;\n border-top: 2px solid #dedfe0;\n}\n.raty-product-section i[data-v-0ba6557f] {\n margin-left: 5px;\n margin-bottom: 10px;\n}\nb[data-v-0ba6557f] {\n color: #29303b;\n}\n.fas.fa-star.star-live[data-v-0ba6557f] {\n color: rgb(245, 200, 91);\n}\n.fas.fa-star.star-dead[data-v-0ba6557f] {\n color: #abb0bb;\n}\n", ""]);
+exports.push([module.i, "\n@media (max-width: 1199.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n}\n@media (max-width: 991.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n}\n@media (max-width: 767.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n}\n@media (max-width: 575.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n}\n.custom-card[data-v-0ba6557f] {\n box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);\n background-color: #fff;\n border-radius: 3px;\n border: none;\n position: relative;\n margin-bottom: 30px;\n}\n#myKanban[data-v-0ba6557f] {\n overflow-x: auto;\n padding: 20px 0;\n}\n.success[data-v-0ba6557f] {\n background: #00b961;\n color: #fff;\n}\n.info[data-v-0ba6557f] {\n background: #2a92bf;\n color: #fff;\n}\n.warning[data-v-0ba6557f] {\n background: #f4ce46;\n color: #fff;\n}\n.error[data-v-0ba6557f] {\n background: #fb7d44;\n color: #fff;\n}\n.raty-text[data-v-0ba6557f] {\n color: #e6d816 !important;\n}\n.raty[data-v-0ba6557f] {\n color: #e6d816 !important;\n}\n.course[data-v-0ba6557f] {\n font-family: \"Open Sans\", sans-serif;\n}\n.course a[data-v-0ba6557f] {\n color: #007791;\n}\n.course .course-header[data-v-0ba6557f] {\n margin-left: 100px;\n margin-top: 50px;\n margin-bottom: 50px;\n padding: 0px;\n min-width: 1980px;\n}\n.course-header .title[data-v-0ba6557f] {\n width: 600px;\n}\n.section.section-header[data-v-0ba6557f] {\n margin-top: -15px;\n}\n.wrap-header[data-v-0ba6557f] {\n background-color: #29303b;\n color: white;\n}\n.no-padding[data-v-0ba6557f] {\n padding: 0px;\n}\n.no-margin[data-v-0ba6557f] {\n margin: 0px;\n}\n.main-content.header[data-v-0ba6557f] {\n margin-top: 15px;\n}\n.margin-top-next[data-v-0ba6557f] {\n margin-top: 40px;\n}\n.header-custom-border[data-v-0ba6557f] {\n border-top: #dedfe0 solid 1px;\n border-left: #dedfe0 solid 1px;\n border-right: #dedfe0 solid 1px;\n border-bottom: #dedfe0 solid 1px;\n padding: 10px 0px;\n}\n.list-custom-border[data-v-0ba6557f] {\n border-bottom: #dedfe0 solid 1px;\n border-left: #dedfe0 solid 1px;\n border-right: #dedfe0 solid 1px;\n font: 15px;\n color: #007791;\n padding-top: 10px;\n padding-left: 40px;\n padding-right: 5px;\n padding-bottom: 10px;\n text-indent: -0.8em;\n}\n.list-custom-border > i[data-v-0ba6557f] {\n opacity: 0.5;\n padding-right: 10px;\n}\n.section-1[data-v-0ba6557f] {\n border: #dedfe0 solid 1px;\n color: #29303b;\n padding: 30px;\n}\n.section-1 ul[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-7 ul[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-7[data-v-0ba6557f] {\n color: #29303b;\n}\n.section-7 .vendor-profile img[data-v-0ba6557f] {\n margin-bottom: 10px;\n width: 96px;\n height: 96px;\n}\n.section-7 ul li i[data-v-0ba6557f] {\n padding-right: 10px;\n}\n.section-1 ul > li[data-v-0ba6557f] {\n padding-left: 1.3em;\n}\n.section-1 li[data-v-0ba6557f]:before {\n content: \"\\f00c\";\n font-family: FontAwesome;\n display: inline-block;\n margin-left: -1.3em;\n width: 1.3em;\n color: #a1a7b3;\n}\n.section-2[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-3[data-v-0ba6557f] {\n padding: 2.5px 0px;\n}\n.section-4-header[data-v-0ba6557f] {\n font-size: 22px !important;\n padding-top: 10px !important;\n color: #29303b !important;\n}\n.section-4 ul > li[data-v-0ba6557f] {\n font-size: 15px;\n color: #29303b;\n}\n.section-4 p[data-v-0ba6557f] {\n font-size: 14px;\n color: #29303b;\n}\n.section-5-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-6-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-6 .item-price[data-v-0ba6557f] {\n font-size: 18px;\n}\n.section-7-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8 .average-rating[data-v-0ba6557f] {\n font-size: 72px;\n padding: 0px;\n margin-top: -20px;\n}\n.section-9-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8 .individual-rating ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0px;\n}\n.section-9 ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0px;\n}\n.section-5[data-v-0ba6557f] {\n color: #29303b;\n}\n.video-tutorials[data-v-0ba6557f] {\n position: absolute;\n z-index: 1;\n right: 200px;\n top: 50px;\n background: white;\n border: 1px solid white;\n box-shadow: 0.5px 1px 5px 0.5px #00000080;\n border-radius: 2px;\n height: 700px;\n}\n.video-tutorials video[data-v-0ba6557f] {\n width: 400px;\n height: 300px;\n border: 10px solid white;\n}\n.video-tutorials.video-details[data-v-0ba6557f] {\n font-size: 16px;\n}\n.video-details[data-v-0ba6557f] {\n padding: 10px;\n padding-left: 20px;\n text-align: center;\n}\n.video-details-header[data-v-0ba6557f] {\n font-size: 24px;\n font-weight: bold;\n text-align: left;\n padding-left: 40px;\n}\n.video-details p[data-v-0ba6557f] {\n font-size: 32px;\n}\n.button[data-v-0ba6557f] {\n border-style: none;\n padding: 15px;\n width: 300px;\n}\n.add-to-cart[data-v-0ba6557f] {\n margin-top: 10px;\n border: black 1px solid;\n background-color: #ffffff;\n font-weight: bold;\n color: #686f7a;\n}\n.buy-now[data-v-0ba6557f] {\n background-color: #ec5252;\n color: #ffffff;\n font-weight: bold;\n}\n.video-descriptions[data-v-0ba6557f] {\n color: #686f7a;\n text-align: left;\n padding-left: 1;\n}\n.video-descriptions p[data-v-0ba6557f] {\n font-size: 14px;\n padding-left: 40px;\n font-weight: bold;\n padding-top: 10px;\n}\n.video-descriptions ul[data-v-0ba6557f] {\n padding-left: 60px;\n}\n.video-descriptions ul li[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-6 ul li[data-v-0ba6557f] {\n border-bottom: 2px solid #dedfe0;\n padding: 20px 0px;\n}\n.section-6 ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0;\n border-bottom: 2px solid #dedfe0;\n border-top: 2px solid #dedfe0;\n}\n.raty-product-section i[data-v-0ba6557f] {\n margin-left: 5px;\n margin-bottom: 10px;\n}\nb[data-v-0ba6557f] {\n color: #29303b;\n}\n.fas.fa-star.star-live[data-v-0ba6557f] {\n color: rgb(245, 200, 91);\n}\n.fas.fa-star.star-dead[data-v-0ba6557f] {\n color: #abb0bb;\n}\n", ""]);
 
 /***/ }),
 /* 260 */
@@ -59749,7 +59786,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('h5', [_vm._v("What will i learn?")]), _vm._v(" "), _c('ul', _vm._l((_vm.courseWhatWillLearn), function(value, index) {
     return _c('li', {
       key: index
-    }, [_vm._v("\n         " + _vm._s(value) + "\n      ")])
+    }, [_vm._v(_vm._s(value.desc))])
   }), 0)])])])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
@@ -59770,17 +59807,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       attrs: {
         "data-toggle": "collapse",
-        "data-target": "#demo"
+        "data-target": '#collapse_' + index
       }
     }, [_c('i', {
       staticClass: "fas fa-plus",
       staticStyle: {
         "color": "#007791"
       }
-    }), _vm._v("   " + _vm._s(value.title) + "\n      ")])]), _vm._v(" "), _c('div', {
+    }), _vm._v("\n          " + _vm._s(value.title) + "\n      ")])]), _vm._v(" "), _c('div', {
       staticClass: "collapse",
       attrs: {
-        "id": "demo"
+        "id": 'collapse_' + index
       }
     }, [_c('div', {
       staticClass: "list-custom-border"
@@ -59795,7 +59832,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('i', {
       staticClass: "fas fa-play-circle"
-    }), _vm._v("  " + _vm._s(value.desc))])])])])
+    }), _vm._v("\n          " + _vm._s(value.title) + "\n       ")])])])])
   }), 0)])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
@@ -59809,7 +59846,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Requirements")]), _vm._v(" "), _c('ul', _vm._l((_vm.requirements), function(value, index) {
     return _c('li', {
       key: index
-    }, [_vm._v("\n        " + _vm._s(value) + "\n      ")])
+    }, [_vm._v(_vm._s(value.req))])
   }), 0)])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
@@ -59824,7 +59861,44 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "innerHTML": _vm._s(_vm.description)
     }
-  })])])])]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
+  })])])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-lg-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-lg-6 offset-lg-1 section-6"
+  }, [_c('p', {
+    staticClass: "section-6-header"
+  }, [_vm._v("Other related courses")]), _vm._v(" "), _c('ul', _vm._l((_vm.courseRelatedList), function(value, index) {
+    return _c('li', {
+      key: index,
+      staticClass: "col-lg-12"
+    }, [_c('div', {
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-lg-3"
+    }, [_c('b', [_vm._v(_vm._s(value.duration))])]), _vm._v(" "), _c('div', {
+      staticClass: "col-lg-5 row"
+    }, [_c('div', {
+      staticClass: "col-lg-12"
+    }, [_c('a', {
+      attrs: {
+        "href": "https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
+      }
+    }, [_vm._v(_vm._s(value.title))])]), _vm._v(" "), _c('div', {
+      staticClass: "col-lg-12"
+    }, [_c('div', {
+      staticClass: "updated-time"
+    }, [_vm._v(_vm._s(_vm.formatDate(value.create_at)))])])]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c('div', {
+      staticClass: "col-lg-1 text-right"
+    }, [_c('span', {
+      staticClass: "item-price"
+    }, [_c('span', {
+      staticClass: "current-price"
+    }, [_c('b', [_vm._v(_vm._s((value.free == 0) ? value.price : 'Free'))])])])])])])
+  }), 0)])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12"
@@ -59843,7 +59917,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('ul', [_vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "fas fa-play-circle"
-  }), _vm._v(" " + _vm._s(_vm.vendorCountCourses) + " Courses\n        ")])])]), _vm._v(" "), _c('div', {
+  }), _vm._v("\n          " + _vm._s(_vm.vendorCountCourses) + " Courses\n        ")])])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-8"
   }, [_c('label', [_c('h4', [_c('a', {
     attrs: {
@@ -59853,13 +59927,73 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "innerHTML": _vm._s(_vm.userAbout)
     }
-  })])])])])])]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c('div', {
+  })])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-lg-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-lg-6 offset-lg-1 section-8"
+  }, [_vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-lg-12 row"
+  }, [_c('div', {
+    staticClass: "col-lg-3 row"
+  }, [_c('div', {
+    staticClass: "col-lg-12 text-center"
+  }, [_c('div', {
+    staticClass: "average-rating"
+  }, [_c('b', [_vm._v(_vm._s(_vm.courseRate))])]), _vm._v(" "), _c('div', {
+    staticClass: "rating"
+  }, _vm._l((5), function(value, index) {
+    return _c('i', {
+      key: index,
+      staticClass: "fas fa-star filled",
+      class: {
+        'star-live': (index <= _vm.courseRate), 'star-dead': (index >= _vm.courseRate)
+      },
+      staticStyle: {
+        "display": "inline"
+      }
+    })
+  }), 0), _vm._v("Average rating\n        ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-lg-9"
+  }, [_c('div', {
+    staticClass: "individual-rating"
+  }, [_c('ul', [_c('li', [_c('div', {
+    staticClass: "progress"
+  }, [_c('div', {
+    staticClass: "progress-bar",
+    style: ('width: ' + _vm.studentRate.onestar + '%')
+  })]), _vm._v(" "), _c('div', [_vm._m(7), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.onestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "progress"
+  }, [_c('div', {
+    staticClass: "progress-bar",
+    style: ('width: ' + _vm.studentRate.twostar + '%')
+  })]), _vm._v(" "), _c('div', [_vm._m(8), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.twostar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "progress"
+  }, [_c('div', {
+    staticClass: "progress-bar",
+    style: ('width: ' + _vm.studentRate.threestar + '%')
+  })]), _vm._v(" "), _c('div', [_vm._m(9), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.threestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "progress"
+  }, [_c('div', {
+    staticClass: "progress-bar",
+    style: ('width: ' + _vm.studentRate.fourstar + '%')
+  })]), _vm._v(" "), _c('div', [_vm._m(10), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fourstar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+    staticClass: "progress"
+  }, [_c('div', {
+    staticClass: "progress-bar",
+    style: ('width: ' + _vm.studentRate.fivestar + '%')
+  })]), _vm._v(" "), _c('div', [_vm._m(11), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fivestar) + "%")])])])])])])])])])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12"
   }, [_c('div', {
     staticClass: "col-lg-6 offset-lg-1 section-9"
-  }, [_vm._m(7), _vm._v(" "), _c('div', {
+  }, [_vm._m(12), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12"
@@ -59870,21 +60004,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "col-lg-12 row"
     }, [_c('div', {
       staticClass: "col-lg-5 row"
-    }, [_vm._m(8, true), _vm._v(" "), _c('div', {
+    }, [_vm._m(13, true), _vm._v(" "), _c('div', {
       staticClass: "col-lg-8"
     }, [_c('div', {
       staticClass: "review-time"
     }, [_c('div', {
       staticClass: "time"
-    }, [_vm._v(_vm._s(value.created_at))]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(_vm.formatDate(value.create_at)))]), _vm._v(" "), _c('div', {
       staticClass: "reviewer-name"
-    }, [_vm._v(_vm._s(_vm.commentName))])])])]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(value.user_id))])])])]), _vm._v(" "), _c('div', {
       staticClass: "col-lg-7"
     }, [_c('div', {
       staticClass: "review-details"
-    }, [_vm._m(9, true), _vm._v(" "), _c('div', {
+    }, [_vm._m(14, true), _vm._v(" "), _c('div', {
       staticClass: "review-text star-dead"
-    }, [_vm._v(_vm._s(value.comments))])])])])])
+    }, [_vm._v(_vm._s(value.comment))])])])])])
   }), 0)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
@@ -59950,34 +60084,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("17 Lessons 23:47:22 Hours")])])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-lg-12"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-lg-6 offset-lg-1 section-6"
-  }, [_c('p', {
-    staticClass: "section-6-header"
-  }, [_vm._v("Other related courses")]), _vm._v(" "), _c('ul', [_c('li', {
-    staticClass: "col-lg-12"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-lg-3"
-  }, [_c('b', [_vm._v("01:50:56 Hours")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-5 row"
-  }, [_c('div', {
-    staticClass: "col-lg-12"
-  }, [_c('a', {
-    attrs: {
-      "href": "https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
-    }
-  }, [_vm._v("How To Shoot B-Roll Footage with Peter McKinnon")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-12"
-  }, [_c('div', {
-    staticClass: "updated-time"
-  }, [_vm._v("Updated Sat, 06-Jul-2019")])])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-3 row"
   }, [_c('div', {
     staticClass: "col-lg-6"
@@ -59993,53 +60099,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "enrolled-"
   }, [_c('i', {
     staticClass: "far fa-user"
-  }), _vm._v("\n           1\n          ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-1 text-right"
-  }, [_c('span', {
-    staticClass: "item-price"
-  }, [_c('span', {
-    staticClass: "current-price"
-  }, [_c('b', [_vm._v("Free")])])])])])]), _vm._v(" "), _c('li', {
-    staticClass: "col-lg-12"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-lg-3"
-  }, [_c('b', [_vm._v("01:50:56 Hours")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-5 row"
-  }, [_c('div', {
-    staticClass: "col-lg-12"
-  }, [_c('a', {
-    attrs: {
-      "href": "https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
-    }
-  }, [_vm._v("How To Shoot B-Roll Footage with Peter McKinnon")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-12"
-  }, [_c('div', {
-    staticClass: "updated-time"
-  }, [_vm._v("Updated Sat, 06-Jul-2019")])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-3 row"
-  }, [_c('div', {
-    staticClass: "col-lg-6"
-  }, [_c('span', {
-    staticClass: "item-rating"
-  }, [_c('i', {
-    staticClass: "fas fa-star star-live"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "d-inline-block average-rating"
-  }, [_vm._v("4")])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-6"
-  }, [_c('span', {
-    staticClass: "enrolled-student"
-  }, [_c('i', {
-    staticClass: "far fa-user"
-  }), _vm._v("\n           1\n          ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-1 text-right"
-  }, [_c('span', {
-    staticClass: "item-price"
-  }, [_c('b', [_c('span', {
-    staticClass: "current-price"
-  }, [_vm._v("$1800")])])])])])])])])])])])
+  }), _vm._v("\n           1\n          ")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"
@@ -60047,7 +60107,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-lg-12"
   }, [_c('p', {
     staticClass: "section-7-header"
-  }, [_vm._v("About the instructor ")])])])
+  }, [_vm._v("About the instructor")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('i', {
     staticClass: "fas fa-comment"
@@ -60061,56 +60121,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-lg-6 offset-lg-1 section-8"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-lg-12"
   }, [_c('p', {
     staticClass: "section-8-header"
-  }, [_vm._v("Student feedback")])])]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-lg-12 row"
-  }, [_c('div', {
-    staticClass: "col-lg-3 row"
-  }, [_c('div', {
-    staticClass: "col-lg-12 text-center"
-  }, [_c('div', {
-    staticClass: "average-rating"
-  }, [_c('b', [_vm._v("4")])]), _vm._v(" "), _c('div', {
-    staticClass: "rating"
-  }, [_c('i', {
-    staticClass: "fas fa-star filled star-live"
-  }), _vm._v(" "), _c('i', {
-    staticClass: "fas fa-star filled star-live"
-  }), _vm._v(" "), _c('i', {
-    staticClass: "fas fa-star filled star-live"
-  }), _vm._v(" "), _c('i', {
-    staticClass: "fas fa-star filled star-live"
-  }), _vm._v(" "), _c('i', {
-    staticClass: "fas fa-star star-dead"
-  })]), _vm._v("Average rating\n        ")])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-9"
-  }, [_c('div', {
-    staticClass: "individual-rating"
-  }, [_c('ul', [_c('li', [_c('div', {
-    staticClass: "col-lg-12 row"
-  }, [_c('div', {
-    staticClass: "col-lg-8"
-  }, [_c('div', {
-    staticClass: "progress"
-  }, [_c('div', {
-    staticClass: "progress-bar",
-    staticStyle: {
-      "width": "0%"
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-3"
-  }, [_c('span', {
+  }, [_vm._v("Student feedback")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
     staticClass: "rating"
   }, [_c('i', {
     staticClass: "fas fa-star star-dead"
@@ -60121,23 +60136,52 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('i', {
     staticClass: "fas fa-star star-dead"
   }), _vm._v(" "), _c('i', {
-    staticClass: "fas fa-star filled star-dead"
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-1"
-  }, [_c('span', [_vm._v("0%")])])])]), _vm._v(" "), _c('li', [_c('div', {
-    staticClass: "col-lg-12 row"
-  }, [_c('div', {
-    staticClass: "col-lg-8"
-  }, [_c('div', {
-    staticClass: "progress"
-  }, [_c('div', {
-    staticClass: "progress-bar",
-    staticStyle: {
-      "width": "50%"
-    }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-3"
-  }, [_c('span', {
+    staticClass: "fas fa-star star-live"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "rating"
+  }, [_c('i', {
+    staticClass: "fas fa-star star-dead"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-dead"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-dead"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-live"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-live"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "rating"
+  }, [_c('i', {
+    staticClass: "fas fa-star star-dead"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-dead"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-live"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-live"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-live"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "rating"
+  }, [_c('i', {
+    staticClass: "fas fa-star star-dead"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-live"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-live"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-live"
+  }), _vm._v(" "), _c('i', {
+    staticClass: "fas fa-star star-live"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
     staticClass: "rating"
   }, [_c('i', {
     staticClass: "fas fa-star star-live"
@@ -60148,10 +60192,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('i', {
     staticClass: "fas fa-star star-live"
   }), _vm._v(" "), _c('i', {
-    staticClass: "fas fa-star filled star-live"
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "col-lg-1"
-  }, [_c('span', [_vm._v("50%")])])])])])])])])])])])])])
+    staticClass: "fas fa-star star-live"
+  })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"

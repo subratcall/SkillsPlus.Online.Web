@@ -21,7 +21,12 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Input;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use App\Models\ContentRequirements;
+use App\Models\ContentLearn;
+use App\Models\ContentRate;
 use App\Models\LessonType;
+use App\Models\Sell;
+
 
 class ContentController extends Controller
 {
@@ -562,8 +567,9 @@ class ContentController extends Controller
     ## Comment Section
     public function comments(){
         $comments = ContentComment::with('content')->orderBy('id','DESC')->get();
-        return view('admin.content.comments',['comments'=>$comments]);
+        return view('admin.content.comments',['comments'=>$comments]);   
     }
+    
     public function commentDelete($id)
     {
         ContentComment::find($id)->delete();
@@ -770,4 +776,131 @@ class ContentController extends Controller
         $list = \App\Models\Usage::with('user')->where('product_id', $id)->select('user_id', DB::raw('count(*) as total'))->groupBy('user_id')->orderBy('total','DESC')->get();
         return view('admin.content.usage',['list'=>$list]);
     }
+
+    public function product($id) {
+     error_reporting(0);
+
+        global $user;
+        $buy = Sell::where('buyer_id',$user['id'])->where('content_id',$id)->count();
+        $product = Content::withCount(['comments'=>function($q){
+            $q->where('mode','publish');
+        }])->with(['discount','category'=>function($c) use($id){
+            $c->with(['discount'=>function($dc) use($id){
+                $dc->where('off_id',Content::find($id)->category->id);
+            }]);
+        },'rates','user'=>function($u){
+            $u->with(['usermetas','point','contents'=>function($cQuery){
+                $cQuery->where('mode','publish')->limit(3);
+            }]);
+        },'metas','parts'=>function($query){
+            $query->where('mode','publish')->orderBy('sort');
+        },'favorite'=>function($fquery) use ($user){
+            $fquery->where('user_id',$user['id']);
+        },'comments'=>function($ccquery) use($id){
+            $ccquery->where('mode','publish')->with(['user'=>function($uquery) use($id){
+                $uquery->with(['category','usermetas'])->withCount(['buys'=>function($buysq) use($id){
+                    $buysq->where('content_id',$id);
+                },'contents'=>function($contentq) use($id){
+                    $contentq->where('id',$id);
+                }]);
+            },'childs'=>function($cccquery) use($id) {
+                $cccquery->where('mode', 'publish')->with(['user'=>function($cuquery) use($id){
+                    $cuquery->with(['category','usermetas'])->withCount(['buys'=>function($buysq) use($id){
+                        $buysq->where('content_id',$id);
+                    },'contents'=>function($contentq) use($id){
+                        $contentq->where('id',$id);
+                    }]);
+                }]);
+            }]);
+        },'supports'=>function($q) use ($user){
+            $q->with(['user.usermetas','supporter.usermetas','sender.usermetas'])->where('sender_id',$user['id'])->where('mode','publish')->orderBy('id','DESC');
+        }])->where(function ($where){
+            $where->where('mode','publish');
+        })->find($id);
+
+        if(!$product)
+            return abort(404);
+
+        ## Update View
+        $product->increment('view');
+
+        if($product->price == 0 && $user)
+            $buy = 1;
+
+        $subscribe = false;
+        if(isset($buy->tupe) && $buy->type == 'subscribe' && $buy->remain_time - time()) {
+            $buy        = 0;
+            $subscribe  = true;
+        }
+
+        if(!$product)
+            return abort(404);
+
+        $meta = arrayToList($product->metas,'option','value');
+        $parts = $product->parts->toArray();
+        $rates = getRate($product->user->toArray());
+
+
+
+        ## Get Related Content ##
+        $relatedCat = $product->category_id;
+        $relatedContent = Content::with(['metas'])->where('category_id',$relatedCat)->where('id','<>',$product->id)->where('mode','publish')->limit(3)->inRandomOrder()->get();
+
+
+        ## Get PreCourse Content ##
+        if(isset($meta['precourse']))
+            $preCourseIDs = explode(',',rtrim($meta['precourse'],','));
+        else
+            $preCourseIDs = [];
+        $preCousreContent = Content::where('mode','publish')->whereIn('id',$preCourseIDs)->get();
+
+
+        if(!cookie('cv'.$id)) {
+            $product->increment('view');
+            setcookie('cv'.$id,'1');
+        }
+
+        return response()->json(['product'=>$product,'meta'=>$meta,'parts'=>$parts,'rates'=>$rates,'buy'=>$buy,'related'=>$relatedContent,'precourse'=>$preCousreContent,'subscribe'=>$subscribe]);
+    }
+
+    #public content learn
+    function contentLearn($id){
+     $cl = ContentLearn::where('content_id',$id)->get();      
+     $data = array();
+     foreach ($cl as $myList)
+     {
+        $row = array();
+                 $row['desc'] = $myList->description;
+        $data[] = $row;
+     }
+        $output = array("data" => $data);
+        
+
+        return response()->json($output);
+    }
+
+    function contentRequirements($id){
+     $cl = ContentRequirements::where('content_id',$id)->get();      
+         $data = array();
+           foreach ($cl as $myList)
+      {
+      $row = array();
+               $row['req'] = $myList->requirement;
+      $data[] = $row;
+      }
+           $output = array("data" => $data);
+     return response()->json($output);
+ }
+
+ function getIndividualRating($id) {
+  $data = ContentRate::where("content_id", $id)->get();
+
+  return $data;
+ }
+
+ public function getComments($id, $cid){
+  $comments = ContentComment::with('content')->where("user_id", $id)->where("content_id", $cid)->orderBy('id','DESC')->get();
+  return response()->json($comments);  
+}
+
 }

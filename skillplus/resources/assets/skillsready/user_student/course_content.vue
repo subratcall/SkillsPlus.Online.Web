@@ -20,7 +20,6 @@
     <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
    </video>
    <div class="video-details">
-
     <button class="button buy-now">Take Quiz</button>
     <br />
     <div class="video-descriptions">
@@ -80,9 +79,7 @@
      <div class="col-lg-6 offset-lg-1 section-1">
       <h5>What will i learn?</h5>
       <ul>
-       <li v-for="(value, index) in courseWhatWillLearn" :key="index">
-          {{ value }}
-       </li>
+       <li v-for="(value, index) in courseWhatWillLearn" :key="index">{{ value.desc }}</li>
       </ul>
      </div>
     </div>
@@ -108,21 +105,22 @@
        <a
         class="btn"
         data-toggle="collapse"
-        data-target="#demo"
+        :data-target="'#collapse_'+index"
         style="display:inline; font-size:15px"
        >
-        <i class="fas fa-plus" style="color: #007791"></i>&nbsp;&nbsp; {{ value.title }}
+        <i class="fas fa-plus" style="color: #007791"></i>
+        &nbsp;&nbsp; {{ value.title }}
        </a>
       </div>
 
-
-      <div id="demo" class="collapse">
+      <div :id="'collapse_'+index" class="collapse">
        <div class="list-custom-border">
-        <a href="javascript:void(0)" @click="takeQuiz(value.id)" ><i class="fas fa-play-circle"></i>&nbsp;&nbsp;{{ value.desc }}</a>
+        <a href="javascript:void(0)" @click="takeQuiz(value.id)">
+         <i class="fas fa-play-circle"></i>
+         &nbsp;&nbsp;{{ value.title }}
+        </a>
        </div>
       </div>
-
-
      </div>
     </div>
    </div>
@@ -135,9 +133,7 @@
       <p class="section-4-header">Requirements</p>
 
       <ul>
-       <li v-for="(value, index) in requirements" :key="index">
-         {{ value }}
-       </li>
+       <li v-for="(value, index) in requirements" :key="index">{{ value.req }}</li>
       </ul>
      </div>
     </div>
@@ -149,7 +145,7 @@
     <div class="row">
      <div class="col-lg-6 offset-lg-1 section-5">
       <p class="section-5-header">Description</p>
-       <div v-html="description"></div>
+      <div v-html="description"></div>
      </div>
     </div>
    </div>
@@ -161,19 +157,19 @@
      <div class="col-lg-6 offset-lg-1 section-6">
       <p class="section-6-header">Other related courses</p>
       <ul>
-       <li class="col-lg-12">
+       <li class="col-lg-12" v-for="(value, index) in courseRelatedList" :key="index">
         <div class="row">
          <div class="col-lg-3">
-          <b>01:50:56 Hours</b>
+          <b>{{ value.duration }}</b>
          </div>
          <div class="col-lg-5 row">
           <div class="col-lg-12">
            <a
             href="https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
-           >How To Shoot B-Roll Footage with Peter McKinnon</a>
+           >{{ value.title }}</a>
           </div>
           <div class="col-lg-12">
-           <div class="updated-time">Updated Sat, 06-Jul-2019</div>
+           <div class="updated-time">{{ formatDate(value.create_at) }}</div>
           </div>
          </div>
          <div class="col-lg-3 row">
@@ -193,46 +189,8 @@
          <div class="col-lg-1 text-right">
           <span class="item-price">
            <span class="current-price">
-            <b>Free</b>
+            <b>{{ (value.free == 0) ? value.price : 'Free'}}</b>
            </span>
-          </span>
-         </div>
-        </div>
-       </li>
-       <li class="col-lg-12">
-        <div class="row">
-         <div class="col-lg-3">
-          <b>01:50:56 Hours</b>
-         </div>
-         <div class="col-lg-5 row">
-          <div class="col-lg-12">
-           <a
-            href="https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
-           >How To Shoot B-Roll Footage with Peter McKinnon</a>
-          </div>
-          <div class="col-lg-12">
-           <div class="updated-time">Updated Sat, 06-Jul-2019</div>
-          </div>
-         </div>
-         <div class="col-lg-3 row">
-          <div class="col-lg-6">
-           <span class="item-rating">
-            <i class="fas fa-star star-live"></i>
-            <span class="d-inline-block average-rating">4</span>
-           </span>
-          </div>
-          <div class="col-lg-6">
-           <span class="enrolled-student">
-            <i class="far fa-user"></i>
-            1
-           </span>
-          </div>
-         </div>
-         <div class="col-lg-1 text-right">
-          <span class="item-price">
-           <b>
-            <span class="current-price">$1800</span>
-           </b>
           </span>
          </div>
         </div>
@@ -249,9 +207,8 @@
      <div class="col-lg-6 offset-lg-1 section-7">
       <div class="row">
        <div class="col-lg-12">
-        <p class="section-7-header">About the instructor </p>
+        <p class="section-7-header">About the instructor</p>
        </div>
-
       </div>
       <div class="col-lg-12 row">
        <div class="col-lg-4 vendor-profile">
@@ -267,7 +224,8 @@
           <i class="fas fa-user"></i>&nbsp;3 Students
          </li>
          <li>
-          <i class="fas fa-play-circle"></i>&nbsp;{{ vendorCountCourses }} Courses
+          <i class="fas fa-play-circle"></i>
+          &nbsp;{{ vendorCountCourses }} Courses
          </li>
         </ul>
        </div>
@@ -299,14 +257,16 @@
         <div class="col-lg-3 row">
          <div class="col-lg-12 text-center">
           <div class="average-rating">
-           <b>4</b>
+           <b>{{ courseRate }}</b>
           </div>
           <div class="rating">
-           <i class="fas fa-star filled star-live"></i>
-           <i class="fas fa-star filled star-live"></i>
-           <i class="fas fa-star filled star-live"></i>
-           <i class="fas fa-star filled star-live"></i>
-           <i class="fas fa-star star-dead"></i>
+           <i
+            class="fas fa-star filled"
+            v-for="(value, index) in 5"
+            :key="index"
+            style="display:inline"
+            :class="{'star-live': (index <= courseRate), 'star-dead': (index >= courseRate)}"
+           ></i>
           </div>Average rating
          </div>
         </div>
@@ -314,45 +274,78 @@
          <div class="individual-rating">
           <ul>
            <li>
-            <div class="col-lg-12 row">
-             <div class="col-lg-8">
-              <div class="progress">
-               <div class="progress-bar" style="width: 0%"></div>
-              </div>
-             </div>
-             <div class="col-lg-3">
-              <span class="rating">
-               <i class="fas fa-star star-dead"></i>
-               <i class="fas fa-star star-dead"></i>
-               <i class="fas fa-star star-dead"></i>
-               <i class="fas fa-star star-dead"></i>
-               <i class="fas fa-star filled star-dead"></i>
-              </span>
-             </div>
-             <div class="col-lg-1">
-              <span>0%</span>
-             </div>
+            <div class="progress">
+             <div class="progress-bar" :style="'width: '+studentRate.onestar+'%'"></div>
+            </div>
+            <div>
+             <span class="rating">
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-live"></i>
+             </span>
+             <span>{{ studentRate.onestar }}%</span>
             </div>
            </li>
            <li>
-            <div class="col-lg-12 row">
-             <div class="col-lg-8">
-              <div class="progress">
-               <div class="progress-bar" style="width: 50%"></div>
-              </div>
-             </div>
-             <div class="col-lg-3">
-              <span class="rating">
-               <i class="fas fa-star star-live"></i>
-               <i class="fas fa-star star-live"></i>
-               <i class="fas fa-star star-live"></i>
-               <i class="fas fa-star star-live"></i>
-               <i class="fas fa-star filled star-live"></i>
-              </span>
-             </div>
-             <div class="col-lg-1">
-              <span>50%</span>
-             </div>
+            <div class="progress">
+              <div class="progress-bar" :style="'width: '+studentRate.twostar+'%'"></div>
+            </div>
+            <div>
+             <span class="rating">
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+             </span>
+             <span>{{ studentRate.twostar }}%</span>
+            </div>
+           </li>
+           <li>
+            <div class="progress">
+             <div class="progress-bar" :style="'width: '+studentRate.threestar+'%'"></div>
+            </div>
+            <div>
+             <span class="rating">
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+             </span>
+             <span>{{ studentRate.threestar }}%</span>
+            </div>
+           </li>
+           <li>
+            <div class="progress">
+             <div class="progress-bar" :style="'width: '+studentRate.fourstar+'%'"></div>
+            </div>
+            <div>
+             <span class="rating">
+              <i class="fas fa-star star-dead"></i>
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+             </span>
+             <span>{{ studentRate.fourstar }}%</span>
+            </div>
+           </li>
+           <li>
+            <div class="progress">
+             <div class="progress-bar" :style="'width: '+studentRate.fivestar+'%'"></div>
+            </div>
+            <div>
+             <span class="rating">
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+              <i class="fas fa-star star-live"></i>
+             </span>
+             <span>{{ studentRate.fivestar }}%</span>
             </div>
            </li>
           </ul>
@@ -388,8 +381,8 @@
            </div>
            <div class="col-lg-8">
             <div class="review-time">
-             <div class="time">{{ value.created_at }}</div>
-             <div class="reviewer-name">{{ commentName }}</div>
+             <div class="time">{{ formatDate(value.create_at) }}</div>
+             <div class="reviewer-name">{{ value.user_id }}</div>
             </div>
            </div>
           </div>
@@ -402,64 +395,11 @@
              <i class="fas fa-star filled star-live"></i>
              <i class="fas fa-star star-live"></i>
             </div>
-            <div class="review-text star-dead">{{ value.comments }}</div>
+            <div class="review-text star-dead">{{ value.comment }}</div>
            </div>
           </div>
          </div>
-
-         <!-- <div class="col-lg-12 row">
-          <div class="col-lg-5 row">
-           <div class="col-lg-4">
-            <div class="reviewer-details clearfix">
-             <div class="reviewer-img float-left">
-              <img src="https://demo.academy-lms.com/addon/uploads/user_image/6.jpg" width="46" alt />
-             </div>
-            </div>
-           </div>
-           <div class="col-lg-8">
-            <div class="review-time">
-             <div class="time">Sun, 07-Jul-2019</div>
-             <div class="reviewer-name">Jane Doe</div>
-            </div>
-           </div>
-          </div>
-          <div class="col-lg-7">
-           <div class="review-details">
-            <div class="rating">
-             <i class="fas fa-star filled star-live"></i>
-             <i class="fas fa-star filled star-live"></i>
-             <i class="fas fa-star filled star-live"></i>
-             <i class="fas fa-star filled star-live"></i>
-             <i class="fas fa-star star-live"></i>
-            </div>
-            <div class="review-text star-dead">This course taught me a lot. Very effective!!</div>
-           </div>
-          </div>
-         </div> -->
         </li>
-        <!-- <li>
-        <div class="col-lg-12 row">
-         <div class="col-lg-4">
-           <img src="https://demo.academy-lms.com/addon/uploads/user_image/3.jpg" width="46" alt />
-         </div>
-         <div class="col-lg-7">
-           <div class="review-time">
-            <div class="time">Sun, 04-Aug-2019</div>
-            <div class="reviewer-name">Jane Doe</div>
-           </div>
-          <div class="review-details">
-           <div class="rating">
-            <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-            <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-            <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-            <i class="fas fa-star" style="color: #abb0bb;"></i>
-            <i class="fas fa-star" style="color: #abb0bb;"></i>
-           </div>
-           <div class="review-text">Nah!</div>
-          </div>
-         </div>
-        </div>
-        </li>-->
        </ul>
       </div>
      </div>
@@ -470,6 +410,8 @@
 </template>
 
 <script>
+ import moment from "moment";
+
  export default {
   data() {
    return {
@@ -478,30 +420,55 @@
     courseUnrate: 0,
     countCourseSold: 0,
     courseWhatWillLearn: [],
-    vendorName: '',
+    vendorName: "",
     quizList: [],
     requirements: [],
-    urlid: '',
-    description: '',
+    urlid: "",
+    description: "",
     vendorCountCourses: 0,
-    userAbout: '',
+    userAbout: "",
     courseReview: [],
-    commentName: ''
+    commentName: "",
+    courseRelatedList: [],
+    studentRate: {
+     onestar: 0,
+     twostar: 0,
+     threestar: 0,
+     fourstar: 0,
+     fivestar: 0
+    }
    };
   },
   methods: {
    takeQuiz(id) {
-    
-    window.location.href=`/admin/user_student/student_lesson_quiz/${id}/${this.urlid}`;
+    window.location.href = `/admin/user_student/student_lesson_quiz/${id}/${this.urlid}`;
    },
 
+   formatDate(value, fmt = "D MMM YYYY") {
+    value = new Date(value);
+    return value == null ? "" : moment(value, "YYYY-MM-DD").format(fmt);
+   },
+   
    getAbout(id) {
-     axios
+    axios
      .get(`/admin/user_vendor/vendor_course_vendor/${id}`)
      .then(res => {
       this.vendorName = res.data[0].name;
       this.userAbout = res.data[0].about;
       this.commentName = res.data[0].name;
+     })
+     .catch(err => {
+      console.error(err);
+      alert("Error! Contact IT Department.");
+     });
+   },
+
+   getCourseTag(data) {
+    /* get course tag */
+    axios
+     .get(`/admin/user_vendor/vendor_course_related/${data}`)
+     .then(res => {
+      this.courseRelatedList = res.data;
      })
      .catch(err => {
       console.error(err);
@@ -515,28 +482,47 @@
     var id = window.location.href;
     id = id.substring(id.lastIndexOf("/") + 1);
 
-/* get course_content */
+    /* get course_content */
 
     axios
      .get(`/admin/user_vendor/vendor_course_show/${id}`)
      .then(res => {
       self.course = res.data;
       self.vendor_id = res.data.user_id;
-
-      let whatWillLearn = res.data.what_will_learn;
-
-      self.courseWhatWillLearn = whatWillLearn.split("|");
       self.requirements = res.data.requirements.split("|");
-      self.description = res.data.description;
       self.getAbout(res.data.user_id);
-
+      self.getCourseTag(res.data.tag);
      })
      .catch(err => {
       console.log(err);
       alert("Error! Contact IT Department.");
      });
 
-/* get course rate */
+    /* get product */
+
+    axios
+     .get(`/admin/user_vendor/product/${id}`)
+     .then(res => {
+      self.description = res.data.product.courseDescription;
+     })
+     .catch(err => {
+      console.log(err);
+      alert("Error! Contact IT Department.");
+     });
+
+    /* get what will learn */
+
+    axios
+     .get(`/admin/user_vendor/cl/${id}`)
+     .then(res => {
+      self.courseWhatWillLearn = res.data.data;
+     })
+     .catch(err => {
+      console.log(err);
+      alert("Error! Contact IT Department.");
+     });
+
+    /* get course rate */
 
     axios
      .get(`/admin/user_vendor/vendor_course_rate/${id}`)
@@ -555,8 +541,8 @@
       console.error(err);
       alert("Error! Contact IT Department.");
      });
-     
-/* get course count sold */
+
+    /* get course count sold */
 
     axios
      .get(`/admin/user_vendor/vendor_course_sold/${id}`)
@@ -568,11 +554,7 @@
       alert("Error! Contact IT Department.");
      });
 
-/*  get vendor details */
-
-  
-
-/* get course quiz list  */
+    /* get course quiz list  */
 
     axios
      .get(`/admin/user_student/student_lesson_get_list/${id}`)
@@ -584,9 +566,9 @@
       alert("Error! Contact IT Department.");
      });
 
-/* get vendor count courses */
+    /* get vendor count courses */
 
-   axios
+    axios
      .get(`/admin/user_vendor/vendor_count_courses/${id}`)
      .then(res => {
       this.vendorCountCourses = res.data;
@@ -596,19 +578,84 @@
       alert("Error! Contact IT Department.");
      });
 
- /* get course comment */
+    /* get course comment */
 
     axios
-     .get(`/admin/user_vendor/vendor_course_comment/${id}`)
+     .get(`/admin/user_vendor/vendor_course_comment/135/116`)
      .then(res => {
+      console.log(res);
       this.courseReview = res.data;
-       getAbout(res.data.tbl_user_id);
      })
      .catch(err => {
       console.error(err);
       alert("Error! Contact IT Department.");
      });
 
+    /* get course requirement */
+
+    axios
+     .get(`/admin/user_vendor/cr/${id}`)
+     .then(res => {
+      this.requirements = res.data.data;
+     })
+     .catch(err => {
+      console.error(err);
+      alert("Error! Contact IT Department.");
+     });
+
+
+     /* get individual rating */
+
+     axios.get(`/admin/user_vendor/ir/${id}`).then((res) => {
+      
+      let data = res.data;
+      let onestar = 0;
+      let twostar = 0;
+      let threestar = 0;
+      let fourstar = 0;
+      let fivestar = 0;
+
+      data.forEach(item => {
+
+       if (item.rate == 1) {
+        onestar += item.rate;
+       }
+       else if (item.rate == 2) {
+        twostar += item.rate;
+       }
+       else if (item.rate == 3) {
+        threestar += item.rate;
+       }
+       else if (item.rate == 4) {
+        fourstar += item.rate;
+       }
+       else if (item.rate == 5) {
+        fivestar += item.rate;
+       }
+      });
+
+       onestar = onestar/5;
+       onestar = (onestar/5)*100;
+
+       twostar = twostar/5;
+       twostar = (twostar/5)*100;
+
+       threestar = threestar/5;
+       threestar = (threestar/5)*100;
+
+       fourstar = fourstar/5;
+       fourstar = (fourstar/5)*100;
+
+       fivestar = fivestar/5;
+       fivestar = (fivestar/5)*100;
+
+       self.studentRate.onestar = onestar;
+       self.studentRate.twostar = twostar;
+       self.studentRate.threestar = threestar;
+       self.studentRate.fourstar = fourstar;
+       self.studentRate.fivestar = fivestar;
+     });
+     
    }
   },
   mounted() {
@@ -621,6 +668,30 @@
 </script>
 
 <style scoped>
+ @media (max-width: 1199.98px) {
+  .video-tutorials {
+   display: none;
+  }
+ }
+
+ @media (max-width: 991.98px) {
+  .video-tutorials {
+   display: none;
+  }
+ }
+
+ @media (max-width: 767.98px) {
+  .video-tutorials {
+   display: none;
+  }
+ }
+
+ @media (max-width: 575.98px) {
+  .video-tutorials {
+   display: none;
+  }
+ }
+
  .custom-card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
   background-color: #fff;

@@ -83,7 +83,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor','Admin_user\VendorController@vendor');
             Route::get('getAllCategory','Admin_user\VendorController@getAllCategory');
             Route::post('vendor_request','Admin_user\VendorController@store');
-            /***Cousrse */
+            /***Course */
             Route::get('vendor_course_new','Admin_user\VendorController@vendorCourseNew');
             Route::get('vendor_course_new/{id}','Admin_user\VendorController@vendorCourseNew');
             Route::get('vendor_course_list','Admin_user\VendorController@vendorCourseList');
@@ -92,12 +92,19 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor_course_show_meta/{id}','Admin_user\VendorController@showCourseMeta');
             Route::get('vendor_course_destroy/{id}','Admin_user\VendorController@destroyCourse');
             Route::post('vendor_course_saveCourse','Admin_user\VendorController@saveCourse');
+
+
             Route::get('vendor_course_rate/{id}','Admin_user\VendorController@getRatings');
             Route::get('vendor_course_sold/{id}','Admin_user\VendorController@countCoursePurchased');
             Route::get('vendor_course_vendor/{id}','Admin_user\VendorController@getVendor');
             Route::get('vendor_count_courses/{id}','Admin_user\VendorController@getVendorCountCourses');
-            Route::get('vendor_course_comment/{id}','Admin_user\VendorController@getVendorCourseComment');
             Route::get('vendor_course_related/{id}','Admin_user\VendorController@getVendorRelatedCourse');
+            
+            Route::get('product/{id}','Admin\ContentController@product');
+            Route::get('cl/{id}','Admin\ContentController@contentLearn');
+            Route::get('cr/{id}','Admin\ContentController@contentRequirements');
+            Route::get('ir/{id}','Admin\ContentController@getIndividualRating');
+            Route::get('vendor_course_comment/{id}/{cid}','Admin\ContentController@getComments');
 
             /* http://localhost:8000/admin/user_vendor/vendor_course_related/116 */
 

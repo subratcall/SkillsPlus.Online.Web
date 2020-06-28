@@ -825,6 +825,7 @@ class ContentController extends Controller
     public function product($id)
     {
         error_reporting(0);
+
         global $user;
         $buy = Sell::where('buyer_id',$user['id'])->where('content_id',$id)->count();
         $product = Content::withCount(['comments'=>function($q){
@@ -1458,4 +1459,5 @@ class ContentController extends Controller
 		echo json_encode($output);
     }
 
+    
 }
