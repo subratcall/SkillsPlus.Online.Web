@@ -206,7 +206,6 @@ img {
 
   $(document).ready(function() { 
     course_categories();
-
   }); 
 
   function course_categories(){

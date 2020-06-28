@@ -19,7 +19,9 @@
     <link rel="stylesheet" href="/assets/vendor/easyautocomplete/easy-autocomplete.css"/>
     <link rel="stylesheet" href="/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css" />
     <link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css" />
-	<link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" />
+    
+    
     @if(get_option('site_rtl','0') == 1)
         <link rel="stylesheet" href="/assets/stylesheets/view-custom-rtl.css"/>
     @else
@@ -32,6 +34,7 @@
         </style>
     @endif
     <script type="application/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>
+    
     <title>@yield('title')</title>
 
 </head>
@@ -195,7 +198,8 @@
   }
 
 }
-            </style>
+
+  </style>
  
     <div class="container-fluid">
         <div class="row line-header"></div>
@@ -232,7 +236,19 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-5 col-xs-12 tab-con">
+                <div class="col-md-2 col-xs-12 tab-con">
+
+                      <div class="dropdown pull-left">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" aria-expanded="false">
+                         Categories
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdownhover-bottom categories_dropdown_menus" role="menu" aria-labelledby="dropdownMenu1">
+                          
+                        </ul>
+                      </div>
+                </div>
+                <div class="col-md-4 col-xs-12 tab-con">
                     <div class="row search-box">
                         <form action="/search">
                             <input type="text" name="q" class="col-md-11 provider-json" placeholder="Search..." />
@@ -240,7 +256,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-md-4 col-xs-12 text-center tab-con">
+                <div class="col-md-3 col-xs-12 text-center tab-con">
                     <div class="row">
                         @if(isset($user) && isset($user['vendor']) && $user['vendor'] == 1)
                         <a href="/user/content/new" class="header-upload-button pulse"><span class="headericon mdi mdi-arrow-up-bold"></span>{{{ trans('main.upload_course') }}}</a>
@@ -290,7 +306,9 @@
                                 </div>
                             </a>
                         @else
-                            <a href="/user?redirect={{ Request::path() }}" class="header-login-button"><span class="headericon mdi mdi-account"></span> {{{ trans('main.login_signup') }}}</a>
+                        <button type="button" class="btn btn-success">Login In</button> <button type="button" class="btn btn-primary">Sign In</button>
+                        <!--<a href="/user?redirect={{ Request::path() }}" class="header-login-button">{{-- <span class="headericon mdi mdi-account"></span> --}} sadsad | </a>
+                        <a href="/user?redirect={{ Request::path() }}" class="header-login-button">{{-- <span class="headericon mdi mdi-account"></span> --}}cxcxzc</a> -->
                         @endif
                     </div>
                 </div>
@@ -395,3 +413,52 @@
     </div>
 
 
+    <script type="text/javascript">
+
+        $(document).ready(function() { 
+          $.ajax({
+                  url: "{{url('/getAllCategories')}}/",
+                  type: 'get',
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  dataType: 'JSON',
+                  success: function(data) {
+                    $(".categories_dropdown_menus").empty();
+                      data.forEach(element => {                        
+                            if(element.sc.length==0){
+                                $(".categories_dropdown_menus").append(
+                                    '<li><a href="#">'+element.mc+'</a></li>'
+                                );
+                            }
+                                             
+                            if(element.sc.length>0){                                
+                                var l = '';
+                                element.sc.forEach(sub_element => {
+                                    
+                                       l +=  '<li><a href="/category/'+sub_element.sub_category+'">'+sub_element.sub_category+'</a></li>';
+                                })
+
+                                $(".categories_dropdown_menus").append(
+                                    '<li class="dropdown">'+
+                                        '<a href="#">'+element.mc+' <span class="caret"></span></a>'+
+                                        '<ul class="dropdown-menu">'+
+                                            l+                                        
+                                        '</ul>'+
+                                    '</li>'
+                                );                                
+                            }
+                      });    
+
+                      $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '/assets/dd/css/animate.min.css') );
+                      $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '/assets/dd/css/bootstrap-dropdownhover.min.css') );
+                      $('<script/>',{type:'text/javascript', src:'/assets/dd/js/bootstrap-dropdownhover.min.js'}).appendTo('head'); 
+
+
+                  },
+                  error: function(jqXHR, textStatus, errorThrown) {
+                      alert('Error get data from ajax');
+                  }
+              });
+        }); 
+      </script>

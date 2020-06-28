@@ -197,6 +197,13 @@ class ContentController extends Controller
             }
         return $array;
     }
+    private function filters_tag($array,$filter){
+            foreach ($array as $index=>$a){
+                    $filters_in = unserialize($a['metas']['filters']);
+                    $c = array_intersect($filters_in, $filter);
+            }
+        return $array;
+    }
     public function category($id = null)
     {
         $order = Input::get('order');
@@ -454,7 +461,9 @@ class ContentController extends Controller
         $off = Input::get('off');
         if(Input::get('filter')!=null) {
             $filters = array_unique(Input::get('filter'));
+            //echo 1;exit;
         }else{
+            //echo 0;exit;
             $filters = null;
         }
         $q = Input::get('q');
@@ -477,6 +486,7 @@ class ContentController extends Controller
             $vipContent = [];
         }
 
+        //$content = Content::with(['metas','sells','discount','user'])->withCount('parts')->where('mode','publish');
         $content = Content::with(['metas','sells','discount','user'])->withCount('parts')->where('mode','publish');
         /* if(!$Category)
             $content = Content::with(['metas','sells','discount','user'])->withCount('parts')->where('mode','publish');
@@ -565,10 +575,16 @@ class ContentController extends Controller
             $content = $this->filters($content,$filters);
         }
 
+        
+        //$tag_ids = ContentCategoryFilterTag::where('tag','LIKE','%'.$q.'%')->pluck('id');
+
+        #filter level        
+
         /* if($id != null)
             return view('view.category.category',['category'=>$Category,'contents'=>$content,'vip'=>$vipContent,'order'=>$order,'pricing'=>$price,'course'=>$course,'off'=>$off,'filters'=>$filters,'mostSell'=>$mostSellContent]);
         else */
-            return view('view.courses',['category'=>$Category,'contents'=>$content,'vip'=>$vipContent,'order'=>$order,'pricing'=>$price,'course'=>$course,'off'=>$off,'filters'=>$filters,'mostSell'=>$mostSellContent]);
+            return view('view.courses',['category'=>$Category,'contents'=>$content,'vip'=>$vipContent,'order'=>$order,'pricing'=>$price,
+            'course'=>$course,'off'=>$off,'filters'=>$filters,'mostSell'=>$mostSellContent]);
     }
     ######################
 
@@ -1459,5 +1475,30 @@ class ContentController extends Controller
 		echo json_encode($output);
     }
 
-    
+    #get categories
+    function getAllCategories(){
+        $categories = ContentCategory::where('parent_id',0)->get();      
+        $main_cat = array();
+        foreach ($categories as $myList)
+		{
+			$row = array();
+            //$row['category'] = $myList->title;            
+            $sub_categories = ContentCategory::where('parent_id',$myList->id)->get();
+            $sub_cat = array();
+            foreach ($sub_categories as $val)
+            {
+                $row2 = array();
+                $row2['sub_category'] = $val->title;
+                //$row['category'] = $row2;
+                $sub_cat[] =   $row2;
+            }
+            //$row['scategory'] = $sub_categories;
+            $row['sc'] = $sub_cat;
+            $row['mc'] = $myList->title;
+			$main_cat[] = $row;
+		}
+        $output = array("data" => $main_cat);
+		echo json_encode($main_cat);
+    }
+
 }

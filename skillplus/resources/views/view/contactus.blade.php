@@ -117,13 +117,15 @@ cat-banner .categories-image a .categories-title:hover {
                 </div>
                 <div class="col-md-6">
                     <form action="/action_page.php">
-                        <label for="fname">Full Name: </label>
-                        <input type="text" id="fname" name="firstname" class="form-control" placeholder="Your name..">
-                        <label for="lname">Email: </label>
-                        <input type="text" id="fname" name="firstname" class="form-control" placeholder="Your email..">
-                        <label for="subject">Message: </label>
-                        <textarea id="subject" name="subject"  class="form-control" placeholder="Write something.." style="height:170px"></textarea>
-                        <button class="btn btn-success">Submit</button>
+                        <div class="form-group">
+                            <label for="fname">Full Name: </label>
+                            <input type="text" id="fname" name="firstname" class="form-control" placeholder="Your name..">
+                            <label for="lname">Email: </label>
+                            <input type="text" id="fname" name="firstname" class="form-control" placeholder="Your email..">
+                            <label for="subject">Message: </label>
+                            <textarea id="subject" name="subject"  class="form-control" placeholder="Write something.." style="height:170px"></textarea>
+                            <button class="btn btn-success">Submit</button>
+                        </div>
                     </form>
                 </div>
               </div>

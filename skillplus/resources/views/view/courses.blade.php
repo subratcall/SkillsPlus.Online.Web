@@ -98,7 +98,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="container">
-            <div class="col-md-3 col-xs-12 tab-con">
+            <!-- <div class="col-md-3 col-xs-12 tab-con">
             
                     <div class="ucp-section-box sbox3">
                     <div class="header back-orange header-new"><span>{{{ trans('main.filters') }}}</span><input type="checkbox"  name="hh" id="hh"></div>
@@ -121,9 +121,9 @@
                                 <div class="link">Price<i class="mdi mdi-chevron-down"></i></div>                                    
                                 <ul class="submenu" style="display: block;">
                                     <li>
-                                        <input type="checkbox" id="filter555" name="filters" value="555">
+                                        <input type="checkbox" id="filter555" name="filters" value="Free">
                                         <label for="filter555"><span></span>Free </label>
-                                        <input type="checkbox" id="filter556" name="filters" value="556">
+                                        <input type="checkbox" id="filter556" name="filters" value="Paid">
                                         <label for="filter556"><span></span>Paid</label>
                                     </li>
                                 </ul>
@@ -132,12 +132,12 @@
                                 <div class="link">Language<i class="mdi mdi-chevron-down"></i></div>                                    
                                 <ul class="submenu" style="display: block;">
                                     <li>
-                                        <input type="checkbox" id="filter555" name="filters" value="555">
-                                        <label for="filter555"><span></span>English </label>
-                                        <input type="checkbox" id="filter556" name="filters" value="556">
-                                        <label for="filter556"><span></span>Spanish</label>
-                                        <input type="checkbox" id="filter556" name="filters" value="556">
-                                        <label for="filter556"><span></span>Japanese</label>
+                                        <input type="checkbox" id="filter557" name="filters" value="English">
+                                        <label for="filter557"><span></span>English </label>
+                                        <input type="checkbox" id="filter558" name="filters" value="Spanish">
+                                        <label for="filter558"><span></span>Spanish</label>
+                                        <input type="checkbox" id="filter607" name="filters" value="607">
+                                        <label for="filter607"><span></span>Filipino</label>
                                     </li>
                                 </ul>
                             </li>
@@ -155,13 +155,13 @@
                             @endforeach
                         @endif
                     </div>
-            </div>
-            <div class="col-md-9 col-xs-12">
+            </div> -->
+            <div class="col-md-12 col-xs-12">
                 <div class="newest-container newest-container-s">
                     <div class="row body body-target body-target-s">
                         <?php $vipIds[] = 0; ?>
                         @if(!empty($vip) && !isset($order) && !isset($pricing) && !isset($course) && !isset($off) && !isset($post_sell) && !isset($q) && !isset($support) && !isset($filters))
-                            @foreach($vip as $content)
+                            @foreach($vip as $content)123
                                 @if(isset($content->content->id))
                                     <?php $vipIds[] = $content->content->id; ?>
                                     <?php $meta = arrayToList($content->content->metas,'option','value'); ?>

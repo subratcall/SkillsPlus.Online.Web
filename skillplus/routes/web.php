@@ -820,6 +820,9 @@ Route::group(['middleware'=>'notification'],function (){
     Route::get('cl/{id}','ContentController@contentLearn');
     Route::get('cr/{id}','ContentController@contentRequirements');
     Route::get('cp/{id}','ContentController@contentLessons');
+    Route::get('getAllCategories','ContentController@getAllCategories');
+
+    
     
     Route::get('/contactus', function () {
         return view('view.contactus');

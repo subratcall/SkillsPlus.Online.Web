@@ -3,6 +3,12 @@
       right: 20%;
       left: 20%;
   }
+
+
+ #sliderImg .item img{height: 488px;
+color: #ffffff;
+position: relative;
+ }  
 </style>
 <div class="container-fluid">
     {{-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -59,10 +65,10 @@
         <li data-target="#myCarousel" data-slide-to="2"></li>
       </ol>
   
-      <div class="carousel-inner">
+      <div class="carousel-inner" id="sliderImg">
   
         <div class="item active">
-          <img class="d-block w-100"  alt="First slide [800x400]" src="/bin/admin/files/cover(7).jpg" data-holder-rendered="true">
+          <img class="d-block w-100777123" class="parts-slider" alt="First slide [800x400]" src="/bin/admin/files/cover(7).jpg" data-holder-rendered="true">
 
           <div class="carousel-caption">
             <h3>Get personal learning recommendations</h3>
@@ -71,7 +77,7 @@
         </div>
   
         <div class="item">
-         <img class="d-block w-100"  alt="First slide [800x400]" src="/bin/admin/files/cover(6).jpg" data-holder-rendered="true">
+         <img class="d-block w-100" class="parts-slider"  alt="First slide [800x400]" src="/bin/admin/files/cover(6).jpg" data-holder-rendered="true">
           <div class="carousel-caption">
             <h3>Transform your life through education</h3>
             <p>Thank you, Chicago!</p>
@@ -79,7 +85,7 @@
         </div>
       
         <div class="item">
-         <img class="d-block w-100"  alt="First slide [800x400]" src="/bin/admin/files/cover(9).jpg" data-holder-rendered="true">
+         <img class="d-block w-100" class="parts-slider"  alt="First slide [800x400]" src="/bin/admin/files/cover(9).jpg" data-holder-rendered="true">
           <div class="carousel-caption">
             <h3>New York</h3>
             <p>We love the Big Apple!</p>
