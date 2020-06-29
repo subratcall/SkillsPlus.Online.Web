@@ -210,12 +210,17 @@ export default {
     skip() {
       if (this.pageState + 1 < this.pageLimit) {
         this.pageState = this.pageState + 1;
+        this.$events.fire("get-hints", this.pageState);
       }
     },
     back() {
       if (this.pageState > 0) {
         this.pageState = this.pageState - 1;
+        this.$events.fire("get-hints", this.pageState);
       }
+    },
+    save() {
+      this.$events.fire("save-answer");
     },
     submitAnswer(event) {
       this.$events.fire("submit-answer");
@@ -319,6 +324,9 @@ export default {
           var fiveMinutes = 60 * data.data.timer;
 
           vm.startTimer(fiveMinutes);
+          setTimeout(() => {
+           vm.firstHint(0);
+          }, 500);
         })
         .catch(err => {
           alert("Error! Contact IT Department.");
