@@ -199,6 +199,12 @@
 
 }
 
+
+.become_a_teacher{
+    color: #555;
+    font-weight: 600;
+}
+
   </style>
  
     <div class="container-fluid">
@@ -306,7 +312,18 @@
                                 </div>
                             </a>
                         @else
-                        <button type="button" class="btn btn-success">Login In</button> <button type="button" class="btn btn-primary">Sign In</button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="/user?redirect={{ Request::path() }}" class="btn btn-primary">Sign Up</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="/user?redirect={{ Request::path() }}" class="btn btn-success">Log In</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="/user?redirect={{ Request::path() }}" class="become_a_teacher">Become a Teacher</a>
+                            </div>
+                        </div>
+                          
                         <!--<a href="/user?redirect={{ Request::path() }}" class="header-login-button">{{-- <span class="headericon mdi mdi-account"></span> --}} sadsad | </a>
                         <a href="/user?redirect={{ Request::path() }}" class="header-login-button">{{-- <span class="headericon mdi mdi-account"></span> --}}cxcxzc</a> -->
                         @endif

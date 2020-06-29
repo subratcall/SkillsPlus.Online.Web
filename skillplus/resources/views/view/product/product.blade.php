@@ -516,7 +516,33 @@
                                 <span >{{{ $product->view or '0' }}}</span>
                                 <span class="playericon mdi mdi-eye"></span>
                             </a>
+
+                            @if(!$buy)
+
+                    
+                            <div class="product-price-box">
+                                <span class="proicon mdi mdi-wallet"></span>
+                                @if(isset($meta['price']) && $product->price != 0)
+                                <span  id="buy-price">{{{ currencySign() }}}{{{ price($product->id,$product->category_id,$meta['price'])['price']  }}}</span>
+                            @else
+                                <span  id="buy-price">{{{ trans('main.free') }}}</span>
+                            @endif
+                        </div> 
+                    
+               
+                                        
+                                        @if($product->price != 0)<a class="btn btn-orange product-btn-buy sbox3" id="buy-btn" data-toggle="modal" data-target="#buyModal" href="">{{{ trans('main.pay') }}}</a>@endif
+                                @else
+                                        @if($product->price != 0)<a class="btn btn-orange product-btn-buy sbox3" href="javascript:void(0);">{{{ trans('main.purchased_item') }}}</a>@endif
+                                @endif
+
+
                     </div>
+                   
+
+                                
+
+
                 </div>
                 <div id="buyModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
@@ -907,10 +933,7 @@
                                 {{{ 'Vendor doesnt support this course' }}}
                             @endif
                         </span>
-                    </div>
-                    <div class="product-price-box">
-						<span class="proicon mdi mdi-wallet"></span>
-                        @if(isset($meta['price']) && $product->price != 0)
+                    </div>  @if(isset($meta['price']) && $product->price != 0)
                             <span  id="buy-price">{{{ currencySign() }}}{{{ price($product->id,$product->category_id,$meta['price'])['price']  }}}</span>
                         @else
                             <span  id="buy-price">{{{ trans('main.free') }}}</span>
@@ -956,8 +979,11 @@
                              {{{ date('Y-m-d', userMeta($product->user_id,'trip_mode_date')) }}}
                              {{{ trans('main.vendor_vac_2') }}} </span>
                     </div>
-                    @endif --}}
-                </div>   
+                    @endif 
+                    <div class="product-price-box">
+						<span class="proicon mdi mdi-wallet"></span>
+                      
+                </div>   --}}
             </div>
         </div>
     </div>

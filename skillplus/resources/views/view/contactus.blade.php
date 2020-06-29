@@ -116,7 +116,7 @@ cat-banner .categories-image a .categories-title:hover {
                       </div>
                 </div>
                 <div class="col-md-6">
-                    <form action="/action_page.php">
+                    {{-- <form action="/action_page.php">
                         <div class="form-group">
                             <label for="fname">Full Name: </label>
                             <input type="text" id="fname" name="firstname" class="form-control" placeholder="Your name..">
@@ -126,9 +126,27 @@ cat-banner .categories-image a .categories-title:hover {
                             <textarea id="subject" name="subject"  class="form-control" placeholder="Write something.." style="height:170px"></textarea>
                             <button class="btn btn-success">Submit</button>
                         </div>
-                    </form>
+                    </form> --}}
+
+                    <form>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Full Name</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Fulll name">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Email</label>
+                          <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Message</label>
+                          <textarea id="subject" name="subject"  class="form-control" placeholder="Write something.." style="height:170px"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                      </form>
                 </div>
               </div>
+
+              
                   
             </div>
         </div>

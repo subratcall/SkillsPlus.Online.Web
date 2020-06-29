@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/assets/slick/slick.css"/>
 
 <link rel="stylesheet" type="text/css" href="/assets/slick/slick-theme.css"/>
-{{-- <link rel="stylesheet" type="text/css" href="http://192.168.1.6:8001/web/css/app.css"> --}}
+{{-- <link rel="stylesheet" type="text/css" href="http://192.168.110.16:8001/web/css/app.css"> --}}
 <style>
    
     .pro-fs-content .general-product {
@@ -560,8 +560,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">24-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
+                        <a href="#" tabindex="-1">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -569,7 +569,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Business                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1">
+                        <h5><a href="#" tabindex="-1">
                             Fashion Week</a>
                         </h5>
                         <div class="blog-description">
@@ -577,7 +577,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -585,8 +585,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">24-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
+                        <a href="#" tabindex="-1">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -594,7 +594,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Tools and Technology                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1">
+                        <h5><a href="#" tabindex="-1">
                             Why to choose this app for your Project?</a>
                         </h5>
                         <div class="blog-description">
@@ -602,7 +602,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -610,8 +610,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">18-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
+                        <a href="#" tabindex="-1">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -619,7 +619,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Business                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
+                        <h5><a href="#" tabindex="-1">
                             World Business</a>
                         </h5>
                         <div class="blog-description">
@@ -631,7 +631,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -639,8 +639,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">24-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="0">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/qotAc27710.jpg" alt="Tool and Technology" width="100%">
+                        <a href="#" tabindex="0">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/qotAc27710.jpg" alt="Tool and Technology" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -648,7 +648,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Tools and Technology                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="0">
+                        <h5><a href="#" tabindex="0">
                             Tool and Technology</a>
                         </h5>
                         <div class="blog-description">
@@ -656,7 +656,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="0"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="0"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -664,8 +664,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">24-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="0">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
+                        <a href="#" tabindex="0">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -673,7 +673,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Business                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="0">
+                        <h5><a href="#" tabindex="0">
                             Fashion Week</a>
                         </h5>
                         <div class="blog-description">
@@ -681,7 +681,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="0"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="0"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -689,8 +689,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">24-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="0">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
+                        <a href="#" tabindex="0">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -698,7 +698,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Tools and Technology                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="0">
+                        <h5><a href="#" tabindex="0">
                             Why to choose this app for your Project?</a>
                         </h5>
                         <div class="blog-description">
@@ -706,7 +706,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="0"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="0"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -714,8 +714,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">18-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
+                        <a href="#" tabindex="-1">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -723,7 +723,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Business                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
+                        <h5><a href="#" tabindex="-1">
                             World Business</a>
                         </h5>
                         <div class="blog-description">
@@ -735,7 +735,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -743,8 +743,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">24-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="-1">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/qotAc27710.jpg" alt="Tool and Technology" width="100%">
+                        <a href="#" tabindex="-1">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/qotAc27710.jpg" alt="Tool and Technology" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -752,7 +752,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Tools and Technology                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="-1">
+                        <h5><a href="#" tabindex="-1">
                             Tool and Technology</a>
                         </h5>
                         <div class="blog-description">
@@ -760,7 +760,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="-1"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -768,8 +768,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">24-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
+                        <a href="#" tabindex="-1">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -777,7 +777,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Business                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1">
+                        <h5><a href="#" tabindex="-1">
                             Fashion Week</a>
                         </h5>
                         <div class="blog-description">
@@ -785,7 +785,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -793,8 +793,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">24-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
+                        <a href="#" tabindex="-1">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -802,7 +802,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Tools and Technology                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1">
+                        <h5><a href="#" tabindex="-1">
                             Why to choose this app for your Project?</a>
                         </h5>
                         <div class="blog-description">
@@ -810,7 +810,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>
@@ -818,8 +818,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <div class="blog">
                         <div class="blog-thumbnail">
                         <span class="date-tag badge">18-Sep-2019</span>
-                        <a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
-                        <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
+                        <a href="#" tabindex="-1">
+                        <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
                         </a>
                         <div class="over"></div>
                         </div>
@@ -827,7 +827,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                         <span class="tag">
                         Business                              
                         </span>
-                        <h5><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
+                        <h5><a href="#" tabindex="-1">
                             World Business</a>
                         </h5>
                         <div class="blog-description">
@@ -839,7 +839,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                             </p>
                         </div>
-                        <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1"> Read More .. </a></span>
+                        <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                         </div>
                     </div>
                 </div>  
@@ -868,8 +868,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">24-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
+                    <a href="#" tabindex="-1">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -877,7 +877,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Business                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1">
+                    <h5><a href="#" tabindex="-1">
                         Fashion Week</a>
                     </h5>
                     <div class="blog-description">
@@ -885,7 +885,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -893,8 +893,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">24-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
+                    <a href="#" tabindex="-1">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -902,7 +902,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Tools and Technology                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1">
+                    <h5><a href="#" tabindex="-1">
                         Why to choose this app for your Project?</a>
                     </h5>
                     <div class="blog-description">
@@ -910,7 +910,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -918,8 +918,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">18-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
+                    <a href="#" tabindex="-1">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -927,7 +927,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Business                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
+                    <h5><a href="#" tabindex="-1">
                         World Business</a>
                     </h5>
                     <div class="blog-description">
@@ -939,7 +939,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -947,8 +947,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">24-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="0">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/qotAc27710.jpg" alt="Tool and Technology" width="100%">
+                    <a href="#" tabindex="0">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/qotAc27710.jpg" alt="Tool and Technology" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -956,7 +956,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Tools and Technology                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="0">
+                    <h5><a href="#" tabindex="0">
                         Tool and Technology</a>
                     </h5>
                     <div class="blog-description">
@@ -964,7 +964,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="0"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="0"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -972,8 +972,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">24-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="0">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
+                    <a href="#" tabindex="0">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -981,7 +981,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Business                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="0">
+                    <h5><a href="#" tabindex="0">
                         Fashion Week</a>
                     </h5>
                     <div class="blog-description">
@@ -989,7 +989,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="0"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="0"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -997,8 +997,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">24-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="0">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
+                    <a href="#" tabindex="0">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -1006,7 +1006,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Tools and Technology                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="0">
+                    <h5><a href="#" tabindex="0">
                         Why to choose this app for your Project?</a>
                     </h5>
                     <div class="blog-description">
@@ -1014,7 +1014,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="0"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="0"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -1022,8 +1022,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">18-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
+                    <a href="#" tabindex="-1">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -1031,7 +1031,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Business                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
+                    <h5><a href="#" tabindex="-1">
                         World Business</a>
                     </h5>
                     <div class="blog-description">
@@ -1043,7 +1043,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -1051,8 +1051,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">24-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="-1">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/qotAc27710.jpg" alt="Tool and Technology" width="100%">
+                    <a href="#" tabindex="-1">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/qotAc27710.jpg" alt="Tool and Technology" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -1060,7 +1060,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Tools and Technology                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="-1">
+                    <h5><a href="#" tabindex="-1">
                         Tool and Technology</a>
                     </h5>
                     <div class="blog-description">
@@ -1068,7 +1068,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-wide-networking" tabindex="-1"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -1076,8 +1076,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">24-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
+                    <a href="#" tabindex="-1">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/souUX27810.jpg" alt="Fashion Week" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -1085,7 +1085,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Business                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1">
+                    <h5><a href="#" tabindex="-1">
                         Fashion Week</a>
                     </h5>
                     <div class="blog-description">
@@ -1093,7 +1093,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/fashion-week" tabindex="-1"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -1101,8 +1101,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">24-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
+                    <a href="#" tabindex="-1">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/CLA2s27610.jpg" alt="Why to choose this app for your Project?" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -1110,7 +1110,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Tools and Technology                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1">
+                    <h5><a href="#" tabindex="-1">
                         Why to choose this app for your Project?</a>
                     </h5>
                     <div class="blog-description">
@@ -1118,7 +1118,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&amp;rsquo;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/manufacturing-tools" tabindex="-1"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
@@ -1126,8 +1126,8 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                 <div class="blog">
                     <div class="blog-thumbnail">
                     <span class="date-tag badge">18-Sep-2019</span>
-                    <a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
-                    <img class="img-thumbnail" src="http://192.168.1.6:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
+                    <a href="#" tabindex="-1">
+                    <img class="img-thumbnail" src="http://192.168.110.16:8001/images/media/2019/09/5xN6v24411.jpg" alt="World Business" width="100%">
                     </a>
                     <div class="over"></div>
                     </div>
@@ -1135,7 +1135,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                     <span class="tag">
                     Business                              
                     </span>
-                    <h5><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1">
+                    <h5><a href="#" tabindex="-1">
                         World Business</a>
                     </h5>
                     <div class="blog-description">
@@ -1147,7 +1147,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.                      
                         </p>
                     </div>
-                    <span class="blink"><a href="http://192.168.1.6:8001/news-detail/world-business-news" tabindex="-1"> Read More .. </a></span>
+                    <span class="blink"><a href="#" tabindex="-1"> Read More .. </a></span>
                     </div>
                 </div>
             </div>
