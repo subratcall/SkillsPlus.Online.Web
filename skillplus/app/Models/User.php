@@ -10,11 +10,6 @@ class User extends Model
     protected $guarded = ['id'];
     public $timestamps = false;
 
-    protected $visible = [
-     "name",
-     "about"
-   ];
-
     public function usermetas()
     {
         return $this->hasMany('App\Models\Usermeta');
