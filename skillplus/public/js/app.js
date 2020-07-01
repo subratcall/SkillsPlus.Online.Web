@@ -37110,6 +37110,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -37261,16 +37277,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       /* get course comment */
 
       /*     axios
-                                        .get(`/admin/user_vendor/vendor_course_comment/135/116`)
-                                        .then(res => {
-                                         console.log(res);
-                                         this.courseReview = res.data;
-                                        })
-                                        .catch(err => {
-                                         console.error(err);
-                                         alert("Error! Contact IT Department.");
-                                        });
-                                    */
+                                                                     .get(`/admin/user_vendor/vendor_course_comment/135/116`)
+                                                                     .then(res => {
+                                                                      console.log(res);
+                                                                      this.courseReview = res.data;
+                                                                     })
+                                                                     .catch(err => {
+                                                                      console.error(err);
+                                                                      alert("Error! Contact IT Department.");
+                                                                     });
+                                                                 */
 
       /* get course requirement */
 
@@ -40767,7 +40783,7 @@ exports.push([module.i, "\n.filter-bar {\r\n  padding: 10px;\n}\r\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n@media (max-width: 1980px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 5% !important;\n  width: 400px !important;\n}\n.video-tablet[data-v-0ba6557f] {\n  display: none;\n}\n}\n@media (max-width: 1600px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 4% !important;\n  width: 350px !important;\n}\n}\n@media (max-width: 1300px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 1% !important;\n  width: 350px !important;\n}\n.title[data-v-0ba6557f] {\n  margin-left: -20px !important;\n  width: 400px !important;\n}\n}\n@media (max-width: 1200px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 0.5% !important;\n  width: 40% !important;\n}\n.title[data-v-0ba6557f] {\n  margin-left: -20px !important;\n  width: 400px !important;\n}\n}\n@media (max-width: 1180.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 0.1% !important;\n  width: 38% !important;\n}\n.title[data-v-0ba6557f] {\n  margin-left: -80px !important;\n  width: 400px !important;\n}\n}\n@media (max-width: 991.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n.title[data-v-0ba6557f] {\n  margin-left: -80px !important;\n  width: 500px;\n}\n.video-tablet[data-v-0ba6557f] {\n  display: inline;\n  padding: 0px;\n  width: 100%;\n}\n}\n@media (max-width: 767.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n}\n@media (max-width: 575.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n}\n.custom-card[data-v-0ba6557f] {\n box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);\n background-color: #fff;\n border-radius: 3px;\n border: none;\n position: relative;\n margin-bottom: 30px;\n}\n#myKanban[data-v-0ba6557f] {\n overflow-x: auto;\n padding: 20px 0;\n}\n.success[data-v-0ba6557f] {\n background: #00b961;\n color: #fff;\n}\n.info[data-v-0ba6557f] {\n background: #2a92bf;\n color: #fff;\n}\n.warning[data-v-0ba6557f] {\n background: #f4ce46;\n color: #fff;\n}\n.error[data-v-0ba6557f] {\n background: #fb7d44;\n color: #fff;\n}\n.raty-text[data-v-0ba6557f] {\n color: #e6d816 !important;\n}\n.raty[data-v-0ba6557f] {\n color: #e6d816 !important;\n}\n.course[data-v-0ba6557f] {\n font-family: \"Open Sans\", sans-serif;\n}\n.course a[data-v-0ba6557f] {\n color: #007791;\n}\n.course .course-header[data-v-0ba6557f] {\n margin-left: 100px;\n margin-top: 50px;\n margin-bottom: 50px;\n padding: 0px;\n min-width: 1980px;\n}\n.course-header .title[data-v-0ba6557f] {\n width: 600px;\n}\n.section.section-header[data-v-0ba6557f] {\n margin-top: -15px;\n}\n.wrap-header[data-v-0ba6557f] {\n background-color: #29303b;\n color: white;\n}\n.no-padding[data-v-0ba6557f] {\n padding: 0px;\n}\n.no-margin[data-v-0ba6557f] {\n margin: 0px;\n}\n.main-content.header[data-v-0ba6557f] {\n margin-top: 15px;\n}\n.margin-top-next[data-v-0ba6557f] {\n margin-top: 40px;\n}\n.header-custom-border[data-v-0ba6557f] {\n border-top: #dedfe0 solid 1px;\n border-left: #dedfe0 solid 1px;\n border-right: #dedfe0 solid 1px;\n border-bottom: #dedfe0 solid 1px;\n padding-top: 10px;\n padding-bottom: 10px;\n padding-right: 10px;\n}\n.video-done[data-v-0ba6557f] {\n color: black;\n font-size: 18px;\n}\n.list-custom-border[data-v-0ba6557f] {\n border-bottom: #dedfe0 solid 1px;\n border-left: #dedfe0 solid 1px;\n border-right: #dedfe0 solid 1px;\n font: 15px;\n color: #007791;\n padding-top: 10px;\n padding-left: 40px;\n padding-right: 5px;\n padding-bottom: 10px;\n text-indent: -0.8em;\n}\n.list-custom-border > i[data-v-0ba6557f] {\n opacity: 0.5;\n padding-right: 10px;\n}\n.section-1[data-v-0ba6557f] {\n border: #dedfe0 solid 1px;\n color: #29303b;\n padding: 30px;\n}\n.section-1 ul[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-7 ul[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-7[data-v-0ba6557f] {\n color: #29303b;\n}\n.section-7 .vendor-profile img[data-v-0ba6557f] {\n margin-bottom: 10px;\n width: 96px;\n height: 96px;\n}\n.section-7 ul li i[data-v-0ba6557f] {\n padding-right: 10px;\n}\n.section-1 ul > li[data-v-0ba6557f] {\n padding-left: 1.3em;\n}\n.section-1 li[data-v-0ba6557f]:before {\n content: \"\\f00c\";\n font-family: FontAwesome;\n display: inline-block;\n margin-left: -1.3em;\n width: 1.3em;\n color: #a1a7b3;\n}\n.section-2[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-3[data-v-0ba6557f] {\n padding: 2.5px 0px;\n}\n.section-4-header[data-v-0ba6557f] {\n font-size: 22px !important;\n padding-top: 10px !important;\n color: #29303b !important;\n}\n.section-4 ul > li[data-v-0ba6557f] {\n font-size: 15px;\n color: #29303b;\n}\n.section-4 p[data-v-0ba6557f] {\n font-size: 14px;\n color: #29303b;\n}\n.section-5-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-6-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-6 .item-price[data-v-0ba6557f] {\n font-size: 14px;\n}\n.section-7-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8 .average-rating[data-v-0ba6557f] {\n font-size: 72px;\n padding: 0px;\n margin-top: -20px;\n}\n.section-9-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8 .individual-rating ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0px;\n}\n.section-9 ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0px;\n}\n.section-5[data-v-0ba6557f] {\n color: #29303b;\n}\n.video-tutorials[data-v-0ba6557f] {\n position: absolute;\n z-index: 1;\n right: 200px;\n top: 50px;\n background: white;\n border: 1px solid white;\n box-shadow: 0.5px 1px 5px 0.5px #00000080;\n border-radius: 2px;\n height: 700px;\n}\n.video-tutorials video[data-v-0ba6557f] {\n width: 100%;\n height: 300px;\n border: 10px solid white;\n}\n.video-tutorials.video-details[data-v-0ba6557f] {\n font-size: 16px;\n}\n.video-details[data-v-0ba6557f] {\n padding: 10px;\n padding-left: 20px;\n text-align: center;\n}\n.video-details-header[data-v-0ba6557f] {\n font-size: 24px;\n font-weight: bold;\n text-align: left;\n padding-left: 40px;\n}\n.video-details p[data-v-0ba6557f] {\n font-size: 32px;\n}\n.button[data-v-0ba6557f] {\n border-style: none;\n padding: 15px;\n width: 300px;\n}\n.add-to-cart[data-v-0ba6557f] {\n margin-top: 10px;\n border: black 1px solid;\n background-color: #ffffff;\n font-weight: bold;\n color: #686f7a;\n}\n.buy-now[data-v-0ba6557f] {\n background-color: #ec5252;\n color: #ffffff;\n font-weight: bold;\n width: 100% !important;\n}\n.video-descriptions[data-v-0ba6557f] {\n color: #686f7a;\n text-align: left;\n padding-left: 1;\n}\n.video-descriptions p[data-v-0ba6557f] {\n font-size: 14px;\n padding-left: 40px;\n font-weight: bold;\n padding-top: 10px;\n}\n.video-descriptions ul[data-v-0ba6557f] {\n padding-left: 60px;\n}\n.video-descriptions ul li[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-6 ul li[data-v-0ba6557f] {\n border-bottom: 2px solid #dedfe0;\n padding: 20px 0px;\n}\n.section-6 ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0;\n border-bottom: 2px solid #dedfe0;\n border-top: 2px solid #dedfe0;\n}\n.raty-product-section i[data-v-0ba6557f] {\n margin-left: 5px;\n margin-bottom: 10px;\n}\nb[data-v-0ba6557f] {\n color: #29303b;\n}\n.fas.fa-star.star-live[data-v-0ba6557f] {\n color: rgb(245, 200, 91);\n}\n.fas.fa-star.star-dead[data-v-0ba6557f] {\n color: #abb0bb;\n}\n", ""]);
+exports.push([module.i, "\n@media (max-width: 1980px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 5% !important;\n  width: 400px !important;\n}\n.video-tablet[data-v-0ba6557f] {\n  display: none;\n}\n}\n@media (max-width: 1600px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 4% !important;\n  width: 350px !important;\n}\n}\n@media (max-width: 1300px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 1% !important;\n  width: 350px !important;\n}\n.title[data-v-0ba6557f] {\n  margin-left: -20px !important;\n  width: 400px !important;\n}\n}\n@media (max-width: 1200px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 0.5% !important;\n  width: 40% !important;\n}\n.title[data-v-0ba6557f] {\n  margin-left: -20px !important;\n  width: 400px !important;\n}\n}\n@media (max-width: 1180.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  right: 0.1% !important;\n  width: 38% !important;\n}\n.title[data-v-0ba6557f] {\n  margin-left: -80px !important;\n  width: 400px !important;\n}\n}\n@media (max-width: 991.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n.title[data-v-0ba6557f] {\n  margin-left: -80px !important;\n  width: 500px;\n}\n.video-tablet[data-v-0ba6557f] {\n  display: inline;\n  padding: 0px;\n  width: 100%;\n}\n\n /* .otc-md-size {\n                            text-align: center;\n                           } */\n}\n@media (max-width: 767.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n}\n@media (max-width: 575.98px) {\n.video-tutorials[data-v-0ba6557f] {\n  display: none;\n}\n.md-text-center[data-v-0ba6557f] {\n  text-align: center !important;\n}\n\n /* .md-text-right {\n                     text-align: right !important;\n                    } */\n}\n.custom-card[data-v-0ba6557f] {\n box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);\n background-color: #fff;\n border-radius: 3px;\n border: none;\n position: relative;\n margin-bottom: 30px;\n}\n#myKanban[data-v-0ba6557f] {\n overflow-x: auto;\n padding: 20px 0;\n}\n.success[data-v-0ba6557f] {\n background: #00b961;\n color: #fff;\n}\n.info[data-v-0ba6557f] {\n background: #2a92bf;\n color: #fff;\n}\n.warning[data-v-0ba6557f] {\n background: #f4ce46;\n color: #fff;\n}\n.error[data-v-0ba6557f] {\n background: #fb7d44;\n color: #fff;\n}\n.raty-text[data-v-0ba6557f] {\n color: #e6d816 !important;\n}\n.raty[data-v-0ba6557f] {\n color: #e6d816 !important;\n}\n.course[data-v-0ba6557f] {\n font-family: \"Open Sans\", sans-serif;\n}\n.course a[data-v-0ba6557f] {\n color: #007791;\n}\n.course .course-header[data-v-0ba6557f] {\n margin-left: 100px;\n margin-top: 50px;\n margin-bottom: 50px;\n padding: 0px;\n min-width: 1980px;\n}\n.course-header .title[data-v-0ba6557f] {\n width: 600px;\n}\n.section.section-header[data-v-0ba6557f] {\n margin-top: -15px;\n}\n.wrap-header[data-v-0ba6557f] {\n background-color: #29303b;\n color: white;\n}\n.no-padding[data-v-0ba6557f] {\n padding: 0px;\n}\n.no-margin[data-v-0ba6557f] {\n margin: 0px;\n}\n.main-content.header[data-v-0ba6557f] {\n margin-top: 15px;\n}\n.margin-top-next[data-v-0ba6557f] {\n margin-top: 40px;\n}\n.header-custom-border[data-v-0ba6557f] {\n border-top: #dedfe0 solid 1px;\n border-left: #dedfe0 solid 1px;\n border-right: #dedfe0 solid 1px;\n border-bottom: #dedfe0 solid 1px;\n padding-top: 10px;\n padding-bottom: 10px;\n padding-right: 10px;\n}\n.video-done[data-v-0ba6557f] {\n color: black;\n font-size: 18px;\n}\n.list-custom-border[data-v-0ba6557f] {\n border-bottom: #dedfe0 solid 1px;\n border-left: #dedfe0 solid 1px;\n border-right: #dedfe0 solid 1px;\n font: 15px;\n color: #007791;\n padding-top: 10px;\n padding-left: 40px;\n padding-right: 5px;\n padding-bottom: 10px;\n text-indent: -0.8em;\n}\n.list-custom-border > i[data-v-0ba6557f] {\n opacity: 0.5;\n padding-right: 10px;\n}\n.section-1[data-v-0ba6557f] {\n border: #dedfe0 solid 1px;\n color: #29303b;\n padding: 30px;\n}\n.section-1 ul[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-7 ul[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-7[data-v-0ba6557f] {\n color: #29303b;\n}\n.section-7 .vendor-profile img[data-v-0ba6557f] {\n margin-bottom: 10px;\n width: 96px;\n height: 96px;\n}\n.section-7 ul li i[data-v-0ba6557f] {\n padding-right: 10px;\n}\n.section-1 ul > li[data-v-0ba6557f] {\n padding-left: 1.3em;\n}\n.section-1 li[data-v-0ba6557f]:before {\n content: \"\\f00c\";\n font-family: FontAwesome;\n display: inline-block;\n margin-left: -1.3em;\n width: 1.3em;\n color: #a1a7b3;\n}\n.section-2[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-3[data-v-0ba6557f] {\n padding: 2.5px 0px;\n}\n.section-4-header[data-v-0ba6557f] {\n font-size: 22px !important;\n padding-top: 10px !important;\n color: #29303b !important;\n}\n.section-4 ul > li[data-v-0ba6557f] {\n font-size: 15px;\n color: #29303b;\n}\n.section-4 p[data-v-0ba6557f] {\n font-size: 14px;\n color: #29303b;\n}\n.section-5-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-6-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-6 .item-price[data-v-0ba6557f] {\n font-size: 14px;\n}\n.section-7-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8 .average-rating[data-v-0ba6557f] {\n font-size: 72px;\n padding: 0px;\n margin-top: -20px;\n}\n.section-9-header[data-v-0ba6557f] {\n font-size: 22px;\n padding: 10px 0px;\n color: #29303b;\n}\n.section-8 .individual-rating ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0px;\n}\n.section-9 ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0px;\n}\n.section-5[data-v-0ba6557f] {\n color: #29303b;\n}\n.video-tutorials[data-v-0ba6557f] {\n position: absolute;\n z-index: 1;\n right: 200px;\n top: 50px;\n background: white;\n border: 1px solid white;\n box-shadow: 0.5px 1px 5px 0.5px #00000080;\n border-radius: 2px;\n height: 700px;\n}\n.video-tutorials video[data-v-0ba6557f] {\n width: 100%;\n height: 300px;\n border: 10px solid white;\n}\n.video-tutorials.video-details[data-v-0ba6557f] {\n font-size: 16px;\n}\n.video-details[data-v-0ba6557f] {\n padding: 10px;\n padding-left: 20px;\n text-align: center;\n}\n.video-details-header[data-v-0ba6557f] {\n font-size: 24px;\n font-weight: bold;\n text-align: left;\n padding-left: 40px;\n}\n.video-details p[data-v-0ba6557f] {\n font-size: 32px;\n}\n.button[data-v-0ba6557f] {\n border-style: none;\n padding: 15px;\n width: 300px;\n}\n.add-to-cart[data-v-0ba6557f] {\n margin-top: 10px;\n border: black 1px solid;\n background-color: #ffffff;\n font-weight: bold;\n color: #686f7a;\n}\n.buy-now[data-v-0ba6557f] {\n background-color: #ec5252;\n color: #ffffff;\n font-weight: bold;\n width: 100% !important;\n}\n.video-descriptions[data-v-0ba6557f] {\n color: #686f7a;\n text-align: left;\n padding-left: 1;\n}\n.video-descriptions p[data-v-0ba6557f] {\n font-size: 14px;\n padding-left: 40px;\n font-weight: bold;\n padding-top: 10px;\n}\n.video-descriptions ul[data-v-0ba6557f] {\n padding-left: 60px;\n}\n.video-descriptions ul li[data-v-0ba6557f] {\n list-style: none;\n padding: 0;\n}\n.section-6 ul li[data-v-0ba6557f] {\n border-bottom: 2px solid #dedfe0;\n padding: 20px 0px;\n}\n.section-6 ul[data-v-0ba6557f] {\n list-style-type: none;\n padding: 0;\n border-bottom: 2px solid #dedfe0;\n border-top: 2px solid #dedfe0;\n}\n.raty-product-section i[data-v-0ba6557f] {\n margin-left: 5px;\n margin-bottom: 10px;\n}\nb[data-v-0ba6557f] {\n color: #29303b;\n}\n.fas.fa-star.star-live[data-v-0ba6557f] {\n color: rgb(245, 200, 91);\n}\n.fas.fa-star.star-dead[data-v-0ba6557f] {\n color: #abb0bb;\n}\n", ""]);
 
 /***/ }),
 /* 261 */
@@ -59806,7 +59822,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('div', {
       staticClass: "row"
     }, [_c('div', {
-      staticClass: "col-lg-11"
+      staticClass: "col-lg-12"
     }, [_c('a', {
       staticClass: "btn",
       staticStyle: {
@@ -59822,7 +59838,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "color": "#007791"
       }
-    }), _vm._v("\n            " + _vm._s(value.title) + "\n        ")])]), _vm._v(" "), _vm._m(3, true)])]), _vm._v(" "), _c('div', {
+    }), _vm._v("\n            " + _vm._s(value.title) + "\n        ")]), _vm._v(" "), _vm._m(3, true)])])]), _vm._v(" "), _c('div', {
       staticClass: "collapse",
       attrs: {
         "id": 'collapse_' + index
@@ -59889,18 +59905,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "col-lg-12"
     }, [_c('div', {
       staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-lg-12 md-text-center"
     }, [_c('a', {
       attrs: {
         "href": "https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
       }
-    }, [_vm._v(_vm._s(value.title))])]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(value.title))])])]), _vm._v(" "), _c('div', {
       staticClass: "row"
     }, [_c('div', {
+      staticClass: "col-lg-12 md-text-center"
+    }, [_c('div', {
       staticClass: "updated-time"
-    }, [_vm._v(_vm._s(_vm.formatDate(value.create_at)))])])])]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(_vm.formatDate(value.create_at)))])])])])]), _vm._v(" "), _c('div', {
       staticClass: "col-lg-3 row"
     }, [_c('div', {
-      staticClass: "col-lg-6"
+      staticClass: "col-lg-6 md-text-center"
     }, [_c('span', {
       staticClass: "item-rating"
     }, [_c('i', {
@@ -59908,13 +59928,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }), _vm._v(" "), _c('span', {
       staticClass: "d-inline-block average-rating"
     }, [_vm._v(_vm._s(value.rate))])])]), _vm._v(" "), _c('div', {
-      staticClass: "col-lg-6"
+      staticClass: "col-lg-6 md-text-center"
     }, [_c('span', {
       staticClass: "enrolled-"
     }, [_c('i', {
       staticClass: "far fa-user"
     }), _vm._v("\n           " + _vm._s(value.sold) + "\n          ")])])]), _vm._v(" "), _c('div', {
-      staticClass: "col-lg-2 text-right"
+      staticClass: "col-lg-2 float-sm-center float-md-right md-text-center"
     }, [_c('span', {
       staticClass: "item-price"
     }, [_c('span', {
@@ -59932,14 +59952,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-lg-12 row"
   }, [_c('div', {
     staticClass: "col-lg-4 vendor-profile"
-  }, [_c('img', {
-    staticClass: "rounded-circle",
-    attrs: {
-      "src": "https://demo.academy-lms.com/addon/uploads/user_image/1.jpg"
-    }
-  }), _vm._v(" "), _c('ul', [_vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _c('li', [_c('i', {
+  }, [_vm._m(6), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-6"
+  }, [_c('ul', [_vm._m(7), _vm._v(" "), _vm._m(8), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "fas fa-play-circle"
-  }), _vm._v("\n          " + _vm._s(_vm.vendorCountCourses) + " Courses\n        ")])])]), _vm._v(" "), _c('div', {
+  }), _vm._v("\n           " + _vm._s(_vm.vendorCountCourses) + " Courses\n         ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-8"
   }, [_c('label', [_c('h4', [_c('a', {
     attrs: {
@@ -59957,7 +59974,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-6 offset-lg-1 section-8"
-  }, [_vm._m(8), _vm._v(" "), _c('div', {
+  }, [_vm._m(9), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12 row"
@@ -59989,57 +60006,56 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.onestar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(9), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.onestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(10), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.onestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
     staticClass: "progress"
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.twostar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(10), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.twostar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(11), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.twostar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
     staticClass: "progress"
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.threestar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(11), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.threestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(12), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.threestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
     staticClass: "progress"
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.fourstar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(12), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fourstar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(13), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fourstar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
     staticClass: "progress"
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.fivestar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(13), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fivestar) + "%")])])])])])])])])])])])]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(14), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fivestar) + "%")])])])])])])])])])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12"
   }, [_c('div', {
     staticClass: "col-lg-6 offset-lg-1 section-9"
-  }, [_vm._m(14), _vm._v(" "), _c('div', {
+  }, [_vm._m(15), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12"
-  }, [_c('ul', _vm._l((_vm.courseReview), function(value_a, index_a) {
-    return _c('li', {
-      key: index_a
+  }, _vm._l((_vm.courseReview), function(value_a, index_a) {
+    return _c('div', {
+      key: index_a,
+      staticClass: "row"
     }, [_c('div', {
-      staticClass: "col-lg-12 row"
+      staticClass: "col-lg-12"
     }, [_c('div', {
-      staticClass: "col-lg-5 row"
-    }, [_vm._m(15, true), _vm._v(" "), _c('div', {
-      staticClass: "col-lg-8"
+      staticClass: "row"
+    }, [_vm._m(16, true), _vm._v(" "), _c('div', {
+      staticClass: "col-4 col-lg-4"
+    }, [_c('p', [_vm._v("\n           " + _vm._s(value_a.name)), _c('br'), _vm._v("\n           " + _vm._s(_vm.formatDate(value_a.create_at)) + "\n           ")])]), _vm._v(" "), _c('div', {
+      staticClass: "col-4 col-lg-6"
     }, [_c('div', {
-      staticClass: "review-time"
+      staticClass: "row"
     }, [_c('div', {
-      staticClass: "time"
-    }, [_vm._v(_vm._s(_vm.formatDate(value_a.create_at)))]), _vm._v(" "), _c('div', {
-      staticClass: "reviewer-name"
-    }, [_vm._v(_vm._s(value_a.name))])])])]), _vm._v(" "), _c('div', {
-      staticClass: "col-lg-7"
+      staticClass: "col-12"
     }, [_c('div', {
-      staticClass: "review-details"
-    }, [_c('div', {
-      staticClass: "rating"
+      staticClass: "comment"
+    }, [_vm._v(_vm._s(value_a.comment))])]), _vm._v(" "), _c('div', {
+      staticClass: "col-12"
     }, _vm._l((5), function(value_b, index_b) {
       return _c('div', {
         key: index_b,
@@ -60052,10 +60068,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           'star-live': (value_b <= value_a.rate), 'star-dead': (value_b >= value_a.rate)
         }
       })])
-    }), 0), _vm._v(" "), _c('div', {
-      staticClass: "review-text star-dead"
-    }, [_vm._v(_vm._s(value_a.comment))])])])])])
-  }), 0)])])])])])])
+    }), 0)])])])])])
+  }), 0)])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "video-tutorials"
@@ -60173,9 +60187,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-lg-1 text-right"
+    staticClass: "float-right"
   }, [_c('i', {
-    staticClass: "fa fa-check-circle video-done",
+    staticClass: "fa fa-check-circle video-done text-right",
     attrs: {
       "aria-hidden": "true"
     }
@@ -60222,13 +60236,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "section-7-header"
   }, [_vm._v("About the instructor")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-xs-6"
+  }, [_c('img', {
+    staticClass: "rounded-circle",
+    attrs: {
+      "src": "https://demo.academy-lms.com/addon/uploads/user_image/1.jpg"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('i', {
     staticClass: "fas fa-comment"
-  }), _vm._v(" 5 Reviews\n        ")])
+  }), _vm._v(" 5 Reviews\n         ")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('i', {
     staticClass: "fas fa-user"
-  }), _vm._v(" 3 Students\n        ")])
+  }), _vm._v(" 3 Students\n         ")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"
@@ -60317,18 +60340,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Reviews")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-lg-4"
-  }, [_c('div', {
-    staticClass: "reviewer-details clearfix"
-  }, [_c('div', {
-    staticClass: "reviewer-img float-left"
+    staticClass: "col-4 col-lg-2"
   }, [_c('img', {
     attrs: {
       "src": "https://demo.academy-lms.com/addon/uploads/user_image/6.jpg",
       "width": "46",
       "alt": ""
     }
-  })])])])
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {

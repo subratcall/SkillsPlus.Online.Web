@@ -142,7 +142,7 @@
      <div class="col-lg-6 offset-lg-1 section-3" v-for="(value, index) in quizList" :key="index">
       <div class="header-custom-border">
        <div class="row">
-        <div class="col-lg-11">
+        <div class="col-lg-12">
          <a
           class="btn"
           data-toggle="collapse"
@@ -152,9 +152,9 @@
           <i class="fas fa-plus" style="color: #007791"></i>
           &nbsp;&nbsp; {{ value.title }}
          </a>
-        </div>
-        <div class="col-lg-1 text-right">
-         <i class="fa fa-check-circle video-done" aria-hidden="true"></i>
+         <div class="float-right">
+          <i class="fa fa-check-circle video-done text-right" aria-hidden="true"></i>
+         </div>
         </div>
        </div>
       </div>
@@ -221,33 +221,40 @@
            <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
           </video>
          </div>
+
          <div class="col-lg-4 row">
           <div class="col-lg-12">
            <div class="row">
-            <a
-             href="https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
-            >{{ value.title }}</a>
+            <div class="col-lg-12 md-text-center">
+             <a
+              href="https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
+             >{{ value.title }}</a>
+            </div>
            </div>
            <div class="row">
-            <div class="updated-time">{{ formatDate(value.create_at) }}</div>
+            <div class="col-lg-12 md-text-center">
+             <div class="updated-time">{{ formatDate(value.create_at) }}</div>
+            </div>
            </div>
           </div>
          </div>
+
          <div class="col-lg-3 row">
-          <div class="col-lg-6">
+          <div class="col-lg-6 md-text-center">
            <span class="item-rating">
             <i class="fas fa-star star-live"></i>
             <span class="d-inline-block average-rating">{{ value.rate }}</span>
            </span>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-6 md-text-center">
            <span class="enrolled-">
             <i class="far fa-user"></i>
             {{ value.sold }}
            </span>
           </div>
          </div>
-         <div class="col-lg-2 text-right">
+
+         <div class="col-lg-2 float-sm-center float-md-right md-text-center">
           <span class="item-price">
            <span class="current-price">
             <b>{{ (value.price_post) ? value.price_post+' $' : "Not Available" }}</b>
@@ -273,23 +280,28 @@
       </div>
       <div class="col-lg-12 row">
        <div class="col-lg-4 vendor-profile">
-        <img
-         src="https://demo.academy-lms.com/addon/uploads/user_image/1.jpg"
-         class="rounded-circle"
-        />
-        <ul>
-         <li>
-          <i class="fas fa-comment"></i>&nbsp;5 Reviews
-         </li>
-         <li>
-          <i class="fas fa-user"></i>&nbsp;3 Students
-         </li>
-         <li>
-          <i class="fas fa-play-circle"></i>
-          &nbsp;{{ vendorCountCourses }} Courses
-         </li>
-        </ul>
+        <div class="col-xs-6">
+         <img
+          src="https://demo.academy-lms.com/addon/uploads/user_image/1.jpg"
+          class="rounded-circle"
+         />
+        </div>
+        <div class="col-xs-6">
+         <ul>
+          <li>
+           <i class="fas fa-comment"></i>&nbsp;5 Reviews
+          </li>
+          <li>
+           <i class="fas fa-user"></i>&nbsp;3 Students
+          </li>
+          <li>
+           <i class="fas fa-play-circle"></i>
+           &nbsp;{{ vendorCountCourses }} Courses
+          </li>
+         </ul>
+        </div>
        </div>
+
        <div class="col-lg-8">
         <label>
          <h4>
@@ -427,29 +439,30 @@
        <p class="section-9-header">Reviews</p>
       </div>
      </div>
+
      <div class="row">
       <div class="col-lg-12">
-       <ul>
-        <li v-for="(value_a, index_a) in courseReview" :key="index_a">
-         <div class="col-lg-12 row">
-          <div class="col-lg-5 row">
-           <div class="col-lg-4">
-            <div class="reviewer-details clearfix">
-             <div class="reviewer-img float-left">
-              <img src="https://demo.academy-lms.com/addon/uploads/user_image/6.jpg" width="46" alt />
-             </div>
-            </div>
-           </div>
-           <div class="col-lg-8">
-            <div class="review-time">
-             <div class="time">{{ formatDate(value_a.create_at) }}</div>
-             <div class="reviewer-name">{{ value_a.name }}</div>
-            </div>
-           </div>
+       <div class="row" v-for="(value_a, index_a) in courseReview" :key="index_a">
+        <div class="col-lg-12">
+         <div class="row">
+
+          <div class="col-4 col-lg-2">
+           <img src="https://demo.academy-lms.com/addon/uploads/user_image/6.jpg" width="46" alt />
           </div>
-          <div class="col-lg-7">
-           <div class="review-details">
-            <div class="rating">
+
+          <div class="col-4 col-lg-4">
+           <p>
+            {{ value_a.name }}<br>
+            {{ formatDate(value_a.create_at) }}
+            </p>
+          </div>
+
+          <div class="col-4 col-lg-6">
+           <div class="row">
+            <div class="col-12">
+             <div class="comment">{{ value_a.comment }}</div>
+            </div>
+            <div class="col-12">
              <div v-for="(value_b, index_b) in 5" :key="index_b" style="display:inline">
               <i
                class="fas fa-star filled"
@@ -457,12 +470,12 @@
               ></i>
              </div>
             </div>
-            <div class="review-text star-dead">{{ value_a.comment }}</div>
            </div>
           </div>
+
          </div>
-        </li>
-       </ul>
+        </div>
+       </div>
       </div>
      </div>
     </div>
@@ -470,6 +483,9 @@
   </div>
  </section>
 </template>
+
+
+
 
 <script>
  import moment from "moment";
@@ -644,16 +660,16 @@
     /* get course comment */
 
     /*     axios
-                                      .get(`/admin/user_vendor/vendor_course_comment/135/116`)
-                                      .then(res => {
-                                       console.log(res);
-                                       this.courseReview = res.data;
-                                      })
-                                      .catch(err => {
-                                       console.error(err);
-                                       alert("Error! Contact IT Department.");
-                                      });
-                                  */
+                                                                   .get(`/admin/user_vendor/vendor_course_comment/135/116`)
+                                                                   .then(res => {
+                                                                    console.log(res);
+                                                                    this.courseReview = res.data;
+                                                                   })
+                                                                   .catch(err => {
+                                                                    console.error(err);
+                                                                    alert("Error! Contact IT Department.");
+                                                                   });
+                                                               */
 
     /* get course requirement */
 
@@ -793,6 +809,10 @@
    padding: 0px;
    width: 100%;
   }
+
+  /* .otc-md-size {
+                             text-align: center;
+                            } */
  }
 
  @media (max-width: 767.98px) {
@@ -805,6 +825,14 @@
   .video-tutorials {
    display: none;
   }
+
+  .md-text-center {
+   text-align: center !important;
+  }
+
+  /* .md-text-right {
+                      text-align: right !important;
+                     } */
  }
 
  .custom-card {
