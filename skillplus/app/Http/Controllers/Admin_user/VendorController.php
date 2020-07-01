@@ -24,6 +24,7 @@ use App\Models\ContentPart;
 use App\SaveAnswer;
 use App\Models\User;
 use App\CourseReview;
+use App\Models\ContentComment;
 
 class VendorController extends Controller
 {
@@ -125,9 +126,29 @@ class VendorController extends Controller
 
     public function showCourse($id)
     {
-        $getData = Content::where(['id'=>$id])->first();
-        return $getData;
+        $getContent = Content::where(['id'=>$id])->first();
+        $rate = ContentRate::select("user_id", "rate")->where(["content_id" => $id])->get();
+
+        $data = array();
+        $comment = array();  
+        
+        foreach($rate as $key_a => $value_a) {
+         $user = User::where(["id" => $value_a->user_id])->first();
+         $getComment = ContentComment::where(["user_id" => $value_a->user_id])->first();
+
+          $comment["user_comment"][$key_a]["comment"] = $getComment["comment"];
+          $comment["user_comment"][$key_a]["create_at"] = $getComment["create_at"];
+          $comment["user_comment"][$key_a]["name"] = $user["name"];
+          $comment["user_comment"][$key_a]["rate"] = $value_a->rate;
+
+        }
+
+        $data["content"] = $getContent;
+        $data["content"]["user_comment"] = $comment["user_comment"];
+
+        return response()->json($data["content"]);
     }
+
 
     public function getRatings($id)
     {
@@ -849,10 +870,38 @@ echo json_encode($output);
 
      // $data = Content::where(["tag" => $id])->select("id as content_id")->get();
 
-     $data = Content::leftJoin("tbl_contents_part as contents_part", function($join) {
+     /* $data = Content::leftJoin("tbl_contents_part as contents_part", function($join) {
       $join->on('contents_part.content_id', '=', 'tbl_contents.id');
-    })->select("contents_part.title", "contents_part.create_at", "contents_part.duration", "contents_part.price", "contents_part.free")->where(["tag" => $id])->limit(5)->get();
+    })->select("contents_part.title", "contents_part.create_at", "contents_part.duration", "contents_part.price", "contents_part.free")->where(["tag" => $id])->limit(5)->get(); */
 
-     return response()->json($data);
+    $content = Content::where(["tag" => $id])->limit(5)->get();
+    
+    $row = array();
+    
+    foreach($content as $key_a => $value_a) {
+     $row[$key_a]["title"] = $value_a->title;
+     $row[$key_a]["create_at"] = $value_a->create_at;
+     $row[$key_a]["price_post"] = $value_a->price_post;
+
+     $contentRate = ContentRate::where(['content_id'=>$value_a->id])->get();
+     $userSold = Sell::where('content_id', $value_a->id)->get();
+
+     $rate = 0;
+     $average = 0;
+     $length = count($contentRate);
+     $length = ($length == 0) ? 1 : $length;
+
+     foreach($contentRate as $key_b => $value_b) {
+      $rate = $rate + $value_b->rate;
+     }
+
+     $average = ($rate/$length);
+     //overall rate
+     $row[$key_a]["rate"] = ceil($average);
+     //vendor student sold
+     $row[$key_a]["sold"] = count($userSold);
+    }
+
+     return response()->json($row);
     }
 }
