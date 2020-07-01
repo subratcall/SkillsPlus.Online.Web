@@ -341,16 +341,16 @@
                         </div>
                         <div class="col-md-10 col-xs-12 tab-con">
                             <ul id="accordion" class="cat-filters-li accordion accordion-s">
-                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Home</a></li>
-                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/courses">Courses</a></li>
-                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/news">News</a></li>
-                                <li class="has-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/">Info Pages</a>
+                                <li class="no-child" onmouseover="" onmouseleave="this.style.borderColor='transparent'"><a href="/">Home</a></li>
+                                <li class="no-child" onmouseover="" onmouseleave="this.style.borderColor='transparent'"><a href="/courses">Courses</a></li>
+                                <li class="no-child" onmouseover="" onmouseleave="this.style.borderColor='transparent'"><a href="/news">News</a></li>
+                                <li class="has-child" onmouseover="" onmouseleave="this.style.borderColor='transparent'"><a href="/">Info Pages</a>
                                     <ul>                                      
-                                        <li onmouseover="this.style.borderColor='{{{ $child->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/aboutus/">About Us</a></li>
-                                        <li onmouseover="this.style.borderColor='{{{ $child->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/privacy/">Privacy Policy</a></li>
+                                        <li onmouseover="" onmouseleave="this.style.borderColor='transparent'"><a href="/aboutus/">About Us</a></li>
+                                        <li onmouseover="" onmouseleave="this.style.borderColor='transparent'"><a href="/privacy/">Privacy Policy</a></li>
                                     </ul>
                                 </li>
-                                <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="/contactus">Contact Us</a></li>
+                                <li class="no-child" onmouseover="" onmouseleave="this.style.borderColor='transparent'"><a href="/contactus">Contact Us</a></li>
                                 {{-- @foreach($setting['category'] as $mainCategory)
                                     @if(count($mainCategory->childs)>0)
                                         <li class="has-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color or '' }}}'" onmouseleave="this.style.borderColor='transparent'"><a href="javascript:void(0);"><img src="{{{$mainCategory->image or ''}}}" />{{{$mainCategory->title or ''}}}</a>
