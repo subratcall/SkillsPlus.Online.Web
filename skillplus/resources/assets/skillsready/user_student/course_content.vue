@@ -343,7 +343,7 @@
           </div>Average rating
          </div>
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-9 margin-top-next">
          <div class="individual-rating">
           <ul>
            <li>
@@ -446,18 +446,18 @@
         <div class="col-lg-12">
          <div class="row">
 
-          <div class="col-4 col-lg-2">
+          <div class="col-4 col-sm-2">
            <img src="https://demo.academy-lms.com/addon/uploads/user_image/6.jpg" width="46" alt />
           </div>
 
-          <div class="col-4 col-lg-4">
+          <div class="col-4 col-sm-2">
            <p>
             {{ value_a.name }}<br>
             {{ formatDate(value_a.create_at) }}
             </p>
           </div>
 
-          <div class="col-4 col-lg-6">
+          <div class="col-4 col-sm-6">
            <div class="row">
             <div class="col-12">
              <div class="comment">{{ value_a.comment }}</div>
@@ -810,14 +810,15 @@
    width: 100%;
   }
 
-  /* .otc-md-size {
-                             text-align: center;
-                            } */
  }
 
  @media (max-width: 767.98px) {
   .video-tutorials {
    display: none;
+  }
+  
+   .md-text-center {
+   text-align: center !important;
   }
  }
 
@@ -830,9 +831,6 @@
    text-align: center !important;
   }
 
-  /* .md-text-right {
-                      text-align: right !important;
-                     } */
  }
 
  .custom-card {
