@@ -3,7 +3,7 @@
      <style>
       .loading-modal {
        position: fixed;
-       background-color: rgba(0, 0, 0, 0.534);
+       background-color: rgba(255, 255, 255, 0.459);
        width: 100%;
        height: 100%;
        top: 0;
@@ -12,7 +12,7 @@
       }
 
       .loading-modal .loading-gif {
-       background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/disp/35771931234507.564a1d2403b3a.gif");
+       background-image: url("https://i.ya-webdesign.com/images/transparent-bars-loading-1.gif");
        background-repeat: no-repeat;
        width: 100%;
        height: 100%;
