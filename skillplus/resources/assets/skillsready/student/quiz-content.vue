@@ -2,13 +2,11 @@
  <div class="row">
   <div class="col-12">
    <form
-    method="post"
     id="form"
-    :action="'/admin/user_student/student_quiz_save_answers/'+id+'/'+lid"
+    method="post"
+    :action="`/admin/user_student/student_quiz_save_answers/${lid}/${id}`"
    >
     <div class="row" v-for="(value_a, index_a) in questions" :key="index_a">
-     <input type="hidden" name="question_id" :value="value_a.id" />
-
      <div v-show="page == index_a">
       <div class="col-md-12 question-and-answer">
        <div class="row">
@@ -30,64 +28,53 @@
         </div>
         <div class="col-lg-6">
          <div class="row col-md-12">
-          <h2 class="control-label">Question No. {{ index_a + 1 }} {{ value_a.id }}</h2>
+          <h2 class="control-label">Question No. {{ index_a + 1 }}</h2>
           <p class="title-question">{{ value_a.question }}</p>
          </div>
 
          <div v-if="value_a.type == 'CHECKBOX'">
           <div v-for="(value_b, index_b) in value_a.answer" :key="index_b">
-           <ul>
-            <li>{{ value_b.description }}</li>
-           </ul>
-          </div>
-
-          <div
-           class="col-xs-12"
-           v-for="(value_b, index_b) in options"
-           @click="answer($event)"
-           :key="index_b"
-          >
-           <!-- <div class="col-xs-2">
+           <div class="col-xs-2">
             <input
              ref="element"
              @change="answer($event)"
              class="form-check-input"
              type="checkbox"
              id="checkbox"
-             :value="value_b.description"
-             name="input[]"
+             :value="value_b.id"
+             :name="'qid-'+value_a.id+'_t-'+value_a.type+'_input[]'"
             />
            </div>
-
-
            <div class="col-xs-10">
-            <label class="form-check-label" for="defaultCheck1">{{ value_b }}</label>
-           </div>-->
+            <label class="form-check-label" for="defaultCheck1">{{ value_b.description }}</label>
+           </div>
           </div>
          </div>
 
          <div v-if="value_a.type == 'MULTIPLE CHOICE'">
-          <div v-for="(value_b, index_b) in options" :key="index_b">
+          <div v-for="(value_b, index_b) in value_a.answer" :key="index_b">
            <input
             ref="element"
             @change="answer($event)"
             class="form-check-input"
             type="radio"
-            :value="value_b"
-            name="input[]"
+            :value="value_b.id"
+            :name="'qid-'+value_a.id+'_t-'+value_a.type+'_input[]'"
            />
-           <label class="form-check-label" :for="value_a">{{ value_b }}</label>
+           <label class="form-check-label" :for="value_a">{{ value_b.description }}</label>
           </div>
          </div>
 
          <div v-if="value_a.type == 'SHORT ANSWER'">
-          <input
-           ref="element"
-           @keyup="answer($event)"
-           type="text"
-           class="form-control"
-           name="input[]"
-          />
+          <div v-for="(value_b, index_b) in value_a.answer" :key="index_b">
+           <input
+            ref="element"
+            @keyup="answer($event)"
+            type="text"
+            class="form-control"
+            :name="'qid-'+value_a.id+'_t-'+value_a.type+'_input[]'"
+           />
+          </div>
          </div>
 
          <div v-if="value_a.type == 'PARAGRAPH'">
@@ -97,35 +84,23 @@
            type="textarea"
            class="form-control margin-top"
            rows="4"
-           :name="'input[]'"
+           :name="'qid-'+value_a.id+'_t-'+value_a.type+'_input[]'"
           ></textarea>
          </div>
 
          <div v-if="value_a.type == 'SWITCH'">
-          <label class="switch">
-           <input
-            ref="element"
-            type="checkbox"
-            class="input-sw"
-            name="input[]"
-            @change="answer($event)"
-           />
-           <span class="button button-primary" @click="switchEffect($event)">True</span>
-          </label>
-
-          <!-- <input type="checkbox" class="switch" v-model="data[index_a][0]" /> -->
-
-          <!-- <input
-                      type="checkbox"
-                      :id="'sws_'+index_a"
-                      :name="'sws_'+index_a"
-                      checked
-                      data-toggle="toggle"
-                      data-onstyle="primary"
-                      data-offstyle="danger"
-                    />
-                    <input type="hidden" name="type" value="SWITCH" />
-          <input type="hidden" name="qid" :value="value_a.id" />-->
+          <div v-for="(value_b, index_b) in value_a.answer" :key="index_b">
+           <label class="switch">
+            <input
+             ref="element"
+             type="checkbox"
+             class="input-sw"
+             :name="'qid-'+value_a.id+'_t-'+value_a.type+'_input[]'"
+             @change="answer($event)"
+            />
+            <span class="button button-primary" @click="switchEffect($event)">True</span>
+           </label>
+          </div>
          </div>
         </div>
        </div>
@@ -192,6 +167,8 @@
 </style>
 
 <script>
+ import Modal from "../components/Modal";
+
  export default {
   data() {
    return {
@@ -199,7 +176,8 @@
     questions: [],
     btnToggle: true,
     input: {},
-    options: []
+    options: [],
+    question_id: 0
    };
   },
   props: {
@@ -226,22 +204,13 @@
     this.$events.fire("display-hint", hint);
    },
 
-   save() {
+   submitAnswer() {
     let form = document.getElementById("form");
     let input = new FormData(form);
 
-    axios({
-     url: `/admin/user_student/student_quiz_save_answers/${this.id}/${this.lid}`,
-     method: "post",
-     data: input
-    })
-     .then(res => {
-      console.log(res);
-     })
-     .catch(err => {
-      console.log(err);
-     });
+    form.submit();
    },
+
    answer(event) {
     let self = this;
 
@@ -263,6 +232,14 @@
     /*checkbox not available*/
 
     if (element.type == "radio") {
+     if (element.checked == true) {
+      self.$events.fire("answered", this.page);
+     } else if (element.checked == false) {
+      self.$events.fire("no-answered", this.page);
+     }
+    }
+
+    if (element.type == "checkbox") {
      if (element.checked == true) {
       self.$events.fire("answered", this.page);
      } else if (element.checked == false) {
@@ -307,7 +284,10 @@
     this.loadData();
    },
    "submit-answer"() {
-    this.save();
+    this.submitAnswer();
+   },
+   "save-answer"() {
+    console.log("save_answer");
    }
   },
   mounted() {
