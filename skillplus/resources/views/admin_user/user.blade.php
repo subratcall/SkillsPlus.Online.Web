@@ -32,6 +32,8 @@ Courses Overview
 @section('page')
 <div class="row">
     <div class="col-xs-6 col-md-3 col-sm-6 text-center">
+
+     {{--
         <!-- <section class="card bg-warning">
                 <div class="card-body">
                     <div class="widget-summary">
@@ -106,6 +108,7 @@ Courses Overview
                 </div>
             </div>
         </section> -->
+        --}}
 </div>
 </div>
 <section class="card">
