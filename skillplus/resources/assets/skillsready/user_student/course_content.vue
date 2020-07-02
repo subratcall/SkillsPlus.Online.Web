@@ -49,7 +49,9 @@
      <div class="title">
       <h1>{{ course.title }}</h1>
       <h6>{{ course.subtitle }}</h6>
+     </div>
 
+     <div class="col-xs-6">
       <div class="raty-product-section">
        <div v-for="(value, index) in 5" :key="index" style="display:inline">
         <i
@@ -61,51 +63,10 @@
        <span class="raty-text">{{ courseRate }} ratings</span>
        <span class>{{ countCourseSold }} students / vendors purchased this book</span>
       </div>
+     </div>
+     <div class="col-xs-12">
       <div class="raty-product-section">
        <span class>Vendor: {{ vendorName }}</span>
-      </div>
-     </div>
-    </div>
-   </div>
-  </div>
-
-  <div class="row video-tablet margin-top-next">
-   <div class="col-lg-12">
-    <div class="row">
-     <div class="col-lg-12">
-      <video
-       class="padding-top video"
-       id="video"
-       width="100%"
-       controls
-       autoplay="false"
-       poster="https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
-      >
-       <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm />
-       <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg />
-       <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4 />
-       <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
-      </video>
-      <div class="video-details">
-       <button class="button buy-now">Take Quiz</button>
-       <br />
-       <div class="video-descriptions">
-        <p>Updates:</p>
-        <ul>
-         <li>
-          <i class="far fa-file-video"></i>&nbsp;Hours On demand videos
-         </li>
-         <li>
-          <i class="far fa-file"></i>&nbsp;Lessons
-         </li>
-         <li>
-          <i class="far fa-compass"></i>&nbsp;lifetime access
-         </li>
-         <li>
-          <i class="fas fa-mobile-alt"></i>&nbsp;on mobile and tv
-         </li>
-        </ul>
-       </div>
       </div>
      </div>
     </div>
@@ -130,7 +91,7 @@
     <div class="row">
      <div class="col-lg-6 offset-lg-1 section-2">
       Curriculum for this course
-      <p style="display:inline; font-size:14px"></p>
+      <p style="display:inline; font-size:14px">17 Lessons 23:47:22 Hours</p>
      </div>
     </div>
    </div>
@@ -141,28 +102,21 @@
     <div class="row">
      <div class="col-lg-6 offset-lg-1 section-3" v-for="(value, index) in quizList" :key="index">
       <div class="header-custom-border">
-       <div class="row">
-        <div class="col-lg-12">
-         <a
-          class="btn"
-          data-toggle="collapse"
-          :data-target="'#collapse_'+index"
-          style="display:inline; font-size:15px"
-         >
-          <i class="fas fa-plus" style="color: #007791"></i>
-          &nbsp;&nbsp; {{ value.title }}
-         </a>
-         <div class="float-right">
-          <i class="fa fa-check-circle video-done text-right" aria-hidden="true"></i>
-         </div>
-        </div>
-       </div>
+       <a
+        class="btn"
+        data-toggle="collapse"
+        :data-target="'#collapse_'+index"
+        style="display:inline; font-size:15px"
+       >
+        <i class="fas fa-plus" style="color: #007791"></i>
+        &nbsp;&nbsp; {{ value.title }}
+       </a>
       </div>
 
       <div :id="'collapse_'+index" class="collapse">
        <div class="list-custom-border">
         <a href="javascript:void(0)" @click="takeQuiz(value.id)">
-         <!-- <i class="fas fa-play-circle"></i> -->
+         <i class="fas fa-play-circle"></i>
          &nbsp;&nbsp;{{ value.title }}
         </a>
        </div>
@@ -206,58 +160,36 @@
        <li class="col-lg-12" v-for="(value, index) in courseRelatedList" :key="index">
         <div class="row">
          <div class="col-lg-3">
-          <!-- <b>{{ value.duration }} Hours</b> -->
-          <video
-           class="padding-top video"
-           id="video"
-           width="100%"
-           controls
-           autoplay="false"
-           poster="https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
-          >
-           <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm />
-           <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg />
-           <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4 />
-           <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
-          </video>
+          <b>{{ value.duration }}</b>
          </div>
-
-         <div class="col-lg-4 row">
+         <div class="col-lg-5 row">
           <div class="col-lg-12">
-           <div class="row">
-            <div class="col-lg-12 md-text-center">
-             <a
-              href="https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
-             >{{ value.title }}</a>
-            </div>
-           </div>
-           <div class="row">
-            <div class="col-lg-12 md-text-center">
-             <div class="updated-time">{{ formatDate(value.create_at) }}</div>
-            </div>
-           </div>
+           <a
+            href="https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
+           >{{ value.title }}</a>
+          </div>
+          <div class="col-lg-12">
+           <div class="updated-time">{{ formatDate(value.create_at) }}</div>
           </div>
          </div>
-
          <div class="col-lg-3 row">
-          <div class="col-lg-6 md-text-center">
+          <div class="col-lg-6">
            <span class="item-rating">
             <i class="fas fa-star star-live"></i>
-            <span class="d-inline-block average-rating">{{ value.rate }}</span>
+            <span class="d-inline-block average-rating">4</span>
            </span>
           </div>
-          <div class="col-lg-6 md-text-center">
+          <div class="col-lg-6">
            <span class="enrolled-">
             <i class="far fa-user"></i>
-            {{ value.sold }}
+            1
            </span>
           </div>
          </div>
-
-         <div class="col-lg-2 float-sm-center float-md-right md-text-center">
+         <div class="col-lg-1 text-right">
           <span class="item-price">
            <span class="current-price">
-            <b>{{ (value.price_post) ? value.price_post+' $' : "Not Available" }}</b>
+            <b>{{ (value.free == 0) ? value.price : 'Free'}}</b>
            </span>
           </span>
          </div>
@@ -280,28 +212,23 @@
       </div>
       <div class="col-lg-12 row">
        <div class="col-lg-4 vendor-profile">
-        <div class="col-xs-6">
-         <img
-          src="https://demo.academy-lms.com/addon/uploads/user_image/1.jpg"
-          class="rounded-circle"
-         />
-        </div>
-        <div class="col-xs-6">
-         <ul>
-          <li>
-           <i class="fas fa-comment"></i>&nbsp;5 Reviews
-          </li>
-          <li>
-           <i class="fas fa-user"></i>&nbsp;3 Students
-          </li>
-          <li>
-           <i class="fas fa-play-circle"></i>
-           &nbsp;{{ vendorCountCourses }} Courses
-          </li>
-         </ul>
-        </div>
+        <img
+         src="https://demo.academy-lms.com/addon/uploads/user_image/1.jpg"
+         class="rounded-circle"
+        />
+        <ul>
+         <li>
+          <i class="fas fa-comment"></i>&nbsp;5 Reviews
+         </li>
+         <li>
+          <i class="fas fa-user"></i>&nbsp;3 Students
+         </li>
+         <li>
+          <i class="fas fa-play-circle"></i>
+          &nbsp;{{ vendorCountCourses }} Courses
+         </li>
+        </ul>
        </div>
-
        <div class="col-lg-8">
         <label>
          <h4>
@@ -363,7 +290,7 @@
            </li>
            <li>
             <div class="progress">
-             <div class="progress-bar" :style="'width: '+studentRate.twostar+'%'"></div>
+              <div class="progress-bar" :style="'width: '+studentRate.twostar+'%'"></div>
             </div>
             <div>
              <span class="rating">
@@ -439,43 +366,41 @@
        <p class="section-9-header">Reviews</p>
       </div>
      </div>
-
      <div class="row">
       <div class="col-lg-12">
-       <div class="row" v-for="(value_a, index_a) in courseReview" :key="index_a">
-        <div class="col-lg-12">
-         <div class="row">
-
-          <div class="col-4 col-lg-2">
-           <img src="https://demo.academy-lms.com/addon/uploads/user_image/6.jpg" width="46" alt />
-          </div>
-
-          <div class="col-4 col-lg-4">
-           <p>
-            {{ value_a.name }}<br>
-            {{ formatDate(value_a.create_at) }}
-            </p>
-          </div>
-
-          <div class="col-4 col-lg-6">
-           <div class="row">
-            <div class="col-12">
-             <div class="comment">{{ value_a.comment }}</div>
-            </div>
-            <div class="col-12">
-             <div v-for="(value_b, index_b) in 5" :key="index_b" style="display:inline">
-              <i
-               class="fas fa-star filled"
-               :class="{'star-live': (value_b <= value_a.rate), 'star-dead': (value_b >= value_a.rate)}"
-              ></i>
+       <ul>
+        <li v-for="(value, index) in courseReview" :key="index">
+         <div class="col-lg-12 row">
+          <div class="col-lg-5 row">
+           <div class="col-lg-4">
+            <div class="reviewer-details clearfix">
+             <div class="reviewer-img float-left">
+              <img src="https://demo.academy-lms.com/addon/uploads/user_image/6.jpg" width="46" alt />
              </div>
             </div>
            </div>
+           <div class="col-lg-8">
+            <div class="review-time">
+             <div class="time">{{ formatDate(value.create_at) }}</div>
+             <div class="reviewer-name">{{ value.user_id }}</div>
+            </div>
+           </div>
           </div>
-
+          <div class="col-lg-7">
+           <div class="review-details">
+            <div class="rating">
+             <i class="fas fa-star filled star-live"></i>
+             <i class="fas fa-star filled star-live"></i>
+             <i class="fas fa-star filled star-live"></i>
+             <i class="fas fa-star filled star-live"></i>
+             <i class="fas fa-star star-live"></i>
+            </div>
+            <div class="review-text star-dead">{{ value.comment }}</div>
+           </div>
+          </div>
          </div>
-        </div>
-       </div>
+        </li>
+       </ul>
       </div>
      </div>
     </div>
@@ -483,9 +408,6 @@
   </div>
  </section>
 </template>
-
-
-
 
 <script>
  import moment from "moment";
@@ -526,7 +448,7 @@
     value = new Date(value);
     return value == null ? "" : moment(value, "YYYY-MM-DD").format(fmt);
    },
-
+   
    getAbout(id) {
     axios
      .get(`/admin/user_vendor/vendor_course_vendor/${id}`)
@@ -570,7 +492,6 @@
       self.requirements = res.data.requirements.split("|");
       self.getAbout(res.data.user_id);
       self.getCourseTag(res.data.tag);
-      self.courseReview = res.data.user_comment;
      })
      .catch(err => {
       console.log(err);
@@ -659,17 +580,16 @@
 
     /* get course comment */
 
-    /*     axios
-                                                                   .get(`/admin/user_vendor/vendor_course_comment/135/116`)
-                                                                   .then(res => {
-                                                                    console.log(res);
-                                                                    this.courseReview = res.data;
-                                                                   })
-                                                                   .catch(err => {
-                                                                    console.error(err);
-                                                                    alert("Error! Contact IT Department.");
-                                                                   });
-                                                               */
+    axios
+     .get(`/admin/user_vendor/vendor_course_comment/135/116`)
+     .then(res => {
+      console.log(res);
+      this.courseReview = res.data;
+     })
+     .catch(err => {
+      console.error(err);
+      alert("Error! Contact IT Department.");
+     });
 
     /* get course requirement */
 
@@ -683,51 +603,59 @@
       alert("Error! Contact IT Department.");
      });
 
-    /* get individual rating */
 
-    axios.get(`/admin/user_vendor/ir/${id}`).then(res => {
-     let data = res.data;
-     let onestar = 0;
-     let twostar = 0;
-     let threestar = 0;
-     let fourstar = 0;
-     let fivestar = 0;
+     /* get individual rating */
 
-     data.forEach(item => {
-      if (item.rate == 1) {
-       onestar += item.rate;
-      } else if (item.rate == 2) {
-       twostar += item.rate;
-      } else if (item.rate == 3) {
-       threestar += item.rate;
-      } else if (item.rate == 4) {
-       fourstar += item.rate;
-      } else if (item.rate == 5) {
-       fivestar += item.rate;
-      }
+     axios.get(`/admin/user_vendor/ir/${id}`).then((res) => {
+      
+      let data = res.data;
+      let onestar = 0;
+      let twostar = 0;
+      let threestar = 0;
+      let fourstar = 0;
+      let fivestar = 0;
+
+      data.forEach(item => {
+
+       if (item.rate == 1) {
+        onestar += item.rate;
+       }
+       else if (item.rate == 2) {
+        twostar += item.rate;
+       }
+       else if (item.rate == 3) {
+        threestar += item.rate;
+       }
+       else if (item.rate == 4) {
+        fourstar += item.rate;
+       }
+       else if (item.rate == 5) {
+        fivestar += item.rate;
+       }
+      });
+
+       onestar = onestar/5;
+       onestar = (onestar/5)*100;
+
+       twostar = twostar/5;
+       twostar = (twostar/5)*100;
+
+       threestar = threestar/5;
+       threestar = (threestar/5)*100;
+
+       fourstar = fourstar/5;
+       fourstar = (fourstar/5)*100;
+
+       fivestar = fivestar/5;
+       fivestar = (fivestar/5)*100;
+
+       self.studentRate.onestar = onestar;
+       self.studentRate.twostar = twostar;
+       self.studentRate.threestar = threestar;
+       self.studentRate.fourstar = fourstar;
+       self.studentRate.fivestar = fivestar;
      });
-
-     onestar = onestar / 5;
-     onestar = (onestar / 5) * 100;
-
-     twostar = twostar / 5;
-     twostar = (twostar / 5) * 100;
-
-     threestar = threestar / 5;
-     threestar = (threestar / 5) * 100;
-
-     fourstar = fourstar / 5;
-     fourstar = (fourstar / 5) * 100;
-
-     fivestar = fivestar / 5;
-     fivestar = (fivestar / 5) * 100;
-
-     self.studentRate.onestar = onestar;
-     self.studentRate.twostar = twostar;
-     self.studentRate.threestar = threestar;
-     self.studentRate.fourstar = fourstar;
-     self.studentRate.fivestar = fivestar;
-    });
+     
    }
   },
   mounted() {
@@ -740,57 +668,9 @@
 </script>
 
 <style scoped>
- @media (max-width: 1980px) {
+ @media (max-width: 1199.98px) {
   .video-tutorials {
-   right: 5% !important;
-   width: 400px !important;
-  }
-
-  .video-tablet {
    display: none;
-  }
- }
-
- @media (max-width: 1600px) {
-  .video-tutorials {
-   right: 4% !important;
-   width: 350px !important;
-  }
- }
-
- @media (max-width: 1300px) {
-  .video-tutorials {
-   right: 1% !important;
-   width: 350px !important;
-  }
-
-  .title {
-   margin-left: -20px !important;
-   width: 400px !important;
-  }
- }
-
- @media (max-width: 1200px) {
-  .video-tutorials {
-   right: 0.5% !important;
-   width: 40% !important;
-  }
-
-  .title {
-   margin-left: -20px !important;
-   width: 400px !important;
-  }
- }
-
- @media (max-width: 1180.98px) {
-  .video-tutorials {
-   right: 0.1% !important;
-   width: 38% !important;
-  }
-
-  .title {
-   margin-left: -80px !important;
-   width: 400px !important;
   }
  }
 
@@ -798,21 +678,6 @@
   .video-tutorials {
    display: none;
   }
-
-  .title {
-   margin-left: -80px !important;
-   width: 500px;
-  }
-
-  .video-tablet {
-   display: inline;
-   padding: 0px;
-   width: 100%;
-  }
-
-  /* .otc-md-size {
-                             text-align: center;
-                            } */
  }
 
  @media (max-width: 767.98px) {
@@ -825,14 +690,6 @@
   .video-tutorials {
    display: none;
   }
-
-  .md-text-center {
-   text-align: center !important;
-  }
-
-  /* .md-text-right {
-                      text-align: right !important;
-                     } */
  }
 
  .custom-card {
@@ -927,14 +784,7 @@
   border-left: #dedfe0 solid 1px;
   border-right: #dedfe0 solid 1px;
   border-bottom: #dedfe0 solid 1px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 10px;
- }
-
- .video-done {
-  color: black;
-  font-size: 18px;
+  padding: 10px 0px;
  }
 
  .list-custom-border {
@@ -1037,7 +887,7 @@
  }
 
  .section-6 .item-price {
-  font-size: 14px;
+  font-size: 18px;
  }
 
  .section-7-header {
@@ -1091,7 +941,7 @@
  }
 
  .video-tutorials video {
-  width: 100%;
+  width: 400px;
   height: 300px;
   border: 10px solid white;
  }
@@ -1135,7 +985,6 @@
   background-color: #ec5252;
   color: #ffffff;
   font-weight: bold;
-  width: 100% !important;
  }
 
  .video-descriptions {

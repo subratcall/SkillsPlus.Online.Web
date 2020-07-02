@@ -162,7 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -235,7 +235,6 @@ return [
         'PaytmWallet' => Anand\LaravelPaytmWallet\Facades\PaytmWallet::class,
         /* 'Payumoney' => Riazxrazor\Payumoney\PayumoneyFacade::class,
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class, */
-        'PayPal' => Srmklive\PayPal\Facades\PayPal::class
     ],
 
 ];

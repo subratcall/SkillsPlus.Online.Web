@@ -986,12 +986,3 @@ Route::group(['prefix'=>'video'],function (){
     Route::get('stream/{id}','VideoController@stream');
     Route::get('download/{id}','VideoController@download');
 });
-
-#paypal
-Route::get('payment', 'PayPalController@payment')->name('payment');
-Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');
-Route::get('payment/success', 'PayPalController@success')->name('payment.success');
-
-Route::get('ppal', function () {
-    return view('products.welcome');
-});

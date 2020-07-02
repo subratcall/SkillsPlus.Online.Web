@@ -422,9 +422,7 @@ class UserController extends Controller
         }
 
         //dd($tenDay);
-        $userMetas['avatar'] = 'dfdsfsdf';
-        $current_rate['description'] = 'dfdsfsdf';
-        $after_rate['description'] = 'dfdsfsdf';
+
         return view('user.dashboard',[
             'user'=>$user,
             'meta'=>$userMetas,
