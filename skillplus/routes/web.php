@@ -139,6 +139,11 @@ Route::group(['prefix' => 'admin'],function (){
             
             
             Route::post('student_quiz_save_answers/{lid}/{id}','Admin_user\VendorController@saveAnswers');
+            Route::get('product/{cid}', 'Admin_user\ContentController@product');
+
+            /* Full Lesson Course */
+            Route::get("lesson/{cid}", 'Admin_user\ContentController@readFullLesson');
+
 
         });
 
@@ -964,7 +969,7 @@ Route::group(['prefix'=>'api'],function (){
     Route::get('','Api\ApiController@functionList');
     Route::get('index','Api\ApiController@functionIndex');
     Route::group(['prefix'=>'content'],function (){
-        Route::get('last/{last?}','Api\ApiController@contents');
+        Route::get('last/{last}','Api\ApiController@contents');
     });
     Route::get('ParentCategories','CourseController@getParentCategory');
 

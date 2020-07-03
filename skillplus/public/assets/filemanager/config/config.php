@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+
 $version = "9.14.0";
 session_start();
 

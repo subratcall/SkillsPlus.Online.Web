@@ -136,6 +136,7 @@
    </div>
   </div>
 
+<!--
   <div class="row">
    <div class="col-lg-12">
     <div class="row">
@@ -162,7 +163,6 @@
       <div :id="'collapse_'+index" class="collapse">
        <div class="list-custom-border">
         <a href="javascript:void(0)" @click="takeQuiz(value.id)">
-         <!-- <i class="fas fa-play-circle"></i> -->
          &nbsp;&nbsp;{{ value.title }}
         </a>
        </div>
@@ -171,6 +171,47 @@
     </div>
    </div>
   </div>
+  -->
+
+   <div class="row">
+   <div class="col-lg-12">
+    <div class="row">
+     <div class="col-lg-6 offset-lg-1 section-3" v-for="(value, index) in content.parts" :key="index">
+      <div class="header-custom-border">
+       <div class="row">
+
+        <div class="col-lg-12">
+         <a
+          class="btn"
+          data-toggle="collapse"
+          :data-target="'#collapse_'+index"
+          style="display:inline; font-size:15px"
+         >
+          <i class="fas fa-plus" style="color: #007791"></i>
+          &nbsp;&nbsp; {{ value.title }}
+         </a>
+         <div class="float-right">
+          <i class="fa fa-check-circle video-done text-right" aria-hidden="true"></i>
+         </div>
+        </div>
+
+       </div>
+      </div>
+
+      <div :id="'collapse_'+index" class="collapse">
+       <div class="list-custom-border">
+       <div v-html="value.description"></div>
+       <div class="text-right">
+       <a :href="'/admin/user_student/lesson/'+value.id">Read full lesson</a>
+       </div>
+       </div>
+
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+
 
   <div class="row">
    <div class="col-lg-12">
@@ -497,9 +538,9 @@
     courseRate: 0,
     courseUnrate: 0,
     countCourseSold: 0,
+    content: [],
     courseWhatWillLearn: [],
     vendorName: "",
-    quizList: [],
     requirements: [],
     urlid: "",
     description: "",
@@ -635,10 +676,16 @@
 
     /* get course quiz list  */
 
+
+    /* ---------------- ON WORK ---------------*/
+
     axios
-     .get(`/admin/user_student/student_lesson_get_list/${id}`)
+     .get(`/admin/user_student/product/${id}`)
      .then(res => {
-      this.quizList = res.data;
+
+      this.content.parts = res.data.parts;
+
+      console.log(res);
      })
      .catch(err => {
       console.error(err);
@@ -735,6 +782,10 @@
    this.urlid = id.substring(id.lastIndexOf("/") + 1);
 
    this.get();
+
+   var loading = document.querySelector(".loading-modal");
+  
+  loading.style.display = "none";
   }
  };
 </script>

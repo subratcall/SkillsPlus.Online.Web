@@ -30,6 +30,26 @@
    position: relative;
    top: 4px;
   }
+
+  .loading-modal {
+       position: fixed;
+       background-color: rgba(255, 255, 255, 0.459);
+       width: 100%;
+       height: 100%;
+       top: 0;
+       left: 0;
+       z-index: 9999999;
+      }
+
+      .loading-modal .loading-gif {
+       background-image: url("https://i.ya-webdesign.com/images/transparent-bars-loading-1.gif");
+       background-repeat: no-repeat;
+       width: 100%;
+       height: 100%;
+       margin-left: 40%;
+       margin-right: auto;
+       margin-top: 15%;
+      }
  </style>
  <!-- Start GA -->
  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>

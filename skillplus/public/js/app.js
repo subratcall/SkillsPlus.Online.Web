@@ -37126,6 +37126,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -37136,9 +37177,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       courseRate: 0,
       courseUnrate: 0,
       countCourseSold: 0,
+      content: [],
       courseWhatWillLearn: [],
       vendorName: "",
-      quizList: [],
       requirements: [],
       urlid: "",
       description: "",
@@ -37258,8 +37299,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       /* get course quiz list  */
 
-      axios.get("/admin/user_student/student_lesson_get_list/" + id).then(function (res) {
-        _this3.quizList = res.data;
+      /* ---------------- ON WORK ---------------*/
+
+      axios.get("/admin/user_student/product/" + id).then(function (res) {
+
+        _this3.content.parts = res.data.parts;
+
+        console.log(res);
       }).catch(function (err) {
         console.error(err);
         alert("Error! Contact IT Department.");
@@ -37349,6 +37395,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.urlid = id.substring(id.lastIndexOf("/") + 1);
 
     this.get();
+
+    var loading = document.querySelector(".loading-modal");
+
+    loading.style.display = "none";
   }
 });
 
@@ -59813,7 +59863,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-lg-12"
   }, [_c('div', {
     staticClass: "row"
-  }, _vm._l((_vm.quizList), function(value, index) {
+  }, _vm._l((_vm.content.parts), function(value, index) {
     return _c('div', {
       key: index,
       staticClass: "col-lg-6 offset-lg-1 section-3"
@@ -59838,23 +59888,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "color": "#007791"
       }
-    }), _vm._v("\n            " + _vm._s(value.title) + "\n        ")]), _vm._v(" "), _vm._m(3, true)])])]), _vm._v(" "), _c('div', {
+    }), _vm._v("\n             " + _vm._s(value.title) + "\n         ")]), _vm._v(" "), _vm._m(3, true)])])]), _vm._v(" "), _c('div', {
       staticClass: "collapse",
       attrs: {
         "id": 'collapse_' + index
       }
     }, [_c('div', {
       staticClass: "list-custom-border"
+    }, [_c('div', {
+      domProps: {
+        "innerHTML": _vm._s(value.description)
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "text-right"
     }, [_c('a', {
       attrs: {
-        "href": "javascript:void(0)"
-      },
-      on: {
-        "click": function($event) {
-          return _vm.takeQuiz(value.id)
-        }
+        "href": '/admin/user_student/lesson/' + value.id
       }
-    }, [_vm._v("\n          " + _vm._s(value.title) + "\n       ")])])])])
+    }, [_vm._v("Read full lesson")])])])])])
   }), 0)])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
@@ -59933,7 +59984,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "enrolled-"
     }, [_c('i', {
       staticClass: "far fa-user"
-    }), _vm._v("\n           " + _vm._s(value.sold) + "\n          ")])])]), _vm._v(" "), _c('div', {
+    }), _vm._v("\n            " + _vm._s(value.sold) + "\n           ")])])]), _vm._v(" "), _c('div', {
       staticClass: "col-lg-2 float-sm-center float-md-right md-text-center"
     }, [_c('span', {
       staticClass: "item-price"
@@ -59956,7 +60007,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-6"
   }, [_c('ul', [_vm._m(7), _vm._v(" "), _vm._m(8), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "fas fa-play-circle"
-  }), _vm._v("\n           " + _vm._s(_vm.vendorCountCourses) + " Courses\n         ")])])])]), _vm._v(" "), _c('div', {
+  }), _vm._v("\n            " + _vm._s(_vm.vendorCountCourses) + " Courses\n          ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-8"
   }, [_c('label', [_c('h4', [_c('a', {
     attrs: {
@@ -59997,7 +60048,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "display": "inline"
       }
     })
-  }), 0), _vm._v("Average rating\n        ")])]), _vm._v(" "), _c('div', {
+  }), 0), _vm._v("Average rating\n         ")])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-9 margin-top-next"
   }, [_c('div', {
     staticClass: "individual-rating"
@@ -60046,7 +60097,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "row"
     }, [_vm._m(16, true), _vm._v(" "), _c('div', {
       staticClass: "col-4 col-sm-2"
-    }, [_c('p', [_vm._v("\n           " + _vm._s(value_a.name)), _c('br'), _vm._v("\n           " + _vm._s(_vm.formatDate(value_a.create_at)) + "\n           ")])]), _vm._v(" "), _c('div', {
+    }, [_c('p', [_vm._v("\n            " + _vm._s(value_a.name)), _c('br'), _vm._v("\n            " + _vm._s(_vm.formatDate(value_a.create_at)) + "\n            ")])]), _vm._v(" "), _c('div', {
       staticClass: "col-4 col-sm-6"
     }, [_c('div', {
       staticClass: "row"
@@ -60110,13 +60161,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "video-descriptions"
   }, [_c('p', [_vm._v("Updates:")]), _vm._v(" "), _c('ul', [_c('li', [_c('i', {
     staticClass: "far fa-file-video"
-  }), _vm._v(" Hours On demand videos\n     ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" Hours On demand videos\n      ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "far fa-file"
-  }), _vm._v(" Lessons\n     ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" Lessons\n      ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "far fa-compass"
-  }), _vm._v(" lifetime access\n     ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" lifetime access\n      ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "fas fa-mobile-alt"
-  }), _vm._v(" on mobile and tv\n     ")])])])])])
+  }), _vm._v(" on mobile and tv\n      ")])])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row video-tablet margin-top-next"
@@ -60163,13 +60214,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "video-descriptions"
   }, [_c('p', [_vm._v("Updates:")]), _vm._v(" "), _c('ul', [_c('li', [_c('i', {
     staticClass: "far fa-file-video"
-  }), _vm._v(" Hours On demand videos\n        ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" Hours On demand videos\n         ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "far fa-file"
-  }), _vm._v(" Lessons\n        ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" Lessons\n         ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "far fa-compass"
-  }), _vm._v(" lifetime access\n        ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" lifetime access\n         ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "fas fa-mobile-alt"
-  }), _vm._v(" on mobile and tv\n        ")])])])])])])])])
+  }), _vm._v(" on mobile and tv\n         ")])])])])])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"
@@ -60179,7 +60230,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-6 offset-lg-1 section-2"
-  }, [_vm._v("\n     Curriculum for this course\n     "), _c('p', {
+  }, [_vm._v("\n      Curriculum for this course\n      "), _c('p', {
     staticStyle: {
       "display": "inline",
       "font-size": "14px"
@@ -60247,11 +60298,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('i', {
     staticClass: "fas fa-comment"
-  }), _vm._v(" 5 Reviews\n         ")])
+  }), _vm._v(" 5 Reviews\n          ")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('i', {
     staticClass: "fas fa-user"
-  }), _vm._v(" 3 Students\n         ")])
+  }), _vm._v(" 3 Students\n          ")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"

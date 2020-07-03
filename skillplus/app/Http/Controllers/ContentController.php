@@ -920,10 +920,13 @@ class ContentController extends Controller
         if(!cookie('cv'.$id)) {
             $product->increment('view');
             setcookie('cv'.$id,'1');
-        }
 
+           }
+              
         return view('view.product.product',['product'=>$product,'meta'=>$meta,'parts'=>$parts,'rates'=>$rates,'buy'=>$buy,'related'=>$relatedContent,'precourse'=>$preCousreContent,'subscribe'=>$subscribe]);
     }
+
+    
     public function productPart($id,$pid)
     {
         error_reporting(0);
