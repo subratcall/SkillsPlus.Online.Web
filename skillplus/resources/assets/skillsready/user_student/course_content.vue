@@ -254,12 +254,12 @@
                       width="100%"
                       controls
                       autoplay="false"
-                      poster="https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
+                      poster=""
                     >
-                      <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm />
-                      <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg />
-                      <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4 />
-                      <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
+                      <source :src="value.meta.video" type=video/webm />
+                      <source :src="value.meta.video" type=video/ogg />
+                      <source :src="value.meta.video" type=video/mp4 />
+                      <source :src="value.meta.video" type=video/3gp />
                     </video>
                   </div>
 
@@ -268,7 +268,7 @@
                       <div class="row">
                         <div class="col-lg-12 md-text-center">
                           <a
-                            href="https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
+                            href=""
                           >{{ value.title }}</a>
                         </div>
                       </div>
@@ -595,7 +595,6 @@ export default {
         .get(`/admin/user_vendor/vendor_course_related/${data}`)
         .then(res => {
           this.courseRelatedList = res.data;
-
           console.log(res);
         })
         .catch(err => {
@@ -693,8 +692,6 @@ export default {
           this.content.parts = res.data.parts;
           this.content.video = res.data.meta.video;
           this.content.thumbnail = res.data.meta.thumbnail;
-
-          console.log(res);
         })
         .catch(err => {
           console.error(err);
