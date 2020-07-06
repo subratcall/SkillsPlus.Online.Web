@@ -11,62 +11,29 @@
 @section('page')
 <section class="card">
  <div class="card-body">
-
-  {{-- 
-
-  <div id="tabs">
-   <div class="row">
-    <div class="col-lg-4">
-     <div class="col-lg">
-      <div class="row">
-       <div class="col-lg">
-        <a href="#tabs-1"  data-toggle="tab">Introduction</a>
-       </div>
-       <div class="col-lg">
-        <a href="#tabs-2"  data-toggle="tab">Video</a>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div>
-   <div class="row">
-    <div class="col-lg">
-     <div id="tabs-1">
-      <h1>{{ $contentPart[0]->title }}</h1>
-  <div id="lessonContent">{{ $contentPart[0]->description }}</div>
- </div>
- <div id="tabs-2">
-  <video width="320" height="240" controls>
-   <source src="{{ $contentPart[0]->upload_video }}" type="video/mp4">
-   Your browser does not support the video tag.
-  </video>
- </div>
- </div>
- </div>
- --}}
-
- <div class="row">
   <div class="col-lg-12">
    <div class="row">
     <div class="col-lg">
+
      <ul class="navigation nav nav-pills nav-tabs">
       <li class="nav-item">
-       <a class="nav-link" href="#prev" data-toggle="tab">
+       <a class="nav-link" href="#prev">
         <i class="fa fa-arrow-left" aria-hidden="true"></i>
        </a>
       </li>
+
+      @if(count($contentPart) > 0)
+      @foreach($contentPart as $key => $value)
       <li class="nav-item">
-       <a class="nav-link active" href="#tab-1" data-toggle="tab">
-        Introduction
+       <a class="nav-link {{ ($key == 0) ? 'active' : ''  }}" href="#tab-{{ $key }}" data-toggle="tab">
+        {{ $value->lesson_type }}
        </a>
       </li>
-      <li class="nav-item">
-       <a class="nav-link" href="#tab-2" data-toggle="tab">
-        Video
-       </a>
-      </li>
-      <li class="nav-item">
-       <a href="#next" class="nav-link">
+      @endforeach
+      @endif
+
+      <li class="nav-item" id="next">
+       <a class="nav-link" href="#">
         <i class="fa fa-arrow-right" aria-hidden="true"></i>
        </a>
       </li>
@@ -75,34 +42,40 @@
    </div>
 
    <div class="tab-content mt-lg-1">
-    <div class="tab-pane fade show active" id="tab-1">
-     <h1>{{ $contentPart[0]->title }}</h1>
 
-     <div id="lessonDescription"></div>
+    @if(count($contentPart) > 0)
+    @foreach($contentPart as $key => $value)
+    <div class="tab-pane fade show {{ ($key == 0) ? 'active' : ''  }}" id="tab-{{ $key }}">
 
-    </div>
-    <div class="tab-pane fade" id="tab-2">
-     <div class="row justify-content-center">
-      <div class="col-lg-6">
-       <div class="col-lg">
-        <video width="100%" controls>
-         <source src="{{ $contentPart[0]->upload_video }}" type="video/mp4">
-         Your browser does not support the video tag.
-        </video>
+     <div class="row">
+      <div class="col-lg-12">
+       <h2><strong>{{ $value->title }}</strong></h2>
+      </div>
+      <div class="col-lg-12">
+       <div class="row">
+        <div class="col-lg-6">
+         <video width="100%" controls>
+          <source src="{{ $value->upload_video }}" type="video/mp4">
+          Your browser does not support the video tag.
+         </video>
+        </div>
        </div>
-       <div class="col-lg">
-        Video description
+      </div>
+      <div class="col-lg-12">
+       <div class="row">
+        <div class="col-lg-6">
+         {!! $value->description !!}
+        </div>
        </div>
       </div>
      </div>
+
     </div>
+
+    @endforeach
+    @endif
    </div>
-
-
   </div>
- </div>
-
-
  </div>
 </section>
 
@@ -111,11 +84,19 @@
 
 @section('script')
 <script>
+ var cid = "{{request()->route('cid')}}";
+ var cpid = "{{request()->route('cpid')}}";
+
  $(document).ready(function() {
   console.log("test");
   ShowContent();
+
  });
 
+ $("#next").click(function() {
+  console.log("test");
+ });
+ 
  function ShowContent() {
   var lessonDescription = "<?php echo $contentPart[0]->description ?>";
 

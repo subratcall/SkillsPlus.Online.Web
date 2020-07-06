@@ -204,7 +204,7 @@
        <div class="list-custom-border">
         <div v-html="value.description"></div>
         <div class="text-right">
-         <a :href="'/admin/user_student/lesson/'+value.id">Read full lesson</a>
+         <a :href="'/admin/user_student/lesson/'+urlid+'/'+value.id">Read full lesson</a>
         </div>
        </div>
       </div>

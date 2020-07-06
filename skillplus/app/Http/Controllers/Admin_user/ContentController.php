@@ -100,11 +100,11 @@ class ContentController extends Controller
         return response()->json($data);
     }
 
-    public function readFullLesson($cid) {
+    public function readFullLesson($cid, $cpid) {
 
-     $contentPart = ContentPart::where("id", $cid)->get();
+     $contentPart = ContentPart::where("content_id", $cid)->get();
 
-return view("/admin_user/lesson/index", compact(array("contentPart")));
+      return view("/admin_user/lesson/index", compact(["contentPart"]));
     }
     
 }
