@@ -121,6 +121,7 @@ class VendorController extends Controller
         echo true;
     }
 
+
     public function destroyCourse($id)
     {
         Content::where('id', $id)->delete();
@@ -234,6 +235,15 @@ class VendorController extends Controller
         }
         $output = array("data" => $cnt);
         echo json_encode($output);
+    }
+
+    public function getCL($id) {
+      $cl = ContentLearn::where('content_id',$id)->get();      
+      $data = array();
+      
+      $data["data"] = $cl;
+
+      return $data;
     }
 
     public function saveCourseLearn(Request $request)
@@ -877,7 +887,7 @@ class VendorController extends Controller
 
 
 
-        $content = Content::where(["tag" => $id])->limit(5)->get();
+        $content = Content::where(["tag" => $id])->get();
 
         $row = array();
 

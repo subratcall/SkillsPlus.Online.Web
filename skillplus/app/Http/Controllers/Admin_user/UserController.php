@@ -164,6 +164,9 @@ class UserController extends Controller
            $arr['vendor'] = $getUser->name;
            $arr['date'] = date("F d, Y H:i:s", $key->create_at);
            $arr['price'] = ($getTransaction?$getTransaction->price:'');
+
+           $arr['content_id'] = $key->content_id;
+
            //$arr['data'] = $meta;
            $btn = '';
            //$btn .= '<a href="/admin/user_student/student_lesson_list/'.$key->content_id.'" type="button" class="btn btn-warning">View Lesson</a>';
