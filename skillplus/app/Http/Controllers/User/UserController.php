@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    public $getUsername = '';
     public function login(Request $request){
         if($request->session()->has('user')){
             $c = unserialize($request->session()->get('user'));
@@ -367,7 +368,7 @@ class UserController extends Controller
         return back();
     }
 
-    public function dashboard(){
+    public function dashboard(Request $request){
         global $user;
         $userNotification = Notification::where(function($q){
             $q->where('recipent_type','all');
@@ -442,9 +443,19 @@ class UserController extends Controller
             'incomeDay'=>$incomeDay
         ]); */
 
-        
-        Session::put('user_type','vend_user');
-        return redirect('/admin/user_dashboard/user');
+        //$admin = User::where('username',$username)->where('mode','active')->first();
+
+            $admin = User::where('username',$user['username'])->where('mode','active')->first();
+
+            $request->session()->put('Admin',serialize($admin->toArray()));
+            $user = User::find($admin->id);
+            $user->last_view = time();
+            $user->save();
+
+            Session::put('user_id',$user['id']);
+            Session::put('user_type','vend_user');
+            //return redirect('/admin/user_dashboard/user');
+            return view('admin_user.user');
     }
 
     ## Show Profile For All Users ##
