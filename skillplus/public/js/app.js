@@ -37167,6 +37167,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -37174,6 +37186,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       course: [],
+      orc_limit: 5,
+      cr_limit: 5,
       courseRate: 0,
       courseUnrate: 0,
       countCourseSold: 0,
@@ -37226,6 +37240,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       /* get course tag */
       axios.get("/admin/user_vendor/vendor_course_related/" + data).then(function (res) {
         _this2.courseRelatedList = res.data;
+        console.log(res);
       }).catch(function (err) {
         console.error(err);
         alert("Error! Contact IT Department.");
@@ -37297,15 +37312,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         alert("Error! Contact IT Department.");
       });
 
-      /* get course quiz list  */
-
-      /* ---------------- ON WORK ---------------*/
+      /* get course product list  */
 
       axios.get("/admin/user_student/product/" + id).then(function (res) {
-
         _this3.content.parts = res.data.parts;
-
-        console.log(res);
+        _this3.content.video = res.data.meta.video;
+        _this3.content.thumbnail = res.data.meta.thumbnail;
       }).catch(function (err) {
         console.error(err);
         alert("Error! Contact IT Department.");
@@ -37323,16 +37335,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       /* get course comment */
 
       /*     axios
-                                                                     .get(`/admin/user_vendor/vendor_course_comment/135/116`)
-                                                                     .then(res => {
-                                                                      console.log(res);
-                                                                      this.courseReview = res.data;
-                                                                     })
-                                                                     .catch(err => {
-                                                                      console.error(err);
-                                                                      alert("Error! Contact IT Department.");
-                                                                     });
-                                                                 */
+                                                                          .get(`/admin/user_vendor/vendor_course_comment/135/116`)
+                                                                          .then(res => {
+                                                                           console.log(res);
+                                                                           this.courseReview = res.data;
+                                                                          })
+                                                                          .catch(err => {
+                                                                           console.error(err);
+                                                                           alert("Error! Contact IT Department.");
+                                                                          });
+                                                                      */
 
       /* get course requirement */
 
@@ -59819,7 +59831,38 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
     staticClass: "col-12 course"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
+    staticClass: "video-tutorials"
+  }, [_c('video', {
+    staticClass: "padding-top video",
+    attrs: {
+      "id": "video",
+      "width": "100%",
+      "controls": "",
+      "autoplay": "false",
+      "poster": _vm.content.thumbnail
+    }
+  }, [_c('source', {
+    attrs: {
+      "src": _vm.content.video,
+      "type": "video/webm"
+    }
+  }), _vm._v(" "), _c('source', {
+    attrs: {
+      "src": _vm.content.video,
+      "type": "video/ogg"
+    }
+  }), _vm._v(" "), _c('source', {
+    attrs: {
+      "src": _vm.content.video,
+      "type": "video/mp4"
+    }
+  }), _vm._v(" "), _c('source', {
+    attrs: {
+      "src": _vm.content.video,
+      "type": "video/3gp"
+    }
+  })]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c('div', {
     staticClass: "row wrap-header"
   }, [_c('div', {
     staticClass: "col-lg-12"
@@ -59845,7 +59888,44 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "raty-text"
   }, [_vm._v(_vm._s(_vm.courseRate) + " ratings")]), _vm._v(" "), _c('span', {}, [_vm._v(_vm._s(_vm.countCourseSold) + " students / vendors purchased this book")])], 2), _vm._v(" "), _c('div', {
     staticClass: "raty-product-section"
-  }, [_c('span', {}, [_vm._v("Vendor: " + _vm._s(_vm.vendorName))])])])])])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
+  }, [_c('span', {}, [_vm._v("Vendor: " + _vm._s(_vm.vendorName))])])])])])]), _vm._v(" "), _c('div', {
+    staticClass: "row video-tablet margin-top-next"
+  }, [_c('div', {
+    staticClass: "col-lg-12"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-lg-12"
+  }, [_c('video', {
+    staticClass: "padding-top video",
+    attrs: {
+      "id": "video",
+      "width": "100%",
+      "controls": "",
+      "autoplay": "false",
+      "poster": _vm.content.thumbnail
+    }
+  }, [_c('source', {
+    attrs: {
+      "src": _vm.content.video,
+      "type": "video/webm"
+    }
+  }), _vm._v(" "), _c('source', {
+    attrs: {
+      "src": _vm.content.video,
+      "type": "video/ogg"
+    }
+  }), _vm._v(" "), _c('source', {
+    attrs: {
+      "src": _vm.content.video,
+      "type": "video/mp4"
+    }
+  }), _vm._v(" "), _c('source', {
+    attrs: {
+      "src": _vm.content.video,
+      "type": "video/3gp"
+    }
+  })]), _vm._v(" "), _vm._m(1)])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12"
@@ -59888,7 +59968,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "color": "#007791"
       }
-    }), _vm._v("\n             " + _vm._s(value.title) + "\n         ")]), _vm._v(" "), _vm._m(3, true)])])]), _vm._v(" "), _c('div', {
+    }), _vm._v("\n            " + _vm._s(value.title) + "\n        ")]), _vm._v(" "), _vm._m(3, true)])])]), _vm._v(" "), _c('div', {
       staticClass: "collapse",
       attrs: {
         "id": 'collapse_' + index
@@ -59903,7 +59983,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "text-right"
     }, [_c('a', {
       attrs: {
-        "href": '/admin/user_student/lesson/' + value.id
+        "href": '/admin/user_student/lesson/' + _vm.urlid + '/' + value.id
       }
     }, [_vm._v("Read full lesson")])])])])])
   }), 0)])]), _vm._v(" "), _c('div', {
@@ -59946,11 +60026,48 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "section-6-header"
   }, [_vm._v("Other related courses")]), _vm._v(" "), _c('ul', _vm._l((_vm.courseRelatedList), function(value, index) {
     return _c('li', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (index < _vm.orc_limit),
+        expression: "index < orc_limit"
+      }],
       key: index,
       staticClass: "col-lg-12"
     }, [_c('div', {
       staticClass: "row"
-    }, [_vm._m(4, true), _vm._v(" "), _c('div', {
+    }, [_c('div', {
+      staticClass: "col-lg-3"
+    }, [_c('video', {
+      staticClass: "padding-top video",
+      attrs: {
+        "id": "video",
+        "width": "100%",
+        "controls": "",
+        "autoplay": "false",
+        "poster": ""
+      }
+    }, [_c('source', {
+      attrs: {
+        "src": value.meta.video,
+        "type": "video/webm"
+      }
+    }), _vm._v(" "), _c('source', {
+      attrs: {
+        "src": value.meta.video,
+        "type": "video/ogg"
+      }
+    }), _vm._v(" "), _c('source', {
+      attrs: {
+        "src": value.meta.video,
+        "type": "video/mp4"
+      }
+    }), _vm._v(" "), _c('source', {
+      attrs: {
+        "src": value.meta.video,
+        "type": "video/3gp"
+      }
+    })])]), _vm._v(" "), _c('div', {
       staticClass: "col-lg-4 row"
     }, [_c('div', {
       staticClass: "col-lg-12"
@@ -59960,7 +60077,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "col-lg-12 md-text-center"
     }, [_c('a', {
       attrs: {
-        "href": "https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
+        "href": ""
       }
     }, [_vm._v(_vm._s(value.title))])])]), _vm._v(" "), _c('div', {
       staticClass: "row"
@@ -59984,13 +60101,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "enrolled-"
     }, [_c('i', {
       staticClass: "far fa-user"
-    }), _vm._v("\n            " + _vm._s(value.sold) + "\n           ")])])]), _vm._v(" "), _c('div', {
+    }), _vm._v("\n           " + _vm._s(value.sold) + "\n          ")])])]), _vm._v(" "), _c('div', {
       staticClass: "col-lg-2 float-sm-center float-md-right md-text-center"
     }, [_c('span', {
       staticClass: "item-price"
     }, [_c('span', {
       staticClass: "current-price"
-    }, [_c('b', [_vm._v(_vm._s((value.price_post) ? value.price_post + ' $' : "Not Available"))])])])])])])
+    }, [_c('b', [_vm._v(_vm._s((value.price_post) ? value.price_post + ' $' : "Not Available"))])])])])]), _vm._v(" "), _c('div', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (index + 1 == _vm.orc_limit),
+        expression: "index + 1 == orc_limit"
+      }],
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-lg-12 text-center"
+    }, [_c('a', {
+      on: {
+        "click": function($event) {
+          _vm.orc_limit += 5
+        }
+      }
+    }, [_vm._v("See more")]), _vm._v(" "), _c('i', {
+      staticClass: "fa fa-angle-down"
+    })])])])
   }), 0)])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
@@ -59999,15 +60134,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-6 offset-lg-1 section-7"
-  }, [_vm._m(5), _vm._v(" "), _c('div', {
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
     staticClass: "col-lg-12 row"
   }, [_c('div', {
     staticClass: "col-lg-4 vendor-profile"
-  }, [_vm._m(6), _vm._v(" "), _c('div', {
+  }, [_vm._m(5), _vm._v(" "), _c('div', {
     staticClass: "col-xs-6"
-  }, [_c('ul', [_vm._m(7), _vm._v(" "), _vm._m(8), _vm._v(" "), _c('li', [_c('i', {
+  }, [_c('ul', [_vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "fas fa-play-circle"
-  }), _vm._v("\n            " + _vm._s(_vm.vendorCountCourses) + " Courses\n          ")])])])]), _vm._v(" "), _c('div', {
+  }), _vm._v("\n           " + _vm._s(_vm.vendorCountCourses) + " Courses\n         ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-8"
   }, [_c('label', [_c('h4', [_c('a', {
     attrs: {
@@ -60025,7 +60160,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-6 offset-lg-1 section-8"
-  }, [_vm._m(9), _vm._v(" "), _c('div', {
+  }, [_vm._m(8), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12 row"
@@ -60048,7 +60183,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "display": "inline"
       }
     })
-  }), 0), _vm._v("Average rating\n         ")])]), _vm._v(" "), _c('div', {
+  }), 0), _vm._v("Average rating\n        ")])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-9 margin-top-next"
   }, [_c('div', {
     staticClass: "individual-rating"
@@ -60057,47 +60192,53 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.onestar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(10), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.onestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(9), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.onestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
     staticClass: "progress"
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.twostar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(11), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.twostar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(10), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.twostar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
     staticClass: "progress"
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.threestar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(12), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.threestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(11), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.threestar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
     staticClass: "progress"
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.fourstar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(13), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fourstar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(12), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fourstar) + "%")])])]), _vm._v(" "), _c('li', [_c('div', {
     staticClass: "progress"
   }, [_c('div', {
     staticClass: "progress-bar",
     style: ('width: ' + _vm.studentRate.fivestar + '%')
-  })]), _vm._v(" "), _c('div', [_vm._m(14), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fivestar) + "%")])])])])])])])])])])])]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('div', [_vm._m(13), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.studentRate.fivestar) + "%")])])])])])])])])])])])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12"
   }, [_c('div', {
     staticClass: "col-lg-6 offset-lg-1 section-9"
-  }, [_vm._m(15), _vm._v(" "), _c('div', {
+  }, [_vm._m(14), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-12"
   }, _vm._l((_vm.courseReview), function(value_a, index_a) {
     return _c('div', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (index_a < _vm.cr_limit),
+        expression: "index_a < cr_limit"
+      }],
       key: index_a,
       staticClass: "row"
     }, [_c('div', {
       staticClass: "col-lg-12"
     }, [_c('div', {
       staticClass: "row"
-    }, [_vm._m(16, true), _vm._v(" "), _c('div', {
+    }, [_vm._m(15, true), _vm._v(" "), _c('div', {
       staticClass: "col-4 col-sm-2"
-    }, [_c('p', [_vm._v("\n            " + _vm._s(value_a.name)), _c('br'), _vm._v("\n            " + _vm._s(_vm.formatDate(value_a.create_at)) + "\n            ")])]), _vm._v(" "), _c('div', {
+    }, [_c('p', [_vm._v("\n           " + _vm._s(value_a.name) + "\n           "), _c('br'), _vm._v("\n           " + _vm._s(_vm.formatDate(value_a.create_at)) + "\n          ")])]), _vm._v(" "), _c('div', {
       staticClass: "col-4 col-sm-6"
     }, [_c('div', {
       staticClass: "row"
@@ -60119,41 +60260,28 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           'star-live': (value_b <= value_a.rate), 'star-dead': (value_b >= value_a.rate)
         }
       })])
-    }), 0)])])])])])
+    }), 0)])])]), _vm._v(" "), _c('div', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (index_a + 1 == _vm.cr_limit),
+        expression: "index_a + 1 == cr_limit"
+      }],
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-lg-12 text-center"
+    }, [_c('a', {
+      on: {
+        "click": function($event) {
+          _vm.cr_limit += 5
+        }
+      }
+    }, [_vm._v("See more")]), _vm._v(" "), _c('i', {
+      staticClass: "fa fa-angle-down"
+    })])])])])
   }), 0)])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "video-tutorials"
-  }, [_c('video', {
-    staticClass: "padding-top video",
-    attrs: {
-      "id": "video",
-      "width": "100%",
-      "controls": "",
-      "autoplay": "false",
-      "poster": "https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
-    }
-  }, [_c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.webm",
-      "type": "video/webm"
-    }
-  }), _vm._v(" "), _c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.ogv",
-      "type": "video/ogg"
-    }
-  }), _vm._v(" "), _c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.mp4",
-      "type": "video/mp4"
-    }
-  }), _vm._v(" "), _c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.3gp",
-      "type": "video/3gp"
-    }
-  })]), _vm._v(" "), _c('div', {
     staticClass: "video-details"
   }, [_c('button', {
     staticClass: "button buy-now"
@@ -60161,52 +60289,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "video-descriptions"
   }, [_c('p', [_vm._v("Updates:")]), _vm._v(" "), _c('ul', [_c('li', [_c('i', {
     staticClass: "far fa-file-video"
-  }), _vm._v(" Hours On demand videos\n      ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" Hours On demand videos\n     ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "far fa-file"
-  }), _vm._v(" Lessons\n      ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" Lessons\n     ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "far fa-compass"
-  }), _vm._v(" lifetime access\n      ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" lifetime access\n     ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "fas fa-mobile-alt"
-  }), _vm._v(" on mobile and tv\n      ")])])])])])
+  }), _vm._v(" on mobile and tv\n     ")])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "row video-tablet margin-top-next"
-  }, [_c('div', {
-    staticClass: "col-lg-12"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-lg-12"
-  }, [_c('video', {
-    staticClass: "padding-top video",
-    attrs: {
-      "id": "video",
-      "width": "100%",
-      "controls": "",
-      "autoplay": "false",
-      "poster": "https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
-    }
-  }, [_c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.webm",
-      "type": "video/webm"
-    }
-  }), _vm._v(" "), _c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.ogv",
-      "type": "video/ogg"
-    }
-  }), _vm._v(" "), _c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.mp4",
-      "type": "video/mp4"
-    }
-  }), _vm._v(" "), _c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.3gp",
-      "type": "video/3gp"
-    }
-  })]), _vm._v(" "), _c('div', {
     staticClass: "video-details"
   }, [_c('button', {
     staticClass: "button buy-now"
@@ -60214,13 +60305,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "video-descriptions"
   }, [_c('p', [_vm._v("Updates:")]), _vm._v(" "), _c('ul', [_c('li', [_c('i', {
     staticClass: "far fa-file-video"
-  }), _vm._v(" Hours On demand videos\n         ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" Hours On demand videos\n        ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "far fa-file"
-  }), _vm._v(" Lessons\n         ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" Lessons\n        ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "far fa-compass"
-  }), _vm._v(" lifetime access\n         ")]), _vm._v(" "), _c('li', [_c('i', {
+  }), _vm._v(" lifetime access\n        ")]), _vm._v(" "), _c('li', [_c('i', {
     staticClass: "fas fa-mobile-alt"
-  }), _vm._v(" on mobile and tv\n         ")])])])])])])])])
+  }), _vm._v(" on mobile and tv\n        ")])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"
@@ -60230,7 +60321,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-lg-6 offset-lg-1 section-2"
-  }, [_vm._v("\n      Curriculum for this course\n      "), _c('p', {
+  }, [_vm._v("\n     Curriculum for this course\n     "), _c('p', {
     staticStyle: {
       "display": "inline",
       "font-size": "14px"
@@ -60245,39 +60336,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-hidden": "true"
     }
   })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-lg-3"
-  }, [_c('video', {
-    staticClass: "padding-top video",
-    attrs: {
-      "id": "video",
-      "width": "100%",
-      "controls": "",
-      "autoplay": "false",
-      "poster": "https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
-    }
-  }, [_c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.webm",
-      "type": "video/webm"
-    }
-  }), _vm._v(" "), _c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.ogv",
-      "type": "video/ogg"
-    }
-  }), _vm._v(" "), _c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.mp4",
-      "type": "video/mp4"
-    }
-  }), _vm._v(" "), _c('source', {
-    attrs: {
-      "src": "http://techslides.com/demos/sample-videos/small.3gp",
-      "type": "video/3gp"
-    }
-  })])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"
@@ -60298,11 +60356,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('i', {
     staticClass: "fas fa-comment"
-  }), _vm._v(" 5 Reviews\n          ")])
+  }), _vm._v(" 5 Reviews\n         ")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('i', {
     staticClass: "fas fa-user"
-  }), _vm._v(" 3 Students\n          ")])
+  }), _vm._v(" 3 Students\n         ")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "row"

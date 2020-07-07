@@ -12,12 +12,12 @@
     width="100%"
     controls
     autoplay="false"
-    poster="https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
+    :poster="content.thumbnail"
    >
-    <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm />
-    <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg />
-    <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4 />
-    <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
+    <source :src="content.video" type=video/webm />
+    <source :src="content.video" type=video/ogg />
+    <source :src="content.video" type=video/mp4 />
+    <source :src="content.video" type=video/3gp />
    </video>
    <div class="video-details">
     <button class="button buy-now">Take Quiz</button>
@@ -79,12 +79,12 @@
        width="100%"
        controls
        autoplay="false"
-       poster="https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
+       :poster="content.thumbnail"
       >
-       <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm />
-       <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg />
-       <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4 />
-       <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
+       <source :src="content.video" type=video/webm />
+       <source :src="content.video" type=video/ogg />
+       <source :src="content.video" type=video/mp4 />
+       <source :src="content.video" type=video/3gp />
       </video>
       <div class="video-details">
        <button class="button buy-now">Take Quiz</button>
@@ -136,7 +136,7 @@
    </div>
   </div>
 
-<!--
+  <!--
   <div class="row">
    <div class="col-lg-12">
     <div class="row">
@@ -173,13 +173,16 @@
   </div>
   -->
 
-   <div class="row">
+  <div class="row">
    <div class="col-lg-12">
     <div class="row">
-     <div class="col-lg-6 offset-lg-1 section-3" v-for="(value, index) in content.parts" :key="index">
+     <div
+      class="col-lg-6 offset-lg-1 section-3"
+      v-for="(value, index) in content.parts"
+      :key="index"
+     >
       <div class="header-custom-border">
        <div class="row">
-
         <div class="col-lg-12">
          <a
           class="btn"
@@ -194,24 +197,21 @@
           <i class="fa fa-check-circle video-done text-right" aria-hidden="true"></i>
          </div>
         </div>
-
        </div>
       </div>
 
       <div :id="'collapse_'+index" class="collapse">
        <div class="list-custom-border">
-       <div v-html="value.description"></div>
-       <div class="text-right">
-       <a :href="'/admin/user_student/lesson/'+value.id">Read full lesson</a>
+        <div v-html="value.description"></div>
+        <div class="text-right">
+         <a :href="'/admin/user_student/lesson/'+urlid+'/'+value.id">Read full lesson</a>
+        </div>
        </div>
-       </div>
-
       </div>
      </div>
     </div>
    </div>
   </div>
-
 
   <div class="row">
    <div class="col-lg-12">
@@ -244,22 +244,20 @@
      <div class="col-lg-6 offset-lg-1 section-6">
       <p class="section-6-header">Other related courses</p>
       <ul>
-       <li class="col-lg-12" v-for="(value, index) in courseRelatedList" :key="index">
+       <li
+        class="col-lg-12"
+        v-for="(value, index) in courseRelatedList"
+        :key="index"
+        v-show="index < orc_limit"
+       >
         <div class="row">
          <div class="col-lg-3">
           <!-- <b>{{ value.duration }} Hours</b> -->
-          <video
-           class="padding-top video"
-           id="video"
-           width="100%"
-           controls
-           autoplay="false"
-           poster="https://homepages.cae.wisc.edu/~ece533/images/monarch.png"
-          >
-           <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm />
-           <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg />
-           <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4 />
-           <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
+          <video class="padding-top video" id="video" width="100%" controls autoplay="false" poster>
+           <source :src="value.meta.video" type=video/webm />
+           <source :src="value.meta.video" type=video/ogg />
+           <source :src="value.meta.video" type=video/mp4 />
+           <source :src="value.meta.video" type=video/3gp />
           </video>
          </div>
 
@@ -267,9 +265,7 @@
           <div class="col-lg-12">
            <div class="row">
             <div class="col-lg-12 md-text-center">
-             <a
-              href="https://demo.academy-lms.com/addon/home/course/how-to-shoot-b-roll-footage-with-peter-mckinnon/26"
-             >{{ value.title }}</a>
+             <a href>{{ value.title }}</a>
             </div>
            </div>
            <div class="row">
@@ -301,6 +297,12 @@
             <b>{{ (value.price_post) ? value.price_post+' $' : "Not Available" }}</b>
            </span>
           </span>
+         </div>
+        </div>
+        <div class="row" v-show="index + 1 == orc_limit">
+         <div class="col-lg-12 text-center">
+          <a @click="orc_limit += 5">See more</a>
+          <i class="fa fa-angle-down"></i>
          </div>
         </div>
        </li>
@@ -483,19 +485,24 @@
 
      <div class="row">
       <div class="col-lg-12">
-       <div class="row" v-for="(value_a, index_a) in courseReview" :key="index_a">
+       <div
+        class="row"
+        v-for="(value_a, index_a) in courseReview"
+        :key="index_a"
+        v-show="index_a < cr_limit"
+       >
         <div class="col-lg-12">
          <div class="row">
-
           <div class="col-4 col-sm-2">
            <img src="https://demo.academy-lms.com/addon/uploads/user_image/6.jpg" width="46" alt />
           </div>
 
           <div class="col-4 col-sm-2">
            <p>
-            {{ value_a.name }}<br>
+            {{ value_a.name }}
+            <br />
             {{ formatDate(value_a.create_at) }}
-            </p>
+           </p>
           </div>
 
           <div class="col-4 col-sm-6">
@@ -513,7 +520,12 @@
             </div>
            </div>
           </div>
-
+         </div>
+         <div class="row" v-show="index_a + 1 == cr_limit">
+          <div class="col-lg-12 text-center">
+           <a @click="cr_limit += 5">See more</a>
+           <i class="fa fa-angle-down"></i>
+          </div>
          </div>
         </div>
        </div>
@@ -535,6 +547,8 @@
   data() {
    return {
     course: [],
+    orc_limit: 5,
+    cr_limit: 5,
     courseRate: 0,
     courseUnrate: 0,
     countCourseSold: 0,
@@ -588,6 +602,7 @@
      .get(`/admin/user_vendor/vendor_course_related/${data}`)
      .then(res => {
       this.courseRelatedList = res.data;
+      console.log(res);
      })
      .catch(err => {
       console.error(err);
@@ -674,18 +689,14 @@
       alert("Error! Contact IT Department.");
      });
 
-    /* get course quiz list  */
-
-
-    /* ---------------- ON WORK ---------------*/
+    /* get course product list  */
 
     axios
      .get(`/admin/user_student/product/${id}`)
      .then(res => {
-
       this.content.parts = res.data.parts;
-
-      console.log(res);
+      this.content.video = res.data.meta.video;
+      this.content.thumbnail = res.data.meta.thumbnail;
      })
      .catch(err => {
       console.error(err);
@@ -707,16 +718,16 @@
     /* get course comment */
 
     /*     axios
-                                                                   .get(`/admin/user_vendor/vendor_course_comment/135/116`)
-                                                                   .then(res => {
-                                                                    console.log(res);
-                                                                    this.courseReview = res.data;
-                                                                   })
-                                                                   .catch(err => {
-                                                                    console.error(err);
-                                                                    alert("Error! Contact IT Department.");
-                                                                   });
-                                                               */
+                                                                        .get(`/admin/user_vendor/vendor_course_comment/135/116`)
+                                                                        .then(res => {
+                                                                         console.log(res);
+                                                                         this.courseReview = res.data;
+                                                                        })
+                                                                        .catch(err => {
+                                                                         console.error(err);
+                                                                         alert("Error! Contact IT Department.");
+                                                                        });
+                                                                    */
 
     /* get course requirement */
 
@@ -784,8 +795,8 @@
    this.get();
 
    var loading = document.querySelector(".loading-modal");
-  
-  loading.style.display = "none";
+
+   loading.style.display = "none";
   }
  };
 </script>
@@ -860,15 +871,14 @@
    padding: 0px;
    width: 100%;
   }
-
  }
 
  @media (max-width: 767.98px) {
   .video-tutorials {
    display: none;
   }
-  
-   .md-text-center {
+
+  .md-text-center {
    text-align: center !important;
   }
  }
@@ -881,7 +891,6 @@
   .md-text-center {
    text-align: center !important;
   }
-
  }
 
  .custom-card {

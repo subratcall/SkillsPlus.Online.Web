@@ -875,6 +875,7 @@
                 </div>
                 
                 </div>
+                {{-- 
         <!--    <div class="row">
                 <div class="header">
                     <span class="pull-left">{{{ trans('main.newest_courses') }}}</span>
@@ -884,7 +885,7 @@
                     <span class="nav-right"></span>
                     <div class="owl-carousel">
                         @foreach($new_content as $new)
-                            <?php $meta = arrayToList($new->metas,'option','value'); ?>
+                            <?php /* $meta = arrayToList($new->metas,'option','value'); */ ?>
                             <div class="owl-car-s" dir="rtl">
                                 <a href="/product/{{{ $new->id or '' }}}" title="{{{ $new->title or '' }}}" class="content-box">
                                     <img src="{{{ $meta['thumbnail'] or $meta['cover'] or $meta['video'] or $meta['document'] or '' }}}"/>
@@ -904,6 +905,7 @@
                 </div>
             </div> -->
             
+            --}}
 
             
             

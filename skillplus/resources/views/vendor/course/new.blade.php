@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Course','Edit']])
 @section('title')
-<p id="titleHeader">New Course</p>
+ New Course
 @endsection
 
 @section('style')
@@ -129,7 +129,7 @@
             <div class="col-lg-12">
                 <br>
                 <legend>List to learn</legend>      
-                <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
+                <table id="tbl" class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
                     width="100%">
                         <thead>
                             <tr>
@@ -143,6 +143,28 @@
     </div>
 </section>
 
+@endsection
+
+@section("modals")
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+       ...
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-primary">Save changes</button>
+     </div>
+   </div>
+ </div>
+</div>
 @endsection
 
 @section('script')
@@ -176,28 +198,39 @@ var id = "{{request()->route('id')}}";
                     $(".jqte_editor").html(data.content)
                     $("#private").val(data.private);
                     $("#subtitle").val(data.subTitle);
-                    $("#id").val(data.id);   
-
-                    $('#tbl').dtcustom({
-                        "ajax": {
-                                "type": "GET",
-                                "url": "{{ url('/admin/user_vendor/vendor_course_get_all_cl') }}/"+id,
-                                "dataSrc": function(json) {
-                                    return json.data;
-                                }
-                            },
-                        "columns": [{
-                            "data": "des"
-                            },{
-                            "data": "action"
-                            }]
-                    });                 
+                    $("#id").val(data.id);           
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert('Error! Contact IT Department.');
                 }
             });
+
+
+            $('#tbl').DataTable({
+               "ajax": {
+                "url": "/admin/user_vendor/vendor_course_get_all_cl/"+id,
+                "type": "GET",
+             },
+              "columns": [{
+                 "data": "description",
+               }, {
+                "data": null
+               }],
+              "columnDefs": [{
+               "targets": -1,
+                 "render": function(row, data, type, meta) {
+                  return `
+                  <button type='button' class='btn btn-primary' onclick="action('edit', ${row.id})">Edit</button>
+                  <button type='button' class='btn btn-danger' onclick="action('delete', ${row.id})">Delete</button>
+                  `;
+                 }
+                }]
+            });         
         }
+    }
+
+    function action(type, id) {
+     $("#modal").modal("show");
     }
 
     function save() {

@@ -105,6 +105,8 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('cr/{id}','Admin\ContentController@contentRequirements');
             Route::get('ir/{id}','Admin\ContentController@getIndividualRating');
             Route::get('vendor_course_comment/{id}/{cid}','Admin\ContentController@getComments');
+            
+            Route::get("vendor_course_get_all_cl/{id}", 'Admin_user\VendorController@getCL');
 
             /* http://localhost:8000/admin/user_vendor/vendor_course_related/116 */
 
@@ -142,7 +144,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('product/{cid}', 'Admin_user\ContentController@product');
 
             /* Full Lesson Course */
-            Route::get("lesson/{cid}", 'Admin_user\ContentController@readFullLesson');
+            Route::get("lesson/{cid}/{cpid}", 'Admin_user\ContentController@readFullLesson');
 
 
         });
