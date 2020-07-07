@@ -930,6 +930,12 @@ Route::group(['middleware'=>'notification'],function (){
             Route::any('cancel/{id}','Admin\PayController@payuCancel');
         });
 
+        Route::group(['prefix'=>'paynow'], function () {
+            Route::get('pay/{id}/{type}','Admin\PayController@paynow');
+            /* Route::any('status/{product_id}','Admin\PayController@payuStatus');
+            Route::any('cancel/{id}','Admin\PayController@payuCancel'); */
+        });
+
         Route::get('/credit/pay/{id}/{mode}','Admin\PayController@creditPay');
     });
 

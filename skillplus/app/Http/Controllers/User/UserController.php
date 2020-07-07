@@ -423,7 +423,7 @@ class UserController extends Controller
 
         //dd($tenDay);
 
-        return view('user.dashboard',[
+        /* return view('user.dashboard',[
             'user'=>$user,
             'meta'=>$userMetas,
             'buyList'=>$userBuy,
@@ -440,7 +440,11 @@ class UserController extends Controller
             'captionDay'=>$tenDay,
             'sellDay'=>$sellDay,
             'incomeDay'=>$incomeDay
-        ]);
+        ]); */
+
+        
+        Session::put('user_type','vend_user');
+        return redirect('/admin/user_dashboard/user');
     }
 
     ## Show Profile For All Users ##
