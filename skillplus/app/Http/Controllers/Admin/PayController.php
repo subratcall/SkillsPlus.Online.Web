@@ -504,7 +504,95 @@ class PayController extends Controller
         return back();
     }
 
+    #2c2p paynow
+    function paynow(Request $request,$id,$type)
+    {
+        //Merchant's account information
+        $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
+        $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
+        
+        //Transaction information
+        $payment_description  = '2 days 1 night hotel room';
+        $order_id  = time();
+        $currency = "702";
+        $amount  = '000000002500';
+        
+        //Request information
+        $version = "8.5";	
+        $payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
+        $result_url_1 = "http://localhost/devPortal/V3_UI_PHP_JT01_devPortal/result.php";
+        
+        //Construct signature string
+        $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
+        $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
 
+        
+        /* get response */
+
+        //each response params:
+        #$version = $_REQUEST["version"];
+        $date = date_create();
+        $request_timestamp = date_timestamp_get($date);// $_REQUEST["request_timestamp"];
+        #$merchant_id = $_REQUEST["merchant_id"];
+        #$currency = $_REQUEST["currency"];
+        #$order_id = $_REQUEST["order_id"];
+        #$amount = $_REQUEST["amount"];
+        $invoice_no = '';//$_REQUEST["invoice_no"];
+        $transaction_ref = 'O';//$_REQUEST["transaction_ref"];
+        $approval_code = '';// $_REQUEST["approval_code"];
+        $eci = '';//$_REQUEST["eci"];
+        $transaction_datetime = date("Y-m-d");//$_REQUEST["transaction_datetime"];
+        $payment_channel = '';//$_REQUEST["payment_channel"];
+        $payment_status = '';//$_REQUEST["payment_status"];
+        $channel_response_code = '';//$_REQUEST["channel_response_code"];
+        $channel_response_desc = '';//$_REQUEST["channel_response_desc"];
+        $masked_pan = '';//$_REQUEST["masked_pan"];
+        $stored_card_unique_id ='';// $_REQUEST["stored_card_unique_id"];
+        $backend_invoice ='';//$_REQUEST["backend_invoice"];
+        $paid_channel = '';//$_REQUEST["paid_channel"];
+        $recurring_unique_id = '';//$_REQUEST["recurring_unique_id"];
+        $paid_agent = '';//$_REQUEST["paid_agent"];
+        $payment_scheme = '';//$_REQUEST["payment_scheme"];
+        $user_defined_1 ='';// $_REQUEST["user_defined_1"];
+        $user_defined_2 ='';// $_REQUEST["user_defined_2"];
+        $user_defined_3 ='';// $_REQUEST["user_defined_3"];
+        $user_defined_4 ='';//'';// $_REQUEST["user_defined_4"];
+        $user_defined_5 = '';//$_REQUEST["user_defined_5"];
+        $browser_info = '';//$_REQUEST["browser_info"];
+        $ippPeriod ='';// $_REQUEST["ippPeriod"];
+        $ippInterestType ='';//$_REQUEST["ippInterestType"];
+        $ippInterestRate = '';//$_REQUEST["ippInterestRate"];
+        $ippMerchantAbsorbRate = '';//$_REQUEST["ippMerchantAbsorbRate"];
+        $payment_scheme ='';// $_REQUEST["payment_scheme"];
+        $process_by ='';// $_REQUEST["process_by"];
+        $sub_merchant_list = '';//$_REQUEST["sub_merchant_list"];
+       // $hash_value ='';// $_REQUEST["hash_value"];   
+        
+        //check response hash value (for security, hash value validation is Mandatory)
+        $checkHashStr = $version . $request_timestamp . $merchant_id . $order_id . 
+        $invoice_no . $currency . $amount . $transaction_ref . $approval_code . 
+        $eci . $transaction_datetime . $payment_channel . $payment_status . 
+        $channel_response_code . $channel_response_desc . $masked_pan . 
+        $stored_card_unique_id . $backend_invoice . $paid_channel . $paid_agent . 
+        $recurring_unique_id . $user_defined_1 . $user_defined_2 . $user_defined_3 . 
+        $user_defined_4 . $user_defined_5 . $browser_info . $ippPeriod . 
+        $ippInterestType . $ippInterestRate . $ippMerchantAbsorbRate . $payment_scheme .
+        $process_by . $sub_merchant_list;
+
+        $SECRETKEY = "7jYcp4FxFdf0";
+        $checkHash = hash_hmac('sha256',$checkHashStr, $SECRETKEY,false); 
+        echo "hash_value: ".$hash_value."<br/><br/>";
+        echo "checkHash: ".$checkHash."<br/><br/>";
+
+        if(strcmp(strtolower('a87183f5f9663f37ddb7e4d321c2471d70aaecf6058945319c2400b752e5973b'), strtolower($checkHash))==0){
+            echo "Hash check = success. it is safe to use this response data.";
+        }
+        else{
+            echo "Hash check = failed. do not use this response data.";
+        }
+    
+       // dd($checkHashStr);
+    }
 
 
 }

@@ -589,6 +589,11 @@
                                         <label class="radio-label" for="mode-2"> Payu </label>
                                     </div>
                                 @endif
+                                    <div class="radio">
+                                        <input type="radio" class="buy-mode" id="mode-6" value="paynow" name="buyMode">
+                                        &nbsp;
+                                        <label class="radio-label" for="mode-6"> Pay now </label>
+                                    </div>
                                 <div class="h-10"></div>
                                 <div class="table-responsive table-base-price">
                                     <table class="table table-hover table-factor-modal">
