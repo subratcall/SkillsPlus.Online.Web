@@ -325,7 +325,7 @@
        <div class="col-lg-4 vendor-profile">
         <div class="col-xs-6">
          <img
-          src="https://demo.academy-lms.com/addon/uploads/user_image/1.jpg"
+          :src="vendorAvatar"
           class="rounded-circle"
          />
         </div>
@@ -494,7 +494,7 @@
         <div class="col-lg-12">
          <div class="row">
           <div class="col-4 col-sm-2">
-           <img src="https://demo.academy-lms.com/addon/uploads/user_image/6.jpg" width="46" alt />
+           <img :src="value_a.avatar" width="46" alt />
           </div>
 
           <div class="col-4 col-sm-2">
@@ -563,6 +563,7 @@
     courseReview: [],
     commentName: "",
     courseRelatedList: [],
+    vendorAvatar: "",
     studentRate: {
      onestar: 0,
      twostar: 0,
@@ -589,6 +590,7 @@
       this.vendorName = res.data[0].name;
       this.userAbout = res.data[0].about;
       this.commentName = res.data[0].name;
+      this.vendorAvatar = res.data[0].avatar;
      })
      .catch(err => {
       console.error(err);
@@ -602,7 +604,6 @@
      .get(`/admin/user_vendor/vendor_course_related/${data}`)
      .then(res => {
       this.courseRelatedList = res.data;
-      console.log(res);
      })
      .catch(err => {
       console.error(err);

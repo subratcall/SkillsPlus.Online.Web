@@ -31,7 +31,7 @@
       </li>
       @endforeach
       @endif
-
+      
       <li class="nav-item" id="next">
        <a class="nav-link" href="#">
         <i class="fa fa-arrow-right" aria-hidden="true"></i>

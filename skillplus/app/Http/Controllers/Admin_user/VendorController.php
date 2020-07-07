@@ -26,6 +26,7 @@ use App\SaveAnswer;
 use App\Models\User;
 use App\CourseReview;
 use App\Models\ContentComment;
+use App\Models\Usermeta;
 
 class VendorController extends Controller
 {
@@ -139,11 +140,18 @@ class VendorController extends Controller
         foreach ($rate as $key_a => $value_a) {
             $user = User::where(["id" => $value_a->user_id])->first();
             $getComment = ContentComment::where(["user_id" => $value_a->user_id])->first();
+            $userMeta = Usermeta::where(["user_id" => $value_a->user_id])->get();
 
             $comment["user_comment"][$key_a]["comment"] = $getComment["comment"];
             $comment["user_comment"][$key_a]["create_at"] = $getComment["create_at"];
             $comment["user_comment"][$key_a]["name"] = $user["name"];
             $comment["user_comment"][$key_a]["rate"] = $value_a->rate;
+
+            foreach($userMeta as $key_b => $value_b) {
+             if ($value_b->option == "avatar") {
+              $comment["user_comment"][$key_a]["avatar"] = $value_b->value;
+             }
+            }
         }
 
         $data["content"] = $getContent;
@@ -847,8 +855,21 @@ class VendorController extends Controller
     {
 
         $user = User::where(["id" => $id])->get();
+        $userMeta = Usermeta::where(["user_id" => $id])->get();
+        $data = array();
+        foreach($user as $key_a => $value_a) {
+         $data[$key_a]["name"] = $value_a->name;
+         $data[$key_a]["about"] = $value_a->about;
+         $data[$key_a]["vendor"] = $value_a->vendor;
+         
+         foreach($userMeta as $key_b => $value_b) {
+          if ($value_b->option == "avatar") {
+           $data[$key_a]["avatar"] = $value_b->value;
+          }
+         }
+        }
 
-        return response()->json($user);
+        return response()->json($data);
     }
 
     public function getVendorCountCourses($id)
