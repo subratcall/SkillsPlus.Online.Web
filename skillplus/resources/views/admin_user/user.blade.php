@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Report','Users']])
 @section('title')
-Courses Overview
+Dashboard
 @endsection
 
 @section('style')

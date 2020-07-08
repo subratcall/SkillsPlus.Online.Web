@@ -36,7 +36,8 @@ class UserController extends Controller
 
     public function dashboard()
     {    
-        return view('admin_user.user');
+        //return view('admin_user.user');
+        return view('admin_user.dashboard');
     }
     
     public function category(Request $request) {

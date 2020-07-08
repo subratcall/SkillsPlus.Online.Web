@@ -508,7 +508,7 @@ class PayController extends Controller
     function paynow(Request $request,$id,$type)
     {
         //Merchant's account information
-        $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
+       /*  $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
         $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
         
         //Transaction information
@@ -525,79 +525,104 @@ class PayController extends Controller
         //Construct signature string
         $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
         $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
-
-        
-        /* get response */
-
-        //each response params:
-        #$version = $_REQUEST["version"];
-        $date = date_create();
-        $request_timestamp = date_timestamp_get($date);// $_REQUEST["request_timestamp"];
-        #$merchant_id = $_REQUEST["merchant_id"];
-        #$currency = $_REQUEST["currency"];
-        #$order_id = $_REQUEST["order_id"];
-        #$amount = $_REQUEST["amount"];
-        $invoice_no = '';//$_REQUEST["invoice_no"];
-        $transaction_ref = 'O';//$_REQUEST["transaction_ref"];
-        $approval_code = '';// $_REQUEST["approval_code"];
-        $eci = '';//$_REQUEST["eci"];
-        $transaction_datetime = date("Y-m-d");//$_REQUEST["transaction_datetime"];
-        $payment_channel = '';//$_REQUEST["payment_channel"];
-        $payment_status = '';//$_REQUEST["payment_status"];
-        $channel_response_code = '';//$_REQUEST["channel_response_code"];
-        $channel_response_desc = '';//$_REQUEST["channel_response_desc"];
-        $masked_pan = '';//$_REQUEST["masked_pan"];
-        $stored_card_unique_id ='';// $_REQUEST["stored_card_unique_id"];
-        $backend_invoice ='';//$_REQUEST["backend_invoice"];
-        $paid_channel = '';//$_REQUEST["paid_channel"];
-        $recurring_unique_id = '';//$_REQUEST["recurring_unique_id"];
-        $paid_agent = '';//$_REQUEST["paid_agent"];
-        $payment_scheme = '';//$_REQUEST["payment_scheme"];
-        $user_defined_1 ='';// $_REQUEST["user_defined_1"];
-        $user_defined_2 ='';// $_REQUEST["user_defined_2"];
-        $user_defined_3 ='';// $_REQUEST["user_defined_3"];
-        $user_defined_4 ='';//'';// $_REQUEST["user_defined_4"];
-        $user_defined_5 = '';//$_REQUEST["user_defined_5"];
-        $browser_info = '';//$_REQUEST["browser_info"];
-        $ippPeriod ='';// $_REQUEST["ippPeriod"];
-        $ippInterestType ='';//$_REQUEST["ippInterestType"];
-        $ippInterestRate = '';//$_REQUEST["ippInterestRate"];
-        $ippMerchantAbsorbRate = '';//$_REQUEST["ippMerchantAbsorbRate"];
-        $payment_scheme ='';// $_REQUEST["payment_scheme"];
-        $process_by ='';// $_REQUEST["process_by"];
-        $sub_merchant_list = '';//$_REQUEST["sub_merchant_list"];
-       // $hash_value ='';// $_REQUEST["hash_value"];   
-        
-        //check response hash value (for security, hash value validation is Mandatory)
-        $checkHashStr = $version . $request_timestamp . $merchant_id . $order_id . 
-        $invoice_no . $currency . $amount . $transaction_ref . $approval_code . 
-        $eci . $transaction_datetime . $payment_channel . $payment_status . 
-        $channel_response_code . $channel_response_desc . $masked_pan . 
-        $stored_card_unique_id . $backend_invoice . $paid_channel . $paid_agent . 
-        $recurring_unique_id . $user_defined_1 . $user_defined_2 . $user_defined_3 . 
-        $user_defined_4 . $user_defined_5 . $browser_info . $ippPeriod . 
-        $ippInterestType . $ippInterestRate . $ippMerchantAbsorbRate . $payment_scheme .
-        $process_by . $sub_merchant_list;
-
-        $SECRETKEY = "7jYcp4FxFdf0";
-        $checkHash = hash_hmac('sha256',$checkHashStr, $SECRETKEY,false); 
+      
         echo "hash_value: ".$hash_value."<br/><br/>";
-        echo "checkHash: ".$checkHash."<br/><br/>";
-
-        if(strcmp(strtolower('a87183f5f9663f37ddb7e4d321c2471d70aaecf6058945319c2400b752e5973b'), strtolower($checkHash))==0){
-            echo "Hash check = success. it is safe to use this response data.";
-        }
-        else{
-            echo "Hash check = failed. do not use this response data.";
-        }
-<<<<<<< HEAD
-
-        /**/
-=======
->>>>>>> parent of b170ffd... 2c2cp success partial
+     */
     
-       // dd($checkHashStr);
-    }
+        /**form payment */
+        $merchantID = "JT01";		//Get MerchantID when opening account with 2C2P
+            $secretKey = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
 
+            //Transaction Information
+            $desc = "2 days 1 night hotel room";
+            $uniqueTransactionCode = time();
+            $currencyCode = "702";
+            $amt  = "000000000080";
+            $panCountry = "SG";
+
+            //Customer Information
+            $cardholderName = "John Doe";
+        
+            //Encrypted card data
+           $encCardData = "00acTPCs4oy2P52nolDsjc9FabG5/p6OqMzISvh8glP+qb5YgD7z7wCayBp9QW66CtAFENvqW/zZTgDBSKM8qz0W6sFx4TO6Uww58ar//VvDc5+OUz+JIAlQCPhewZN8IznxlyaBFvFLpvi+VugaUWo/Eow6kYalVuIj0MYg8OAccgU=U2FsdGVkX18jR/eUn9PmDT3MSuD3cmgWSovAztlaIPaE52l+fl3SJkU2+UhgJxZ";
+           // $_POST['encryptedCardInfo'];
+
+            //Retrieve card information for merchant use if needed
+            $maskedCardNo = 5437613519;//$_POST['maskedCardInfo'];
+            $expMonth =12;// $_POST['expMonthCardInfo'];
+            $expYear = 2022;//$_POST['expYearCardInfo'];
+
+            //Request Information 
+            $version = "9.9";    
+            
+            //Construct payment request message
+            $xml = "
+            <PaymentRequest>
+                <merchantID>$merchantID</merchantID>
+                <uniqueTransactionCode>$uniqueTransactionCode</uniqueTransactionCode>
+                <desc>$desc</desc>
+                <amt>$amt</amt>
+                <currencyCode>$currencyCode</currencyCode>  
+                <panCountry>$panCountry</panCountry> 
+                <cardholderName>$cardholderName</cardholderName>
+                <encCardData>$encCardData</encCardData>
+                </PaymentRequest>"; 
+            $paymentPayload = base64_encode($xml); //Convert payload to base64
+            $signature = strtoupper(hash_hmac('sha256', $paymentPayload, $secretKey, false));
+            $payloadXML = "<PaymentRequest>
+                <version>$version</version>
+                <payload>$paymentPayload</payload>
+                <signature>$signature</signature>
+                </PaymentRequest>"; 
+            $payload = base64_encode($payloadXML); //encode with base64
+
+            //dd($xml);
+
+            /** submit payment */
+            $arr = array('paymentRequest'=>$payload);
+
+            //$ap = $this->redirect_post('https://demo2.2c2p.com/2C2PFrontEnd/SecurePayment/PaymentAuth.aspx',$arr);
+
+            //dd($ap);
+            
+            /** read response */
+            $response = "<PaymentResponse><version>9.9</version><payload>PFBheW1lbnRSZXNwb25zZT48dGltZVN0YW1wPjA3MDcyMDE5NDUyNzwvdGltZVN0YW1wPjxtZXJjaGFudElEPkpUMDE8L21lcmNoYW50SUQ+PHJlc3BDb2RlPjk5PC9yZXNwQ29kZT48cGFuPjwvcGFuPjxhbXQ+MDAwMDAwMDAwMDgwPC9hbXQ+PHVuaXF1ZVRyYW5zYWN0aW9uQ29kZT4xNTk0MTc5ODUzPC91bmlxdWVUcmFuc2FjdGlvbkNvZGU+PHRyYW5SZWY+PC90cmFuUmVmPjxhcHByb3ZhbENvZGU+PC9hcHByb3ZhbENvZGU+PHJlZk51bWJlcj48L3JlZk51bWJlcj48ZWNpPjwvZWNpPjxkYXRlVGltZT4wNzA3MjAyMDQ1Mjc8L2RhdGVUaW1lPjxzdGF0dXM+Rjwvc3RhdHVzPjxmYWlsUmVhc29uPlRoZSBsZW5ndGggb2YgJ3BhbicgZmllbGQgZG9lcyBub3QgbWF0Y2guPC9mYWlsUmVhc29uPjx1c2VyRGVmaW5lZDE+PC91c2VyRGVmaW5lZDE+PHVzZXJEZWZpbmVkMj48L3VzZXJEZWZpbmVkMj48dXNlckRlZmluZWQzPjwvdXNlckRlZmluZWQzPjx1c2VyRGVmaW5lZDQ+PC91c2VyRGVmaW5lZDQ+PHVzZXJEZWZpbmVkNT48L3VzZXJEZWZpbmVkNT48aXBwUGVyaW9kPjwvaXBwUGVyaW9kPjxpcHBJbnRlcmVzdFR5cGU+PC9pcHBJbnRlcmVzdFR5cGU+PGlwcEludGVyZXN0UmF0ZT48L2lwcEludGVyZXN0UmF0ZT48aXBwTWVyY2hhbnRBYnNvcmJSYXRlPjwvaXBwTWVyY2hhbnRBYnNvcmJSYXRlPjxwYWlkQ2hhbm5lbD48L3BhaWRDaGFubmVsPjxwYWlkQWdlbnQ+PC9wYWlkQWdlbnQ+PHBheW1lbnRDaGFubmVsPjwvcGF5bWVudENoYW5uZWw+PGJhY2tlbmRJbnZvaWNlPjwvYmFja2VuZEludm9pY2U+PGlzc3VlckNvdW50cnk+PC9pc3N1ZXJDb3VudHJ5Pjxpc3N1ZXJDb3VudHJ5QTM+PC9pc3N1ZXJDb3VudHJ5QTM+PGJhbmtOYW1lPjwvYmFua05hbWU+PGNhcmRUeXBlPjwvY2FyZFR5cGU+PHByb2Nlc3NCeT48L3Byb2Nlc3NCeT48cGF5bWVudFNjaGVtZT48L3BheW1lbnRTY2hlbWU+PHJhdGVRdW90ZUlEPjwvcmF0ZVF1b3RlSUQ+PG9yaWdpbmFsQW1vdW50Pjwvb3JpZ2luYWxBbW91bnQ+PGZ4UmF0ZT48L2Z4UmF0ZT48Y3VycmVuY3lDb2RlPjwvY3VycmVuY3lDb2RlPjwvUGF5bWVudFJlc3BvbnNlPg==</payload><signature>8AB6298952A19D55134136C6FA5CCC46345384F668B85532936270DF1930A6DB</signature></PaymentResponse>";
+            //$_REQUEST["paymentResponse"]; 
+	
+            //dd($response);
+            //Decode response with base64
+            $reponsePayLoadXML = base64_decode($response);
+            //Parse ResponseXML            
+
+            $json = json_encode($response);
+            $array = json_decode($json,TRUE);
+            $xmlObject =simplexml_load_string($array);// or die("Error: Cannot create object");
+
+            
+            //dd($xmlObject);
+            //resource_path simplexml_load_string
+            //Decode payload with base64 to get the Reponse
+            $payloadxml = base64_decode($xmlObject->payload);
+            
+            //Get the signature from the ResponseXML
+            $signaturexml = $xmlObject->signature;
+            
+            $secretKey = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
+
+            //Encode the payload
+            $base64EncodedPayloadResponse=base64_encode($payloadxml);
+            //Generate signature based on "payload"
+            $signatureHash = strtoupper(hash_hmac('sha256', $base64EncodedPayloadResponse ,$secretKey, false));
+            
+            //Compare the response signature with payload signature with secretKey
+            if($signaturexml == $signatureHash){
+                echo "Response :<br/><textarea style='width:100%;height:80px'>". $payloadxml."</textarea>"; 
+            }
+            else{
+                //If Signature does not match
+                echo "Error :<br/><textarea style='width:100%;height:20px'>". "Wrong Signature"."</textarea>"; 
+                echo "<br/>";
+            }
+    }
 
 }
