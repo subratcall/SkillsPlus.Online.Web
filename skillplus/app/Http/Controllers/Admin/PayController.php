@@ -590,8 +590,11 @@ class PayController extends Controller
         else{
             echo "Hash check = failed. do not use this response data.";
         }
+<<<<<<< HEAD
 
         /**/
+=======
+>>>>>>> parent of b170ffd... 2c2cp success partial
     
        // dd($checkHashStr);
     }

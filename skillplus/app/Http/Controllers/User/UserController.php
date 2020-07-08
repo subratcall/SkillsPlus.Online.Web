@@ -368,7 +368,7 @@ class UserController extends Controller
         return back();
     }
 
-    public function dashboard(Request $request){
+    public function dashboard(){
         global $user;
         $userNotification = Notification::where(function($q){
             $q->where('recipent_type','all');
@@ -443,6 +443,7 @@ class UserController extends Controller
             'incomeDay'=>$incomeDay
         ]); */
 
+<<<<<<< HEAD
         //$admin = User::where('username',$username)->where('mode','active')->first();
 
             $admin = User::where('username',$user['username'])->where('mode','active')->first();
@@ -456,6 +457,11 @@ class UserController extends Controller
             Session::put('user_type','vend_user');
             //return redirect('/admin/user_dashboard/user');
             return view('admin_user.user');
+=======
+        
+        Session::put('user_type','vend_user');
+        return redirect('/admin/user_dashboard/user');
+>>>>>>> parent of b170ffd... 2c2cp success partial
     }
 
     ## Show Profile For All Users ##
