@@ -367,7 +367,7 @@ class UserController extends Controller
         return back();
     }
 
-    public function dashboard(){
+    public function dashboard(Request $request){
         global $user;
         $userNotification = Notification::where(function($q){
             $q->where('recipent_type','all');
@@ -443,8 +443,24 @@ class UserController extends Controller
         ]); */
 
         
-        Session::put('user_type','vend_user');
-        return redirect('/admin/user_dashboard/user');
+
+        $admin = User::where('username',$user['username'])->where('mode','active')->first();
+       
+        $request->session()->put('Admin',serialize($admin->toArray()));
+                    $user = User::find($admin->id);
+                    $user->last_view = time();
+                    $user->save();
+
+                    Session::put('user_id',$admin->id);
+                    if($admin->admin==1){
+                        Session::put('user_type','admin');
+                    }else if($admin->vendor==1){
+                        Session::put('user_type','vend_user');
+                    }else{
+                        Session::put('user_type','reg_user');
+                    }
+        return view('admin_user.user');
+        //return redirect('/admin/user_dashboard/user');
     }
 
     ## Show Profile For All Users ##
