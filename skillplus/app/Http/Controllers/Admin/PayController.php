@@ -581,8 +581,11 @@ class PayController extends Controller
             /** submit payment */
             $arr = array('paymentRequest'=>$payload);
 
-            //$ap = $this->redirect_post('https://demo2.2c2p.com/2C2PFrontEnd/SecurePayment/PaymentAuth.aspx',$arr);
-
+            $ap = $this->redirect_post('https://demo2.2c2p.com/2C2PFrontEnd/SecurePayment/PaymentAuth.aspx',$arr);
+            //$encoded_payment_response = urldecode($_REQUEST["PaymentResponse"]);
+            if($ap){
+                echo 1234;
+            }
             //dd($ap);
             
             /** read response */
@@ -623,6 +626,31 @@ class PayController extends Controller
                 echo "Error :<br/><textarea style='width:100%;height:20px'>". "Wrong Signature"."</textarea>"; 
                 echo "<br/>";
             }
+    }
+
+    function redirect_post($url, array $data, array $headers = null) {
+        $params = array(
+            'http' => array(
+                'method' => 'POST',
+                'content' => http_build_query($data)
+            )
+        );
+        if (!is_null($headers)) {
+            $params['http']['header'] = '';
+            foreach ($headers as $k => $v) {
+                $params['http']['header'] .= "$k: $v\n";
+            }
+        }
+        $ctx = stream_context_create($params);
+        $fp = @fopen($url, 'rb', false, $ctx);
+        if ($fp) {
+            echo @stream_get_contents($fp);
+            echo 123;
+            die();
+        } else {
+            // Error
+            throw new Exception("Error loading '$url', $php_errormsg");
+        }
     }
 
 }
