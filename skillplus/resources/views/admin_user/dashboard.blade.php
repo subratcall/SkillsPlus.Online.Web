@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Report','Users']])
 @section('title')
-Courses Overview
+Dashboard
 @endsection
 
 @section('style')
@@ -339,5 +339,39 @@ Courses Overview
 @endsection
 
 @section('script')
+<script>
+    $(document).ready(function() {
+        var d = '
+            <PaymentRequest>'
+               ' <merchantID>$merchantID</merchantID>'
+              '  <uniqueTransactionCode>$uniqueTransactionCode</uniqueTransactionCode>'
+                '<desc>$desc</desc>'
+               ' <amt>$amt</amt>'
+              '  <currencyCode>$currencyCode</currencyCode>  '
+              '  <panCountry>$panCountry</panCountry> '
+                <cardholderName>$cardholderName</cardholderName>
+                <encCardData>$encCardData</encCardData>
+                </PaymentRequest>"; 
+            $paymentPayload = base64_encode($xml); //Convert payload to base64
+            $signature = strtoupper(hash_hmac('sha256', $paymentPayload, $secretKey, false));
+            $payloadXML = "<PaymentRequest>
+                <version>$version</version>
+                <payload>$paymentPayload</payload>
+                <signature>$signature</signature>
+                </PaymentRequest>'
+        $.ajax({
+            url: "https://demo2.2c2p.com/2C2PFrontEnd/SecurePayment/PaymentAuth.aspx",
+            type: "post",
+            dataType: 'JSON',
+            success: function(data) {       
+               
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error! Contact IT Department.');
+            }
+        });
+        
+    });
+</script>
 
 @endsection

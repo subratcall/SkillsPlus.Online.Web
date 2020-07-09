@@ -544,7 +544,7 @@ class PayController extends Controller
             $cardholderName = "John Doe";
         
             //Encrypted card data
-           $encCardData = "00acTPCs4oy2P52nolDsjc9FabG5/p6OqMzISvh8glP+qb5YgD7z7wCayBp9QW66CtAFENvqW/zZTgDBSKM8qz0W6sFx4TO6Uww58ar//VvDc5+OUz+JIAlQCPhewZN8IznxlyaBFvFLpvi+VugaUWo/Eow6kYalVuIj0MYg8OAccgU=U2FsdGVkX18jR/eUn9PmDT3MSuD3cmgWSovAztlaIPaE52l+fl3SJkU2+UhgJxZ";
+           $encCardData = "00acTPCs4oy2P52nolDsjc9FabG5/p6OqMzISvh8glP+qb5YgD7z7wCayBp9QW66CtAFENvqW/zZTgDBSKM8qz0W6sFx4TO6Uww58ar//VvDc5+OUz+JIAlQCPhewZN8IznxlyaBFvFLpvi+VugaUWo/Eow6kYalVuIj0MYg8OAccgU=U2FsdGVkX18jR/eUn9PmDT3MSuD3cmgWSovAztlaIPaE52l+fl3SJkU2+UhgJxZL";
            // $_POST['encryptedCardInfo'];
 
             //Retrieve card information for merchant use if needed
