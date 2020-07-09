@@ -505,7 +505,106 @@ class PayController extends Controller
     }
 
     #2c2p paynow
-    function paynow(Request $request,$id,$type)
+
+    public $get2c2p_course_id;
+    function paynow(Request $request,$id,$type='download')
+    {
+        $this->get2c2p_course_id = $id;
+        $content = Content::with('metas')->where('mode','publish')->find($id);
+        $meta = arrayToList($content->metas,'option','value');
+        
+        if($type == 'download')
+            $Amounts = $meta['price'];
+        elseif ($type == 'post')
+            $Amounts = $meta['post_price']; 
+          // dd($meta['price']);
+
+        $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
+        $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
+        
+        //Transaction information
+        $payment_description  = $content->title;//'2 days 1 night hotel room';
+        $order_id  = time();
+        $currency = "702";
+        $amount  =  str_pad($Amounts, 12, '0', STR_PAD_LEFT);//'000000002500';
+        
+        //Request information
+        $version = "8.5";	
+        $payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
+        $result_url_1 = "http://192.168.110.16:8080/get2c2presult";
+        
+        //Construct signature string
+        $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
+        $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
+        $arr = array(
+            'version'=>$version,
+            'merchant_id'=>$merchant_id,
+            'currency'=>$currency,
+            'result_url_1'=>$result_url_1,
+            'hash_value'=>$hash_value,
+            'payment_description'=>$payment_description,
+            'order_id'=>$order_id,
+            'amount'=>$amount,
+        );
+        $fields_string = '';
+        //url-ify the data for the POST
+        foreach($arr as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        rtrim($fields_string, '&');
+        /* $al = $this->redirect_post($payment_url,$arr);
+        dd($al); */
+
+
+        global $user;
+
+        $Amount_pay = pricePay($content->id,$content->category_id,$Amounts)['price'];
+        if($content->private == 1)
+            $site_income = get_option('site_income_private');
+        else
+            $site_income = get_option('site_income');
+       $Transaction = Transaction::create([
+            'buyer_id'      => $user['id'],
+            'user_id'       => $content->user_id,
+            'content_id'    => $content->id,
+            'price'         => $Amount_pay,
+            'price_content' => $Amounts,
+            'mode'          => 'pending',
+            'create_at'     => time(),
+            'bank'          => 'paytm',
+            'authority'     => 0,
+            'income'        => $Amount_pay - (($site_income/100)*$Amount_pay),
+            'type'          => '',//$mode
+        ]);
+
+
+
+        $ch = curl_init();
+
+        //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+ 
+        $fields_string = '';
+        //url-ify the data for the POST
+        foreach($arr as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        rtrim($fields_string, '&');
+
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $payment_url);
+        curl_setopt($ch,CURLOPT_POST, count($arr));
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        //execute post
+        $redirectURL = curl_getinfo($ch,CURLINFO_EFFECTIVE_URL );
+        curl_exec($ch);
+        curl_close($ch);
+
+     //   return Redirect::to($redirectURL);
+
+    /*     header("Location: ".$redirectURL); 
+        exit(); */
+        
+       // dd($redirectURL);
+    }
+
+    function testpaynow2(Request $request,$id,$type)
     {
         //Merchant's account information
        /*  $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
@@ -584,7 +683,7 @@ class PayController extends Controller
             $ap = $this->redirect_post('https://demo2.2c2p.com/2C2PFrontEnd/SecurePayment/PaymentAuth.aspx',$arr);
             //$encoded_payment_response = urldecode($_REQUEST["PaymentResponse"]);
             if($ap){
-                echo 1234;
+               // echo 1234;
             }
             //dd($ap);
             
@@ -628,29 +727,83 @@ class PayController extends Controller
             }
     }
 
-    function redirect_post($url, array $data, array $headers = null) {
-        $params = array(
-            'http' => array(
-                'method' => 'POST',
-                'content' => http_build_query($data)
-            )
-        );
-        if (!is_null($headers)) {
-            $params['http']['header'] = '';
-            foreach ($headers as $k => $v) {
-                $params['http']['header'] .= "$k: $v\n";
-            }
+    
+
+/**
+ * Redirect with POST data.
+ *
+ * @param string $url URL.
+ * @param array $post_data POST data. Example: array('foo' => 'var', 'id' => 123)
+ * @param array $headers Optional. Extra headers to send.
+ */
+public function redirect_post($url, array $data, array $headers = null) {
+    $params = array(
+        'http' => array(
+            'method' => 'POST',
+            'content' => http_build_query($data)
+        )
+    );
+    if (!is_null($headers)) {
+        $params['http']['header'] = '';
+        foreach ($headers as $k => $v) {
+            $params['http']['header'] .= "$k: $v\n";
         }
-        $ctx = stream_context_create($params);
-        $fp = @fopen($url, 'rb', false, $ctx);
-        if ($fp) {
-            echo @stream_get_contents($fp);
-            echo 123;
-            die();
-        } else {
-            // Error
-            throw new Exception("Error loading '$url', $php_errormsg");
-        }
+    }
+    $ctx = stream_context_create($params);
+    $fp = @fopen($url, 'rb', false, $ctx);
+    if ($fp) {
+        echo @stream_get_contents($fp);
+        die();
+    } else {
+        // Error
+        throw new Exception("Error loading '$url', $php_errormsg");
+    }
+}
+
+
+
+    function get2c2presult(Request $request)
+    {
+       dd($request);exit;
+
+
+        //if(isset($payment['status']) && $payment['status'] == true){
+          //  dd($this->get2c2p_course_id);
+            $Transaction = Transaction::find($this->get2c2p_course_id);
+            $product = Content::find($Transaction->content_id);
+            $userUpdate = User::with('category')->find($Transaction->user_id);
+            if($product->private == 1)
+                $site_income = get_option('site_income_private')-$userUpdate->category->off;
+            else
+                $site_income = get_option('site_income')-$userUpdate->category->off;
+
+            if(empty($transaction))
+                \redirect('/product/'.$Transaction->content_id);
+
+            $Amount = $Transaction->price;
+
+            Sell::insert([
+                'user_id'       => $Transaction->user_id,
+                'buyer_id'      => $Transaction->buyer_id,
+                'content_id'    => $Transaction->content_id,
+                'type'          => $Transaction->type,
+                'create_at'     => time(),
+                'mode'          => 'pay',
+                'transaction_id'=> $Transaction->id,
+                'remain_time'   => $Transaction->remain_time
+            ]);
+
+            $userUpdate->update(['income'=>$userUpdate->income+((100-$site_income)/100)*$Amount]);
+            Transaction::find($Transaction->id)->update(['mode'=>'deliver','income'=>((100-$site_income)/100)*$Amount]);
+
+            ## Notification Center
+            sendNotification(0,['[c.title]'=>$product->title],get_option('notification_template_buy_new'),'user',$Transaction->buyer_id);
+
+            return redirect('/product/'.$Transaction->content_id);
+        /* }else{
+            return \redirect('/product/'.$product_id)->with('msg',trans('admin.payment_failed'));
+        } */
+    
     }
 
 }

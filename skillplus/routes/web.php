@@ -1,4 +1,8 @@
 <?php
+
+
+Route::match(['get','post'],'get2c2presult','Admin\PayController@get2c2presult');
+//','Admin\PayController@get2c2presult');
 Route::group(['prefix' => 'admin'],function (){
 
     Route::group(['middleware'=>'admin'],function (){
@@ -931,7 +935,8 @@ Route::group(['middleware'=>'notification'],function (){
         });
 
         Route::group(['prefix'=>'paynow'], function () {
-            Route::get('pay/{id}/{type}','Admin\PayController@paynow');
+            //Route::get('pay/{id}/{type}','Admin\PayController@paynow');
+            Route::match(['get','post'],'pay/{id}/{type}','Admin\PayController@paynow');
             /* Route::any('status/{product_id}','Admin\PayController@payuStatus');
             Route::any('cancel/{id}','Admin\PayController@payuCancel'); */
         });

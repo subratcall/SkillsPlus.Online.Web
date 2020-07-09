@@ -309,12 +309,52 @@ Dashboard
     </div>
   </div>
 
-
+  <?php 
+  //Merchant's account information
+  $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
+  $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
   
+  //Transaction information
+  $payment_description  = '2 days 1 night hotel room';
+  $order_id  = time();
+  $currency = "702";
+  $amount  = '000000002500';
+  
+  //Request information
+  $version = "8.5";	
+  $payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
+  $result_url_1 = "http://192.168.110.16:8080/get2c2presult";
+  
+  //Construct signature string
+  $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
+  $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
+  
+?>
+  
+{{-- 
+  <form id="myform" method="post" action="https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment">
+    <input type="hidden" name="version" value="8.5"/>
+    <input type="hidden" name="merchant_id" value="JT01"/>
+    <input type="hidden" name="currency" value="702"/>
+    <input type="hidden" name="result_url_1" value="http://192.168.110.16:8080/get2c2presult"/>
+    <input type="hidden" name="hash_value" value="3c4d6e9a9746a8d920c927f3c003c33173a2de7b0813b13ca85c29904ed5cf34"/>
+PRODUCT INFO : <input type="text" name="payment_description" value="2 days 1 night hotel room"  readonly/><br/>
+    ORDER NO : <input type="text" name="order_id" value="1594261684"  readonly/><br/>
+    AMOUNT: <input type="text" name="amount" value="000000002500" readonly/><br/>
+    <input type="submit" name="submit" value="Confirm" />
+</form> --}}
 
-
-
-
+<form id="myform" method="post" action="{{$payment_url}}">
+    <input type="hidden" name="version" value="{{$version}}"/>
+    <input type="hidden" name="merchant_id" value="{{$merchant_id}}"/>
+    <input type="hidden" name="currency" value="{{$currency}}"/>
+    <input type="hidden" name="result_url_1" value="{{$result_url_1}}"/>
+    <input type="hidden" name="hash_value" value="{{$hash_value}}"/>
+PRODUCT INFO : <input type="text" name="payment_description" value="{{$payment_description}}"  readonly/><br/>
+    ORDER NO : <input type="text" name="order_id" value="{{$order_id}}"  readonly/><br/>
+    AMOUNT: <input type="text" name="amount" value="{{$amount}}" readonly/><br/>
+    <input type="submit" name="submit" value="Confirm" />
+</form>  
 
 
 
@@ -339,29 +379,26 @@ Dashboard
 @endsection
 
 @section('script')
+<script type="text/javascript">
+    document.forms.myform.submit();
+</script>
 <script>
     $(document).ready(function() {
-        var d = '
-            <PaymentRequest>'
-               ' <merchantID>$merchantID</merchantID>'
-              '  <uniqueTransactionCode>$uniqueTransactionCode</uniqueTransactionCode>'
-                '<desc>$desc</desc>'
-               ' <amt>$amt</amt>'
-              '  <currencyCode>$currencyCode</currencyCode>  '
-              '  <panCountry>$panCountry</panCountry> '
-                <cardholderName>$cardholderName</cardholderName>
-                <encCardData>$encCardData</encCardData>
-                </PaymentRequest>"; 
-            $paymentPayload = base64_encode($xml); //Convert payload to base64
-            $signature = strtoupper(hash_hmac('sha256', $paymentPayload, $secretKey, false));
-            $payloadXML = "<PaymentRequest>
-                <version>$version</version>
-                <payload>$paymentPayload</payload>
-                <signature>$signature</signature>
-                </PaymentRequest>'
-        $.ajax({
-            url: "https://demo2.2c2p.com/2C2PFrontEnd/SecurePayment/PaymentAuth.aspx",
-            type: "post",
+     
+        /* $.ajax({
+            url: "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment",
+            type: "POST",
+            data:{
+                //paymentRequst:"PFBheW1lbnRSZXF1ZXN0Pg0KICAgICAgICAgICAgICAgIDx2ZXJzaW9uPjkuOTwvdmVyc2lvbj4NCiAgICAgICAgICAgICAgICA8cGF5bG9hZD5EUW9nSUNBZ0lDQWdJQ0FnSUNBOFVHRjViV1Z1ZEZKbGNYVmxjM1ErRFFvZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnUEcxbGNtTm9ZVzUwU1VRK1NsUXdNVHd2YldWeVkyaGhiblJKUkQ0TkNpQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBOGRXNXBjWFZsVkhKaGJuTmhZM1JwYjI1RGIyUmxQakUxT1RReU5UZ3lOekU4TDNWdWFYRjFaVlJ5WVc1ellXTjBhVzl1UTI5a1pUNE5DaUFnSUNBZ0lDQWdJQ0FnSUNBZ0lDQThaR1Z6WXo0eUlHUmhlWE1nTVNCdWFXZG9kQ0JvYjNSbGJDQnliMjl0UEM5a1pYTmpQZzBLSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJRHhoYlhRK01EQXdNREF3TURBd01EZ3dQQzloYlhRK0RRb2dJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ1BHTjFjbkpsYm1ONVEyOWtaVDQzTURJOEwyTjFjbkpsYm1ONVEyOWtaVDRnSUEwS0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUR4d1lXNURiM1Z1ZEhKNVBsTkhQQzl3WVc1RGIzVnVkSEo1UGlBTkNpQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBOFkyRnlaR2h2YkdSbGNrNWhiV1UrU205b2JpQkViMlU4TDJOaGNtUm9iMnhrWlhKT1lXMWxQZzBLSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJRHhsYm1ORFlYSmtSR0YwWVQ0d01HRmpWRkJEY3pSdmVUSlFOVEp1YjJ4RWMycGpPVVpoWWtjMUwzQTJUM0ZOZWtsVGRtZzRaMnhRSzNGaU5WbG5SRGQ2TjNkRFlYbENjRGxSVnpZMlEzUkJSa1ZPZG5GWEwzcGFWR2RFUWxOTFRUaHhlakJYTm5OR2VEUlVUelpWZDNjMU9HRnlMeTlXZGtSak5TdFBWWG9yU2tsQmJGRkRVR2hsZDFwT09FbDZibmhzZVdGQ1JuWkdUSEIyYVN0V2RXZGhWVmR2TDBWdmR6WnJXV0ZzVm5WSmFqQk5XV2M0VDBGalkyZFZQVlV5Um5Oa1IxWnJXREU0YWxJdlpWVnVPVkJ0UkZRelRWTjFSRE5qYldkWFUyOTJRWHAwYkdGSlVHRkZOVEpzSzJac00xTkthMVV5SzFWb1owcDRXa3c4TDJWdVkwTmhjbVJFWVhSaFBnMEtJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lEd3ZVR0Y1YldWdWRGSmxjWFZsYzNRKzwvcGF5bG9hZD4NCiAgICAgICAgICAgICAgICA8c2lnbmF0dXJlPjlFMTBDQjJEQzU4MDk3MjZFNDhDREQ4RDlDOTMwQjUzQTJENTUwMTg3MzBCNDZEMThDN0ExNzFFMzU0M0IzRkQ8L3NpZ25hdHVyZT4NCiAgICAgICAgICAgICAgICA8L1BheW1lbnRSZXF1ZXN0Pg=="
+                version:"8.5",
+                merchant_id:"JT01",
+                currency:"702",
+                result_url_1:"http://192.168.110.16:8080/get2c2presult",
+                hash_value:"5721e8c6e1cf53293fa7b784e82432fbb3f0b66cd5fb15ffd8a1a87725c0b935",
+                payment_description:"2 days 1 night hotel room",
+                order_id:"1594260802",
+                amount:"000000002500",
+            },
             dataType: 'JSON',
             success: function(data) {       
                
@@ -369,7 +406,7 @@ Dashboard
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
             }
-        });
+        }); */
         
     });
 </script>
