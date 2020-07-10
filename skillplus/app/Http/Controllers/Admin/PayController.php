@@ -545,6 +545,7 @@ class PayController extends Controller
             'payment_description'=>$payment_description,
             'order_id'=>$order_id,
             'amount'=>$amount,
+            //'user_defined_1' => $amount,
         );
         $fields_string = '';
         //url-ify the data for the POST
