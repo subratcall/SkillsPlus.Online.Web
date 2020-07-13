@@ -590,9 +590,9 @@
                                     </div>
                                 @endif
                                     <div class="radio">
-                                        <input type="radio" class="buy-mode" id="mode-6" value="paynow" name="buyMode">
+                                        <input type="radio" class="buy-mode" id="mode-6" value="CCVS" name="buyMode">
                                         &nbsp;
-                                        <label class="radio-label" for="mode-6"> Pay now </label>
+                                        <label class="radio-label" for="mode-6"> Credit Card/ Visa </label>
                                     </div>
                                 <div class="h-10"></div>
                                 <div class="table-responsive table-base-price">

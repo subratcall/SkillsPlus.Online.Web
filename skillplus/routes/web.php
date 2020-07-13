@@ -934,7 +934,7 @@ Route::group(['middleware'=>'notification'],function (){
             Route::any('cancel/{id}','Admin\PayController@payuCancel');
         });
 
-        Route::group(['prefix'=>'paynow'], function () {
+        Route::group(['prefix'=>'CCVS'], function () {
             //Route::get('pay/{id}/{type}','Admin\PayController@paynow');
             Route::match(['get','post'],'pay/{id}/{type}','Admin\PayController@paynow');
             /* Route::any('status/{product_id}','Admin\PayController@payuStatus');

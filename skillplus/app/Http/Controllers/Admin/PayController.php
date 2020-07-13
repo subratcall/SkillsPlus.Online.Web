@@ -9,6 +9,7 @@ use App\Models\Sell;
 use App\Models\Transaction;
 use App\Models\TransactionCharge;
 use App\Models\User;
+use App\Models\PaymentLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use PayPal\Api\Amount;
@@ -23,7 +24,6 @@ use PayPal\Rest\ApiContext;
 use SoapClient;
 use Illuminate\Support\Facades\Redirect;
 use Unicodeveloper\Paystack\Facades\Paystack;
-
 class PayController extends Controller
 {
 
@@ -505,20 +505,18 @@ class PayController extends Controller
     }
 
     #2c2p paynow
-
-    public $get2c2p_course_id;
     function paynow(Request $request,$id,$type='download')
     {
-        $this->get2c2p_course_id = $id;
         $content = Content::with('metas')->where('mode','publish')->find($id);
         $meta = arrayToList($content->metas,'option','value');
         
         if($type == 'download')
-            $Amounts = $meta['price'];
+            $Amounts = floatval($meta['price']);
         elseif ($type == 'post')
-            $Amounts = $meta['post_price']; 
+            $Amounts = floatval($meta['post_price']); 
           // dd($meta['price']);
 
+         // echo number_format((float)$Amounts, 2, '.', '');exit;
         $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
         $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
         
@@ -526,15 +524,17 @@ class PayController extends Controller
         $payment_description  = $content->title;//'2 days 1 night hotel room';
         $order_id  = time();
         $currency = "702";
-        $amount  =  str_pad($Amounts, 12, '0', STR_PAD_LEFT);//'000000002500';
-        
+        $amount1 = number_format((float)$Amounts, 2, '.', '');
+        $getFinalAmount =str_replace(".","",$amount1);
+        $amount  =  str_pad(floatval($getFinalAmount), 12, '0', STR_PAD_LEFT);//'000000002500';
+  
         //Request information
         $version = "8.5";	
         $payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
-        $result_url_1 = "http://192.168.110.16:8080/get2c2presult";
-        
+        $result_url_1 = url('/')."/get2c2presult";        
+        $payment_option = 'ALL';
         //Construct signature string
-        $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
+        $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1.$payment_option;
         $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
         $arr = array(
             'version'=>$version,
@@ -544,65 +544,88 @@ class PayController extends Controller
             'hash_value'=>$hash_value,
             'payment_description'=>$payment_description,
             'order_id'=>$order_id,
-            'amount'=>$amount,
-            //'user_defined_1' => $amount,
+            'amount'=>$amount,            
+            'payment_option' => $payment_option,
         );
         $fields_string = '';
-        //url-ify the data for the POST
-        foreach($arr as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-        rtrim($fields_string, '&');
-        /* $al = $this->redirect_post($payment_url,$arr);
-        dd($al); */
 
-
-        global $user;
-
-        $Amount_pay = pricePay($content->id,$content->category_id,$Amounts)['price'];
-        if($content->private == 1)
-            $site_income = get_option('site_income_private');
-        else
-            $site_income = get_option('site_income');
-       $Transaction = Transaction::create([
-            'buyer_id'      => $user['id'],
-            'user_id'       => $content->user_id,
-            'content_id'    => $content->id,
-            'price'         => $Amount_pay,
-            'price_content' => $Amounts,
-            'mode'          => 'pending',
-            'create_at'     => time(),
-            'bank'          => 'paytm',
-            'authority'     => 0,
-            'income'        => $Amount_pay - (($site_income/100)*$Amount_pay),
-            'type'          => '',//$mode
-        ]);
-
-
-
-        $ch = curl_init();
-
-        //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
- 
+   /*     $ch = curl_init();
+        //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); 
         $fields_string = '';
         //url-ify the data for the POST
         foreach($arr as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
         rtrim($fields_string, '&');
-
-
         //set the url, number of POST vars, POST data
         curl_setopt($ch,CURLOPT_URL, $payment_url);
         curl_setopt($ch,CURLOPT_POST, count($arr));
         curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
         //execute post
         $redirectURL = curl_getinfo($ch,CURLINFO_EFFECTIVE_URL );
+
+        header("HTTP/1.1 301 Moved Permanently");
+        header( $payment_url);
+
         curl_exec($ch);
         curl_close($ch);
+ */
+    echo '
+    <html>
+    <body>
+    <form style="visibility:hidden" id="myform" name="myform" method="post" action="'.$payment_url.'">
+    <input type="hidden" name="version" value="'.$version.'"/>
+    <input type="hidden" name="merchant_id" value="'.$merchant_id.'"/>
+    <input type="hidden" name="currency" value="'.$currency.'"/>
+    <input type="hidden" name="result_url_1" value="'.$result_url_1.'"/>
+    <input type="hidden" name="payment_option" value="'.$payment_option.'"/>
+    <input type="hidden" name="hash_value" value="'.$hash_value.'"/>
+    PRODUCT INFO : <input type="text" name="payment_description" value="'.$payment_description.'"  readonly/><br/>
+    ORDER NO : <input type="text" name="order_id" value="'.$order_id.'"  readonly/><br/>
+    AMOUNT: <input type="text" name="amount" value="'.$amount.'" readonly/><br/>
+    <input type="submit" name="submit" value="Confirm" />
+    </form> 
 
-     //   return Redirect::to($redirectURL);
+    
+    '.'<script type="application/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>'
+    ."
+    <script type='text/javascript'>
+    $(document).ready(function(){
+        document.createElement('form').submit.call(document.getElementById('myform'));
+    });
+    </script>
 
-    /*     header("Location: ".$redirectURL); 
-        exit(); */
-        
-       // dd($redirectURL);
+    </body>
+    </html> "; 
+    }
+
+    /**
+     * Redirect with POST data.
+     *
+     * @param string $url URL.
+     * @param array $post_data POST data. Example: array('foo' => 'var', 'id' => 123)
+     * @param array $headers Optional. Extra headers to send.
+     */
+    public function redirect_posts($url, array $data, array $headers = null) {
+        $params = array(
+            'http' => array(
+                'method' => 'POST',
+                'content' => http_build_query($data)
+            )
+        );
+        if (!is_null($headers)) {
+            $params['http']['header'] = '';
+            foreach ($headers as $k => $v) {
+                $params['http']['header'] .= "$k: $v\n";
+            }
+        }
+        $ctx = stream_context_create($params);
+        $fp = @fopen($url, 'rb', false, $ctx);
+        if ($fp) {
+            echo @stream_get_contents($fp);
+            die();
+        } else {
+            // Error
+            throw new Exception("Error loading '$url', $php_errormsg");
+        }
     }
 
     function testpaynow2(Request $request,$id,$type)
@@ -765,7 +788,9 @@ public function redirect_post($url, array $data, array $headers = null) {
 
     function get2c2presult(Request $request)
     {
-       dd($request);exit;
+        
+        return redirect('/product/117');
+      // dd($request);exit;
 
 
         //if(isset($payment['status']) && $payment['status'] == true){
@@ -800,7 +825,6 @@ public function redirect_post($url, array $data, array $headers = null) {
             ## Notification Center
             sendNotification(0,['[c.title]'=>$product->title],get_option('notification_template_buy_new'),'user',$Transaction->buyer_id);
 
-            return redirect('/product/'.$Transaction->content_id);
         /* }else{
             return \redirect('/product/'.$product_id)->with('msg',trans('admin.payment_failed'));
         } */
