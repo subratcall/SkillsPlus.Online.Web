@@ -11,19 +11,19 @@ Dashboard
 @section('page')
 <style>
     .ucp-menu-item .item-box {
-    background: #ffffff;
-    border-radius: 4px;
-    height: auto;
-    overflow: hidden;
-    display: block;
-    padding: 15px;
-    position: relative;
-    -webkit-transition: all 0.25s ease-in-out;
-    transition: all 0.25s ease-in-out;
-    text-decoration: none;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
+        background: #ffffff;
+        border-radius: 4px;
+        height: auto;
+        overflow: hidden;
+        display: block;
+        padding: 15px;
+        position: relative;
+        -webkit-transition: all 0.25s ease-in-out;
+        transition: all 0.25s ease-in-out;
+        text-decoration: none;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
 .sbox3 {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
 }
@@ -274,6 +274,18 @@ Dashboard
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
 }
 
+.ucp-top-panel .top-panel-box p {
+    position: absolute;
+    left: 10px;
+    top: 35%;
+    font-size: 1.3em;
+}
+p {
+    font-size: 1em;
+}
+p {
+    margin: 0 0 10px;
+}
 
 </style>
 <link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" /> 
@@ -348,147 +360,200 @@ Dashboard
         </div>
       </div>
     </div>
-  </div>
-
-  {{-- <div class="row ucp-top-panel">
-    <div class="container no-padding-xs">
-        <div class="row">      
-                <div class="col">
-                    <div class="card">
-                    <div class="card-body">
-                                <a href="/user/balance" class="col-md-3 col-xs-6">
-                                    <div class="top-panel-box sbox3 sbox3-s">
-                                        <div class="icon-holder icon1 hidden-xs">
-                                        <span class="noticon mdi mdi-cash-usd"></span>
-                                        </div>
-                                        <p>{{{ trans('main.new_sales') }}}</p>
-                                        <div class="alert-box alert-box1">123</div>
-                                    </div>
-                                </a>
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                    <div class="card-body">
-                        <a href="/user/balance/sell/post" class="col-md-3 col-xs-6">
-                            <div class="top-panel-box sbox3 sbox3n">
-                                <div class="icon-holder icon2 hidden-xs">
-                                <span class="noticon mdi mdi-package-variant-closed"></span>
-                                </div>
-                                <p>{{{ trans('main.new_postal_sales') }}}</p>
-                                <div class="alert-box alert-box3">23</div>
-                            </div>
-                        </a>
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                    <div class="card-body">
-                        <a href="/user/ticket" class="col-md-3 col-xs-6">
-                            <div class="top-panel-box sbox3 sbox3m">
-                                <div class="icon-holder icon3 hidden-xs">
-                                <span class="noticon mdi mdi-comment-multiple-outline"></span>
-                                </div>
-                                <p>{{{ trans('main.new_support_ticket') }}}</p>
-                                <div class="alert-box alert-box2">{{{ $alert['ticket'] or 0 }}}</div>
-                            </div>
-                        </a>
-                        
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                    <div class="card-body">                        
-                        <a href="/user/balance/sell/post" class="col-md-3 col-xs-6">
-                            <div class="top-panel-box sbox3 sbox3-e">
-                                <div class="icon-holder icon2 hidden-xs">
-                                <span class="noticon mdi mdi-package-variant-closed"></span>
-                                </div>
-                                <p>{{{ trans('main.new_postal_sales') }}}</p>
-                                <div class="alert-box alert-box3">{!! $alert['sell_post'] !!}</div>
-                            </div>
-                        </a>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+</div>
 
     <div class="container-fluid">
-        <div class="row ucp-top-panel">
+        <div class=" ucp-top-panel">
             <div class="container no-padding-xs">
-                <div class="h-10 visible-xs"></div>
-                {{-- <div class="col">
-                    <div class="card">
-                        <div class="card-body"> --}}
                             <div class="row">
-                                <a href="/user/balance" class="col-md-3 col-xs-6">
-                                    <div class="top-panel-box sbox3 sbox3-s">
-                                        <div class="icon-holder icon1 hidden-xs">
-                                        <span class="noticon mdi mdi-cash-usd"></span>
+                                <div class="col-md-3">
+                                    <a href="/user/balance" >
+                                        <div class="top-panel-box sbox3 sbox3-s">
+                                            <div class="icon-holder icon1 hidden-xs">
+                                            <span class="noticon mdi mdi-cash-usd"></span>
+                                            </div>
+                                            <p>New Sales</p>
+                                            <div class="alert-box alert-box1">212</div>
                                         </div>
-                                        <p>New Sales</p>
-                                        <div class="alert-box alert-box1">212</div>
-                                    </div>
-                                </a>
-                                <a href="/user/balance/sell/post" class="col-md-3 col-xs-6">
-                                    <div class="top-panel-box sbox3 sbox3-e">
-                                        <div class="icon-holder icon2 hidden-xs">
-                                        <span class="noticon mdi mdi-package-variant-closed"></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="/user/balance/sell/post">
+                                        <div class="top-panel-box sbox3 sbox3-e">
+                                            <div class="icon-holder icon2 hidden-xs">
+                                            <span class="noticon mdi mdi-package-variant-closed"></span>
+                                            </div>
+                                            <p>New Postal Sales</p>
+                                            <div class="alert-box alert-box3">0</div>
                                         </div>
-                                        <p>New Postal Sales</p>
-                                        <div class="alert-box alert-box3">0</div>
-                                    </div>
-                                </a>
-                                <a href="/user/ticket" class="col-md-3 col-xs-6">
-                                    <div class="top-panel-box sbox3 sbox3m">
-                                        <div class="icon-holder icon3 hidden-xs">
-                                        <span class="noticon mdi mdi-comment-multiple-outline"></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="/user/ticket" >
+                                        <div class="top-panel-box sbox3 sbox3m">
+                                            <div class="icon-holder icon3 hidden-xs">
+                                            <span class="noticon mdi mdi-comment-multiple-outline"></span>
+                                            </div>
+                                            <p>New Support Message</p>
+                                            <div class="alert-box alert-box2">0</div>
                                         </div>
-                                        <p>New Support Message</p>
-                                        <div class="alert-box alert-box2">0</div>
-                                    </div>
-                                </a>
-                                <a href="/user/ticket/comments" class="col-md-3 col-xs-6">
-                                    <div class="top-panel-box sbox3 sbox3n">
-                                        <div class="icon-holder icon4 hidden-xs">
-                                        <span class="noticon mdi mdi-comment-processing-outline"></span>
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="/user/ticket/comments" >
+                                        <div class="top-panel-box sbox3 sbox3n">
+                                            <div class="icon-holder icon4 hidden-xs">
+                                            <span class="noticon mdi mdi-comment-processing-outline"></span>
+                                            </div>
+                                            <p>New Comment</p>
+                                            <div class="alert-box alert-box3">0</div>
                                         </div>
-                                        <p>New Comment</p>
-                                        <div class="alert-box alert-box3">0</div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
+                                
+                                
+                                
+                                
                             </div>
-                            
-                        {{-- </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col">
-                    <div class="card">
-                        <div class="card-body"> --}}
-                            
-                        {{-- </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col">
-                    <div class="card">
-                        <div class="card-body"> --}}
-                            
-                        {{-- </div>
-                    </div>
-                </div> --}}
-                {{-- <div class="col">
-                    <div class="card">
-                        <div class="card-body"> --}}
-                            
-                        {{-- </div>
-                    </div>
-                </div> --}}
+             
             </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="container">
+
+            <div class="col-md-3 col-xs-12 tab-con">
+                <div class="ucp-section-box">
+                    <div class="header header-d">{{{ trans('main.recent_notifications') }}}</div>
+                    <div class="body">
+                      
+                            <div class="text-center">
+                                <img src="/assets/images/empty/notification.png" class="img-pal">
+                                <div class="h-20"></div>
+                                <span class="empty-first-line">{{{ trans('main.no_notification') }}}</span>
+                            </div>
+                        
+                            <ul class="ucp-section-box-notification">
+                              
+                                    
+                                        <li data-toggle="modal" data-target="#alertModal{{{ $noti->id or 0 }}}"><span class="mdi mdi-information-outline"></span><a href="javascript:void(0);">{{{ $noti->title or '' }}}</a></li>
+                                        <div class="modal fade" id="alertModal{{{ $noti->id or 0 }}}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-hidden="true">&times;
+                                                        </button>
+                                                        <h4 class="modal-title">{!! $noti->title or '' !!}</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {!! $noti->msg or '' !!}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-custom" data-dismiss="modal">{{{ trans('main.close') }}}</button>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                   
+                               
+                            </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-12 tab-con">
+                <div class="ucp-section-box ucp-dasbboard-box-2">
+                    <div class="header">{{{ trans('main.financial_stats') }}}</div>
+                    <div class="body">
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.today_sale') }}}</label><b class="pull-left"> {{{ $sell_count_today or '0' }}}</b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.month_sale') }}}</label><b class="pull-left">{{{ $sell_count_month or '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.total_sale') }}}</label><b class="pull-left">{{{ $userSellCount or '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.total_income') }}}</label><b class="pull-left">{{{ currencySign() }}} {{{ $total_income or '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.withdrawable_amount') }}}</label><b class="pull-left">{{{ currencySign() }}} {{{ $user['income'] or '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.account_charge') }}}</label><b class="pull-left">{{{ currencySign() }}} {{{ $user['credit'] or '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.total_purchase') }}}</label><b class="pull-left">{{{ $userBuyCount or '0' }}} </b></span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-12 tab-con">
+                <div class="ucp-section-box ucp-dasbboard-box-3">
+                    <div class="header">{{{ trans('main.sales_target') }}}</div>
+                    <div class="body ptopz">
+                        <div id="g6"></div>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.current_sales_badge') }}}</label><b class="pull-left">{{{ $current_rate['description'] or 'No data' }}}</b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.your_total_sales') }}}</label><b class="pull-left">{{{ $userSellCount or '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.next_badge') }}}</label><b class="pull-left">{{{ $after_rate['description'] or '' }}}</b></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-12 tab-con">
+                <div class="ucp-section-box ucp-dasbboard-box-4">
+                    <div class="header">{{{ trans('main.latest_purchases') }}}</div>
+                    <div class="body he277">
+                            <div class="text-center">
+                                <img src="/assets/images/empty/bought.png" class="pur-s">
+                                <div class="h-20"></div>
+                                <span class="empty-first-line">{{{ trans('main.not_purchased_item') }}}</span>
+                            </div>
+                     
+                            <ul class="dashboard-buy-item">
+                              
+                                 
+                           
+                            </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+                <a href="/user/video/buy" class="item-box sbox3 text-cente" id="buy-hover">
+                    <span class="center-icon micon mdi mdi-library-video"></span>
+                    <h4 class="text-center">{{{ trans('main.courses') }}}</h4>
+                </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+                <a href="/user/video/buy" class="item-box sbox3 text-cente" id="buy-hover">
+                    <span class="center-icon micon mdi mdi-library-video"></span>
+                    <h4 class="text-center">{{{ trans('main.courses') }}}</h4>
+                </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+                <a href="/user/video/buy" class="item-box sbox3 text-cente" id="buy-hover">
+                    <span class="center-icon micon mdi mdi-library-video"></span>
+                    <h4 class="text-center">{{{ trans('main.courses') }}}</h4>
+                </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+                <a href="/user/video/buy" class="item-box sbox3 text-cente" id="buy-hover">
+                    <span class="center-icon micon mdi mdi-library-video"></span>
+                    <h4 class="text-center">{{{ trans('main.courses') }}}</h4>
+                </a>
+            </div>
+          </div>
         </div>
     </div>
 
