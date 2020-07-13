@@ -15,7 +15,7 @@
 						<span class="noticon mdi mdi-cash-usd"></span>
 						</div>
                         <p>{{{ trans('main.new_sales') }}}</p>
-                        <div class="alert-box alert-box1">{!! $alert['sell_download'] !!}</div>
+                        <div class="alert-box alert-box1">{!! $alert['sell_download'] !!}12</div>
                     </div>
                 </a>
                 <a href="/user/balance/sell/post" class="col-md-3 col-xs-6">

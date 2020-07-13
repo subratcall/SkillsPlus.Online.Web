@@ -149,93 +149,134 @@ Dashboard
         text-align: center;
         font-weight: bold;
     }
+
+        .ucp-top-panel .top-panel-box {
+    padding: 10px 10px 0 0;
+}
+.ucp-top-panel .top-panel-box {
+    height: 100px;
+    border-radius: 10px;
+    padding: 12px 12px 0 0;
+    display: block;
+    position: relative;
+    color: #fff;
+}
+.sbox3-s {
+    background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+    box-shadow: 0 3px 15px -5px rgb(66, 235, 132);
+}
+.ucp-top-panel .top-panel-box .icon1 {
+    box-shadow: 0 5px 15px -5px rgba(16, 16, 16, 0.41);
+}
+.ucp-top-panel .top-panel-box .icon-holder {
+    box-shadow: 0 5px 15px -5px rgba(16, 16, 16, 0.41);
+    width: 75px;
+    height: 75px;
+    right: 5px;
+    border-radius: 75px;
+    background-color: #ffffff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+.noticon {
+    position: absolute;
+    left: 20%;
+    top: 5%;
+    font-size: 3.8em;
+    color: #4c4c4c;
+}
+.ucp-top-panel .top-panel-box .alert-box1 {
+    color: #3d8840;
+}
+.ucp-top-panel .top-panel-box .alert-box1 {
+    background-image: url("../images/view/user/top-box-1-icon.png");
+    color: #E91E63;
+}
+.ucp-top-panel .top-panel-box .alert-box {
+    position: absolute;
+    width: 30px;
+    background-color: #FFF;
+    height: 30px;
+    border-radius: 16px;
+    top: 5px;
+    right: 5px;
+    font-weight: bold;
+    text-align: left;
+    padding-top: 6px;
+    padding-left: 12px;
+    font-size: 1.2em;
+    box-shadow: 1px 1px 4px 1px #48474724;
+}
+
+.sbox3n {
+    background-image: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
+    box-shadow: 0 3px 15px -5px rgb(252, 145, 58);
+}
+
+.ucp-top-panel .top-panel-box .alert-box3 {
+    color: #2a9aa7;
+}
+.ucp-top-panel .top-panel-box .alert-box3 {
+    background-image: url("../images/view/user/top-box-4-icon.png");
+    color: #FFAF0B;
+}
+
+.sbox3m {
+    background-image: linear-gradient(-225deg, #A445B2 0%, #D41872 52%, #FF0066 100%);
+    box-shadow: 0 3px 15px -5px rgb(204, 32, 125);
+}
+
+.sbox3-e {
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    box-shadow: 0 3px 15px -5px rgb(67, 183, 254);
+}
+
+.ucp-top-panel .top-panel-box .alert-box3 {
+    color: #2a9aa7;
+}
+.ucp-top-panel .top-panel-box .alert-box3 {
+    background-image: url("../images/view/user/top-box-4-icon.png");
+    color: #FFAF0B;
+}
+.ucp-top-panel .top-panel-box .alert-box {
+    position: absolute;
+    width: 30px;
+    background-color: #FFF;
+    height: 30px;
+    border-radius: 16px;
+    top: 5px;
+    right: 5px;
+    font-weight: bold;
+    text-align: left;
+    padding-top: 6px;
+    padding-left: 12px;
+    font-size: 1.2em;
+    box-shadow: 1px 1px 4px 1px #48474724;
+}
+
+.ucp-top-panel .top-panel-box {
+    height: 100px;
+    border-radius: 10px;
+    padding: 12px 12px 0 0;
+    display: block;
+    position: relative;
+    color: #fff;
+}
+.ucp-top-panel .top-panel-box {
+    padding: 10px 10px 0 0;
+}
+.sbox3-s {
+    background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+    box-shadow: 0 3px 15px -5px rgb(66, 235, 132);
+}
+.sbox3 {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+
 </style>
 <link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" /> 
-{{-- <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap-3.2.rtl.css"/> --}}
-
-{{-- <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="    https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
-
-<link rel="stylesheet" href="/assets/vendor/owlcarousel/dist/assets/owl.carousel.min.css"/>
-<link rel="stylesheet" href="/assets/vendor/raty/jquery.raty.css"/>
-<link rel="stylesheet" href="/assets/view/fluid-player-master/fluidplayer.min.css"/>
-<link rel="stylesheet" href="/assets/vendor/simplepagination/simplePagination.css"/>
-<link rel="stylesheet" href="/assets/vendor/easyautocomplete/easy-autocomplete.css"/>
-<link rel="stylesheet" href="/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css" />
-<link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css" />
-<link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" /> --}}
-
-{{-- <link rel="stylesheet" href="/assets/stylesheets/view-responsive.css"/>
- --}}
-
-{{-- <div class="container-fluid">
-    <div class="row ucp-menu-item">
-        <div class="container">
-            @if($alert['sell_all']>0 && (!isset($userMeta['seller_apply']) || $userMeta['seller_apply'] == '0'))
-                <div class="col-md-12 col-lg-12">
-                <div class="alert alert-danger">
-                    <p>{!! get_option('seller_not_apply','') !!}</p>
-                </div>
-                </div>
-            @endif
-            <div class="seven-cols">
-
-				<div class="col-md-1 col-sm-6 col-xs-6 tab-con">
-                    <a href="/user/video/buy" class="item-box sbox3" id="buy-hover">
-                        <span class="micon mdi mdi-library-video"></span>
-                        <span>{{{ trans('main.courses') }}}</span>
-                    </a>
-                </div>
-
-                <div class="col-md-1 col-sm-6 col-xs-6 tab-con">
-                    <a href="/user/video/request" class="item-box sbox3" id="request-hover">
-                        <span class="micon mdi mdi-camera-enhance"></span>
-                        <span>{{{ trans('main.requests') }}}</span>
-                    </a>
-                </div>
-                
-                <div class="h-10 visible-xs"></div>
-
-				<div class="col-md-1 col-sm-6 col-xs-6 tab-con">
-                    <a href="/user/balance/log" class="item-box sbox3" id="balance-hover">
-                        <span class="micon mdi mdi-finance"></span>
-                        <span>{{{ trans('main.financial') }}}</span>
-                    </a>
-                </div>
-
-                <div class="col-md-1 col-sm-6 col-xs-6 tab-con">
-                    <a href="/user/balance/charge" class="item-box sbox3" id="charge-hover">
-                        <span class="micon mdi mdi-credit-card-plus"></span>
-                        <span>{{{ trans('main.charge_account') }}}</span>
-                    </a>
-                </div>
-                
-                <div class="h-10 visible-xs"></div>
-                <div class="col-md-1 col-sm-6 col-xs-6 tab-con">
-                    <a href="/user/ticket" class="item-box sbox3" id="ticket-hover">
-                        <span class="micon mdi mdi-headset"></span>
-                        <span>{{{ trans('main.support') }}}</span>
-                    </a>
-                </div>
-                <div class="col-md-1 col-sm-6 col-xs-6 tab-con">
-                    <a href="/user/profile" class="item-box sbox3" id="profile-hover">
-                        <span class="micon mdi mdi-settings"></span>
-                        <span>{{{ trans('main.settings') }}}</span>
-                    </a>
-                </div>
-                <div class="h-10 visible-xs"></div>
-                
-				<div class="col-md-1 col-sm-6 col-xs-6 tab-con">
-                    <a @if(get_option('become_vendor') == 1) href="/user/become" @else onclick="customNotify('{!! trans('main.become_vendor_disabled_message') !!}');" @endif class="item-box sbox3" id="article-hover">
-                        <span class="micon mdi mdi-teach"></span>
-                        <span>{{{ trans('main.become_vendor') }}}</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 <div class="row">
     <div class="col">
       <div class="card">
@@ -309,6 +350,148 @@ Dashboard
     </div>
   </div>
 
+  {{-- <div class="row ucp-top-panel">
+    <div class="container no-padding-xs">
+        <div class="row">      
+                <div class="col">
+                    <div class="card">
+                    <div class="card-body">
+                                <a href="/user/balance" class="col-md-3 col-xs-6">
+                                    <div class="top-panel-box sbox3 sbox3-s">
+                                        <div class="icon-holder icon1 hidden-xs">
+                                        <span class="noticon mdi mdi-cash-usd"></span>
+                                        </div>
+                                        <p>{{{ trans('main.new_sales') }}}</p>
+                                        <div class="alert-box alert-box1">123</div>
+                                    </div>
+                                </a>
+                    </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                    <div class="card-body">
+                        <a href="/user/balance/sell/post" class="col-md-3 col-xs-6">
+                            <div class="top-panel-box sbox3 sbox3n">
+                                <div class="icon-holder icon2 hidden-xs">
+                                <span class="noticon mdi mdi-package-variant-closed"></span>
+                                </div>
+                                <p>{{{ trans('main.new_postal_sales') }}}</p>
+                                <div class="alert-box alert-box3">23</div>
+                            </div>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                    <div class="card-body">
+                        <a href="/user/ticket" class="col-md-3 col-xs-6">
+                            <div class="top-panel-box sbox3 sbox3m">
+                                <div class="icon-holder icon3 hidden-xs">
+                                <span class="noticon mdi mdi-comment-multiple-outline"></span>
+                                </div>
+                                <p>{{{ trans('main.new_support_ticket') }}}</p>
+                                <div class="alert-box alert-box2">{{{ $alert['ticket'] or 0 }}}</div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                    <div class="card-body">                        
+                        <a href="/user/balance/sell/post" class="col-md-3 col-xs-6">
+                            <div class="top-panel-box sbox3 sbox3-e">
+                                <div class="icon-holder icon2 hidden-xs">
+                                <span class="noticon mdi mdi-package-variant-closed"></span>
+                                </div>
+                                <p>{{{ trans('main.new_postal_sales') }}}</p>
+                                <div class="alert-box alert-box3">{!! $alert['sell_post'] !!}</div>
+                            </div>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+    <div class="container-fluid">
+        <div class="row ucp-top-panel">
+            <div class="container no-padding-xs">
+                <div class="h-10 visible-xs"></div>
+                {{-- <div class="col">
+                    <div class="card">
+                        <div class="card-body"> --}}
+                            <div class="row">
+                                <a href="/user/balance" class="col-md-3 col-xs-6">
+                                    <div class="top-panel-box sbox3 sbox3-s">
+                                        <div class="icon-holder icon1 hidden-xs">
+                                        <span class="noticon mdi mdi-cash-usd"></span>
+                                        </div>
+                                        <p>New Sales</p>
+                                        <div class="alert-box alert-box1">212</div>
+                                    </div>
+                                </a>
+                                <a href="/user/balance/sell/post" class="col-md-3 col-xs-6">
+                                    <div class="top-panel-box sbox3 sbox3-e">
+                                        <div class="icon-holder icon2 hidden-xs">
+                                        <span class="noticon mdi mdi-package-variant-closed"></span>
+                                        </div>
+                                        <p>New Postal Sales</p>
+                                        <div class="alert-box alert-box3">0</div>
+                                    </div>
+                                </a>
+                                <a href="/user/ticket" class="col-md-3 col-xs-6">
+                                    <div class="top-panel-box sbox3 sbox3m">
+                                        <div class="icon-holder icon3 hidden-xs">
+                                        <span class="noticon mdi mdi-comment-multiple-outline"></span>
+                                        </div>
+                                        <p>New Support Message</p>
+                                        <div class="alert-box alert-box2">0</div>
+                                    </div>
+                                </a>
+                                <a href="/user/ticket/comments" class="col-md-3 col-xs-6">
+                                    <div class="top-panel-box sbox3 sbox3n">
+                                        <div class="icon-holder icon4 hidden-xs">
+                                        <span class="noticon mdi mdi-comment-processing-outline"></span>
+                                        </div>
+                                        <p>New Comment</p>
+                                        <div class="alert-box alert-box3">0</div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        {{-- </div>
+                    </div>
+                </div> --}}
+                {{-- <div class="col">
+                    <div class="card">
+                        <div class="card-body"> --}}
+                            
+                        {{-- </div>
+                    </div>
+                </div> --}}
+                {{-- <div class="col">
+                    <div class="card">
+                        <div class="card-body"> --}}
+                            
+                        {{-- </div>
+                    </div>
+                </div> --}}
+                {{-- <div class="col">
+                    <div class="card">
+                        <div class="card-body"> --}}
+                            
+                        {{-- </div>
+                    </div>
+                </div> --}}
+            </div>
+        </div>
+    </div>
+
   <?php 
   //Merchant's account information
   $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
@@ -328,24 +511,24 @@ Dashboard
   //Construct signature string
   $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1.$payment_option;
   $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
-  echo $result_url_1;
+
 ?>
   
+{{--
+
 <form id="myform" name="myform" method="post" action="{{$payment_url}}">
     <input type="hidden" name="version" value="{{$version}}"/>
     <input type="hidden" name="merchant_id" value="{{$merchant_id}}"/>
     <input type="hidden" name="currency" value="{{$currency}}"/>
     <input type="hidden" name="result_url_1" value="{{$result_url_1}}"/>
     <input type="hidden" name="payment_option" value="{{$payment_option}}"/>
-    <input type="hidden" name="hash_value" value="{{$hash_value}}"/>
-PRODUCT INFO : <input type="text" name="payment_description" value="{{$payment_description}}"  readonly/><br/>
+    <input type="hidden" name="hash_value" value="{{$hash_value}}"/> PRODUCT INFO : <input type="text" name="payment_description" value="{{$payment_description}}" readonly/><br/>
     ORDER NO : <input type="text" name="order_id" value="{{$order_id}}"  readonly/><br/>
     AMOUNT: <input type="text" name="amount" value="{{$amount}}" readonly/><br/>
     <input type="submit" name="submit" value="Confirm" />
-</form>  
+</form>
 
-
-
+ --}}
 
 <section class="card">
     <div class="card-body">
@@ -376,7 +559,7 @@ PRODUCT INFO : <input type="text" name="payment_description" value="{{$payment_d
 
 <script>
     $(document).ready(function() {
-        document.createElement('form').submit.call(document.getElementById("myform"));
+       // document.createElement('form').submit.call(document.getElementById("myform"));
        /*  $.ajax({
             url: "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment",
             type: "POST",
