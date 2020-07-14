@@ -297,7 +297,7 @@
       <a href="/admin">AP</a>
      </div>
      <ul class="sidebar-menu">
-      <li class="menu-header">Dashboard</li>
+      <li class="menu-header"><a href="/admin/user_dashboard/main_dashboard" class="nav-link">Dashboard </a></li>
       <li id="mp">
        <a href="/admin/profile#main" class="nav-link"><i class="fas fa-tachometer-alt"></i> <span>My Profile</span></a>
       </li>
