@@ -45,8 +45,7 @@ Route::group(['prefix' => 'admin'],function (){
         ########################
 
         Route::group(['prefix'=>'user_dashboard'],function(){
-            Route::get('user','Admin_user\UserController@course_over_view');
-            Route::get('main_dashboard','Admin_user\UserController@dashboard');
+            Route::get('user','Admin_user\UserController@dashboard');
             Route::get('article','Admin_user\UserController@article');
             Route::get('course_overview','Admin_user\UserController@getContentById');
 
@@ -936,13 +935,6 @@ Route::group(['middleware'=>'notification'],function (){
         });
 
         Route::group(['prefix'=>'CCVS'], function () {
-            //Route::get('pay/{id}/{type}','Admin\PayController@paynow');
-            Route::match(['get','post'],'pay/{id}/{type}','Admin\PayController@ccvs');
-            /* Route::any('status/{product_id}','Admin\PayController@payuStatus');
-            Route::any('cancel/{id}','Admin\PayController@payuCancel'); */
-        });
-
-        Route::group(['prefix'=>'paynow'], function () {
             //Route::get('pay/{id}/{type}','Admin\PayController@paynow');
             Route::match(['get','post'],'pay/{id}/{type}','Admin\PayController@paynow');
             /* Route::any('status/{product_id}','Admin\PayController@payuStatus');

@@ -514,24 +514,25 @@ class PayController extends Controller
             $Amounts = floatval($meta['price']);
         elseif ($type == 'post')
             $Amounts = floatval($meta['post_price']); 
-            
+          // dd($meta['price']);
+
+         // echo number_format((float)$Amounts, 2, '.', '');exit;
         $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
         $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
         
         //Transaction information
-        $payment_description  = $content->title;
+        $payment_description  = $content->title;//'2 days 1 night hotel room';
         $order_id  = time();
         $currency = "702";
         $amount1 = number_format((float)$Amounts, 2, '.', '');
         $getFinalAmount =str_replace(".","",$amount1);
-        $amount  =  str_pad(floatval($getFinalAmount), 12, '0', STR_PAD_LEFT);
+        $amount  =  str_pad(floatval($getFinalAmount), 12, '0', STR_PAD_LEFT);//'000000002500';
   
         //Request information
         $version = "8.5";	
         $payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
         $result_url_1 = url('/')."/get2c2presult";        
-        $payment_option = 'EMVQR';
-
+        $payment_option = 'ALL';
         //Construct signature string
         $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1.$payment_option;
         $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
@@ -548,107 +549,52 @@ class PayController extends Controller
         );
         $fields_string = '';
 
-        echo '
-        <html>
-        <body>
-        <form style="visibility:hidden" id="myform" name="myform" method="post" action="'.$payment_url.'">
-        <input type="hidden" name="version" value="'.$version.'"/>
-        <input type="hidden" name="merchant_id" value="'.$merchant_id.'"/>
-        <input type="hidden" name="currency" value="'.$currency.'"/>
-        <input type="hidden" name="result_url_1" value="'.$result_url_1.'"/>
-        <input type="hidden" name="payment_option" value="'.$payment_option.'"/>
-        <input type="hidden" name="hash_value" value="'.$hash_value.'"/>
-        PRODUCT INFO : <input type="text" name="payment_description" value="'.$payment_description.'"  readonly/><br/>
-        ORDER NO : <input type="text" name="order_id" value="'.$order_id.'"  readonly/><br/>
-        AMOUNT: <input type="text" name="amount" value="'.$amount.'" readonly/><br/>
-        <input type="submit" name="submit" value="Confirm" />
-        </form> 
-
-        
-        '.'<script type="application/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>'
-        ."
-        <script type='text/javascript'>
-        $(document).ready(function(){
-            document.createElement('form').submit.call(document.getElementById('myform'));
-        });
-        </script>
-
-        </body>
-        </html> "; 
-    }
-
-
-    #2c2p paynow
-    function ccvs(Request $request,$id,$type='download')
-    {
-        $content = Content::with('metas')->where('mode','publish')->find($id);
-        $meta = arrayToList($content->metas,'option','value');
-        
-        if($type == 'download')
-            $Amounts = floatval($meta['price']);
-        elseif ($type == 'post')
-            $Amounts = floatval($meta['post_price']); 
-            
-        $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
-        $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
-        
-        //Transaction information
-        $payment_description  = $content->title;
-        $order_id  = time();
-        $currency = "702";
-        $amount1 = number_format((float)$Amounts, 2, '.', '');
-        $getFinalAmount =str_replace(".","",$amount1);
-        $amount  =  str_pad(floatval($getFinalAmount), 12, '0', STR_PAD_LEFT);
-  
-        //Request information
-        $version = "8.5";	
-        $payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
-        $result_url_1 = url('/')."/get2c2presult";        
-        $payment_option = 'CC';
-
-        //Construct signature string
-        $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1.$payment_option;
-        $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
-        $arr = array(
-            'version'=>$version,
-            'merchant_id'=>$merchant_id,
-            'currency'=>$currency,
-            'result_url_1'=>$result_url_1,
-            'hash_value'=>$hash_value,
-            'payment_description'=>$payment_description,
-            'order_id'=>$order_id,
-            'amount'=>$amount,            
-            'payment_option' => $payment_option,
-        );
+   /*     $ch = curl_init();
+        //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); 
         $fields_string = '';
+        //url-ify the data for the POST
+        foreach($arr as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        rtrim($fields_string, '&');
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, $payment_url);
+        curl_setopt($ch,CURLOPT_POST, count($arr));
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        //execute post
+        $redirectURL = curl_getinfo($ch,CURLINFO_EFFECTIVE_URL );
 
-        echo '
-        <html>
-        <body>
-        <form style="visibility:hidden" id="myform" name="myform" method="post" action="'.$payment_url.'">
-        <input type="hidden" name="version" value="'.$version.'"/>
-        <input type="hidden" name="merchant_id" value="'.$merchant_id.'"/>
-        <input type="hidden" name="currency" value="'.$currency.'"/>
-        <input type="hidden" name="result_url_1" value="'.$result_url_1.'"/>
-        <input type="hidden" name="payment_option" value="'.$payment_option.'"/>
-        <input type="hidden" name="hash_value" value="'.$hash_value.'"/>
-        PRODUCT INFO : <input type="text" name="payment_description" value="'.$payment_description.'"  readonly/><br/>
-        ORDER NO : <input type="text" name="order_id" value="'.$order_id.'"  readonly/><br/>
-        AMOUNT: <input type="text" name="amount" value="'.$amount.'" readonly/><br/>
-        <input type="submit" name="submit" value="Confirm" />
-        </form> 
+        header("HTTP/1.1 301 Moved Permanently");
+        header( $payment_url);
 
-        
-        '.'<script type="application/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>'
-        ."
-        <script type='text/javascript'>
-        $(document).ready(function(){
-            document.createElement('form').submit.call(document.getElementById('myform'));
-        });
-        </script>
+        curl_exec($ch);
+        curl_close($ch);
+ */
+    echo '
+    <html>
+    <body>
+    <form style="visibility:hidden" id="myform" name="myform" method="post" action="'.$payment_url.'">
+    <input type="hidden" name="version" value="'.$version.'"/>
+    <input type="hidden" name="merchant_id" value="'.$merchant_id.'"/>
+    <input type="hidden" name="currency" value="'.$currency.'"/>
+    <input type="hidden" name="result_url_1" value="'.$result_url_1.'"/>
+    <input type="hidden" name="payment_option" value="'.$payment_option.'"/>
+    <input type="hidden" name="hash_value" value="'.$hash_value.'"/>
+    PRODUCT INFO : <input type="text" name="payment_description" value="'.$payment_description.'"  readonly/><br/>
+    ORDER NO : <input type="text" name="order_id" value="'.$order_id.'"  readonly/><br/>
+    AMOUNT: <input type="text" name="amount" value="'.$amount.'" readonly/><br/>
+    <input type="submit" name="submit" value="Confirm" />
+    </form> 
 
-        </body>
-        </html> "; 
+    
+    '.'<script type="application/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>'
+    ."
+    <script type='text/javascript'>
+    $(document).ready(function(){
+        document.createElement('form').submit.call(document.getElementById('myform'));
+    });
+    </script>
+
+    </body>
+    </html> "; 
     }
 
     /**
