@@ -99,7 +99,9 @@ class UserController extends Controller
            $getContent = Content::where('id',$key->content_id)->first();
            $getUser = User::where('id',$key->user_id)->first();
            $getTransaction = Transaction::where(['content_id'=> $getContent->id , 'buyer_id'=> $key->buyer_id])->first();
-           $arr['content_title'] = $getContent->title;
+           $arr['content_title'] = '<img src="/assets/images/plant.jpg" alt="..." class="img-thumbnail">'.$getContent->title.'<div class="progress">
+           <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"aria-valuemin="0" aria-valuemax="100"></div>
+         </div>';
            $arr['vendor'] = $getUser->name;
            $arr['date'] = date("F d, Y H:i:s", $key->create_at);
            $arr['price'] = ($getTransaction?$getTransaction->price:'');

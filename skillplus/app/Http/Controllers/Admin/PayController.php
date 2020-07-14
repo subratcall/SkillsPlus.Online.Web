@@ -620,7 +620,15 @@ class PayController extends Controller
             'amount'=>$amount,            
             'payment_option' => $payment_option,
         );
-        $fields_string = '';
+
+        global $user;
+        $trans = new PaymentLog;
+        $trans->transaction_code = $order_id;
+        $trans->course_id = $id;
+        $trans->created_dt = date('Y-m-d H:i');
+        $trans->buyer_id = $user['id'];
+        $trans->given_amt = $Amounts;
+        $trans->save();
 
         echo '
         <html>
@@ -807,50 +815,96 @@ class PayController extends Controller
 
     
 
-/**
- * Redirect with POST data.
- *
- * @param string $url URL.
- * @param array $post_data POST data. Example: array('foo' => 'var', 'id' => 123)
- * @param array $headers Optional. Extra headers to send.
- */
-public function redirect_post($url, array $data, array $headers = null) {
-    $params = array(
-        'http' => array(
-            'method' => 'POST',
-            'content' => http_build_query($data)
-        )
-    );
-    if (!is_null($headers)) {
-        $params['http']['header'] = '';
-        foreach ($headers as $k => $v) {
-            $params['http']['header'] .= "$k: $v\n";
+    /**
+     * Redirect with POST data.
+     *
+     * @param string $url URL.
+     * @param array $post_data POST data. Example: array('foo' => 'var', 'id' => 123)
+     * @param array $headers Optional. Extra headers to send.
+     */
+    public function redirect_post($url, array $data, array $headers = null) {
+        $params = array(
+            'http' => array(
+                'method' => 'POST',
+                'content' => http_build_query($data)
+            )
+        );
+        if (!is_null($headers)) {
+            $params['http']['header'] = '';
+            foreach ($headers as $k => $v) {
+                $params['http']['header'] .= "$k: $v\n";
+            }
+        }
+        $ctx = stream_context_create($params);
+        $fp = @fopen($url, 'rb', false, $ctx);
+        if ($fp) {
+            echo @stream_get_contents($fp);
+            die();
+        } else {
+            // Error
+            throw new Exception("Error loading '$url', $php_errormsg");
         }
     }
-    $ctx = stream_context_create($params);
-    $fp = @fopen($url, 'rb', false, $ctx);
-    if ($fp) {
-        echo @stream_get_contents($fp);
-        die();
-    } else {
-        // Error
-        throw new Exception("Error loading '$url', $php_errormsg");
-    }
-}
 
 
 
     function get2c2presult(Request $request)
     {
         
-        return redirect('/product/117');
-      // dd($request);exit;
+        //dd($request);exit;
+        global $user;
+        $getData = PaymentLog::where(['transaction_code'=>$request->order_id])->first();
+        PaymentLog::where(['transaction_code'=>$request->order_id])->update([
+                'transaction_status'=>$request->payment_status,
+                'channel_response_code'=>$request->channel_response_code,
+                'channel_response_desc'=>$request->channel_response_desc,
+                'version'=>$request->version,
+                'merchant_id'=>$request->merchant_id,
+                'currency'=>$request->currency,
+                'amount'=>$request->amount,
+                'hash_value'=>$request->hash_value,
+                'transaction_ref'=>$request->transaction_ref,
+                'approval_code'=>$request->approval_code,
+                'eci'=>$request->eci,
+                'transaction_datetime'=>$request->transaction_datetime,
+                'payment_channel'=>$request->payment_channel,
+                'masked_pan'=>$request->masked_pan,
+                'backend_invoice'=>$request->backend_invoice,
+                'payment_scheme'=>$request->payment_scheme,
+                'process_by'=>$request->process_by,
+                'card_type'=>$request->card_type,
+            ]
+        );
+            $msg = false;
+        if($request->payment_status==000){
+            $msg = true;
+        }
+       
+        $content = Content::with('metas')->where('mode','publish')->find($getData->course_id);
 
+        if($content->private == 1)
+            $site_income = get_option('site_income_private');
+        else
+            $site_income = get_option('site_income');
+           // dd($getData);
+        Transaction::insert([
+            'buyer_id'=>$getData->buyer_id,
+            'user_id'=>$content->user_id,
+            'content_id'=>$content->id,
+            'price'=>$getData->given_amt,
+            'price_content'=>$getData->given_amt,
+            'mode'=>'pending',
+            'create_at'=>time(),
+            'bank'=>'paypal',
+            'income'=>$getData->given_amt - (($site_income/100)*$getData->given_amt),  
+            'authority'=> '',
+            'type'=>''
+        ]);
 
         //if(isset($payment['status']) && $payment['status'] == true){
           //  dd($this->get2c2p_course_id);
-            $Transaction = Transaction::find($this->get2c2p_course_id);
-            $product = Content::find($Transaction->content_id);
+            
+           /*  $product = Content::find($getData->content_id);
             $userUpdate = User::with('category')->find($Transaction->user_id);
             if($product->private == 1)
                 $site_income = get_option('site_income_private')-$userUpdate->category->off;
@@ -858,11 +912,12 @@ public function redirect_post($url, array $data, array $headers = null) {
                 $site_income = get_option('site_income')-$userUpdate->category->off;
 
             if(empty($transaction))
-                \redirect('/product/'.$Transaction->content_id);
+                \redirect('/product/'.$Transaction->content_id); */
 
-            $Amount = $Transaction->price;
+            $Amount = $request->amount;//$Transaction->price;
 
-            Sell::insert([
+            $Transaction = Transaction::find($getData->id);
+            $ss = Sell::insert([
                 'user_id'       => $Transaction->user_id,
                 'buyer_id'      => $Transaction->buyer_id,
                 'content_id'    => $Transaction->content_id,
@@ -870,15 +925,19 @@ public function redirect_post($url, array $data, array $headers = null) {
                 'create_at'     => time(),
                 'mode'          => 'pay',
                 'transaction_id'=> $Transaction->id,
-                'remain_time'   => $Transaction->remain_time
+                'remain_time'   => $Transaction->remain_time,
             ]);
 
+                dd($ss);
+
+            $userUpdate = User::with('category')->find($Transaction->user_id);
             $userUpdate->update(['income'=>$userUpdate->income+((100-$site_income)/100)*$Amount]);
             Transaction::find($Transaction->id)->update(['mode'=>'deliver','income'=>((100-$site_income)/100)*$Amount]);
-
+            $product = Content::find($getData->course_id);
             ## Notification Center
             sendNotification(0,['[c.title]'=>$product->title],get_option('notification_template_buy_new'),'user',$Transaction->buyer_id);
-
+            
+            return redirect('product/'.$getData->course_id)->with('message',$msg);
         /* }else{
             return \redirect('/product/'.$product_id)->with('msg',trans('admin.payment_failed'));
         } */

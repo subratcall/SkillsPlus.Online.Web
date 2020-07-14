@@ -24,8 +24,20 @@ Dashboard
     }
     .error {
         background: #FB7D44;
-        color: #fff
+        color:  #090001
     }
+
+    .jk_danger{
+        background: #f20d12;/*#FB7D44;*/
+        color: #090001
+    }
+
+    .jk_success{
+        background: #399444;/*#FB7D44;*/
+        color: #090001
+    }
+
+    
 </style>
 @endsection
 
@@ -144,11 +156,15 @@ Dashboard
             success: function(data) {
                 var c = []
                 var f = []
+                var e = []
                 for (let index = 0; index < data.courses.length; index++) {
                     c.push({"title":data.courses[index].content_title});                            
                 }
                 for (let index = 0; index < data.favorite.length; index++) {
                     f.push({"title":data.favorite[index].content_title});
+                }
+                for (let index = 0; index < data.favorite.length; index++) {
+                    e.push({"title":data.favorite[index].content_title});
                 }
                            
                 var KanbanTest = new jKanban({
@@ -162,16 +178,23 @@ Dashboard
                         {
                             'id' : '_todo',
                             dragBoards : false,
-                            'title'  : 'My Courses',
-                            'class' : 'info',
+                            'title'  : 'New',
+                            'class' : 'jk_danger',
                             'item'  : c
                         },
                         {
                             'id' : '_working',
                             dragBoards : false,
-                            'title'  : 'Favorites',
-                            'class' : 'warning',
+                            'title'  : 'In Progress',
+                            'class' : 'error',
                             'item'  : f
+                        },
+                        {
+                            'id' : '_working',
+                            dragBoards : false,
+                            'title'  : 'Completed',
+                            'class' : 'jk_success',
+                            'item'  : e
                         },
                     ]
                 });

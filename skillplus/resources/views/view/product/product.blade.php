@@ -1315,6 +1315,12 @@
     <script type="application/javascript" src="/assets/view/fluid-player-master/fluidplayer.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {    
+            var productReturnStatus = "{{Session::get('message')}}";
+            if(productReturnStatus){
+              //  alert(productReturnStatus)
+            }else{
+              //  alert(productReturnStatus)
+            }
             $.ajax({
                 url: "{{url('/cl')}}/"+"{{ Request::route('id') }}",
                 type: 'get',

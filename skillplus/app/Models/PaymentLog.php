@@ -8,7 +8,7 @@ class PaymentLog extends Model
 {
     //use SoftDeletes;
 
-    protected $table = "tlb_payment_log";
+    protected $table = "tbl_payment_log";
 
     protected $primaryKey = "id";
 
@@ -18,6 +18,25 @@ class PaymentLog extends Model
         'id',
         'transaction_code',
         'course_id',
+        'transaction_status',
+        'channel_response_code',
+        'channel_response_desc',
+        'version',
+        'merchant_id',
+        'currency',
+        'amount',
+        'hash_value',
+        'given_amt',
+        'transaction_ref',
+        'approval_code',
+        'eci',
+        'transaction_datetime',
+        'payment_channel',
+        'masked_pan',
+        'backend_invoice',
+        'payment_scheme',
+        'process_by',
+        'card_type',
     ];
 }
 
