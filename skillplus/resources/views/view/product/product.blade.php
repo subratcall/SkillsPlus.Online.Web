@@ -589,11 +589,16 @@
                                         <label class="radio-label" for="mode-2"> Payu </label>
                                     </div>
                                 @endif
-                                    <div class="radio">
-                                        <input type="radio" class="buy-mode" id="mode-6" value="CCVS" name="buyMode">
-                                        &nbsp;
-                                        <label class="radio-label" for="mode-6"> Credit Card/ Visa </label>
-                                    </div>
+                                <div class="radio">
+                                    <input type="radio" class="buy-mode" id="mode-6" value="CCVS" name="buyMode">
+                                    &nbsp;
+                                    <label class="radio-label" for="mode-6"> Credit Card/ Visa </label>
+                                </div>
+                                <div class="radio">
+                                    <input type="radio" class="buy-mode" id="mode-7" value="paynow" name="buyMode">
+                                    &nbsp;
+                                    <label class="radio-label" for="mode-7"> Paynow </label>
+                                </div>
                                 <div class="h-10"></div>
                                 <div class="table-responsive table-base-price">
                                     <table class="table table-hover table-factor-modal">

@@ -39,6 +39,11 @@ class UserController extends Controller
         //return view('admin_user.user');
         return view('admin_user.dashboard');
     }
+
+    public function course_over_view()
+    {    
+        return view('admin_user.user');
+    }
     
     public function category(Request $request) {
         $contentMenu = contentMenu();
