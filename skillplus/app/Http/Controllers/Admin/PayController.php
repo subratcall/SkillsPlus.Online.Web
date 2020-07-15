@@ -880,43 +880,31 @@ class PayController extends Controller
             $msg = true;
         }
        
-        $content = Content::with('metas')->where('mode','publish')->find($getData->course_id);
+        if($request->channel_response_code!=9000)
+        {
+            $content = Content::with('metas')->where('mode','publish')->find($getData->course_id);
 
-        if($content->private == 1)
-            $site_income = get_option('site_income_private');
-        else
-            $site_income = get_option('site_income');
-           // dd($getData);
-        Transaction::insert([
-            'buyer_id'=>$getData->buyer_id,
-            'user_id'=>$content->user_id,
-            'content_id'=>$content->id,
-            'price'=>$getData->given_amt,
-            'price_content'=>$getData->given_amt,
-            'mode'=>'pending',
-            'create_at'=>time(),
-            'bank'=>'paypal',
-            'income'=>$getData->given_amt - (($site_income/100)*$getData->given_amt),  
-            'authority'=> '',
-            'type'=>''
-        ]);
-
-        //if(isset($payment['status']) && $payment['status'] == true){
-          //  dd($this->get2c2p_course_id);
-            
-           /*  $product = Content::find($getData->content_id);
-            $userUpdate = User::with('category')->find($Transaction->user_id);
-            if($product->private == 1)
-                $site_income = get_option('site_income_private')-$userUpdate->category->off;
+            if($content->private == 1)
+                $site_income = get_option('site_income_private');
             else
-                $site_income = get_option('site_income')-$userUpdate->category->off;
-
-            if(empty($transaction))
-                \redirect('/product/'.$Transaction->content_id); */
-
-            $Amount = $request->amount;//$Transaction->price;
-
-            $Transaction = Transaction::find($getData->id);
+                $site_income = get_option('site_income');
+    
+            $trs = new Transaction;
+            $trs->buyer_id = $getData->buyer_id;
+            $trs->user_id = $content->user_id;
+            $trs->content_id = $content->id;
+            $trs->price = $getData->given_amt;
+            $trs->price_content = $getData->given_amt;
+            $trs->mode = 'pending';
+            $trs->create_at = time();
+            $trs->bank = 'CCVS';
+            $trs->income = $getData->given_amt - (($site_income/100)*$getData->given_amt);
+            $trs->authority = '';
+            $trs->type = '';
+            $trs->save();
+            
+            $Amount = $request->amount;
+            $Transaction = Transaction::find($trs->id);
             $ss = Sell::insert([
                 'user_id'       => $Transaction->user_id,
                 'buyer_id'      => $Transaction->buyer_id,
@@ -927,21 +915,16 @@ class PayController extends Controller
                 'transaction_id'=> $Transaction->id,
                 'remain_time'   => $Transaction->remain_time,
             ]);
-
-                dd($ss);
-
+    
             $userUpdate = User::with('category')->find($Transaction->user_id);
             $userUpdate->update(['income'=>$userUpdate->income+((100-$site_income)/100)*$Amount]);
             Transaction::find($Transaction->id)->update(['mode'=>'deliver','income'=>((100-$site_income)/100)*$Amount]);
             $product = Content::find($getData->course_id);
             ## Notification Center
-            sendNotification(0,['[c.title]'=>$product->title],get_option('notification_template_buy_new'),'user',$Transaction->buyer_id);
-            
+            sendNotification(0,['[c.title]'=>$product->title],get_option('notification_template_buy_new'),'user',$Transaction->buyer_id);            
             return redirect('product/'.$getData->course_id)->with('message',$msg);
-        /* }else{
-            return \redirect('/product/'.$product_id)->with('msg',trans('admin.payment_failed'));
-        } */
-    
+        }
+                   
     }
 
 }
