@@ -139,7 +139,7 @@ class UserController extends Controller
     //         ->paginate($limit);
     // }
 
-       public function list(Request $request) {
+    public function list(Request $request) {
         global $user;
 
         $lists = Article::leftJoin('tbl_contents_category', function($join) {
@@ -216,8 +216,8 @@ class UserController extends Controller
 
     public function viewCourses()
     {    
-        // return view('student.courses.course');
-        return view('student.courses.course-vue');
+         return view('student.courses.course');
+        //return view('student.courses.course-vue');
     }
 
     public function viewLesson()

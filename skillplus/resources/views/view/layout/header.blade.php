@@ -304,7 +304,8 @@
                                         @endif
                                     </div>
                                     <ul>
-                                        <li><a href="/profile/{{{ $user['id'] or 0 }}}"><span class="headericon mdi mdi-account"></span><p>{{{ trans('main.profile') }}}</p></a></li>
+                                        <li><a href="/admin/user_settings/settings"><span class="headericon mdi mdi-account"></span><p>{{{ trans('main.profile') }}}</p></a></li>
+                                        {{-- <li><a href="/profile/{{{ $user['id'] or 0 }}}"><span class="headericon mdi mdi-account"></span><p>{{{ trans('main.profile') }}}1</p></a></li> --}}
                                         <li><a href="/user/ticket"><span class="headericon mdi mdi-headset"></span><p>{{{ trans('main.support') }}}</p></a></li>
                                         <li><a href="/user/profile"><span class="headericon mdi mdi-settings"></span><p>{{{ trans('main.settings') }}}</p></a></li>
                                         <li><a href="/user/logout"><span class="headericon mdi mdi-power"></span><p>{{{ trans('main.exit') }}}</p></a></li>

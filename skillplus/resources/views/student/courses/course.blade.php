@@ -1,4 +1,4 @@
-@extends('admin.newlayout.layout-vue',['breadcom'=>['Lesson','Edit']])
+@extends('admin.newlayout.layout',['breadcom'=>['Lesson','Edit']])
 @section('title')
 <!-- <a href="/admin/user_dashboard/courses" class="btn btn-warning btn-sm">Back</a>
 Course Content -->
@@ -13,298 +13,493 @@ Course Content -->
 <link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 <style>
- .custom-card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
-  background-color: #fff;
-  border-radius: 3px;
-  border: none;
-  position: relative;
-  margin-bottom: 30px;
- }
-
- #myKanban {
-  overflow-x: auto;
-  padding: 20px 0;
- }
-
- .success {
-  background: #00B961;
-  color: #fff
- }
-
- .info {
-  background: #2A92BF;
-  color: #fff
- }
-
- .warning {
-  background: #F4CE46;
-  color: #fff
- }
-
- .error {
-  background: #FB7D44;
-  color: #fff
- }
-
- .raty-text {
-  color: #e6d816 !important;
-  /* font-size: 1.7em;
-        font-weight: bold;
-        display: inline-block;
-        padding-right: 2px;
-        position: relative;
-        top: -6px; */
- }
-
- .raty {
-  color: #e6d816 !important;
-  /* font-size: 1.7em;
-        font-weight: bold;
-        display: inline-block;
-        padding-right: 2px;
-        position: relative;
-        top: -6px; */
- }
-
- .course {
-  font-family: 'Open Sans', sans-serif;
- }
-
- .course .course-header {
-  margin-left: 100px;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  padding: 0px;
-  min-width: 1980px;
- }
-
- .section.section-header {
-  margin-top: -15px;
- }
-
- .wrap-header {
-  background-color: #29303B;
-  color: white;
- }
-
- .no-padding {
-  padding: 0px;
- }
-
- .no-margin {
-  margin: 0px;
- }
-
- .main-content.header {
-  margin-top: 15px;
- }
-
-
- .margin-top-next {
-  margin-top: 40px;
- }
-
- .header-custom-border {
-  border-top: #DEDFE0 solid 1px;
-  border-left: #DEDFE0 solid 1px;
-  border-right: #DEDFE0 solid 1px;
-  border-bottom: #DEDFE0 solid 1px;
-  padding: 10px 0px;
- }
-
- .list-custom-border {
-  border-bottom: #DEDFE0 solid 1px;
-  border-left: #DEDFE0 solid 1px;
-  border-right: #DEDFE0 solid 1px;
-  font: 15px;
-  color: #007791;
-  padding-top: 10px;
-  padding-left: 40px;
-  padding-right: 5px;
-  padding-bottom: 10px;
-  text-indent: -0.8em;
- }
-
- .list-custom-border>i {
-  opacity: 0.5;
-  padding-right: 10px;
- }
-
-
- .section-1 {
-  border: #DEDFE0 solid 1px;
-  color: #29303B;
-  padding: 30px;
- }
-
- .section-1 ul {
-  list-style: none;
-  padding: 0;
- }
-
- .section-7 ul {
-  list-style: none;
-  padding: 0;
- }
-
- .section-7 {
-  color: #29303B;
- }
-
- .section-1 ul>li {
-  padding-left: 1.3em;
- }
-
- .section-1 li:before {
-  content: "\f00c";
-  font-family: FontAwesome;
-  display: inline-block;
-  margin-left: -1.3em;
-  width: 1.3em;
-  color: #a1a7b3;
- }
-
- .section-2 {
-  font-size: 22px;
-  padding: 10px 0px;
-  color: #29303B;
- }
-
- .section-3 {
-  padding: 2.5px 0px;
- }
-
- .section-4-header {
-  font-size: 22px !important;
-  padding-top: 10px !important;
-  color: #29303B !important;
- }
-
- .section-4 ul>li {
-  font-size: 15px;
-  color: #29303B;
- }
-
- .section-4 p {
-  font-size: 14px;
-  color: #29303B;
- }
-
- .section-5-header {
-  font-size: 22px;
-  padding: 10px 0px;
-  color: #29303B;
- }
-
- .section-6-header {
-  font-size: 22px;
-  padding: 10px 0px;
-  color: #29303B;
- }
-
- .section-7-header {
-  font-size: 22px;
-  padding: 10px 0px;
-  color: #29303B;
- }
-
- .section-8-header {
-  font-size: 22px;
-  padding: 10px 0px;
-  color: #29303B;
- }
-
- .section-5 {
-  color: #29303b;
- }
-
- .video-tutorials {
-  position: absolute;
-  z-index: 1;
-  right: 200px;
-  top: 50px;
-  background: white;
-  border: 1px solid white;
-  box-shadow: 0.5px 1px 5px 0.5px #00000080;
-  border-radius: 2px;
-  height: 700px;
- }
-
- .video-tutorials video {
-  width: 400px;
-  height: 300px;
-  border: 10px solid white;
- }
-
- .video-tutorials.video-details {
-  font-size: 16px;
- }
-
- .video-details {
-  padding: 10px;
-  padding-left: 20px;
-  text-align: center;
- }
-
- .video-details-header {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: left;
-  padding-left: 40px;
- }
-
- .video-details p {
-  font-size: 32px;
- }
-
- .button {
-  border-style: none;
-  padding: 15px;
-  width: 300px;
- }
-
- .add-to-cart {
-  margin-top: 10px;
-  border: black 1px solid;
-  background-color: #ffffff;
-  font-weight: bold;
-  color: #686F7A;
- }
-
- .buy-now {
-  background-color: #EC5252;
-  color: #ffffff;
-  font-weight: bold;
- }
-
- .video-descriptions {
-  color: #686F7A;
-  text-align: left;
-  padding-left: 1
- }
-
- .video-descriptions p {
-  font-size: 14px;
-  padding-left: 40px;
-  font-weight: bold;
-  padding-top: 10px;
- }
-
- .video-descriptions ul {
-  padding-left: 60px;
- }
-
- .video-descriptions ul li {
-  list-style: none;
-  padding: 0;
- }
-
- /* font-size: 1.2em;
-	padding-top: 5px;
-	display: inline-block; */
+    @media (max-width: 1980px) {
+     .video-tutorials {
+      right: 5% !important;
+      width: 400px !important;
+     }
+   
+     .video-tablet {
+      display: none;
+     }
+    }
+   
+    @media (max-width: 1600px) {
+     .video-tutorials {
+      right: 4% !important;
+      width: 350px !important;
+     }
+    }
+   
+    @media (max-width: 1300px) {
+     .video-tutorials {
+      right: 1% !important;
+      width: 350px !important;
+     }
+   
+     .title {
+      margin-left: -20px !important;
+      width: 400px !important;
+     }
+    }
+   
+    @media (max-width: 1200px) {
+     .video-tutorials {
+      right: 0.5% !important;
+      width: 40% !important;
+     }
+   
+     .title {
+      margin-left: -20px !important;
+      width: 400px !important;
+     }
+    }
+   
+    @media (max-width: 1180.98px) {
+     .video-tutorials {
+      right: 0.1% !important;
+      width: 38% !important;
+     }
+   
+     .title {
+      margin-left: -80px !important;
+      width: 400px !important;
+     }
+    }
+   
+    @media (max-width: 991.98px) {
+     .video-tutorials {
+      display: none;
+     }
+   
+     .title {
+      margin-left: -80px !important;
+      width: 500px;
+     }
+   
+     .video-tablet {
+      display: inline;
+      padding: 0px;
+      width: 100%;
+     }
+    }
+   
+    @media (max-width: 767.98px) {
+     .video-tutorials {
+      display: none;
+     }
+   
+     .md-text-center {
+      text-align: center !important;
+     }
+    }
+   
+    @media (max-width: 575.98px) {
+     .video-tutorials {
+      display: none;
+     }
+   
+     .md-text-center {
+      text-align: center !important;
+     }
+    }
+   
+    .custom-card {
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+     background-color: #fff;
+     border-radius: 3px;
+     border: none;
+     position: relative;
+     margin-bottom: 30px;
+    }
+   
+    #myKanban {
+     overflow-x: auto;
+     padding: 20px 0;
+    }
+   
+    .success {
+     background: #00b961;
+     color: #fff;
+    }
+   
+    .info {
+     background: #2a92bf;
+     color: #fff;
+    }
+   
+    .warning {
+     background: #f4ce46;
+     color: #fff;
+    }
+   
+    .error {
+     background: #fb7d44;
+     color: #fff;
+    }
+   
+    .raty-text {
+     color: #e6d816 !important;
+    }
+   
+    .raty {
+     color: #e6d816 !important;
+    }
+   
+    .course {
+     font-family: "Open Sans", sans-serif;
+    }
+   
+    .course a {
+     color: #007791;
+    }
+   
+    .course .course-header {
+     margin-left: 100px;
+     margin-top: 50px;
+     margin-bottom: 50px;
+     padding: 0px;
+     min-width: 1980px;
+    }
+   
+    .course-header .title {
+     width: 600px;
+    }
+   
+    .section.section-header {
+     margin-top: -15px;
+    }
+   
+    .wrap-header {
+     background-color: #29303b;
+     color: white;
+    }
+   
+    .no-padding {
+     padding: 0px;
+    }
+   
+    .no-margin {
+     margin: 0px;
+    }
+   
+    .main-content.header {
+     margin-top: 15px;
+    }
+   
+    .margin-top-next {
+     margin-top: 40px;
+    }
+   
+    .header-custom-border {
+     border-top: #dedfe0 solid 1px;
+     border-left: #dedfe0 solid 1px;
+     border-right: #dedfe0 solid 1px;
+     border-bottom: #dedfe0 solid 1px;
+     padding-top: 10px;
+     padding-bottom: 10px;
+     padding-right: 10px;
+    }
+   
+    .video-done {
+     color: black;
+     font-size: 18px;
+    }
+   
+    .list-custom-border {
+     border-bottom: #dedfe0 solid 1px;
+     border-left: #dedfe0 solid 1px;
+     border-right: #dedfe0 solid 1px;
+     font: 15px;
+     color: #007791;
+     padding-top: 10px;
+     padding-left: 40px;
+     padding-right: 5px;
+     padding-bottom: 10px;
+     text-indent: -0.8em;
+    }
+   
+    .list-custom-border > i {
+     opacity: 0.5;
+     padding-right: 10px;
+    }
+   
+    .section-1 {
+     border: #dedfe0 solid 1px;
+     color: #29303b;
+     padding: 30px;
+    }
+   
+    .section-1 ul {
+     list-style: none;
+     padding: 0;
+    }
+   
+    .section-7 ul {
+     list-style: none;
+     padding: 0;
+    }
+   
+    .section-7 {
+     color: #29303b;
+    }
+   
+    .section-7 .vendor-profile img {
+     margin-bottom: 10px;
+     width: 96px;
+     height: 96px;
+    }
+   
+    .section-7 ul li i {
+     padding-right: 10px;
+    }
+   
+    .section-1 ul > li {
+     padding-left: 1.3em;
+    }
+   
+    .section-1 li:before {
+     content: "\f00c";
+     font-family: FontAwesome;
+     display: inline-block;
+     margin-left: -1.3em;
+     width: 1.3em;
+     color: #a1a7b3;
+    }
+   
+    .section-2 {
+     font-size: 22px;
+     padding: 10px 0px;
+     color: #29303b;
+    }
+   
+    .section-3 {
+     padding: 2.5px 0px;
+    }
+   
+    .section-4-header {
+     font-size: 22px !important;
+     padding-top: 10px !important;
+     color: #29303b !important;
+    }
+   
+    .section-4 ul > li {
+     font-size: 15px;
+     color: #29303b;
+    }
+   
+    .section-4 p {
+     font-size: 14px;
+     color: #29303b;
+    }
+   
+    .section-5-header {
+     font-size: 22px;
+     padding: 10px 0px;
+     color: #29303b;
+    }
+   
+    .section-6-header {
+     font-size: 22px;
+     padding: 10px 0px;
+     color: #29303b;
+    }
+   
+    .section-6 .item-price {
+     font-size: 14px;
+    }
+   
+    .section-7-header {
+     font-size: 22px;
+     padding: 10px 0px;
+     color: #29303b;
+    }
+   
+    .section-8-header {
+     font-size: 22px;
+     padding: 10px 0px;
+     color: #29303b;
+    }
+   
+    .section-8 .average-rating {
+     font-size: 72px;
+     padding: 0px;
+     margin-top: -20px;
+    }
+   
+    .section-9-header {
+     font-size: 22px;
+     padding: 10px 0px;
+     color: #29303b;
+    }
+   
+    .section-8 .individual-rating ul {
+     list-style-type: none;
+     padding: 0px;
+    }
+   
+    .section-9 ul {
+     list-style-type: none;
+     padding: 0px;
+    }
+   
+    .section-5 {
+     color: #29303b;
+    }
+   
+    .video-tutorials {
+     position: absolute;
+     z-index: 1;
+     right: 200px;
+     top: 50px;
+     background: white;
+     border: 1px solid white;
+     box-shadow: 0.5px 1px 5px 0.5px #00000080;
+     border-radius: 2px;
+     height: 700px;
+    }
+   
+    .video-tutorials video {
+     width: 100%;
+     height: 300px;
+     border: 10px solid white;
+    }
+   
+    .video-tutorials.video-details {
+     font-size: 16px;
+    }
+   
+    .video-details {
+     padding: 10px;
+     padding-left: 20px;
+     text-align: center;
+    }
+   
+    .video-details-header {
+     font-size: 24px;
+     font-weight: bold;
+     text-align: left;
+     padding-left: 40px;
+    }
+   
+    .video-details p {
+     font-size: 32px;
+    }
+   
+    .button {
+     border-style: none;
+     padding: 15px;
+     width: 300px;
+    }
+   
+    .add-to-cart {
+     margin-top: 10px;
+     border: black 1px solid;
+     background-color: #ffffff;
+     font-weight: bold;
+     color: #686f7a;
+    }
+   
+    .buy-now {
+     background-color: #ec5252;
+     color: #ffffff;
+     font-weight: bold;
+     width: 100% !important;
+    }
+   
+    .video-descriptions {
+     color: #686f7a;
+     text-align: left;
+     padding-left: 1;
+    }
+   
+    .video-descriptions p {
+     font-size: 14px;
+     padding-left: 40px;
+     font-weight: bold;
+     padding-top: 10px;
+    }
+   
+    .video-descriptions ul {
+     padding-left: 60px;
+    }
+   
+    .video-descriptions ul li {
+     list-style: none;
+     padding: 0;
+    }
+   
+    .section-6 ul li {
+     border-bottom: 2px solid #dedfe0;
+     padding: 20px 0px;
+    }
+   
+    .section-6 ul {
+     list-style-type: none;
+     padding: 0;
+     border-bottom: 2px solid #dedfe0;
+     border-top: 2px solid #dedfe0;
+    }
+   
+    .raty-product-section i {
+     margin-left: 5px;
+     margin-bottom: 10px;
+    }
+   
+    b {
+     color: #29303b;
+    }
+   
+    .fas.fa-star.star-live {
+     color: rgb(245, 200, 91);
+    }
+   
+    .fas.fa-star.star-dead {
+     color: #abb0bb;
+    }
 </style>
+
+
+
+<style>
+    .custom-switch-input:checked~.custom-switch-description {
+     position: relative;
+     top: 4px;
+    }
+  
+  
+    .loading-modal {
+         position: fixed;
+         background-color: rgba(255, 255, 255, 0.459);
+         width: 100%;
+         height: 100%;
+         top: 0;
+         left: 0;
+         z-index: 9999999;
+        }
+  
+        .loading-modal .loading-gif {
+         background-image: url("https://i.ya-webdesign.com/images/transparent-bars-loading-1.gif");
+         background-repeat: no-repeat;
+         width: 100%;
+         height: 100%;
+         margin-left: 40%;
+         margin-right: auto;
+         margin-top: 15%;
+        }
+        
+</style>
+
+ <!-- Template CSS -->
+ <link rel="stylesheet" href="/assets/admin/css/style.css">
+ <link rel="stylesheet" href="/assets/admin/css/components.css">
+
+ <!-- Custom CSS -->
+ <link rel="stylesheet" href="/assets/stylesheets/admin-custom.css">
+
+
 @endsection
 
 @section('page')
@@ -350,37 +545,43 @@ Course Content -->
             <div class="card" id="secAc"></div>
         </div> --}}
 
- <div class="video-tutorials">
-  <video class="padding-top video" id="video" width="100%" controls autoplay="false"
-   poster="https://homepages.cae.wisc.edu/~ece533/images/monarch.png">
-   {{-- <source src="http://192.168.110.16:8080/bin/admin/file_example_MP4_480_1_5MG.mp4" type="video/mp4"> --}}
-   {{-- <source type="video/mp4"> --}}
-   {{-- Your browser does not support HTML5 video. --}}
 
-   <source src=http://techslides.com/demos/sample-videos/small.webm type=video/webm />
-   <source src=http://techslides.com/demos/sample-videos/small.ogv type=video/ogg />
-   <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4 />
-   <source src=http://techslides.com/demos/sample-videos/small.3gp type=video/3gp />
-  </video>
-  {{-- <div class="video-details" id="video-details"></div> --}}
-
-  <div class="video-details">
-   <p class="video-details-header">$10</p>
-   {{-- <button class="button buy-now">Buy now</button><br />
-            <button class="button add-to-cart">Add to cart</button> --}}
-   <button class="button buy-now">Take Quiz</button><br />
-   <div class="video-descriptions">
-    <p>Includes:</p>
-    <ul>
-     <li><i class="far fa-file-video"></i>&nbsp;Hours On demand videos</li>
-     <li><i class="far fa-file"></i>&nbsp;Lessons</li>
-     <li><i class="far fa-compass"></i>&nbsp;lifetime access</li>
-     <li><i class="fas fa-mobile-alt"></i>&nbsp;on mobile and tv</li>
-    </ul>
-   </div>
-  </div>
- </div>
-
+        <div class="video-tutorials">
+            <video
+             class="padding-top video"
+             id="video"
+             width="100%"
+             controls
+             autoplay="false"
+             :poster="content.thumbnail"
+            >
+             <source :src="content.video" type=video/webm />
+             <source :src="content.video" type=video/ogg />
+             <source :src="content.video" type=video/mp4 />
+             <source :src="content.video" type=video/3gp />
+            </video>
+            <div class="video-details">
+             <button class="button buy-now">Take Quiz</button>
+             <br />
+             <div class="video-descriptions">
+              <p>Updates:</p>
+              <ul>
+               <li>
+                <i class="far fa-file-video"></i>&nbsp;Hours On demand videos
+               </li>
+               <li>
+                <i class="far fa-file"></i>&nbsp;Lessons
+               </li>
+               <li>
+                <i class="far fa-compass"></i>&nbsp;lifetime access
+               </li>
+               <li>
+                <i class="fas fa-mobile-alt"></i>&nbsp;on mobile and tv
+               </li>
+              </ul>
+             </div>
+            </div>
+           </div>
  <div class="row wrap-header">
   <div class="col-lg-12">
    <div class="col-lg-12 course-header text-left">
@@ -409,13 +610,7 @@ Course Content -->
    <div class="row margin-top-next">
     <div class="col-lg-6 offset-lg-1 section-1">
      <h5>What will i learn?</h5>
-     <ul>
-      <li>Have the skills to start making money on the side, as a casual freelancer, or full time as a
-       work-from-home freelancer</li>
-      <li>Convert any static HTML & CSS website into a Custom WordPress Theme</li>
-      <li>Feel comfortable with the process of turning static websites into dynamic WordPress websites
-      </li>
-     </ul>
+     <ul id="wwil"></ul>
     </div>
    </div>
   </div>
@@ -431,10 +626,19 @@ Course Content -->
   </div>
  </div>
 
+{{--  <div class="row">
+    <div class="col-lg-12">
+        <div class="panel-group" id="accordionx">
+
+        </div>
+    </div>
+   </div> --}}
+
+
  <div class="row">
   <div class="col-lg-12">
-   <div class="row">
-    <div class="col-lg-6 offset-lg-1 section-3">
+   <div class="row" id="accordionx">
+    {{-- <div class="col-lg-6 offset-lg-1 section-3">
      <div class="header-custom-border">
       <a class="btn" data-toggle="collapse" data-target="#demo" style="display:inline; font-size:15px"><i
         class="fas fa-plus" style="color: #007791"></i>&nbsp;&nbsp;Getting Started With This
@@ -456,94 +660,69 @@ Course Content -->
     </div>
 
     <div class="col-lg-6 offset-lg-1 section-3">
-     <div class="header-custom-border">
-      <a class="btn" data-toggle="collapse" data-target="#demo1" style="display:inline; font-size:15px"><i
-        class="fas fa-plus" style="color: #007791"></i>&nbsp;&nbsp;Environment Setup: Get Your Project Started
-      </a>
-     </div>
-     <div id="demo1" class="collapse">
-      <div class="list-custom-border"><i class="fas fa-play-circle"></i>Free Download: The Bootstrap
-       Framework
-      </div>
-      <div class="list-custom-border"><i class="fas fa-play-circle"></i>Bootstrap Pop Quiz
-       Environment</div>
-      <div class="list-custom-border"><i class="fas fa-play-circle"></i>WordPress Pop Quiz
-      </div>
-     </div>
-    </div>
-   </div>
+        <div class="header-custom-border">
+         <a class="btn" data-toggle="collapse" data-target="#demo1" style="display:inline; font-size:15px"><i
+           class="fas fa-plus" style="color: #007791"></i>&nbsp;&nbsp;Environment Setup: Get Your Project Started
+         </a>
+        </div>
+        <div id="demo1" class="collapse">
+         <div class="list-custom-border"><i class="fas fa-play-circle"></i>Free Download: The Bootstrap
+          Framework
+         </div>
+         <div class="list-custom-border"><i class="fas fa-play-circle"></i>Bootstrap Pop Quiz
+          Environment</div>
+         <div class="list-custom-border"><i class="fas fa-play-circle"></i>WordPress Pop Quiz
+         </div>
+        </div>
+       </div>
+   </div> --}}
   </div>
  </div>
 
  <div class="row">
   <div class="col-lg-12">
    <div class="row">
-    <div class="col-lg-6 offset-lg-1 section-4">
+    <div class="col-lg-6 offset-lg-1 section-4" id="">
      <p class="section-4-header">Requirements</p>
 
-     <ul>
-      <li>Have a basic understanding of HTML, CSS and PHP (all courses I offer)</li>
-      <li>Have access to a code editor, free or otherwise. I suggest Coda 2, as that's the editor I
-       use exclusively.</li>
-      <li>An Internet connection is required.</li>
-      <li>A fresh copy of Bootstrap and WordPress (we will go over this in the beginning of the
-       course).</li>
-      <li>Download & Install MAMP (or alternatives — we cover this in the course)</li>
+     <ul  id="req">
      </ul>
     </div>
    </div>
   </div>
  </div>
 
- <div class="row">
+{{--  <div class="row">
+    <div class="col-lg-12">
+        <div class="">
+            <div class=" section-4">
+                <p class="section-4-header">Requirements</p>
+
+                <ul id="req">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+{{--  <div class="row">
   <div class="col-lg-12">
    <div class="row">
     <div class="col-lg-6 offset-lg-1 section-5">
      <p class="section-5-header">Description</p>
-
-     <p><strong>Do you want to supercharge your HTML, CSS & PHP knowledge and learn how to turn them into
-       a
-       real business that can make you more money as a freelancer?</strong></p>
-
-     <p>Whether you're a freelance designer, entrepreneur, employee for a company, code hobbyist, or
-      looking for a new career — this course gives you an immensely valuable skill that will enable
-      you to either:</p>
-
-     <p><strong>
-       Make money on the side
-      </strong>
-     </p>
-
-     <p>
-      So you can save up for that Hawaiian vacation you've been wanting, help pay off your debt, your
-      car, your mortgage, or simply just to have bonus cash laying around.
-     </p>
-
-     <p><strong>
-       Create a full-time income
-      </strong>
-     </p>
-
-     <p>
-      WordPress developers have options. Many developers make a generous living off of creating custom
-      WordPress themes and selling them on websites like ThemeForest. Freelance designers and
-      developers can also take on WordPress projects and make an extra $1,000 - $5,000+ per month.
-     </p>
+     
     </div>
    </div>
   </div>
- </div>
+ </div> --}}
 
  <div class="row">
   <div class="col-lg-12">
    <div class="row">
-    <div class="col-lg-6 offset-lg-1 section-6">
+    <div class="col-lg-6 section-6">
      <p class="section-6-header">Other related courses</p>
 
-     <ul>
-      <li><a href="#">course 1</a></li>
-      <li><a href="#">course 2</a></li>
-      <li><a href="#">course 3</a></li>
+     <ul id="related_courses">
      </ul>
     </div>
    </div>
@@ -818,8 +997,9 @@ Course Content -->
     $(document).ready(function() {
 
         $('.editor-te').jqte({format: false});
+        loadWWIL();
         loadMetaData();
-        loadData();
+        //loadData();
         list();             
         $.ajax({
                 url: "{{ url('/admin/user_dashboard/course_progress') }}/"+id,
@@ -836,6 +1016,54 @@ Course Content -->
                 }
         });  
 
+        $.ajax({
+                url: "{{url('/cr')}}/"+"{{ Request::route('id') }}",
+                type: 'get',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    for (let index = 0; index < data.data.length; index++) {
+                        $("#req").append(
+                            '<li>'+
+                                data.data[index].req+
+                            '</li>'
+                        )
+                        
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error get data from ajax');
+                }
+            });
+
+            $.ajax({
+                url: "{{url('/admin/user_dashboard/getCourseDetail')}}/"+"{{ Request::route('id') }}",
+                type: 'get',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    
+                   $("#titleData").text(data.data.title)
+                   $("#subtitleData").text(data.data.subTitle)
+                   $("#video-details").append(data.data.content)
+                   $("#related_courses").empty();
+                   data.related.forEach(function(entry,i) {
+                        console.log(entry)
+                        $("#related_courses").append(
+                            '<li>'+entry.title+'</li>'
+                        ); 
+                    });
+                   
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error get data from ajax');
+                }
+            });
+
         $('.raty').raty({ starType: 'i',score:3,click:function (rate) {
             window.location = window.location.href+'/rate/'+rate;
         }});
@@ -843,7 +1071,6 @@ Course Content -->
 
     
     function loadData() {
-        if(id!=null||id!=""){
             $.ajax({
                 url: "{{ url('/admin/user_vendor/vendor_course_show') }}/"+id,
                 type: "get",
@@ -861,7 +1088,31 @@ Course Content -->
                     alert('Error! Contact IT Department.');
                 }
             });
-        }
+    }
+
+    function loadWWIL() {
+            $.ajax({
+                url: "{{ url('/admin/user_vendor/vendor_course_get_all_cl') }}/"+id,
+                type: "get",
+                dataType: 'JSON',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+
+                    $("#wwil").empty();
+                    data.data.forEach(function(entry,i) {
+                        console.log(entry)
+                        $("#wwil").append(
+                            '<li>'+entry.description+'</li>'
+                        ); 
+                    });
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error! Contact IT Department.');
+                }
+            });
     }
 
     function loadMetaData() {
@@ -935,40 +1186,51 @@ Course Content -->
                     dataType: 'JSON',
                     success: function(data) {
                         
-                        data.data.forEach(function(a,i) {
-                            dr = a.duration?a.duartion:'N/A';
-                            size = a.size?a.size:'N/A';
+                        for (let index = 0; index < data.length; index++) {
                             
-                            $("#secAc").append(
-                                '<div class="card-header" id="heading_"'+i+'>'+
-                                   ' <h2 class="mb-0">'+
-                                       ' <button class="btn btn-link" type="button" data-toggle="collapse"'+
-                                           ' data-target="#col_'+i+'" aria-expanded="true" aria-controls="col_'+i+'"> <i class="fas fa-plus"></i> '+
-                                            a.title+
-                                       ' </button>'+
-                                   ' </h2>'+
-                                '</div>'+
-
-                               ' <div id="col_'+i+'" class="collapse" aria-labelledby="heading_'+i+'"'+
-                                   ' data-parent="#accordionExample">'+
-                                    '<div class="card-body"><ul>'+
-                                       /*  '<li>Duration: '+dr+'</li>'+
-                                        '<li>Size: '+size+'</li>'+
-                                        '</ul>'+
-                                        '<a href="/admin/user_student/student_lesson_quiz/'+a.id+'/'+id+'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>'+
-                                        ' <a href="/admin/user_student/student_show_lesson/'+a.id+'/'+id+'" type="button" class="btn btn-primary">View Full Lesson</a>'+ */
-                                        '<div class="row">'+
-                                            '<div class="col-md-6">Sample Description 1'+
-                                            '</div>'+
-                                            '<div class="col-md-6">'+
-                                            '<a href="/admin/user_student/student_lesson_quiz/'+a.id+'/'+id+'" class="btn  btn-success btn-xs" title="Edit">Take quiz</a>'+
-                                            '</div>'+
+    $("#accordionx").append(
+        '<div class="col-lg-6 offset-lg-1 section-3">'+
+   '  <div class="header-custom-border">'+
+     ' <a class="btn" data-toggle="collapse" data-target="#demo_'+index+'" style="display:inline; font-size:15px"><i class="fas fa-plus" style="color: #007791"></i>'
+       + '&nbsp;&nbsp;'+data[index].title+
+     ' </a>'+
+     '</div>'+
+   '  <div id="demo_'+index +'" class="collapse">'+
+      '<div class="list-custom-border"><i class="fas fa-play-circle"></i>'+data[index].title+'   </div></div>'+
+    '</div>'
+                            )
+                        /* if(index==0){
+                            $("#accordionx").append(
+                                '<div class="panel panel-default">'+
+                                    '<div class="panel-heading">'+
+                                        '<h4 class="panel-title">'+
+                                        '<a data-toggle="collapse" data-parent="#accordionx" href="#collapse'+index+'">  '+data[index].title+'</a> </h4>'+
+                                    '</div>'+
+                                    '<div id="collapse'+index+'" class="panel-collapse collapse in">'+
+                                        '<div class="panel-body">'+
+                                            data[index].desc+
                                         '</div>'+
-                                   ' </div>'+
-                              '  </div>'
-                            );
-
-                        });
+                                    '</div>'+
+                                '</div>'
+                            )
+                        }else{
+                            $("#accordionx").append(
+                                '<div class="panel panel-default">'+
+                                    '<div class="panel-heading">'+
+                                        '<h4 class="panel-title">'+
+                                        '<a data-toggle="collapse" data-parent="#accordionx" href="#collapse'+index+'">  '+data[index].title+'</a> </h4>'+
+                                    '</div>'+
+                                    '<div id="collapse'+index+'" class="panel-collapse collapse">'+
+                                        '<div class="panel-body">'+
+                                            data[index].desc+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'
+                            )
+                        } */
+                        
+                        
+                    }
 
                         
                    

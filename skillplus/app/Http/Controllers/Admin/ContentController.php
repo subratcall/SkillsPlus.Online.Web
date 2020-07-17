@@ -844,7 +844,7 @@ class ContentController extends Controller
 
         ## Get Related Content ##
         $relatedCat = $product->category_id;
-        $relatedContent = Content::with(['metas'])->where('category_id',$relatedCat)->where('id','<>',$product->id)->where('mode','publish')->limit(3)->inRandomOrder()->get();
+        $relatedContent = Content::with(['metas'])->where('category_id',$relatedCat)->where('id','<>',$product->id)->where('mode','publish')->inRandomOrder()->get();
 
 
         ## Get PreCourse Content ##
@@ -865,17 +865,15 @@ class ContentController extends Controller
 
     #public content learn
     function contentLearn($id){
-     $cl = ContentLearn::where('content_id',$id)->get();      
-     $data = array();
-     foreach ($cl as $myList)
-     {
-        $row = array();
-                 $row['desc'] = $myList->description;
-        $data[] = $row;
-     }
+        $cl = ContentLearn::where('content_id',$id)->get();      
+        $data = array();
+        foreach ($cl as $myList)
+        {
+            $row = array();
+            $row['desc'] = $myList->description;
+            $data[] = $row;
+        }
         $output = array("data" => $data);
-        
-
         return response()->json($output);
     }
 

@@ -107,7 +107,13 @@ class RequestController extends Controller
     public function destroy($id){        
         Requests::where('id',$id)->delete();
         echo true;
-    }
+    }    
 
-    
+    function getCourseDetail($id){        
+        $getData = Content::where(['id'=>$id])->first();
+        $relatedContent = Content::with(['metas'])->where('category_id',$getData->category_id)->where('id','<>',$id)->where('mode','publish')->inRandomOrder()->get();
+
+        $output = array("data" => $getData,"related"=>$relatedContent);
+		echo json_encode($output);
+    }
 }

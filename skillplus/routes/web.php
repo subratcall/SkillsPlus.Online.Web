@@ -63,6 +63,7 @@ Route::group(['prefix' => 'admin'],function (){
 
             
             Route::get('course_progress/{id}','Admin_user\VendorController@courseProgress'); 
+            Route::get('getCourseDetail/{id}','Admin_user\RequestController@getCourseDetail');
            /* Route::get('course_overview','Admin_user\UserController@getContentById');
             Route::get('mycourses','Admin_user\UserController@getCourses'); */
         });
@@ -529,6 +530,7 @@ Route::group(['prefix' => 'admin'],function (){
            Route::get('delete/{id}','Admin\RequestController@delete');
            Route::get('draft/{id}','Admin\RequestController@draft');
            Route::get('publish/{id}','Admin\RequestController@publish');
+           Route::get('getCourseDetail/{id}','Admin_user\RequestController@getCourseDetail');
 
            ## RECORD SECTION
             Route::group(['prefix'=>'record'],function (){
