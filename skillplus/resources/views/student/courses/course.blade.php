@@ -590,7 +590,7 @@ Course Content -->
     <div class="col-xs-6">
      <div class="raty-product-section">
       <div class="raty"></div>
-      <span class="raty-text">3 ratings</span>
+      {{-- <span class="raty-text">3 ratings</span> --}}
       <span class="">10 studens / vendors purchased this book</span>
      </div>
     </div>

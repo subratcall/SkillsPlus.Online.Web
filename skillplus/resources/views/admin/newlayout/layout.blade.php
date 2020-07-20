@@ -299,7 +299,7 @@
      <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
       <li id="mp">
-       <a href="/" class="nav-link"><i class="fas fa-tachometer-alt"></i> <span>Home</span></a>
+       <a href="/" class="nav-link"><i class="fas fa-tachomehometer-alt"></i> <span>Home</span></a>
       </li>
       <li id="mp">
        <a href="/admin/profile#main" class="nav-link"><i class="fas fa-tachometer-alt"></i> <span>My Profile</span></a>

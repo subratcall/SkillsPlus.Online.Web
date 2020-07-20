@@ -424,7 +424,7 @@ class UserController extends Controller
 
         //dd($tenDay);
 
-        return view('user.dashboard',[
+        /* return view('user.dashboard',[
             'user'=>$user,
             'meta'=>$userMetas,
             'buyList'=>$userBuy,
@@ -441,11 +441,11 @@ class UserController extends Controller
             'captionDay'=>$tenDay,
             'sellDay'=>$sellDay,
             'incomeDay'=>$incomeDay
-        ]);
+        ]); */
 
         
 
-        /* $admin = User::where('username',$user['username'])->where('mode','active')->first();
+        $admin = User::where('username',$user['username'])->where('mode','active')->first();
        
         $request->session()->put('Admin',serialize($admin->toArray()));
                     $user = User::find($admin->id);
@@ -460,7 +460,7 @@ class UserController extends Controller
                     }else{
                         Session::put('user_type','reg_user');
                     }
-        return view('admin_user.dashboard');  */
+        return view('admin_user.dashboard'); 
 
         //return redirect('/admin/user_dashboard/user');
     }

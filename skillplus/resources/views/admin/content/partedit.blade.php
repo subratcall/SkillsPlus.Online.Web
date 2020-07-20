@@ -279,8 +279,17 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-2 control-label" for="inputDefault">Content</label>
                                 <div class="col-md-12">
                                     <textarea class="summernote" name="description">{{{ $part->description or '' }}}</textarea>
+                                </div>
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="inputDefault">Short Description</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="shortdescription" value="{{{ $part->shortdescription or '' }}}" id="shortdescription" class="form-control">
                                 </div>
                             </div>
 

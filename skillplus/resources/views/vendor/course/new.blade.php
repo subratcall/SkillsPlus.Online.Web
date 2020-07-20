@@ -197,7 +197,7 @@ var id = "{{request()->route('id')}}";
                     $("#type").val(data.type);
                     $(".jqte_editor").html(data.content)
                     $("#private").val(data.private);
-                    $("#subtitle").val(data.subTitle);
+                    $("#subtitle").val(data.subtitle);
                     $("#id").val(data.id);           
                 },
                 error: function(jqXHR, textStatus, errorThrown) {

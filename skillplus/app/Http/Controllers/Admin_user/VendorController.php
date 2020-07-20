@@ -77,7 +77,7 @@ class VendorController extends Controller
             $row['subtitle'] = strtoupper($myList->subTitle);
             $row['id'] = $myList->id;
             $btn = '';
-            $btn = $btn . '<a href="/admin/user_vendor/vendor_lesson_list/' . $myList->id . '" class="btn  btn-warning btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
+            $btn = $btn . '<a href="/admin/user_vendor/vendor_lesson_list/' . $myList->id . '" class="btn  btn-warning btn-xs" title="Lessons"><i class="fa fa-book"></i></a>  ';
             $btn = $btn . '<a href="/admin/user_vendor/vendor_course_new/' . $myList->id . '" class="btn  btn-primary btn-xs" title="Edit"><i class="far fa-save"></i></a>  ';
             $btn = $btn . '<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_course(' . "'" . $myList->id . "'" . ')"><i class="fas fa-trash"></i></button>  ';
             $row['action'] = $btn;
@@ -155,7 +155,7 @@ class VendorController extends Controller
         }
 
         $data["content"] = $getContent;
-        $data["content"]["user_comment"] = $comment["user_comment"];
+        //$data["content"]["user_comment"] = $comment["user_comment"];
 
         return response()->json($data["content"]);
     }
@@ -164,18 +164,18 @@ class VendorController extends Controller
     public function getRatings($id)
     {
 
-        $getData = ContentRate::where(['content_id' => $id])->get();
+        /* $getData = ContentRate::where(['content_id' => $id])->get();
 
-        return response()->json($getData);
+        return response()->json($getData); */
 
-        //       $getData = ContentRate::where(['content_id'=>$id])->get();
-        //       $data = array();
-        //       $cnt = 0;
-        //       foreach ($getData as $myList)
-        // {
-        //           $cnt+=$myList->rate;
-        //       }
-        // echo json_encode($cnt);
+        $getData = ContentRate::where(['content_id'=>$id])->get();
+        $data = array();
+        $cnt = 0;
+        foreach ($getData as $myList)
+        {
+            $cnt+=$myList->rate;
+        }
+        echo json_encode($cnt);
 
     }
 
@@ -316,7 +316,7 @@ class VendorController extends Controller
             $row['cb'] = '<input type="checkbox" value="' . $myList->id . '" name="cb" id="cb_' . $cbid . '" >';
             $btn = '';
             $btn = $btn . '<a href="/admin/user_vendor/vendor_lesson_new/' . $id . "/" . $myList->id . '" class="btn  btn-primary btn-xs" title="Edit"><i class="far fa-save"></i></a>  ';
-            $btn = $btn . '<a href="/admin/user_vendor/vendor_question_add/' . $myList->id . '/' . $id . '" class="btn  btn-success btn-xs" title="Edit"><i class="fa fa-book"></i></a>  ';
+            $btn = $btn . '<a href="/admin/user_vendor/vendor_question_add/' . $myList->id . '/' . $id . '" class="btn  btn-success btn-xs" title="Questions"><i class="fa fa-book"></i></a>  ';
             $btn = $btn . '<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_course(' . "'" . $myList->id . "'" . ')"><i class="fas fa-trash"></i></button>  ';
             $row['action'] = $btn;
             $data[] = $row;
