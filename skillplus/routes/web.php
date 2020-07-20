@@ -98,11 +98,12 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor_course_show_meta/{id}','Admin_user\VendorController@showCourseMeta');
             Route::get('vendor_course_destroy/{id}','Admin_user\VendorController@destroyCourse');
             Route::post('vendor_course_saveCourse','Admin_user\VendorController@saveCourse');
-
+            Route::get('vendor_course_getAllCourses','Admin_user\VendorController@getAllCourses');
+            
 
             Route::get('vendor_course_rate/{id}','Admin_user\VendorController@getRatings');
             Route::get('vendor_course_sold/{id}','Admin_user\VendorController@countCoursePurchased');
-            Route::get('vendor_course_vendor/{id}','Admin_user\VendorController@getVendor');
+            Route::get('vendor_course_vendor/{id}/{cid}','Admin_user\VendorController@getVendor');
             Route::get('vendor_count_courses/{id}','Admin_user\VendorController@getVendorCountCourses');
             Route::get('vendor_course_related/{id}','Admin_user\VendorController@getVendorRelatedCourse');
             

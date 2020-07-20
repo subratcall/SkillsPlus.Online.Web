@@ -590,13 +590,13 @@ Course Content -->
     <div class="col-xs-6">
      <div class="raty-product-section">
       <div class="raty"></div>
-      {{-- <span class="raty-text">3 ratings</span> --}}
-      <span class="">10 studens / vendors purchased this book</span>
+      <span class="raty-text"></span>
+      {{-- <span class="">10 studens / vendors purchased this book</span> --}}
      </div>
     </div>
     <div class="col-xs-12">
      <div class="raty-product-section">
-      <span class="">Vendor: John Carlo C. Lucasan</span>
+      <span class="vendor_name"></span>
      </div>
     </div>
    </div>
@@ -740,7 +740,7 @@ Course Content -->
      </div>
      <div class="col-lg-12 row">
       <div class="col-lg-6">
-       <img src="https://demo.academy-lms.com/addon/uploads/user_image/1.jpg" width="96">
+       <img id="vendor_img" width="96">
        <ul>
         <li><i class="fas fa-comment"></i>&nbsp;5 Reviews</li>
         <li><i class="fas fa-user"></i>&nbsp;3 Students</li>
@@ -748,15 +748,9 @@ Course Content -->
        </ul>
       </div>
       <div class="col-lg-6">
-       <label><strong>John Doe
-         Eat Sleep Code Repeat</strong></label>
+       <label id="vendor_name"></label>
 
-       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-        a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.</p>
+       <p id="vendor_about"></p>
       </div>
      </div>
     </div>
@@ -1000,7 +994,8 @@ Course Content -->
         loadWWIL();
         loadMetaData();
         //loadData();
-        list();             
+        list();            
+
         $.ajax({
                 url: "{{ url('/admin/user_dashboard/course_progress') }}/"+id,
                 type: "get",
@@ -1057,6 +1052,27 @@ Course Content -->
                             '<li>'+entry.title+'</li>'
                         ); 
                     });
+
+                    $.ajax({
+                            url: "{{ url('/admin/user_vendor/vendor_course_vendor') }}/"+data.data.user_id+"/"+id,
+                            type: "get",
+                            dataType: 'JSON',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(data) {
+                                $(".raty-text").text(data.rate+" ratings")
+                                $(".vendor_name").text(data.data[0].name+" ratings")
+                                $("#vendor_img").attr("src",data.data[0].avatar)
+                                $("#vendor_about").text(data.data[0].biography)
+                                $("#vendor_name").text(data.data[0].name+" "+data.data[0].short_biography)
+                                
+                                
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                alert('Error! Contact IT Department.');
+                            }
+                    }); 
                    
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -1196,7 +1212,7 @@ Course Content -->
      ' </a>'+
      '</div>'+
    '  <div id="demo_'+index +'" class="collapse">'+
-      '<div class="list-custom-border"><i class="fas fa-play-circle"></i>'+data[index].title+'   </div></div>'+
+      '<div class="list-custom-border"><i class="fas fa-play-circle"></i>'+data[index].shortdescription+'   </div></div>'+
     '</div>'
                             )
                         /* if(index==0){

@@ -100,7 +100,7 @@ class VendorController extends Controller
     public function saveCourse(Request $request)
     {
         if ($request->mode == "Save") {
-            Content::create([
+            $getLastInsertedId = Content::create([
                 'create_at' => time(),
                 'user_id' => Session::get('user_id'),
                 'title' => $request->title,
@@ -110,6 +110,53 @@ class VendorController extends Controller
                 'private' => $request->private,
                 'subtitle' => $request->subtitle,
             ]);
+            //echo $getLastInsertedId->id;exit;
+            ContentMeta::where('content_id', $request->id)->delete();
+            ContentMeta::create([
+                'content_id' => $getLastInsertedId->id,
+                'option' => 'cover',
+                'value' => $request->cover,
+            ]);
+            ContentMeta::create([
+                'content_id' => $getLastInsertedId->id,
+                'option' => 'thumbnail',
+                'value' => $request->thumbnail,
+            ]);
+            ContentMeta::create([
+                'content_id' => $getLastInsertedId->id,
+                'option' => 'video',
+                'value' => $request->video,
+            ]);
+            /* ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'document',
+                'value' => $request->document,
+            ]); */
+            ContentMeta::create([
+                'content_id' => $getLastInsertedId->id,
+                'option' => 'price',
+                'value' => $request->price,
+            ]);
+            $getPrecourse='';
+            foreach ($request->precourse as $value) {
+                $getPrecourse .= $value.",";
+            }
+            //substr_replace($getPrecourse ,"",-1);
+            ContentMeta::create([
+                'content_id' => $getLastInsertedId->id,
+                'option' => 'precourse',
+                'value' => substr_replace($getPrecourse ,"",-1),
+            ]);
+            ContentMeta::create([
+                'content_id' => $getLastInsertedId->id,
+                'option' => 'duration',
+                'value' => $request->duration,
+            ]);
+            ContentMeta::create([
+                'content_id' => $getLastInsertedId->id,
+                'option' => 'post_price',
+                'value' => $request->post_price,
+            ]);
         } else if ($request->mode == "Update") {
             Content::where(['id' => $request->id])->update([
                 'title' => $request->title,
@@ -118,6 +165,58 @@ class VendorController extends Controller
                 'private' => $request->private,
                 'subtitle' => $request->subtitle,
             ]);
+            //delete Meta and insert new
+            ContentMeta::where('content_id', $request->id)->delete();
+            ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'cover',
+                'value' => $request->cover,
+            ]);
+            ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'thumbnail',
+                'value' => $request->thumbnail,
+            ]);
+            ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'video',
+                'value' => $request->video,
+            ]);
+            /* ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'document',
+                'value' => $request->document,
+            ]); */
+            ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'price',
+                'value' => $request->price,
+            ]);
+            $getPrecourse='';
+            foreach ($request->precourse as $value) {
+                $getPrecourse .= $value.",";
+            }
+            //substr_replace($getPrecourse ,"",-1);
+            ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'precourse',
+                'value' => substr_replace($getPrecourse ,"",-1),
+            ]);
+            ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'duration',
+                'value' => $request->duration,
+            ]);
+            ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'post_price',
+                'value' => $request->post_price,
+            ]);
+            /* ContentMeta::create([
+                'content_id' => $request->id,
+                'option' => 'multiselect',
+                'value' => $request->thumbnail,
+            ]); */
         }
         echo true;
     }
@@ -180,7 +279,19 @@ class VendorController extends Controller
     }
 
 
-
+    public function getAllCourses()
+    {
+        $content = Content::all();
+        $data = array();
+        foreach ($content as $myList) {
+            $row = array();
+            $row['id'] = strtoupper($myList->id);
+            $row['title'] = strtoupper($myList->title);
+            $data[] = $row;
+        }
+        $output = array("data" => $data);
+        echo json_encode($output);
+    }
 
 
     public function getPrecourse($id)
@@ -260,13 +371,14 @@ class VendorController extends Controller
             ContentLearn::create([
                 'content_id' => $request->title,
                 'description' => $request->content,
-            ]);
+            ]);            
         } else if ($request->mode == "Update") {
             ContentLearn::where(['id' => $request->id])->update([
                 'content_id' => $request->title,
                 'description' => $request->content,
             ]);
         }
+        
         echo true;
     }
 
@@ -851,11 +963,17 @@ class VendorController extends Controller
         return dd($request->all());
     }
 
-    public function getVendor($id)
+    public function getVendor($id,$cid)
     {
 
         $user = User::where(["id" => $id])->get();
         $userMeta = Usermeta::where(["user_id" => $id])->get();
+        $contentRate = ContentRate::where(['content_id' => $cid])->get();
+        $length = $contentRate;
+        $rate = 0;
+        foreach ($contentRate as $key_b => $value_b) {
+            $rate = $rate + $value_b->rate;
+        }
         $data = array();
         foreach($user as $key_a => $value_a) {
          $data[$key_a]["name"] = $value_a->name;
@@ -863,13 +981,22 @@ class VendorController extends Controller
          $data[$key_a]["vendor"] = $value_a->vendor;
          
          foreach($userMeta as $key_b => $value_b) {
-          if ($value_b->option == "avatar") {
-           $data[$key_a]["avatar"] = $value_b->value;
+             if ($value_b->option == "avatar") {
+               $data[$key_a]["avatar"] = $value_b->value;
+             }
+             
+          if ($value_b->option == "biography") {
+            $data[$key_a]["biography"] = $value_b->value;
+          }
+          if ($value_b->option == "short_biography") {
+            $data[$key_a]["short_biography"] = $value_b->value;
           }
          }
         }
 
-        return response()->json($data);
+        //return response()->json($data);
+        $output = array("data" => $data,"rate" => $rate);
+        echo json_encode($output);
     }
 
     public function getVendorCountCourses($id)

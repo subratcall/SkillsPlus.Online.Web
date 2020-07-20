@@ -103,6 +103,108 @@
                         </div>
                     </div>
 
+                    <div id="meta" class="tab-pane ">
+                        <form action="/admin/content/store/meta" class="form-horizontal form-bordered" method="post">
+
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{{ trans('admin.course_cover') }}}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="cover">
+                                            <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                        </span>
+                                        <input type="text" name="cover" dir="ltr" value="" class="form-control">
+                                        <span class="input-group-append click-for-upload cu-p">
+                                            <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{{ trans('admin.course_thumbnail') }}}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="thumbnail">
+                                            <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                        </span>
+                                        <input type="text" name="thumbnail" dir="ltr" value="" class="form-control">
+                                        <span class="input-group-append click-for-upload cu-p">
+                                            <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{{ trans('admin.demo') }}}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#VideoModal" data-whatever="video" >
+                                            <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                        </span>
+                                        <input type="text" name="video" dir="ltr" value="" class="form-control">
+                                        <span class="input-group-append click-for-upload cu-p">
+                                            <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{{ trans('admin.duration') }}}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="number" min="0" name="duration" value="" class="form-control text-center">
+                                        <span class="input-group-append click-for-upload cu-p">
+                                            <span class="input-group-text">{{{ trans('admin.minutes') }}}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{{ trans('admin.price') }}}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" name="price" value="" class="form-control text-center" id="product_price" >
+                                        <span class="input-group-append click-for-upload cu-p" >
+                                            <span class="input-group-text"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{{ trans('admin.postal_price') }}}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" name="post_price" value="" class="form-control text-center numtostr">
+                                        <span class="input-group-append click-for-upload cu-p">
+                                            <span class="input-group-text"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                          
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">{{{ trans('admin.prerequisites') }}}</label>
+                                <div class="col-md-8">
+                                    <select name="precourse[]" id="precourse" multiple="multiple" class="form-control selectric">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                    
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
@@ -112,7 +214,6 @@
                             </div>
                         </div>
                     </div>
-
 
                 </form>
 
@@ -168,17 +269,19 @@
 @endsection
 
 @section('script')
-
+<link rel="stylesheet" href="/assets/admin/modules/jquery-selectric/selectric.css">
 <script type="application/javascript" src="/assets/vendor/jquery-te/jquery-te-1.4.0.min.js"></script>
-
+<script src="/assets/admin/modules/jquery-selectric/jquery.selectric.min.js"></script>
 <script>
     var isSave = 1;
 var id = "{{request()->route('id')}}";
     $(document).ready(function() {
+        $('#precourse').selectric();
         $('.editor-te').jqte({format: false});
         if(id){
             loadData();
-        }                
+        }          
+        loadAllCourse();      
     });
 
     function loadData() {
@@ -246,12 +349,35 @@ var id = "{{request()->route('id')}}";
             data: data,
             dataType: 'JSON',
             success: function(data) {
-               location = "/admin/user_vendor/vendor_course_list";
+               //location = "/admin/user_vendor/vendor_course_list";
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
             }
         });
+    }
+
+    function loadAllCourse() {
+        
+        $.ajax({
+                url: "{{ url('/admin/user_vendor/vendor_course_getAllCourses') }}/",
+                type: "get",
+                dataType: 'JSON',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {                    
+                    $.each( data.data, function( key, value ) {
+                        console.log(value.title)
+                        $('#precourse').append('<option value="'+value.id+'">'+value.title+'</option>');
+                    });
+                    $('#precourse').prop('selectedIndex', 0).selectric('refresh');
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error! Contact IT Department.');
+                }
+            });
+        
     }
 </script>
 @endsection
