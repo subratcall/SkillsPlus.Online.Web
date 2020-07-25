@@ -129,7 +129,10 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor_question_list/{id}','Admin_user\VendorController@vendorQuestion');            
             Route::post('vendor_question_add_question','Admin_user\VendorController@addQuestion');
             Route::get('vendor_selected_question_list/{id}','Admin_user\VendorController@vendorSelectedQuestion');      
-            Route::get('vendor_selected_question_delete/{id}','Admin_user\VendorController@removeQuestion');             
+            Route::get('vendor_selected_question_delete/{id}','Admin_user\VendorController@removeQuestion');       
+                  
+            Route::get('vendor_get_course_comments/{id}','Admin_user\VendorController@getCourseComment');   
+            
         });
 
         Route::group(['prefix'=>'user_student'],function(){

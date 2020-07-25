@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Lesson','Edit']])
 @section('title')
-<p id="titleHeader">New Lesson</p>
+Lesson
 @endsection
 
 @section('style')
@@ -184,6 +184,15 @@
                         </div>
 
                         <div class="form-group col-12">
+                            <label class="control-label tab-con"
+                                for="inputDefault">Short Description</label>
+                            <div class="tab-con te-10">
+                                <textarea class="form-control" rows="12" placeholder="Short Description..."
+                                    name="shortdescription" id="shortdescription" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-12">
 
                             <div class="tab-con">
                                 <button class="btn btn-success pull-left" id="edit-part-submit" onclick="save()"
@@ -240,6 +249,7 @@ var id = "{{request()->route('id')}}";
                     $("#sort").val(data.sort);
                     $("#size").val(data.size);
                     $("#duration").val(data.duration);
+                    $("#shortdescription").val(data.shortdescription);
                     $(".jqte_editor").html(data.description)
                     $("#private").val(data.private);
                     $("#id").val(data.id);                    

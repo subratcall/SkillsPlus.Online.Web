@@ -349,7 +349,7 @@ var id = "{{request()->route('id')}}";
             data: data,
             dataType: 'JSON',
             success: function(data) {
-               //location = "/admin/user_vendor/vendor_course_list";
+               location = "/admin/user_vendor/vendor_course_list";
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');

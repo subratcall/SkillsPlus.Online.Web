@@ -413,6 +413,30 @@ class VendorController extends Controller
         echo json_encode($output);
     }
 
+    function getCourseComment($id)
+    {
+        $content = ContentComment::where(['content_id' => $id])->get();
+        $data = array();
+        $cbid = 1;
+        foreach ($content as $myList) {
+            $row = array();
+            $row['comment'] = strtoupper($myList->comment);
+            $row['name'] = strtoupper($myList->name);
+            $row['dt'] = date("Y-m-d H:i:s", $myList->created_at);
+            /* $row['desc'] = strtoupper($myList->description);
+            $row['id'] = $myList->id;
+            $row['cb'] = '<input type="checkbox" value="' . $myList->id . '" name="cb" id="cb_' . $cbid . '" >';
+            $btn = '';
+            $btn = $btn . '<a href="/admin/user_vendor/vendor_lesson_new/' . $id . "/" . $myList->id . '" class="btn  btn-primary btn-xs" title="Edit"><i class="far fa-save"></i></a>  ';
+            $btn = $btn . '<a href="/admin/user_vendor/vendor_question_add/' . $myList->id . '/' . $id . '" class="btn  btn-success btn-xs" title="Questions"><i class="fa fa-book"></i></a>  ';
+            $btn = $btn . '<button type="button" class="btn  btn-danger btn-xs" title="Edit" onclick="delete_course(' . "'" . $myList->id . "'" . ')"><i class="fas fa-trash"></i></button>  ';
+            $row['action'] = $btn; */
+            $data[] = $row;
+        }
+        $output = array("data" => $data);
+        echo json_encode($output);
+    }
+
     /**Lessons */
 
     function vendorLessons($id)
@@ -455,6 +479,7 @@ class VendorController extends Controller
                 'content_id' => $request->cid, //content id
                 'title' => $request->title,
                 'description' => $request->desc,
+                'shortdescription' => $request->shortdescription,
                 'upload_video' => $request->upload_video,
                 'duration' => $request->duration,
                 'size' => $request->size,
@@ -465,6 +490,7 @@ class VendorController extends Controller
             ContentPart::where(['id' => $request->id])->update([
                 'title' => $request->title,
                 'description' => $request->desc,
+                'shortdescription' => $request->shortdescription,
                 'upload_video' => $request->upload_video,
                 'duration' => $request->duration,
                 'size' => $request->size,

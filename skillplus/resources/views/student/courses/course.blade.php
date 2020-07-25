@@ -1,7 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Lesson','Edit']])
 @section('title')
-<!-- <a href="/admin/user_dashboard/courses" class="btn btn-warning btn-sm">Back</a>
-Course Content -->
+
 @endsection
 
 @section('style')
@@ -742,9 +741,9 @@ Course Content -->
       <div class="col-lg-6">
        <img id="vendor_img" width="96">
        <ul>
-        <li><i class="fas fa-comment"></i>&nbsp;5 Reviews</li>
+        {{-- <li><i class="fas fa-comment"></i>&nbsp;5 Reviews</li>
         <li><i class="fas fa-user"></i>&nbsp;3 Students</li>
-        <li><i class="fas fa-play-circle"></i>&nbsp;11 Courses</li>
+        <li><i class="fas fa-play-circle"></i>&nbsp;11 Courses</li> --}}
        </ul>
       </div>
       <div class="col-lg-6">
@@ -759,7 +758,7 @@ Course Content -->
  </div>
 
  <div class="row">
-  <div class="col-lg-12">
+  {{-- <div class="col-lg-12">
    <div class="row">
     <div class="col-lg-6 offset-lg-1 section-8 row">
      <div class="col-lg-12">
@@ -864,7 +863,7 @@ Course Content -->
      </div>
     </div>
    </div>
-  </div>
+  </div> --}}
 
  </div>
 
@@ -875,8 +874,8 @@ Course Content -->
      <p class="section-9-header">Reviews</p>
     </div>
     <div class="col-lg-12">
-     <ul>
-      <li>
+     <ul id='getcomments'>
+      {{-- <li>
        <div class="row">
         <div class="col-lg-4">
          <div class="reviewer-details clearfix">
@@ -935,7 +934,7 @@ Course Content -->
          </div>
         </div>
        </div>
-      </li>
+      </li> --}}
      </ul>
     </div>
    </div>
@@ -994,7 +993,44 @@ Course Content -->
         loadWWIL();
         loadMetaData();
         //loadData();
-        list();            
+        list();          
+
+        $.ajax({
+                url: "{{ url('/admin/user_vendor/vendor_get_course_comments') }}/"+id,
+                type: "get",
+                dataType: 'JSON',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    data.data.forEach(function(entry,i) {
+                        console.log(entry)
+                        $("#getcomments").append(
+                           ' <div class="row">'+
+                                '<div class="col-lg-4">'+
+                               ' <div class="reviewer-details clearfix">'+
+                               ' <div class="reviewer-img float-left">'+
+                              '  </div>'+
+                             '   <div class="review-time">'+
+                             // '  <div class="time"> Sun, 07-Jul-2019 </div>'+
+                              '  <div class="reviewer-name">  '+entry.name+' </div>'+
+                              '  </div>'+
+                              '  </div>'+
+                               ' </div>'+
+                                '<div class="col-lg-8">'+
+                               ' <div class="review-details">'+
+                                '<div class="review-text">'+
+                                    entry.comment+'</div>'+
+                               ' </div>'+
+                              '  </div>'+
+                          '  </div>'
+                        ); 
+                    });
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error! Contact IT Department.');
+                }
+        });  
 
         $.ajax({
                 url: "{{ url('/admin/user_dashboard/course_progress') }}/"+id,

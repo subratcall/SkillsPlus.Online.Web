@@ -299,7 +299,7 @@
                                         @else
                                             <div class="overlap-profile-viewer-info">
                                                 <a href="/user/content" class="dash-s2"><span>{{{ $user['category']['title'] or 'General User' }}}</span></a>
-                                                <a href="/user/content" class="btn btn-danger">{{{ trans('main.user_panel') }}}</a>
+                                               {{--  <a href="/user/content" class="btn btn-danger">{{{ trans('main.user_panel') }}}</a> --}}
                                             </div>
                                         @endif
                                     </div>
