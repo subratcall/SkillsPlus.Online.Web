@@ -352,10 +352,9 @@
 <!-- <script type="application/javascript" src="/assets/toggle/bootstrap-toggle.min.js"></script> -->
 
 <script>
-    var isSave = 1;
-var id = "{{request()->route('id')}}";
-
-var lid = "{{request()->route('lid')}}";
+var isSave = 1;
+var id = "{{request()->route('id')}}";// lesson id
+var lid = "{{request()->route('lid')}}";//course id
 var getData;
 var getCorrectData;
 var cnt_sw = 0;

@@ -184,6 +184,7 @@ class UserController extends Controller
             $content = ContentPart::where(['content_id'=>$key->content_id])->get();
             //$data = array();
             $cnt=0;
+            $cnt_finish_lesson=0;
             foreach ($content as $myList)
             {
                 $mrow = array();
@@ -197,16 +198,19 @@ class UserController extends Controller
                 }            
             }
             $arr['count'] = $cnt;
+            $arr['countLesson'] = count($content);
             $arr['id'] =$key->content_id;
             $arr['lwqa'] = $cnt_lwqa;
             if($cnt_lwqa!=0&&$cnt!=0){
                 $p = (floatval($cnt_lwqa) / floatval($cnt)) * 100;
                 $prog = floor($p * 100)/100;
                 $arr['progress'] = $prog.'%';
+                $cnt_finish_lesson++;
             }else{
                 
             $arr['progress'] = '0%';
             }
+            $arr['countLesson'] = $cnt_finish_lesson;
            /*** */
            $cdata[] = $arr;
         }

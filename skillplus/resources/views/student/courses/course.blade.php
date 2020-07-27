@@ -544,23 +544,11 @@
             <div class="card" id="secAc"></div>
         </div> --}}
 
-
+{{-- 
         <div class="video-tutorials">
-            <video
-             class="padding-top video"
-             id="video"
-             width="100%"
-             controls
-             autoplay="false"
-             :poster="content.thumbnail"
-            >
-             <source :src="content.video" type=video/webm />
-             <source :src="content.video" type=video/ogg />
-             <source :src="content.video" type=video/mp4 />
-             <source :src="content.video" type=video/3gp />
-            </video>
+            <video id="video" class="w-100 h-a" controls> </video>
             <div class="video-details">
-             <button class="button buy-now">Take Quiz</button>
+             <button class="button buy-now" onclick="takeQuiz()">Take Quiz</button>
              <br />
              <div class="video-descriptions">
               <p>Updates:</p>
@@ -580,7 +568,7 @@
               </ul>
              </div>
             </div>
-           </div>
+           </div> --}}
  <div class="row wrap-header">
   <div class="col-lg-12">
    <div class="col-lg-12 course-header text-left">
@@ -1248,7 +1236,10 @@
      ' </a>'+
      '</div>'+
    '  <div id="demo_'+index +'" class="collapse">'+
-      '<div class="list-custom-border"><i class="fas fa-play-circle"></i>'+data[index].shortdescription+'   </div></div>'+
+    
+    '  <video id="video" class="w-100 h-a" controls src="'+data[index].upload_video+'"> </video>'+
+      '<div class="list-custom-border"><i class="fas fa-play-circle"></i>'+data[index].shortdescription+'   </div>'+
+      '<button type="button" class="btn btn-primary" onclick="takeQuiz('+data[index].id+","+id+')">Take Quiz</button></div>'+
     '</div>'
                             )
                         /* if(index==0){
@@ -1292,6 +1283,10 @@
                     }
                 });
 
+    }
+
+    function takeQuiz(lid,cid){
+        location = '/admin/user_student/student_lesson_quiz/'+lid+'/'+cid;
     }
 </script>
 @endsection
