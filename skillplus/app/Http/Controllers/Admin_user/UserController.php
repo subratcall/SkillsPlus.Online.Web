@@ -183,6 +183,9 @@ class UserController extends Controller
            /*** */
             $content = ContentPart::where(['content_id'=>$key->content_id])->get();
             //$data = array();
+            /**
+             * $cnt is the total_question_of_all_lesson
+             */
             $cnt=0;
             $cnt_finish_lesson=0;
             foreach ($content as $myList)
@@ -191,11 +194,19 @@ class UserController extends Controller
                 $lesson = QuestionsLesson::where(['lesson_id'=>$myList->id])->get();
                 foreach ($lesson as $val)
                 {
-                    $lesson_with_questions_answers = CourseLog::where(['lesson_id'=>$val['lesson_id'],'status' => 'Done'])->get(); 
-                    //$val['lesson_id'];
-                   $cnt_lwqa =  count($lesson_with_questions_answers);
+                    //$lesson_with_questions_answers = CourseLog::where(['lesson_id'=>$val['lesson_id'],'status' => 'Done'])->get(); 
+                    //dd($lesson_with_questions_answers);
+                    //$cnt_lwqa =  count($lesson_with_questions_answers);
+                    /* foreach ($lesson_with_questions_answers as  $lwqa_value) {
+                        echo $lwqa_value->lesson_id;
+                        $cnt_lwqa =  count($lesson_with_questions_answers);
+                    } */
                     $cnt++;
-                }            
+                }       
+                $lesson_with_questions_answers = CourseLog::where(['lesson_id'=>$myList['id'],'status' => 'Done'])->get();                 
+                foreach ($lesson_with_questions_answers as  $lwqa_value) {
+                    $cnt_lwqa ++;
+                }     
             }
             $arr['count'] = $cnt;
             $arr['countLesson'] = count($content);

@@ -544,7 +544,7 @@
             <div class="card" id="secAc"></div>
         </div> --}}
 
-{{-- 
+
         <div class="video-tutorials">
             <video id="video" class="w-100 h-a" controls> </video>
             <div class="video-details">
@@ -568,7 +568,7 @@
               </ul>
              </div>
             </div>
-           </div> --}}
+           </div>
  <div class="row wrap-header">
   <div class="col-lg-12">
    <div class="col-lg-12 course-header text-left">
