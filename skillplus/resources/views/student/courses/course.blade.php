@@ -548,7 +548,7 @@
         <div class="video-tutorials">
             <video id="video" class="w-100 h-a" controls> </video>
             <div class="video-details">
-             <button class="button buy-now" onclick="takeQuiz()">Take Quiz</button>
+             {{-- <button class="button buy-now" onclick="takeQuiz()">Take Quiz</button> --}}
              <br />
              <div class="video-descriptions">
               <p>Updates:</p>
@@ -578,7 +578,7 @@
      <div class="raty-product-section">
       <div class="raty"></div>
       <span class="raty-text"></span>
-      {{-- <span class="">10 studens / vendors purchased this book</span> --}}
+      
      </div>
     </div>
     <div class="col-xs-12">

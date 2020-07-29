@@ -40,6 +40,18 @@ class UserController extends Controller
             $user->save();
 
             Session::put('user_id',$admin->id);
+
+            //a29/07/2020 10:05 am
+            Session::put('user_name',$admin->name);
+            $request->session()->put('user',serialize($admin->toArray()));
+            Event::create([
+                'user_id'   => $admin->id,
+                'type'      => 'Login Page',
+                'ip'        => $request->ip()
+            ]);
+            User::where('id',$admin->id)->update(['last_view'=>time()]);
+            //////////////////
+
             if($admin->admin==1){
                 Session::put('user_type','admin');
                 return redirect('/admin/report/user');

@@ -282,7 +282,7 @@ class VendorController extends Controller
     }
 
 
-    public function getAllCoursesX()
+    public function getAllCourses()
     {
         $content = Content::all();
         $data = array();
@@ -290,7 +290,6 @@ class VendorController extends Controller
             $row = array();
             $row['id'] = strtoupper($myList->id);
             $row['title'] = strtoupper($myList->title);
-            $row['vv'] = 'strtoupper($myList->title);';
             $data[] = $row;
         }
         $output = array("data" => $data);

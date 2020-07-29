@@ -98,7 +98,7 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor_course_show_meta/{id}','Admin_user\VendorController@showCourseMeta');
             Route::get('vendor_course_destroy/{id}','Admin_user\VendorController@destroyCourse');
             Route::post('vendor_course_saveCourse','Admin_user\VendorController@saveCourse');
-            Route::get('vendor_course_getAllCourses','Admin_user\VendorController@getAllCourses');
+            Route::get('vendor_course_getAllCourses_','Admin_user\VendorController@getAllCoursesX');
             
 
             Route::get('vendor_course_rate/{id}','Admin_user\VendorController@getRatings');
@@ -109,11 +109,9 @@ Route::group(['prefix' => 'admin'],function (){
             
             Route::get('product/{id}','Admin\ContentController@product');
             Route::get('cl/{id}','Admin\ContentController@contentLearn');
-            Route::get('cr/{id}','Admin\ContentController@contentRequirements');
             Route::get('ir/{id}','Admin\ContentController@getIndividualRating');
             Route::get('vendor_course_comment/{id}/{cid}','Admin\ContentController@getComments');
             
-            Route::get("vendor_course_get_all_cl/{id}", 'Admin_user\VendorController@getCL');
 
             /* http://localhost:8000/admin/user_vendor/vendor_course_related/116 */
 
@@ -132,6 +130,19 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('vendor_selected_question_delete/{id}','Admin_user\VendorController@removeQuestion');       
                   
             Route::get('vendor_get_course_comments/{id}','Admin_user\VendorController@getCourseComment');   
+
+            /*** List to learn */
+            Route::post('vendor_learn_save','Admin_user\VendorController@saveCourseLearn');
+            Route::get('vendor_learn_delete/{id}','Admin_user\VendorController@destroyCourseLarn');
+            Route::get('vendor_learn_show/{id}','Admin_user\VendorController@getCourseLearn');
+            Route::get("vendor_course_get_all_cl/{id}", 'Admin_user\VendorController@getCL');
+
+            
+            /*** List to Requirements */
+            Route::post('vendor_req_save','Admin_user\VendorController@saveCourseRequiremnts');
+            Route::get('vendor_req_delete/{id}','Admin_user\VendorController@destroyCourseRequirements');
+            Route::get('vendor_req_show/{id}','Admin_user\VendorController@getCourseRequirements');
+            Route::get('cr/{id}','Admin\ContentController@contentRequirements');
             
         });
 

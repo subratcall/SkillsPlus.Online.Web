@@ -883,8 +883,9 @@ class ContentController extends Controller
            foreach ($cl as $myList)
       {
       $row = array();
-               $row['req'] = $myList->requirement;
-      $data[] = $row;
+        $row['req'] = $myList->requirement;
+        $row['id'] = $myList->id;
+        $data[] = $row;
       }
            $output = array("data" => $data);
      return response()->json($output);
