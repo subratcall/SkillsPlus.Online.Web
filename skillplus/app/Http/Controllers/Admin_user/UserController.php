@@ -89,7 +89,7 @@ class UserController extends Controller
         return response()->json("success");
     }
 
-    public function getContentById()
+    public function getContentById2()
     {
         $datas = Sell::where('buyer_id',Session::get('user_id'))->get();
         $getFavdatas = Favorite::where('user_id',Session::get('user_id'))->get();
@@ -119,6 +119,92 @@ class UserController extends Controller
         $output = array("courses" => $cdata,"favorite" => $fdata,);
 		echo json_encode($output);
         
+    }
+
+    public function getContentById()
+    {
+        $datas = Sell::where('buyer_id',Session::get('user_id'))->get();
+        $getFavdatas = Favorite::where('user_id',Session::get('user_id'))->get();
+        $cdata = array();
+
+        $cbid = 1;
+        $getcnt = 0;
+        $cnt_lwqa = 0;
+        foreach ($datas as $key) {
+           $arr= array();
+           $getContent = Content::where('id',$key->content_id)->first();
+           $getUser = User::where('id',$key->user_id)->first();
+           $getTransaction = Transaction::where(['content_id'=>$getContent->id,'buyer_id'=>$key->buyer_id])->first();
+           $arr['content_title'] = '<a href="/product/'.$key->content_id.'" target="_blank">'.$getContent->title.'</a>';
+           $arr['vendor'] = $getUser->name;
+           $arr['date'] = date("F d, Y H:i:s", $key->create_at);
+           $arr['price'] = ($getTransaction?$getTransaction->price:'');
+
+           $arr['content_id'] = $key->content_id;
+           $btn = '';
+           $btn .= ' <a href="/admin/user_student/student_show_course/'.$key->content_id.'" type="button" class="btn btn-success">View Course</a>';
+           $arr['action'] = $btn;
+            $content = ContentPart::where(['content_id'=>$key->content_id])->get();
+            $cnt=0;
+            $cnt_finish_lesson=0;
+            foreach ($content as $myList)
+            {
+                $mrow = array();
+                $lesson = QuestionsLesson::where(['lesson_id'=>$myList->id])->get();
+                foreach ($lesson as $val)
+                {
+                    $cnt++;
+                }       
+                $lesson_with_questions_answers = CourseLog::where(['lesson_id'=>$myList['id'],'status' => 'Done'])->get();                 
+                foreach ($lesson_with_questions_answers as  $lwqa_value) {
+                    $cnt_lwqa ++;
+                }     
+            }
+            $arr['count'] = $cnt;
+            $arr['countLesson'] = count($content);
+            $arr['id'] =$key->content_id;
+            $arr['lwqa'] = $cnt_lwqa;
+            $prog = 0;
+            if($cnt_lwqa!=0&&$cnt!=0){
+                $p = (floatval($cnt_lwqa) / floatval($cnt)) * 100;
+                $prog = floor($p * 100)/100;
+                $arr['progress'] = $prog.'%';
+                $cnt_finish_lesson++;
+            }else{
+                
+                $arr['progress'] = '0%';
+            }
+            $arr['countLesson'] = $cnt_finish_lesson;
+
+            /*** */
+           $getMeata =  ContentMeta::where('content_id',$key->content_id)->get();           
+           $img = '';
+           foreach ($getMeata as $value_m) {
+               if($value_m->option=='cover'){     
+                    $img = $value_m->value;
+               }
+           }
+            if($getMeata)
+            $arr['content_title'] = '<img src="'.$img.'" alt="No Image" class="img-thumbnail">'.$getContent->title.'<div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: '.$prog.'%" aria-valuenow="'.$prog.'"aria-valuemin="0" aria-valuemax="100"></div>
+                </div>';
+            $arr['vendor'] = $getUser->name;
+            $arr['date'] = date("F d, Y H:i:s", $key->create_at);
+            $arr['price'] = ($getTransaction?$getTransaction->price:'');
+            $arr['img'] = $img;
+            /*** */
+           $cdata[] = $arr;
+        }
+
+        $fdata = array();
+        foreach ($getFavdatas as $key) {
+           $arr= array();
+           $getContent = Content::where('id',$key->content_id)->first();
+           $arr['content_title'] = $getContent->title;
+           $fdata[] = $arr;
+        }
+        $output = array("courses" => $cdata,"favorite" => $fdata,);
+		echo json_encode($output);        
     }
 
     // public function list(Request $request) {

@@ -632,8 +632,14 @@ class VendorController extends Controller
 
     public function studentTakeQuiz()
     {
-        return view('student.lesson.quiz');
+        return view('student.courses.quiz');
         //return view('student.lesson.quiz-vue');
+    }
+
+    
+    public function studentViewVideos()
+    {
+        return view('student.courses.course_detail');
     }
 
     /* function studentLoadQuiz($id){

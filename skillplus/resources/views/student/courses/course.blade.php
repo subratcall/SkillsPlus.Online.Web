@@ -505,456 +505,140 @@
 
 <link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css" />
 
-{{--
-
-<div class="row">
-     <div class="col-xs-6 col-md-3 col-sm-6 text-center">
-        <course-component></course-component>
-    </div>
-</div>
-</div>
-<section>
-    <div class="col-12">
-        <div class="row">
-            <div class="col-8">
-                <div class="custom-card">
-                    <div class="accordion" id="accordionExample">
-                        <div id="secAc"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4 custom-card" id="content">
-                <div class="custom-card">
-                    <video id="video" class="w-100 h-a" controls>
-                        {{-- <source src="http://192.168.110.16:8080/bin/admin/file_example_MP4_480_1_5MG.mp4" type="video/mp4"> --}}
-{{-- <source type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                </div>
-            </div>
-        </div>
-    <div class="col-xs-6 col-md-3 col-sm-6 text-center"></div> 
-</div> --}}
-{{-- <section class="card"> --}}
 <section class="col-12 course">
- {{-- <div class="card-body"> --}}
-
- {{-- <legend>List of Lessons:</legend>
-        <div class="accordion" id="accordionExample">
-            <div class="card" id="secAc"></div>
-        </div> --}}
 
 
-        <div class="video-tutorials">
-            <video id="video" class="w-100 h-a" controls> </video>
-            <div class="video-details">
-             {{-- <button class="button buy-now" onclick="takeQuiz()">Take Quiz</button> --}}
-             <br />
-             <div class="video-descriptions">
+    <div class="video-tutorials">
+        <video id="video" class="w-100 h-a" controls> </video>
+        <div class="video-details">
+           <button type="button" class="btn btn-primary" onclick="viewAllVideos()">Start Lesson</button>
+           <br />
+           <div class="video-descriptions">
               <p>Updates:</p>
               <ul>
-               <li>
-                <i class="far fa-file-video"></i>&nbsp;Hours On demand videos
-               </li>
-               <li>
-                <i class="far fa-file"></i>&nbsp;Lessons
-               </li>
-               <li>
-                <i class="far fa-compass"></i>&nbsp;lifetime access
-               </li>
-               <li>
-                <i class="fas fa-mobile-alt"></i>&nbsp;on mobile and tv
-               </li>
+                 <li>
+                    <i class="far fa-file-video"></i>&nbsp;Hours On demand videos
+                 </li>
+                 <li>
+                    <i class="far fa-file"></i>&nbsp;Lessons
+                 </li>
+                 <li>
+                    <i class="far fa-compass"></i>&nbsp;lifetime access
+                 </li>
+                 <li>
+                    <i class="fas fa-mobile-alt"></i>&nbsp;on mobile and tv
+                 </li>
               </ul>
-             </div>
-            </div>
            </div>
- <div class="row wrap-header">
-  <div class="col-lg-12">
-   <div class="col-lg-12 course-header text-left">
-    <h1 id="titleData"></h1>
-    <h6 id="subtitleData"></h6>
-    <div class="col-xs-6">
-     <div class="raty-product-section">
-      <div class="raty"></div>
-      <span class="raty-text"></span>
-      
-     </div>
-    </div>
-    <div class="col-xs-12">
-     <div class="raty-product-section">
-      <span class="vendor_name"></span>
-     </div>
-    </div>
-   </div>
-  </div>
- </div>
-
-
-
- <div class="row">
-  <div class="col-lg-12">
-   <div class="row margin-top-next">
-    <div class="col-lg-6 offset-lg-1 section-1">
-     <h5>What will i learn?</h5>
-     <ul id="wwil"></ul>
-    </div>
-   </div>
-  </div>
- </div>
-
- <div class="row">
-  <div class="col-lg-12">
-   <div class="row">
-    <div class="col-lg-6 offset-lg-1 section-2">
-     Curriculum for this course <p style="display:inline; font-size:14px">17 Lessons 23:47:22 Hours</p>
-    </div>
-   </div>
-  </div>
- </div>
-
-{{--  <div class="row">
-    <div class="col-lg-12">
-        <div class="panel-group" id="accordionx">
-
         </div>
-    </div>
-   </div> --}}
-
-
- <div class="row">
-  <div class="col-lg-12">
-   <div class="row" id="accordionx">
-    {{-- <div class="col-lg-6 offset-lg-1 section-3">
-     <div class="header-custom-border">
-      <a class="btn" data-toggle="collapse" data-target="#demo" style="display:inline; font-size:15px"><i
-        class="fas fa-plus" style="color: #007791"></i>&nbsp;&nbsp;Getting Started With This
-      </a>
      </div>
-     <div id="demo" class="collapse">
-      <div class="list-custom-border"><i class="fas fa-play-circle"></i>Code The Basic Webpage Layout
-      </div>
-      <div class="list-custom-border"><i class="fas fa-play-circle"></i>Setting Up Your Project
-       Environment</div>
-      <div class="list-custom-border"><i class="fas fa-play-circle"></i>Code The Basic Webpage Layout
-      </div>
-      <div class="list-custom-border"><i class="fas fa-play-circle"></i>HTML 5</div>
-      <div class="list-custom-border"><i class="fas fa-play-circle"></i>Welcome To The Course! You
-       Made The Right Decision</div>
-      <div class="list-custom-border"><i class="fas fa-play-circle"></i>What is Bootstrap? And Why
-       Mastering It Will Save You Hundreds of Hours</div>
+     <div class="row wrap-header">
+        <div class="col-lg-12">
+           <div class="col-lg-12  text-left">
+              <h1 id="titleData"></h1>
+              <h6 id="subtitleData"></h6>
+              <div class="col-xs-6">
+                 <div class="raty-product-section">
+                    <div class="raty"></div>
+                    <span class="raty-text"></span>
+                 </div>
+              </div>
+              <div class="col-xs-12">
+                 <div class="raty-product-section">
+                    <span class="vendor_name"></span>
+                 </div>
+              </div>
+           </div>
+        </div>
      </div>
-    </div>
-
-    <div class="col-lg-6 offset-lg-1 section-3">
-        <div class="header-custom-border">
-         <a class="btn" data-toggle="collapse" data-target="#demo1" style="display:inline; font-size:15px"><i
-           class="fas fa-plus" style="color: #007791"></i>&nbsp;&nbsp;Environment Setup: Get Your Project Started
-         </a>
-        </div>
-        <div id="demo1" class="collapse">
-         <div class="list-custom-border"><i class="fas fa-play-circle"></i>Free Download: The Bootstrap
-          Framework
-         </div>
-         <div class="list-custom-border"><i class="fas fa-play-circle"></i>Bootstrap Pop Quiz
-          Environment</div>
-         <div class="list-custom-border"><i class="fas fa-play-circle"></i>WordPress Pop Quiz
-         </div>
-        </div>
-       </div>
-   </div> --}}
-  </div>
- </div>
-
- <div class="row">
-  <div class="col-lg-12">
-   <div class="row">
-    <div class="col-lg-6 offset-lg-1 section-4" id="">
-     <p class="section-4-header">Requirements</p>
-
-     <ul  id="req">
-     </ul>
-    </div>
-   </div>
-  </div>
- </div>
-
-{{--  <div class="row">
-    <div class="col-lg-12">
-        <div class="">
-            <div class=" section-4">
-                <p class="section-4-header">Requirements</p>
-
-                <ul id="req">
-                </ul>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
-{{--  <div class="row">
-  <div class="col-lg-12">
-   <div class="row">
-    <div class="col-lg-6 offset-lg-1 section-5">
-     <p class="section-5-header">Description</p>
-     
-    </div>
-   </div>
-  </div>
- </div> --}}
-
- <div class="row">
-  <div class="col-lg-12">
-   <div class="row">
-    <div class="col-lg-6 section-6">
-     <p class="section-6-header">Other related courses</p>
-
-     <ul id="related_courses">
-     </ul>
-    </div>
-   </div>
-  </div>
- </div>
-
- <div class="row">
-  <div class="col-lg-12">
-   <div class="row">
-    <div class="col-lg-6 offset-lg-1 section-7">
      <div class="row">
-      <div class="col-lg-12">
-       <p class="section-7-header">About the instructor</p>
-      </div>
+        <div class="col-lg-12">
+           <div class="row margin-top-next">
+              <div class="col-lg-6 offset-lg-1 section-1">
+                 <h5>What will i learn?</h5>
+                 <ul id="wwil"></ul>
+              </div>
+           </div>
+        </div>
      </div>
-     <div class="col-lg-12 row">
-      <div class="col-lg-6">
-       <img id="vendor_img" width="96">
-       <ul>
-        {{-- <li><i class="fas fa-comment"></i>&nbsp;5 Reviews</li>
-        <li><i class="fas fa-user"></i>&nbsp;3 Students</li>
-        <li><i class="fas fa-play-circle"></i>&nbsp;11 Courses</li> --}}
-       </ul>
-      </div>
-      <div class="col-lg-6">
-       <label id="vendor_name"></label>
-
-       <p id="vendor_about"></p>
-      </div>
+     <div class="row">
+        <div class="col-lg-12">
+           <div class="row">
+              <div class="col-lg-6 offset-lg-1 section-2">
+                 Curriculum for this course 
+                 <p style="display:inline; font-size:14px">17 Lessons 23:47:22 Hours</p>
+              </div>
+           </div>
+        </div>
      </div>
-    </div>
-   </div>
-  </div>
- </div>
-
- <div class="row">
-  {{-- <div class="col-lg-12">
-   <div class="row">
-    <div class="col-lg-6 offset-lg-1 section-8 row">
+     <div class="row">
      <div class="col-lg-12">
-      <p class="section-8-header">About the instructor</p>
+        <div class="row" id="accordionx">
+        </div>
      </div>
-     <div class="col-lg-3">
-      4
-      <div class="rating">
-       <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-       <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-       <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-       <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-       <i class="fas fa-star" style="color: #abb0bb;"></i>
-      </div>
-      Average rating
-     </div>
-     <div class="col-lg-9">
-      <div class="individual-rating">
-       <ul>
-        <li>
-         <div class="progress">
-          <div class="progress-bar" style="width: 0%"></div>
-         </div>
-         <div>
-          <span class="rating">
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star filled"></i>
-
-          </span>
-          <span>0%</span>
-         </div>
-        </li>
-        <li>
-         <div class="progress">
-          <div class="progress-bar" style="width: 0%"></div>
-         </div>
-         <div>
-          <span class="rating">
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-
-          </span>
-          <span>0%</span>
-         </div>
-        </li>
-        <li>
-         <div class="progress">
-          <div class="progress-bar" style="width: 50%"></div>
-         </div>
-         <div>
-          <span class="rating">
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-
-          </span>
-          <span>50%</span>
-         </div>
-        </li>
-        <li>
-         <div class="progress">
-          <div class="progress-bar" style="width: 50%"></div>
-         </div>
-         <div>
-          <span class="rating">
-           <i class="fas fa-star"></i>
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-
-          </span>
-          <span>50%</span>
-         </div>
-        </li>
-        <li>
-         <div class="progress">
-          <div class="progress-bar" style="width: 0%"></div>
-         </div>
-         <div>
-          <span class="rating">
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-           <i class="fas fa-star filled"></i>
-
-          </span>
-          <span>0%</span>
-         </div>
-        </li>
-       </ul>
-      </div>
-     </div>
-    </div>
-   </div>
-  </div> --}}
-
- </div>
-
- <div class="row">
-  <div class="col-lg-12">
-   <div class="col-lg-6 offset-lg-1 section-8 row">
-    <div class="col-lg-12">
-     <p class="section-9-header">Reviews</p>
-    </div>
-    <div class="col-lg-12">
-     <ul id='getcomments'>
-      {{-- <li>
-       <div class="row">
+     <div class="row">
+        <div class="col-lg-5">
+           <div class="row">
+              <div class="col-lg-6 section-4" id="">
+                 <p class="section-4-header">Requirements</p>
+                 <ul  id="req">
+                 </ul>
+              </div>
+           </div>
+        </div>
         <div class="col-lg-4">
-         <div class="reviewer-details clearfix">
-          <div class="reviewer-img float-left">
-           <img src="https://demo.academy-lms.com/addon/uploads/user_image/6.jpg" width="46" alt="">
-          </div>
-          <div class="review-time">
-           <div class="time">
-            Sun, 07-Jul-2019 </div>
-           <div class="reviewer-name">
-            Jane Doe </div>
-          </div>
-         </div>
+           <div class="row">
+              <div class="col-lg-6 section-5" id="courseDesc">
+                 
+              </div>
+           </div>
         </div>
-        <div class="col-lg-8">
-         <div class="review-details">
-          <div class="rating">
-           <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-           <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-           <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-           <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-           <i class="fas fa-star" style="color: #abb0bb;"></i>
-          </div>
-          <div class="review-text">
-           This course taught me a lot. Very effective!! </div>
-         </div>
-        </div>
-       </div>
-      </li>
-      <li>
-       <div class="row">
-        <div class="col-lg-4">
-         <div class="reviewer-details clearfix">
-          <div class="reviewer-img float-left">
-           <img src="https://demo.academy-lms.com/addon/uploads/user_image/3.jpg" width="46" alt="">
-          </div>
-          <div class="review-time">
-           <div class="time">
-            Sun, 04-Aug-2019 </div>
-           <div class="reviewer-name">
-            Jane Doe </div>
-          </div>
-         </div>
-        </div>
-        <div class="col-lg-8">
-         <div class="review-details">
-          <div class="rating">
-           <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-           <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-           <i class="fas fa-star filled" style="color: #f5c85b;"></i>
-           <i class="fas fa-star" style="color: #abb0bb;"></i>
-           <i class="fas fa-star" style="color: #abb0bb;"></i>
-          </div>
-          <div class="review-text">
-           Nah! </div>
-         </div>
-        </div>
-       </div>
-      </li> --}}
-     </ul>
-    </div>
-   </div>
-  </div>
- </div>
 
+        <div class="col-lg-3">
+           <div class="row">
+              <div class="col-lg-6 section-6">
+                 <p class="section-6-header">Other related courses</p>
+                 <ul id="related_courses">
+                 </ul>
+              </div>
+           </div>
+        </div>
+     </div>
+     <div class="row">
+        <div class="col-lg-6">
+                 <div class="row">
+                    <div class="col-lg-12">
+                       <p class="section-7-header">About the instructor</p>
+                    </div>
+                 <div class="row">
+                    <div class="col-lg-6">
+                       <img id="vendor_img" width="96">
+                    </div>
+                    <div class="col-sm-3">
+                       <label id="vendor_name"></label>
+                       <p id="vendor_about"></p>
+                    </div>
+                 </div>
+              </div>
+        </div>
+        <div class="col-lg-6">
+           <div class="col-lg-6 section-8 row">
+              <div class="col-lg-12">
+                 <p class="section-9-header">Reviews</p>
+              </div>
+              <div class="col-lg-12">
+                 <ul id='getcomments'>
+                 </ul>
+              </div>
+           </div>
+        </div>
+     </div>
+     
+     
 </section>
 
-<!-- <section class="card">
-    <div class="accordion" id="accordionExample">
-        <div class="card" id="secAc"></div>
-    </div>
-</section> -->
 
 
-<!-- <section class="card">                    
-    <div class="card-body">
-        <div class="row">
-            <div class="col-lg-12">
-                <table id="tbl"class="table table-bordered table-striped mb-none display responsive nowrap" cellspacing="0"
-                    width="100%">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-</section> -->
 
 
 
@@ -1068,7 +752,7 @@
                     
                    $("#titleData").text(data.data.title)
                    $("#subtitleData").text(data.data.subTitle)
-                   $("#video-details").append(data.data.content)
+                   //$("#video-details").append(data.data.content)
                    $("#related_courses").empty();
                    data.related.forEach(function(entry,i) {
                         console.log(entry)
@@ -1076,6 +760,13 @@
                             '<li>'+entry.title+'</li>'
                         ); 
                     });
+
+                    
+                   $("#courseDesc").empty();
+                   $("#courseDesc").append(
+                        '<p class="section-5-header">Description</p>'+
+                        data.data.content
+                   )
 
                     $.ajax({
                             url: "{{ url('/admin/user_vendor/vendor_course_vendor') }}/"+data.data.user_id+"/"+id,
@@ -1228,49 +919,21 @@
                         
                         for (let index = 0; index < data.length; index++) {
                             
-    $("#accordionx").append(
-        '<div class="col-lg-6 offset-lg-1 section-3">'+
-   '  <div class="header-custom-border">'+
-     ' <a class="btn" data-toggle="collapse" data-target="#demo_'+index+'" style="display:inline; font-size:15px"><i class="fas fa-plus" style="color: #007791"></i>'
-       + '&nbsp;&nbsp;'+data[index].title+
-     ' </a>'+
-     '</div>'+
-   '  <div id="demo_'+index +'" class="collapse">'+
-    
-    '  <video id="video" class="w-100 h-a" controls src="'+data[index].upload_video+'"> </video>'+
-      '<div class="list-custom-border"><i class="fas fa-play-circle"></i>'+data[index].shortdescription+'   </div>'+
-      '<button type="button" class="btn btn-primary" onclick="takeQuiz('+data[index].id+","+id+')">Take Quiz</button></div>'+
-    '</div>'
-                            )
-                        /* if(index==0){
-                            $("#accordionx").append(
-                                '<div class="panel panel-default">'+
-                                    '<div class="panel-heading">'+
-                                        '<h4 class="panel-title">'+
-                                        '<a data-toggle="collapse" data-parent="#accordionx" href="#collapse'+index+'">  '+data[index].title+'</a> </h4>'+
-                                    '</div>'+
-                                    '<div id="collapse'+index+'" class="panel-collapse collapse in">'+
-                                        '<div class="panel-body">'+
-                                            data[index].desc+
-                                        '</div>'+
-                                    '</div>'+
+                                $("#accordionx").append(
+                                    '<div class="col-lg-6 offset-lg-1 section-3">'+
+                            '  <div class="header-custom-border">'+
+                                ' <a class="btn" data-toggle="collapse" data-target="#demo_'+index+'" style="display:inline; font-size:15px"><i class="fas fa-plus" style="color: #007791"></i>'
+                                + '&nbsp;&nbsp;'+data[index].title+
+                                ' </a>'+
+                                '</div>'+
+                            '  <div id="demo_'+index +'" class="collapse">'+
+                                
+                                //'  <video id="video" class="w-100 h-a" controls src="'+data[index].upload_video+'"> </video>'+
+                                '<div class="list-custom-border"><i class="fas fa-play-circle"></i>'+data[index].shortdescription+' '+data[index].duration+' Hours <br> '+
+                                '<button type="button" class="btn btn-primary" onclick="takeQuiz('+data[index].id+","+id+')">Take Quiz</button></div></div>'+
                                 '</div>'
                             )
-                        }else{
-                            $("#accordionx").append(
-                                '<div class="panel panel-default">'+
-                                    '<div class="panel-heading">'+
-                                        '<h4 class="panel-title">'+
-                                        '<a data-toggle="collapse" data-parent="#accordionx" href="#collapse'+index+'">  '+data[index].title+'</a> </h4>'+
-                                    '</div>'+
-                                    '<div id="collapse'+index+'" class="panel-collapse collapse">'+
-                                        '<div class="panel-body">'+
-                                            data[index].desc+
-                                        '</div>'+
-                                    '</div>'+
-                                '</div>'
-                            )
-                        } */
+                 
                         
                         
                     }
@@ -1287,6 +950,10 @@
 
     function takeQuiz(lid,cid){
         location = '/admin/user_student/student_lesson_quiz/'+lid+'/'+cid;
+    }
+
+    function viewAllVideos() {
+        location = '/admin/user_student/student_view_videos/'+id;
     }
 </script>
 @endsection

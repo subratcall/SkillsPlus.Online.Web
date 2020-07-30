@@ -167,6 +167,9 @@ Route::group(['prefix' => 'admin'],function (){
             /* Full Lesson Course */
             Route::get("lesson/{cid}/{cpid}", 'Admin_user\ContentController@readFullLesson');
 
+            
+            Route::get('student_view_videos/{cid}','Admin_user\VendorController@studentViewVideos'); 
+
 
         });
 
