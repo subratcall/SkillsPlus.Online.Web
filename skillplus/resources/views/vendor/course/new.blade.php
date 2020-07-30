@@ -339,7 +339,7 @@
     var tbl_req;
     var getLearnId=0;
     var getReqId=0;
-    var spl;
+    var spl = [];
     $(document).ready(function() {
         $('.editor-te').jqte({format: false});
         if(id){

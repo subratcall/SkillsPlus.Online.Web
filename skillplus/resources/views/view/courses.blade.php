@@ -3,7 +3,21 @@
     {{{ get_option('site_title','') }}} - {{{ $category->title or 'Categories' }}}
 @endsection
 @section('page')
-
+<style>
+    
+.raty-text {
+     color: #e6d816 !important;
+    }
+   
+    .raty {
+     color: #e6d816 !important;
+     font-size: 7px !important;
+    }
+ .raty-product-section i {
+     /* margin-left: 5px; */
+     /*/margin-bottom: 10px;*/
+    }
+</style>
     <div class="container-fluid">
         <div class="row cat-search-section" style="background: url('{{{ $category->background or '' }}}');">
             <div class="container">
@@ -210,15 +224,18 @@
 								<h3>{!! str_limit($content['title'],35,'...') !!}</h3>
                                 <div class="footer">
                                     <span class="avatar" title="{{{ $content['user']['name'] or '' }}}" onclick="window.location.href = '/profile/{{{ $content['user']['id'] or 0 }}}'"><img src="{{{ get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar','')) }}}"></span>
-                                    @if(isset($content['metas']['duration']))
+                                    <label class="pull-left popx popx_{{$content['id']}}">    
+                                        <div class="raty" id="ratx_{{$content['id']}}"></div>    
+                                    </label>
+                                    {{-- @if(isset($content['metas']['duration']))
                                         <label class="pull-right content-clock">{{{ convertToHoursMins($content['metas']['duration']) }}}</label>
 										<span class="boxicon mdi mdi-clock pull-right"></span>
                                     @else
                                         <label class="pull-right content-clock">{{{ trans('main.not_defined') }}}</label>
 										<span class="boxicon mdi mdi-clock pull-right"></span>
-                                    @endif
-									<span class="boxicon mdi mdi-wallet pull-left"></span>
-                                    <label class="pull-left">{{{ price($content['id'],$content['category_id'],$content['metas']['price'])['price_txt'] }}}</label>
+                                    @endif --}}
+									<span class="boxicon mdi mdi-wallet pull-right"></span>
+                                    <label class="pull-right">{{{ price($content['id'],$content['category_id'],$content['metas']['price'])['price_txt'] }}}</label>
                                 </div>
                             </a>
                         </div>
@@ -242,8 +259,39 @@
     </div>
 </div>
 
+<link rel="stylesheet" href="/assets/vendor/raty/jquery.raty.css" />
 @endsection
 @section('script')
+<script type="application/javascript" src="/assets/vendor/raty/jquery.raty.js"></script>
+
+<script>
+    $(document).ready(function() {        
+        $( ".popx" ).each(function( i,a ) {
+            b = a.classList[2].split("_");
+            loadRatings(b[1])
+        });        
+    });
+
+    function loadRatings(id) {
+        $.ajax({
+                url: "{{ url('/admin/user_vendor/vendor_course_rate') }}/"+id,
+                type: "get",
+                dataType: 'JSON',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {                          
+                    $('#ratx_'+id).raty({ starType: 'i',score:data,click:function (rate) {
+                            //window.location = window.location.href+'/rate/'+rate;
+                    }});
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error! Contact IT Department.');
+                }
+        });
+    }
+</script>
+
     <script>
         $(function() {
             pagination('.body-target',@if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] or 6 }}} @endif,0);
