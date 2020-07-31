@@ -221,7 +221,10 @@
                                         </span>
                                     @endif
                                 </div>
-								<h3>{!! str_limit($content['title'],35,'...') !!}</h3>
+								<h3>{!! str_limit($content['title'],35,'...') !!}</h3>               
+                                <label class="pull-left">     
+                                    {!! str_limit($content['subtitle']!="NULL"?$content['subtitle']:'',35,'...') !!} 
+                                </label><br>
                                 <div class="footer">
                                     <span class="avatar" title="{{{ $content['user']['name'] or '' }}}" onclick="window.location.href = '/profile/{{{ $content['user']['id'] or 0 }}}'"><img src="{{{ get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar','')) }}}"></span>
                                     <label class="pull-left popx popx_{{$content['id']}}">    
