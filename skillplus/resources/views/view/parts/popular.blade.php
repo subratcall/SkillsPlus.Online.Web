@@ -55,6 +55,11 @@
             </div>
         </div>
 </div>
+{{-- <script>
+    window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+    ]) !!};
+</script> --}}
 <script>
     $(document).ready(function() {        
         $( ".popz" ).each(function( i,a ) {
@@ -65,7 +70,7 @@
 
     function loadRatings(id) {
         $.ajax({
-                url: "{{ url('/admin/user_vendor/vendor_course_rate') }}/"+id,
+                url: "{{ url('/admin/user_vendor/vendor_course_rate/') }}/"+id,
                 type: "get",
                 dataType: 'JSON',
                 headers: {
@@ -77,7 +82,7 @@
                     }});
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    alert('Error! Contact IT Department.');
+                    //alert('Error! Contact IT Department.');
                 }
         });
     }

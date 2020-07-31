@@ -108,6 +108,7 @@ class VendorController extends Controller
                 'content' => $request->content,
                 'type' => $request->type,
                 'mode' => 'draft',
+                'price' => $request->price,
                 'private' => $request->private,
                 'subtitle' => $request->subtitle,
             ]);
@@ -164,6 +165,7 @@ class VendorController extends Controller
                 'content' => $request->content,
                 'type' => $request->type,
                 'private' => $request->private,
+                'price' => $request->price,
                 'subtitle' => $request->subtitle,
             ]);
             //delete Meta and insert new
