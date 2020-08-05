@@ -267,11 +267,7 @@ class VendorController extends Controller
 
     public function getRatings($id)
     {
-
-        /* $getData = ContentRate::where(['content_id' => $id])->get();
-
         return response()->json($getData); */
-
         $getData = ContentRate::where(['content_id'=>$id])->get();
         $data = array();
         $cnt = 0;
@@ -279,8 +275,8 @@ class VendorController extends Controller
         {
             $cnt+=$myList->rate;
         }
-        echo json_encode($cnt);
-
+        return response()->json($cnt);
+        //echo json_encode($cnt);
     }
 
 
@@ -516,6 +512,26 @@ class VendorController extends Controller
     {
         $getData = ContentPart::where(['id' => $id])->first();
         return $getData;
+    }
+
+    
+    function getVendorLessons($id)
+    {
+        $getcontent = Content::where(['user_id' => $id])->get();
+        $data = array();
+        $cbid = 1;
+        foreach ($content as $myList) {
+            $row = array();
+            $get_lessons = ContentPart::where(['content_id' => $myList->id])->get();
+            foreach ($get_lessons as $key) {
+                $row['title'] = strtoupper($key->title);
+                $row['desc'] = strtoupper($key->description);
+                $row['id'] = $key->id;
+            }
+            $data[] = $row;            
+        }
+        $output = array("data" => $data);
+        echo json_encode($output);
     }
 
     /****Question */

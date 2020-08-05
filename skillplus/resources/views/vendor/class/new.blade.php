@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Course','Edit']])
 @section('title')
- New Course
+ Class
 @endsection
 
 @section('style')
@@ -52,48 +52,50 @@
                 <form id="form" class="form-horizontal form-bordered" method="post">
 
                     <div class="row">
-
-                        <div class="form-group col-3">
-                            <label class="control-label tab-con" for="inputDefault">Course Type</label>
-                            <div class="tab-con">
-                                <select name="type" id="type" class="form-control font-s">
-                                    <option value="single">Single Part</option>
-                                    <option value="course">Course</option>
-                                    <option value="self learn">Self Learn</option>
-                                    <option value="class based">Class Based</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-3">
-                            <label class="control-label tab-con"
-                                for="inputDefault">{{{ trans('main.publish_type') }}}</label>
-                            <div class="tab-con">
-                                <select name="private" id="private" class="form-control font-s">
-                                    <option value="1">Exclusive</option>
-                                    <option value="0">Open</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-3">
+                        <div class="form-group col-md-6">
                             <label class="control-label" for="inputDefault">Course Title</label>
                             <div class="">
                                 <input type="hidden" name="id" id="id" class="form-control">
                                 <input type="text" name="title" id="title" class="form-control">
                             </div>
                         </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Lesson</label>
+                            <div class="col-md-8">
+                                <select name="precourse" id="precourse" class="form-control">
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">                       
+
 
                         <div class="form-group col-3">
-                            <label class="control-label" for="inputDefault">Sub Title</label>
+                            <label class="control-label" for="inputDefault">Start Date</label>
                             <div class="">
-                                <input type="text" name="subtitle" id="subtitle" class="form-control">
+                                <input type="date" name="startDate" id="startDate" class="form-control">
                             </div>
                         </div>
 
+                        <div class="form-group col-3">
+                            <label class="control-label" for="inputDefault">Due Date</label>
+                            <div class="">
+                                <input type="date" name="dueDate" id="dueDate" class="form-control">
+
+                               {{--  <input type="date" name="birthday" id="birthday"
+                                value="{{{ $meta['birthday'] or '' }}}" class="form-control text-center"
+                                id="inputDefault"> --}}
+                            </div>
+                        </div>
+
+
                     </div>
 
-                    <div class="row">
+                    
+
+                    {{-- <div class="row">
                         <div class="col-12">
 
                             <label class="control-label" for="inputDefault">Description</label>
@@ -204,14 +206,14 @@
 
 
                         </form>
-                    </div>
+                    </div> --}}
 
                     
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
                                 <button class="btn btn-primary pull-left" onclick="save()" type="button">save</button>
-                                <a href="/admin/user_vendor/vendor_course_list"
+                                <a href="/admin/class"
                                     class="btn btn-danger pull-left">Cancel</a>
                             </div>
                         </div>
@@ -226,7 +228,7 @@
     </div>
 </section>
 
-<section class="card">                 
+{{-- <section class="card">                 
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
@@ -264,7 +266,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 @endsection
 
@@ -344,33 +346,32 @@
     var spl = [];
     $(document).ready(function() {
         $('.editor-te').jqte({format: false});
-        if(id){
+       /*  if(id){
             loadData();
-        }          
-        loadAllCourse();      
+        }   */        
+        loadAllCourse(); 
+            loadData();    
     });
 
-    function loadData() {
-        
+    function loadData() {       
      
-        if(id!=null||id!=""){
+        if(id){
             $.ajax({
-                url: "{{ url('/admin/user_vendor/vendor_course_show') }}/"+id,
+                url: "{{ url('/admin/class/edit') }}/"+id,
                 type: "get",
                 dataType: 'JSON',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    $("#titleHeader").text("Edit Course");
                     isSave = 0;
                     $("#title").val(data.title);
-                    $("#type").val(data.type);
-                    $(".jqte_editor").html(data.content)
-                    $("#private").val(data.private);
-                    $("#subtitle").val(data.subtitle);
+                    $("#startDate").val(moment(data.startDate).format('YYYY-MM-DD'));
+                    $("#dueDate").val(moment(data.dueDate).format('YYYY-MM-DD'));
+                    $("#precourse").val(data.lesson_id);
 
-
+                    $('#precourse').addClass("selectric");
+                    $('#precourse').selectric();
                     $("#id").val(data.id);           
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -546,12 +547,12 @@ function action2(type, id) {
             value: id?"Update":"Save"
         });
         $.ajax({
-            url: "{{ url('/admin/user_vendor/vendor_course_saveCourse') }}",
+            url: isSave==1?"{{ url('/admin/class/store') }}":"{{ url('/admin/class/update') }}",
             type: "post",
             data: data,
             dataType: 'JSON',
             success: function(data) {
-               location = "/admin/user_vendor/vendor_course_list";
+               location = "/admin/class";
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert('Error! Contact IT Department.');
@@ -562,7 +563,7 @@ function action2(type, id) {
     function loadAllCourse() {
         
         $.ajax({
-                url: "{{ url('/admin/user_vendor/vendor_course_getAllCourses_') }}",
+                url: "{{ url('/admin/class/vendor_get_all_lessons') }}",
                 type: "get",
                 dataType: 'JSON',
                 headers: {
@@ -570,30 +571,8 @@ function action2(type, id) {
                 },
                 success: function(data) {                    
                     $.each( data.data, function( key, value ) {
-                           // console.log(value.title)  
                         $('#precourse').append('<option value="'+value.id+'">'+value.title+'</option>');
-                       // $('#precourse').append(value.title).selectric();
-                    });              
-                   /*  $.each( data.data, function( k, v ) {
-                        $.each( spl, function( kk, vv ) {
-                             console.log(vv)  
-                            if(v.id==vv){
-                             console.log(vv+" - "+v.id+" "+k)  
-                             $('#precourse').setAttribute('selected', 'selected');
-                             
-                            }               
-                        });                      
-                    }); */
-
-                    var element = document.getElementById('precourse');
-
-                    // Set Values
-                    //var values = ["Gold", "Bronze"];
-                    for (var i = 0; i < element.options.length; i++) {
-                             console.log(i)  
-                        element.options[i].selected = spl.indexOf(element.options[i].value) >= 0;
-                    }
-
+                    }); 
 
                     $('#precourse').addClass("selectric");
                     $('#precourse').selectric();

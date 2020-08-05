@@ -27,6 +27,30 @@ Route::group(['prefix' => 'admin'],function (){
             Route::get('get_option_detail/{id}','User\QuestionController@getOptionDetail');
         });
 
+        
+        Route::group(['prefix'=>'class'],function (){
+            Route::get('','User\ClassController@main');
+            Route::get('vendor_class_new','User\ClassController@new');
+            Route::get('vendor_class_new/{id}','User\ClassController@new');
+            Route::get('vendor_get_all_lessons','User\ClassController@getVendorLessons');
+            Route::get('vendor_get_class','User\ClassController@getClass');
+            Route::get('edit/{id}','User\ClassController@show');
+            Route::get('delete/{id}','User\RequestController@delete');
+            Route::post('store','User\ClassController@store');
+            Route::post('update','User\ClassController@update');
+            Route::get('deleteq/{id}','User\QuestionController@destroyq');
+            Route::get('vendor_get_all_users','User\ClassController@getAllUsers');
+            Route::get('trainers/{id}','User\ClassController@trainers');
+            Route::get('vendor_trainors/{id}','User\ClassController@getTrainors');
+            Route::post('vendor_store_trainors','User\ClassController@storeTrainor');       
+            Route::post('save_qh','User\QuestionController@saveQuestionHeader');       
+            Route::post('update_qh','User\QuestionController@updateQuestionHeader');     
+            Route::get('vendor_remove_trainer/{id}','User\ClassController@removeTrainer');  
+            Route::get('vendor_get_class_trainors/{id}','User\ClassController@getClasstrainors');
+
+            Route::get('get_option_detail/{id}','User\QuestionController@getOptionDetail');
+        });
+
         Route::get('profile','Admin\SettingController@profile');
         Route::post('profile/main/update','Admin\SettingController@profileMainUpdate');
         Route::post('profile/security/update','Admin\SettingController@profileSecurityUpdate');
@@ -100,8 +124,8 @@ Route::group(['prefix' => 'admin'],function (){
             Route::post('vendor_course_saveCourse','Admin_user\VendorController@saveCourse');
             Route::get('vendor_course_getAllCourses_','Admin_user\VendorController@getAllCoursesX');
             
-
-            Route::get('vendor_course_rate/{id}','Admin_user\VendorController@getRatings');
+            
+            //Route::get('vendor_course_rate/{id}','Admin_user\VendorController@getRatings');
             Route::get('vendor_course_sold/{id}','Admin_user\VendorController@countCoursePurchased');
             Route::get('vendor_course_vendor/{id}/{cid}','Admin_user\VendorController@getVendor');
             Route::get('vendor_count_courses/{id}','Admin_user\VendorController@getVendorCountCourses');
@@ -853,7 +877,7 @@ Route::group(['middleware'=>'notification'],function (){
     Route::get('cr/{id}','ContentController@contentRequirements');
     Route::get('cp/{id}','ContentController@contentLessons');
     Route::get('getAllCategories','ContentController@getAllCategories');
-
+    Route::get('vendor_course_rate/{id}','Admin_user\VendorController@getRatings');
     
     
     Route::get('/contactus', function () {

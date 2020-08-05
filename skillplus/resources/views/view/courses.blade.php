@@ -277,7 +277,7 @@
 
     function loadRatings(id) {
         $.ajax({
-                url: "{{ url('/admin/user_vendor/vendor_course_rate/') }}/"+id,
+                url: "{{ url('/vendor_course_rate') }}/"+id,
                 type: "get",
                 dataType: 'JSON',
                 headers: {

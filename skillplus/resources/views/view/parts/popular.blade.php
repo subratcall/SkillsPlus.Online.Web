@@ -15,7 +15,6 @@
      /*/margin-bottom: 10px;*/
     }
 </style>
-
 <div class="container-fluid newest-container">
         <div class="container">
             <div class="row">
@@ -55,11 +54,8 @@
             </div>
         </div>
 </div>
-{{-- <script>
-    window.Laravel = {!! json_encode([
-        'csrfToken' => csrf_token(),
-    ]) !!};
-</script> --}}
+
+
 <script>
     $(document).ready(function() {        
         $( ".popz" ).each(function( i,a ) {
@@ -69,24 +65,25 @@
     });
 
     function loadRatings(id) {
-        $.ajax({
-                url: "{{ url('/admin/user_vendor/vendor_course_rate/') }}/"+id,
-                type: "get",
-                dataType: 'JSON',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data) {                          
+            $.ajax({
+                url: "{{url('/vendor_course_rate')}}" +"/"+ id,
+                  type: 'get',
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  dataType: 'JSON',
+                success: function(data) {                       
                     $('#raty_'+id).raty({ starType: 'i',score:data,click:function (rate) {
                             //window.location = window.location.href+'/rate/'+rate;
                     }});
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    //alert('Error! Contact IT Department.');
+                    console.log(jqXHR)
+                    console.log(textStatus)
+                    console.log(errorThrown)
                 }
-        });
+            });
     }
 </script>
-<link rel="stylesheet" href="/assets/vendor/raty/jquery.raty.css" />
 <script type="application/javascript" src="/assets/vendor/raty/jquery.raty.js"></script>
 

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap-3.2.rtl.css"/>
     <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="    https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
     <link rel="stylesheet" href="/assets/vendor/owlcarousel/dist/assets/owl.carousel.min.css"/>
     <link rel="stylesheet" href="/assets/vendor/raty/jquery.raty.css"/>
@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="/assets/vendor/easyautocomplete/easy-autocomplete.css"/>
     <link rel="stylesheet" href="/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css" />
     <link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css" />
-    <link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" />
-    
+    <link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css" />    
+    <script type="application/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>    
     
     @if(get_option('site_rtl','0') == 1)
         <link rel="stylesheet" href="/assets/stylesheets/view-custom-rtl.css"/>
@@ -33,179 +33,175 @@
             {!! get_option('main_css') !!}
         </style>
     @endif
-    <script type="application/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>
-    
     <title>@yield('title')</title>
 
 </head>
 <body>
     
 
-    <style>
+<style>
+    .header-area .alert {
+        background-color: #fff;
+        position: relative;
+        z-index: 8;
+        min-height: 50px;
+        padding: 13px 35px 12px;
+        margin-bottom: 0;
+        border: none;
+    }
+    .alert-warning {
+        color: #856404;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+    }
+    .alert-dismissible {
+        padding-right: 3.8125rem;
+    }
+    .alert {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0;
+    }
+    .fades {
+        transition: opacity 0.15s linear;
+    }
 
-.header-area .alert {
-    background-color: #fff;
-    position: relative;
-    z-index: 8;
-    min-height: 50px;
-    padding: 13px 35px 12px;
-    margin-bottom: 0;
-    border: none;
-}
-.alert-warning {
-    color: #856404;
-    background-color: #fff3cd;
-    border-color: #ffeeba;
-}
-.alert-dismissible {
-    padding-right: 3.8125rem;
-}
-.alert {
-    position: relative;
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: 0;
-}
- .fades {
-    transition: opacity 0.15s linear;
-}
+    .header-area .alert .pro-description {
+        position: relative;
+        text-align: center;
+        width: 100%;
+    }
 
-.header-area .alert .pro-description {
-    position: relative;
-    text-align: center;
-    width: 100%;
-}
+    .header-area .alert .pro-description .pro-info {
+        font-size: 20px;
+        color: #212529;
+        line-height: 25px;a
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        padding: 0 30px;
+    }
 
-.header-area .alert .pro-description .pro-info {
-    font-size: 20px;
-    color: #212529;
-    line-height: 25px;a
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    padding: 0 30px;
-}
+    .header-area .alert .pro-description {
+        text-align: center;
+    }
 
-.header-area .alert .pro-description {
-    text-align: center;
-}
+    .header-area .alert .pro-description .pro-info .pro-link-dropdown.js-toppanel-link-dropdown {
+        display: inline-block;
+        z-index: 8;
+    }
 
-.header-area .alert .pro-description .pro-info .pro-link-dropdown.js-toppanel-link-dropdown {
-    display: inline-block;
-    z-index: 8;
-}
+    .header-area .alert .pro-description .pro-info {
+        font-size: 20px;
+        color: #212529;
+        line-height: 25px;
+        white-space: normal;
+    }
 
-.header-area .alert .pro-description .pro-info {
-    font-size: 20px;
-    color: #212529;
-    line-height: 25px;
-    white-space: normal;
-}
+    .header-area .alert .pro-description .pro-info {
+        font-size: 20px;
+        color: #212529;
+        line-height: 25px;
+        white-space: normal;
+    }
 
-.header-area .alert .pro-description .pro-info {
-    font-size: 20px;
-    color: #212529;
-    line-height: 25px;
-    white-space: normal;
-}
+    .header-area .alert .pro-description {
+        text-align: center;
+    }
 
-.header-area .alert .pro-description {
-    text-align: center;
-}
+    .header-area .alert .pro-description {
+        text-align: center;
+    }
 
-.header-area .alert .pro-description {
-    text-align: center;
-}
+    .header-area .alert .pro-description .pro-info .pro-link-dropdown.js-toppanel-link-dropdown .pro-dropdown-toggle {
+        display: inline-block;
+        position: relative;
+        background: 0 0;
+        border: none;
+        font-family: "Montserrat-Bold", sans-serif;
+        color: #212529;
+        text-decoration: underline;
+        padding: 0;
+        outline: 0;
+        cursor: help;
+    }
 
-.header-area .alert .pro-description .pro-info .pro-link-dropdown.js-toppanel-link-dropdown .pro-dropdown-toggle {
-    display: inline-block;
-    position: relative;
-    background: 0 0;
-    border: none;
-    font-family: "Montserrat-Bold", sans-serif;
-    color: #212529;
-    text-decoration: underline;
-    padding: 0;
-    outline: 0;
-    cursor: help;
-}
+    .header-ten .header-mini {
+        min-height: 26px;
+    }
+    .header-ten .bg-top-bar {
+        background-color: #f5f5f5;
+    }
 
-.header-ten .header-mini {
-    min-height: 26px;
-}
-.header-ten .bg-top-bar {
-    background-color: #f5f5f5;
-}
+    .header-ten .header-mini .navbar {
+        padding: 0;
+    }
+    .align-items-center {
+        align-items: center !important;
+    }
+    .navbar {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+    }
+    .header-ten .header-mini .navbar-lang .country-flag {
+        display: flex;
+        align-items: center;
+        width: auto;
+    }
+    .header-ten .header-mini .navbar-lang .country-flag h4 {
+        padding-right: 12px;
+    }
+    .header-ten .header-mini .navbar-lang .country-flag ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
 
-.header-ten .header-mini .navbar {
-    padding: 0;
-}
-.align-items-center {
-    align-items: center !important;
-}
-.navbar {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 1rem;
-}
-.header-ten .header-mini .navbar-lang .country-flag {
-    display: flex;
-    align-items: center;
-    width: auto;
-}
-.header-ten .header-mini .navbar-lang .country-flag h4 {
-    padding-right: 12px;
-}
-.header-ten .header-mini .navbar-lang .country-flag ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
+    #accordion .no-child {
+        font-size: 17px;
+        font-weight: bold;
+    }
+    #accordion .has-child {
+        font-size: 17px;
+        font-weight: bold;
+    }
 
-#accordion .no-child {
-    font-size: 17px;
-    font-weight: bold;
-}
-#accordion .has-child {
-    font-size: 17px;
-    font-weight: bold;
-}
+    .header-login-button span {
+        left: 13%;
+    }
 
-.header-login-button span {
-    left: 13%;
-}
+    .middle-header .header-login-button {
+        font-size: 15px;
+    }
 
-.middle-header .header-login-button {
-    font-size: 15px;
-}
+    @media only screen and (max-width: 767px) {
+    .header-area .alert {
+        padding: 13px 5px 12px;
+    }
 
-@media only screen and (max-width: 767px) {
-  .header-area .alert {
-    padding: 13px 5px 12px;
-  }
+    .header-area .alert .pro-description .pro-info {
+        padding: 0 5px;
+        display: block;
+    }
 
-  .header-area .alert .pro-description .pro-info {
-    padding: 0 5px;
-    display: block;
-  }
+    }
 
-}
+    .become_a_teacher{
+        color: #555;
+        font-weight: 600;
+    }
 
-
-.become_a_teacher{
-    color: #555;
-    font-weight: 600;
-}
-
-  </style>
+</style>
  
     <div class="container-fluid">
         <div class="row line-header"></div>
@@ -479,4 +475,6 @@
                   }
               });
         }); 
-      </script>
+    </script>
+
+

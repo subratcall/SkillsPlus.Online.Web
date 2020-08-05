@@ -362,6 +362,7 @@
        <ul class="dropdown-menu">
         <li><a class="nav-link" href="/admin/user_vendor/vendor_course_list">Courses</a></li>
         <li><a href="/admin/question" class="nav-link">Question Bank</a> </li>
+        <li><a href="/admin/class" class="nav-link">Class</a> </li>
        </ul>
       </li>
 
