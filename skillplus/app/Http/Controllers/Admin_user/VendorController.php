@@ -267,7 +267,6 @@ class VendorController extends Controller
 
     public function getRatings($id)
     {
-        return response()->json($getData); */
         $getData = ContentRate::where(['content_id'=>$id])->get();
         $data = array();
         $cnt = 0;

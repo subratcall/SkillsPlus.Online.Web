@@ -577,35 +577,43 @@
         </div>
      </div>
      <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-12">
            <div class="row">
-              <div class="col-lg-6 section-4" id="">
+              <div class="col-md-6 section-5" id="courseDesc">
+                 
+              </div>
+           </div>
+        </div>
+          <div class="col-md-12" id="">
+             <p class="section-4-header">Requirements</p>
+             <ul  id="req">
+             </ul>
+          </div>
+        {{-- <div class="col-lg-5">
+            <div class="col-lg-12">
+               <div class="row">
+                  <div class="col-lg-6 section-5" id="courseDesc">
+                     
+                  </div>
+               </div>
+            </div>
+           <div class="row">
+              <div class="col-lg-12 section-4" id="">
                  <p class="section-4-header">Requirements</p>
                  <ul  id="req">
                  </ul>
               </div>
            </div>
-        </div>
-        <div class="col-lg-4">
-           <div class="row">
-              <div class="col-lg-6 section-5" id="courseDesc">
-                 
-              </div>
-           </div>
-        </div>
+        </div> --}}
 
-        <div class="col-lg-3">
-           <div class="row">
-              <div class="col-lg-6 section-6">
+        <div class="col-md-12">
                  <p class="section-6-header">Other related courses</p>
                  <ul id="related_courses">
                  </ul>
-              </div>
-           </div>
         </div>
      </div>
      <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-12">
                  <div class="row">
                     <div class="col-lg-12">
                        <p class="section-7-header">About the instructor</p>
@@ -621,7 +629,7 @@
                  </div>
               </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-md-12">
            <div class="col-lg-6 section-8 row">
               <div class="col-lg-12">
                  <p class="section-9-header">Reviews</p>
