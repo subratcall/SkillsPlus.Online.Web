@@ -298,6 +298,7 @@
                                             '<div class="col-md-6">'+
                                                 data[index].duration+' Hours'   +
                                             '</div>'+
+                                                '<button type="button" class="btn btn-primary" onclick="takeQuiz('+data[index].id+","+id+')">Take Quiz</button></div></div>'+
                                         '</div>'+
                                         //data[index].shortdescription+' '+data[index].duration+' Hours'   +                                
                                    ' </div>'+

@@ -458,6 +458,163 @@
     .fas.fa-star.star-dead {
      color: #abb0bb;
     }
+
+    .course-sidebar {
+    background-color: #fff;
+    box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+    border-radius: 4px;
+    color: #505763;
+    padding: 3px;
+    position: relative;
+    margin-top: -250px;
+    z-index: 10;
+}
+.course-sidebar.fixed {
+    position: fixed;
+    margin-top: 0;
+    width: 350px;
+}
+.course-sidebar.fixed .preview-video-box,
+.course-sidebar.bottom .preview-video-box{
+    display: none;
+}
+.course-sidebar.bottom {
+    margin-top: 0;
+}
+
+.course-sidebar-text-box {
+    padding: 15px 30px;
+}
+
+.course-sidebar-text-box .price .current-price {
+    color: #505763;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 40px;
+    margin-right: 10px;
+}
+
+.course-sidebar-text-box .price span {
+    vertical-align: middle;
+    color: #a1a7b3;
+    margin-right: 10px;
+}
+
+.course-sidebar-text-box .price .original-price {
+    text-decoration: line-through;
+}
+.course-sidebar-text-box .offer-time {
+    color: #208058;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.course-sidebar-text-box .offer-time i {
+    margin-right: 7px;
+}
+.course-sidebar-text-box .buy-btns .btn {
+    display: block;
+    width: 100%;
+    margin: 0;
+    border-radius: 2px;
+    margin-top: 13px;
+    padding: 15px 12px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.course-sidebar-text-box .buy-btns .btn-buy-now {
+    color: #fff;
+    background-color: #ec5252;
+    border-color: #ec5252;
+}
+.course-sidebar-text-box .buy-btns .btn-buy-now:hover,.course-sidebar-text-box .buy-btns .btn-buy-now:focus {
+    background-color: #992337;
+    border-color: #992337;
+}
+
+.course-sidebar-text-box .buy-btns .btn-add-cart {
+    background: transparent;
+    border-color: #505763;
+    color: #686f7a;
+}
+.course-sidebar-text-box .buy-btns .btn-add-cart:hover,.course-sidebar-text-box .buy-btns .btn-add-cart:focus {
+    background-color: #f2f3f5;
+}
+.course-sidebar-text-box .money-back {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    margin-top: 10px;
+}
+.course-sidebar-text-box .includes {
+    margin-bottom: 15px;
+}
+.course-sidebar-text-box .includes ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.course-sidebar-text-box .includes ul li {
+    font-size: 13px;
+    padding: 3px;
+}
+.course-sidebar-text-box .includes ul li i {
+    width: 19px;
+    font-size: 12px;
+}
+
+.course-curriculum-box .course-curriculum-title .title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 10px;
+}
+
+.course-curriculum-box .course-curriculum-title .total-time {
+    width: 130px;
+    display: inline-block;
+    text-align: right;
+}
+
+.course-curriculum-box .course-curriculum-title {
+    padding-right: 31px;
+}
+
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: ""; }
+
+  .float-left {
+    float: left !important;
+}
+
+
+.course-curriculum-accordion .lecture-group-title[aria-expanded="true"] .total-lectures {
+    display: none;
+}
+
+
+.course-curriculum-box .course-curriculum-title .total-time {
+    width: 130px;
+    display: inline-block;
+    text-align: right;
+}
+
+.course-curriculum-accordion .lecture-group-title .total-time {
+    width: 130px;
+    display: inline-block;
+    text-align: right;
+}
+
+.float-right {
+  float: right !important; }
+
+  section.course-header-area {
+    background-color: #29303b;
+    color: #fff;
+    padding: 60px 0;
+}
 </style>
 
 
@@ -504,11 +661,206 @@
 @section('page')
 
 <link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css" />
+<section class="course-header-area">
+    <div class="container">
+      <div class="row align-items-end">
+        <div class="col-lg-8">
+          <div class="course-header-wrap">
+            <h1 class="titleData" id="titleData"></h1>
+            <p class="subtitleData" id="subtitleData"></p>
+            {{-- <div class="rating-row">
+              <span class="course-badge best-seller">level</span>
+             </div> --}}
+             
+             <div class="raty-product-section">
+                <div class="raty"></div>
+                <span class="raty-text"></span>
+              {{-- $total_rating =  $this->crud_model->get_ratings('course', $course_details['id'], true)->row()->rating;
+              $number_of_ratings = $this->crud_model->get_ratings('course', $course_details['id'])->num_rows();
+              if ($number_of_ratings > 0) {
+                $average_ceil_rating = ceil($total_rating / $number_of_ratings);
+              }else {
+                $average_ceil_rating = 0;
+              }
+  
+              for($i = 1; $i < 6; $i++):?> --}}
+              {{-- if ($i <= $average_ceil_rating): ?> --}}
+               {{--  <i class="fas fa-star filled" style="color: #f5c85b;"></i> --}}
+             {{-- else: ?>
+                <i class="fas fa-star"></i>
+              endif; ?>
+             endfor; ?> --}}
+            <span class="d-inline-block average-rating">{{--  p echo $average_ceil_rating; ?></span><span>(p echo $number_of_ratings.' '.get_phrase('ratings'); ?>) --}}</span>
+            <span class="enrolled-num">
+             
+              {{-- $number_of_enrolments = $this->crud_model->enrol_history($course_details['id'])->num_rows();
+              echo $number_of_enrolments.' '.get_phrase('students_enrolled');
+              ?> --}}
+            </span>
+          </div>
+          <div class="created-row">
+            <span class="created-by">
+               
+                <div class="raty-product-section">
+                    Created by:<span class="vendor_name"></span>
+                 </div>
+               {{-- echo get_phrase('created_by'); ?>
+              <a href=" echo site_url('home/instructor_page/'.$course_details['user_id']); ?>"> echo $instructor_details['first_name'].' '.$instructor_details['last_name']; ?> --}}</a>
+            </span>
+          {{--  if ($course_details['last_modified'] > 0): ?> --}}
+             
+            {{-- else: ?>
+              <span class="last-updated-date"> echo get_phrase('last_updated').' '.date('D, d-M-Y', $course_details['date_added']); ?></span>
+            endif; ?> --}}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+  </div>
+</section>
+<section class="course-content-area">
+    <div class="container">
+       <div class="row">
+           <div class="col-lg-8">
+                
 
+ <div class="row">
+    <div class="col-lg-12">
+       <div class="row margin-top-next">
+          <div class="col-lg-12  section-1">
+             <h5>What will i learn?</h5>
+             <ul id="wwil"></ul>
+          </div>
+       </div>
+    </div>
+ </div>
+
+ <div class="row">
+    <div class="col-lg-12">
+       <div class="row margin-top-nex">
+          <div class="col-lg-6  section-2">
+              
+            <div class="lecture-group-title clearfix">
+                <div class="title text-left">Curriculum for this course </div>
+                <div class="text-right">
+                   {{-- <span class="total-lectures">
+                    17 Lessons
+                   </span>
+                   <span class="total-time">
+                    23:47:22 Hours
+                   </span> --}}
+                </div>
+             </div>
+
+             {{-- Curriculum for this course 
+             <p style="display:inline; font-size:14px">17 Lessons 23:47:22 Hours</p> --}}
+          </div>
+       </div>
+    </div>
+ </div>
+
+ 
+ <div class="col-lg-12">
+    <div class="row" id="accordionx">
+    </div>
+ </div>
+
+ <div class="row">
+    <div class="col-lg-12">
+       <div class="row">
+          <div class="col-md-6 section-5" id="courseDesc">
+          </div>
+       </div>
+    </div>
+    <div class="col-md-12" id="">
+       <p class="section-4-header">Requirements</p>
+       <ul  id="req">
+       </ul>
+    </div>
+    <div class="col-md-12">
+       <p class="section-6-header">Other related courses</p>
+       <ul id="related_courses">
+       </ul>
+    </div>
+ </div>
+
+ <div class="row">
+    <div class="col-md-12">
+       <div class="row">
+          <div class="col-lg-12">
+             <p class="section-7-header">About the instructor</p>
+          </div>
+          <div class="row">
+             <div class="col-lg-6">
+                <img id="vendor_img" width="96">
+             </div>
+             <div class="col-sm-3">
+                <label id="vendor_name"></label>
+                <p id="vendor_about"></p>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-md-12">
+       <div class="col-lg-6 section-8 row">
+          <div class="col-lg-12">
+             <p class="section-9-header">Reviews</p>
+          </div>
+          <div class="col-lg-12">
+             <ul id='getcomments'>
+             </ul>
+          </div>
+       </div>
+    </div>
+ </div>
+ 
+ 
+           </div>
+            <div class="col-lg-4">
+                <div class="course-sidebar natural">
+                    <div class="preview-video-box">
+                    <a data-toggle="modal" data-target="#CoursePreviewModal">
+                        <video id="video" class="w-100 h-a" controls> </video>
+                       {{--  <img src="http://192.168.1.22:8000/bin/Dustin%20Pitan/artboard_252.png" alt="" class="img-fluid"> --}}
+                        <span class="preview-text"></span>
+                        <span class="play-btn"></span>
+                    </a>
+                    </div>
+
+                    <div class="course-sidebar-text-box">
+                        <div class="price">
+                            <span class = "current-price"><span class="current-price">FREE</span></span>
+                        
+                        </div>
+                
+                            <div class="buy-btns">
+                               {{--  <a href = " echo site_url('home/get_enrolled_to_free_course/'.$course_details['id']); ?>" class="btn btn-buy-now">GET Enrolled</a> --}}
+                            
+                                <button type="button" class="btn btn-primary" onclick="viewAllVideos()">Start Lesson</button>
+                            </div>
+                
+                
+                        <div class="includes">
+                        <div class="title"><b>Includes:</b></div>
+                            <ul>
+                                <li><i class="far fa-file-video"></i>on_demand_videos</li>
+                                <li><i class="far fa-file"></i>lessons</li>
+                                <li><i class="far fa-compass"></i>full_lifetime_access</li>
+                                <li><i class="fas fa-mobile-alt"></i>access_on_mobile_and_tv</li>
+                            </ul>
+                        </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="col-12 course">
 
 
-    <div class="video-tutorials">
+    {{-- <div class="video-tutorials">
         <video id="video" class="w-100 h-a" controls> </video>
         <div class="video-details">
            <button type="button" class="btn btn-primary" onclick="viewAllVideos()">Start Lesson</button>
@@ -531,8 +883,8 @@
               </ul>
            </div>
         </div>
-     </div>
-     <div class="row wrap-header">
+    </div>
+    <div class="row wrap-header">
         <div class="col-lg-12">
            <div class="col-lg-12  text-left">
               <h1 id="titleData"></h1>
@@ -550,97 +902,11 @@
               </div>
            </div>
         </div>
-     </div>
-     <div class="row">
-        <div class="col-lg-12">
-           <div class="row margin-top-next">
-              <div class="col-lg-6 offset-lg-1 section-1">
-                 <h5>What will i learn?</h5>
-                 <ul id="wwil"></ul>
-              </div>
-           </div>
-        </div>
-     </div>
-     <div class="row">
-        <div class="col-lg-12">
-           <div class="row">
-              <div class="col-lg-6 offset-lg-1 section-2">
-                 Curriculum for this course 
-                 <p style="display:inline; font-size:14px">17 Lessons 23:47:22 Hours</p>
-              </div>
-           </div>
-        </div>
-     </div>
-     <div class="row">
-     <div class="col-lg-12">
-        <div class="row" id="accordionx">
-        </div>
-     </div>
-     <div class="row">
-        <div class="col-lg-12">
-           <div class="row">
-              <div class="col-md-6 section-5" id="courseDesc">
-                 
-              </div>
-           </div>
-        </div>
-          <div class="col-md-12" id="">
-             <p class="section-4-header">Requirements</p>
-             <ul  id="req">
-             </ul>
-          </div>
-        {{-- <div class="col-lg-5">
-            <div class="col-lg-12">
-               <div class="row">
-                  <div class="col-lg-6 section-5" id="courseDesc">
-                     
-                  </div>
-               </div>
-            </div>
-           <div class="row">
-              <div class="col-lg-12 section-4" id="">
-                 <p class="section-4-header">Requirements</p>
-                 <ul  id="req">
-                 </ul>
-              </div>
-           </div>
-        </div> --}}
+    </div> --}}
+   
 
-        <div class="col-md-12">
-                 <p class="section-6-header">Other related courses</p>
-                 <ul id="related_courses">
-                 </ul>
-        </div>
-     </div>
-     <div class="row">
-        <div class="col-md-12">
-                 <div class="row">
-                    <div class="col-lg-12">
-                       <p class="section-7-header">About the instructor</p>
-                    </div>
-                 <div class="row">
-                    <div class="col-lg-6">
-                       <img id="vendor_img" width="96">
-                    </div>
-                    <div class="col-sm-3">
-                       <label id="vendor_name"></label>
-                       <p id="vendor_about"></p>
-                    </div>
-                 </div>
-              </div>
-        </div>
-        <div class="col-md-12">
-           <div class="col-lg-6 section-8 row">
-              <div class="col-lg-12">
-                 <p class="section-9-header">Reviews</p>
-              </div>
-              <div class="col-lg-12">
-                 <ul id='getcomments'>
-                 </ul>
-              </div>
-           </div>
-        </div>
-     </div>
+
+     
      
      
 </section>
@@ -687,7 +953,7 @@
                         console.log(entry)
                         $("#getcomments").append(
                            ' <div class="row">'+
-                                '<div class="col-lg-4">'+
+                                '<div class="col-lg-6">'+
                                ' <div class="reviewer-details clearfix">'+
                                ' <div class="reviewer-img float-left">'+
                               '  </div>'+
@@ -697,7 +963,7 @@
                               '  </div>'+
                               '  </div>'+
                                ' </div>'+
-                                '<div class="col-lg-8">'+
+                                '<div class="col-lg-6">'+
                                ' <div class="review-details">'+
                                 '<div class="review-text">'+
                                     entry.comment+'</div>'+
@@ -928,7 +1194,7 @@
                         for (let index = 0; index < data.length; index++) {
                             
                                 $("#accordionx").append(
-                                    '<div class="col-lg-6 offset-lg-1 section-3">'+
+                                    '<div class="col-lg-12  section-3">'+
                             '  <div class="header-custom-border">'+
                                 ' <a class="btn" data-toggle="collapse" data-target="#demo_'+index+'" style="display:inline; font-size:15px"><i class="fas fa-plus" style="color: #007791"></i>'
                                 + '&nbsp;&nbsp;'+data[index].title+
